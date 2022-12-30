@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function favs()
+    public function favs($number1)
     {
         return $this->belongsToMany(User::class,'favs','product_id','user_id')->as('favs');
     }
