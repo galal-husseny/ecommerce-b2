@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,9 +23,3 @@ Route::get('/', function () {
 
 
 require __DIR__.'/users.auth.php';
-
-
-Route::get('test',function(){
-    $x = new  App\Http\Controllers\User\Auth\AuthenticatedSessionController;
-    $x->setGuard('web');
-});
