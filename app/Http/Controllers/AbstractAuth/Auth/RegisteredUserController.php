@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\AbstractAuth\Auth;
 
-use App\Http\Controllers\AbstractAuth\Contracts\GuardInterface;
-use App\Http\Controllers\AbstractAuth\Contracts\ModelInterface;
-use App\Http\Controllers\AbstractAuth\Contracts\RouteNamePrefixInterface;
-use App\Http\Controllers\AbstractAuth\Contracts\ViewPrefixInterface;
-use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Validation\Rules\Password;
+use App\Http\Controllers\AbstractAuth\Contracts\GuardInterface;
+use App\Http\Controllers\AbstractAuth\Contracts\ModelInterface;
+use App\Http\Controllers\AbstractAuth\Contracts\ViewPrefixInterface;
+use App\Http\Controllers\AbstractAuth\Contracts\RouteNamePrefixInterface;
 
 abstract class RegisteredUserController extends Controller implements
 ViewPrefixInterface,
@@ -43,7 +44,7 @@ ModelInterface
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'. $this->getModel()],
             'phone' => ['required', 'regex://', 'unique:'.$this->getModel()],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
         $user = $this->getModel()::create([

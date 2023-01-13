@@ -34,7 +34,7 @@ ViewPrefixInterface
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $request->authenticate($this->getGuard());
 
         $request->session()->regenerate();
 
