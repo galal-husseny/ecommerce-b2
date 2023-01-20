@@ -15,7 +15,7 @@ use App\Http\Controllers\Seller\Auth\EmailVerificationNotificationController;
 
 Route::prefix('sellers')->name('sellers.')->group(function(){
 
-    Route::middleware('guest')->group(function () {
+    Route::middleware('guest:seller')->group(function () {
         Route::get('register', [RegisteredUserController::class, 'create'])
                     ->name('register');
 

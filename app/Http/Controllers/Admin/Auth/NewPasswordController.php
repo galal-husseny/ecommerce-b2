@@ -1,52 +1,52 @@
 <?php
 
-namespace App\Http\Controllers\Seller\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
-use App\Http\Controllers\AbstractAuth\Auth\ProfileController as AbstractProfileController;
+use App\Http\Controllers\AbstractAuth\Auth\NewPasswordController as AbstractNewPasswordController;
 
-class ProfileController extends AbstractProfileController
+class NewPasswordController extends AbstractNewPasswordController
 {
     /**
-     * guard
+     * broker
      *
      * @var string
     */
-    private $guard = "seller";
+    private $broker = "admins";
 
     /**
      * routeNamePrefix
      *
      * @var string
     */
-    private $routeNamePrefix = "sellers.";
+    private $routeNamePrefix = "admins.";
 
     /**
      * viewPrefix
      *
      * @var string
     */
-    private $viewPrefix = "seller.";
+    private $viewPrefix = "admin.";
 
     /**
-     * Get guard
+     * Get Broker
      *
      * @return  string
     */
-    public function getGuard() :string
+    public function getBroker() :string
     {
-        return $this->guard;
+        return $this->broker;
     }
 
     /**
-     * Set guard
+     * Set Broker
      *
-     * @param  string  $guard  guard
+     * @param  string  $broker  broker
      *
      * @return  void
     */
-    public function setGuard(string $guard) :void
+    public function setBroker(string $broker) :void
     {
-        $this->guard = $guard;
+        $this->broker = $broker;
     }
 
     /**

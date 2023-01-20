@@ -1,31 +1,31 @@
 <?php
+namespace App\Http\Controllers\Admin\Auth;
 
-namespace App\Http\Controllers\Seller\Auth;
+use App\Http\Controllers\AbstractAuth\Auth\ConfirmablePasswordController as AbstractConfirmablePasswordController;
 
-use App\Http\Controllers\AbstractAuth\Auth\ProfileController as AbstractProfileController;
+class ConfirmablePasswordController extends AbstractConfirmablePasswordController
 
-class ProfileController extends AbstractProfileController
 {
     /**
      * guard
      *
      * @var string
     */
-    private $guard = "seller";
+    private $guard = "admin";
 
     /**
      * routeNamePrefix
      *
      * @var string
     */
-    private $routeNamePrefix = "sellers.";
+    private $routeNamePrefix = "admins.";
 
     /**
      * viewPrefix
      *
      * @var string
     */
-    private $viewPrefix = "seller.";
+    private $viewPrefix = "admin.";
 
     /**
      * Get guard
