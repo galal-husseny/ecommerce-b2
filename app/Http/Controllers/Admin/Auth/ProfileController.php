@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Seller\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\AbstractAuth\Auth\ProfileController as AbstractProfileController;
 
@@ -11,21 +11,21 @@ class ProfileController extends AbstractProfileController
      *
      * @var string
     */
-    private $guard = "seller";
+    private $guard = "admin";
 
     /**
      * routeNamePrefix
      *
      * @var string
     */
-    private $routeNamePrefix = "sellers.";
+    private $routeNamePrefix = "admins.";
 
     /**
      * viewPrefix
      *
      * @var string
     */
-    private $viewPrefix = "seller.";
+    private $viewPrefix = "admin.";
 
     /**
      * Get guard

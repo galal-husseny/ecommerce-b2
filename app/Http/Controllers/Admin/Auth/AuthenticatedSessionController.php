@@ -1,31 +1,30 @@
 <?php
+namespace App\Http\Controllers\Admin\Auth;
 
-namespace App\Http\Controllers\Seller\Auth;
+use App\Http\Controllers\AbstractAuth\Auth\AuthenticatedSessionController as AbstractAuthenticatedSessionController ;
 
-use App\Http\Controllers\AbstractAuth\Auth\ProfileController as AbstractProfileController;
-
-class ProfileController extends AbstractProfileController
+class AuthenticatedSessionController extends AbstractAuthenticatedSessionController
 {
     /**
      * guard
      *
      * @var string
     */
-    private $guard = "seller";
+    private $guard = "admin";
 
     /**
      * routeNamePrefix
      *
      * @var string
     */
-    private $routeNamePrefix = "sellers.";
+    private $routeNamePrefix = "admins.";
 
     /**
      * viewPrefix
      *
      * @var string
     */
-    private $viewPrefix = "seller.";
+    private $viewPrefix = "admin.";
 
     /**
      * Get guard

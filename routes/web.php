@@ -24,3 +24,4 @@ Route::get('/', function () {
 
 require __DIR__.'/users.auth.php';
 require __DIR__.'/sellers.auth.php';
+require __DIR__ . '/admins.auth.php';
