@@ -17,5 +17,4 @@ class IndexController extends Controller
     {
         return view('user.dashboard');
     }
-
 }
