@@ -1,59 +1,113 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('users.register') }}">
-        @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+@extends('user.layouts.parent')
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+@section('title', 'Register')
 
-        <!-- Phone -->
-        <div class="mt-4">
-            <x-input-label for="phone" :value="__('Phone')" />
-            <x-text-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-        </div>
+@section('header')
+    @include('user.layouts.partials.header')
+@endsection
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+@section('footer')
+    @include('user.layouts.partials.footer')
+@endsection
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+@push('links')
+    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+@endpush
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+@push('links')
+<link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+@endpush
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+@push('scripts')
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@endpush
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required />
+@section('content')
+@parent
+<div class="container m-t-200">
+    <div class="m-lr-auto size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md m-b-100">
+        <form method="POST" action="{{ route('users.register') }}">
+            @csrf
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+            <h4 class="mtext-105 cl2 txt-center p-b-30">
+                Rigester as User
+            </h4>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('users.login') }}">
-                {{ __('Already registered?') }}
-            </a>
+            <!-- Name -->
+            <div class=" m-b-20 how-pos4-parent">
+                <input class="border-grey stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="name" type="text" name="name"
+                    value="{{old('name')}}" required autofocus placeholder="Name">
+                @if ($errors->get('name'))
+                    <ul class = 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
+                        @foreach ($errors->get('name') as $message)
+                            <li class="text-danger">{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
 
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+            <!-- Email -->
+            <div class=" m-b-20 how-pos4-parent">
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
+                    value="{{old('email')}}" required placeholder="Your Email Address">
+                @if ($errors->get('email'))
+                    <ul class='text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
+                        @foreach ($errors->get('email') as $message)
+                            <p class="text-danger">{{ $message }}</p>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+
+            <!-- Phone -->
+            <div class=" m-b-20 how-pos4-parent">
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="phone" type="number" name="phone" value="{{old('phone')}}" required placeholder="Your Phone Number">
+                @if ($errors->get('phone'))
+                        <ul class='text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
+                            @foreach ($errors->get('phone') as $message)
+                                <p class="text-danger">{{ $message }}</p>
+                            @endforeach
+                        </ul>
+                @endif
+            </div>
+
+            <!-- Password -->
+            <div class=" m-b-20 how-pos4-parent">
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password" type="password" name="password" required autocomplete="current-password" placeholder="Your Password">
+                @if ($errors->get('password'))
+                        <ul class='text-danger  space-y-1 mt-2'>
+                            @foreach ($errors->get('password') as $message)
+                                <p class="text-danger">{{ $message }}</p>
+                            @endforeach
+                        </ul>
+                @endif
+            </div>
+
+            <!-- Confirm Password -->
+            <div class=" m-b-20 how-pos4-parent">
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="current-password" placeholder="Confirm Password">
+                @if ($errors->get('password_confirmation'))
+                        <ul class='text-danger  space-y-1 mt-2'>
+                            @foreach ($errors->get('password_confirmation') as $message)
+                                <p class="text-danger">{{ $message }}</p>
+                            @endforeach
+                        </ul>
+                @endif
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('users.login') }}">
+                    Already registered?
+                </a>
+
+                <button class=" stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                    Register
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+@endsection
+

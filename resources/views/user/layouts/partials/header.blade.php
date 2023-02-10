@@ -1,5 +1,5 @@
 <!-- Header -->
-<header>
+<header >
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
@@ -14,12 +14,6 @@
                         Help & FAQs
                     </a>
 
-                    @auth('web')
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            My Account
-                        </a>
-                    @endauth
-
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
                         EN
                     </a>
@@ -32,43 +26,34 @@
         </div>
 
         <div class="wrap-menu-desktop">
-            <nav class="limiter-menu-desktop container">
+            <nav class="limiter-menu-desktop container" style="width: 90%">
 
                 <!-- Logo desktop -->
                 <a href="#" class="logo">
-                    <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO">
+                    <img src="{{asset('frontend-assets/images/icons/logo-01.png')}}" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="active-menu">
-                            <a href="index.html">Home</a>
-                            <ul class="sub-menu">
-                                <li><a href="index.html">Homepage 1</a></li>
-                                <li><a href="home-02.html">Homepage 2</a></li>
-                                <li><a href="home-03.html">Homepage 3</a></li>
-                            </ul>
+                        <li>
+                            <a href="{{route('users.dashboard')}}">Home</a>
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
-                        </li>
-
-                        <li class="label1" data-label1="hot">
-                            <a href="shoping-cart.html">Features</a>
+                            <a href="{{route('shop')}}">Shop</a>
                         </li>
 
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="{{route('blog')}}">Blog</a>
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="{{route('about')}}">About</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="{{route('contact')}}">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -79,36 +64,37 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                        data-notify="2">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
 
-                    <a href="#"
-                        class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                        data-notify="0">
+                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
                         <i class="zmdi zmdi-favorite-outline"></i>
                     </a>
+                        <ul class="main-menu">
+                            <li >
+                                <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" style="font-size: 2rem">
+                                    <i class="zmdi zmdi-account"></i>
+                                </a>
 
-                    <ul class="main-menu">
-                        <li class="active-menu">
-                            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                                <i class="zmdi zmdi-account"></i>
-                            </a>
-                            <ul class="sub-menu">
-                                @auth('web')
+                                <ul class="sub-menu">
+                                    @auth('web')
                                     <li><a href="{{route('users.profile.edit')}}">Profile</a></li>
                                     <form method="POST" action="{{ route('users.logout') }}">
                                         @csrf
-                                        <li><a href="{{route('users.logout')}}"  onclick="event.preventDefault(); this.closest('form').submit();">Logout</a></li>
+                                        <li><a href="route('users.logout')"
+                                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">Logout</a></li>
                                     </form>
-                                @else
-                                    <li><a href="{{route('users.login')}}">Login</a></li>
-                                    <li><a href="{{route('users.register')}}">Register</a></li>
+                                    @else
+                                    <li><a href="{{ route('users.login') }}">Login</a></li>
+                                    <li><a href="{{ route('users.register') }}">Register</a></li>
+                                    <li><a href="{{ route('sellers.index') }}">Your Seller Account</a></li>
                                 @endauth
-                            </ul>
-                        </li>
-                    </ul>
+                                </ul>
+
+                            </li>
+                        </ul>
 
                 </div>
             </nav>
@@ -119,7 +105,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.html"><img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
+            <a href="index.html"><img src="{{asset('frontend-assets/images/icons/logo-01.png')}}" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -128,15 +114,42 @@
                 <i class="zmdi zmdi-search"></i>
             </div>
 
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                data-notify="2">
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
 
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-                data-notify="0">
+
+
+            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
                 <i class="zmdi zmdi-favorite-outline"></i>
             </a>
+
+            <ul class="main-menu">
+                <li >
+                    <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" style="font-size: 2rem">
+                        <i class="zmdi zmdi-account"></i>
+                    </a>
+
+                    <ul class="sub-menu">
+                        @auth('web')
+                        <li><a href="{{route('users.profile.edit')}}">Profile</a></li>
+                        <form method="POST" action="{{ route('users.logout') }}">
+                            @csrf
+                            <li><a href="route('users.logout')"
+                                onclick="event.preventDefault();
+                                    this.closest('form').submit();">Logout</a></li>
+                        </form>
+                        @else
+                        <li><a href="{{ route('users.login') }}">Login</a></li>
+                        <li><a href="{{ route('users.register') }}">Register</a></li>
+                        <li><a href="{{ route('sellers.index') }}">Your Seller Account</a></li>
+                    @endauth
+                    </ul>
+
+                </li>
+            </ul>
+
+
         </div>
 
         <!-- Button show menu -->
@@ -217,7 +230,7 @@
     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
         <div class="container-search-header">
             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                <img src="{{ asset('frontend-assets/images/icons/icon-close2.png') }}" alt="CLOSE">
+                <img src="{{asset('frontend-assets/images/icons/icon-close2.png')}}" alt="CLOSE">
             </button>
 
             <form class="wrap-search-header flex-w p-l-15">
@@ -226,6 +239,8 @@
                 </button>
                 <input class="plh3" type="text" name="search" placeholder="Search...">
             </form>
+
         </div>
+
     </div>
 </header>
