@@ -1,14 +1,14 @@
 
-@extends('user.layouts.parent')
+@extends('seller.layouts.parent')
 
 @section('title' , 'Verify Email')
 
 @section('header')
-    @include('user.layouts.partials.header')
+    @include('seller.layouts.partials.header')
 @endsection
 
 @section('footer')
-    @include('user.layouts.partials.footer')
+    @include('seller.layouts.partials.footer')
 @endsection
 
 @push('scripts')

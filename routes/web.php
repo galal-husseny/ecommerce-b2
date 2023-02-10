@@ -16,13 +16,8 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('welcome');
-
-
 require __DIR__.'/users.auth.php';
 require __DIR__.'/sellers.auth.php';
 require __DIR__ . '/admins.auth.php';
 require __DIR__ . "/frontend.php";
-require __DIR__ . "/sellers.frontend.php";
+require __DIR__ . "/sellers.php";
