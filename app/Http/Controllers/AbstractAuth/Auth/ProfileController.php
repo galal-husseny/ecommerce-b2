@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Controllers\AbstractAuth\Contracts\GuardInterface;
 use App\Http\Controllers\AbstractAuth\Contracts\ViewPrefixInterface;
 use App\Http\Controllers\AbstractAuth\Contracts\RouteNamePrefixInterface;
@@ -32,11 +31,16 @@ ViewPrefixInterface
     /**
      * Update the user's profile information.
      *
-     * @param  \App\Http\Requests\ProfileUpdateRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfileUpdateRequest $request)
+    public function update(Request $request)
     {
+        $request->validate([
+            'name' => ['string', 'max:255'],
+            'email' => ['email', 'max:255', 'unique:'.$request->user($this->getGuard())->getTable().',email,' . $request->user($this->getGuard())->id],
+        ]);
+
         $request->user($this->getGuard())->fill($request->validated());
 
         if ($request->user($this->getGuard())->isDirty('email')) {
@@ -48,7 +52,7 @@ ViewPrefixInterface
         if ($request->has('email')) {
             event(new Registered($request->user($this->getGuard())));
         }
-        
+
         return Redirect::route($this->getRouteNamePrefix() . 'profile.edit')
         ->with('status', 'profile-updated');
     }
