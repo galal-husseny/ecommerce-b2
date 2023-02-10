@@ -3,11 +3,11 @@
 
 @section('title' , "Home")
 
-@section('header' )
+@section('header')
     @include('user.layouts.partials.header')
 @endsection
 
-@section('cart' )
+@section('cart')
     @include('user.layouts.partials.cart')
 @endsection
 

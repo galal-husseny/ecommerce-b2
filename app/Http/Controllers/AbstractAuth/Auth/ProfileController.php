@@ -41,7 +41,7 @@ ViewPrefixInterface
             'email' => ['email', 'max:255', 'unique:'.$request->user($this->getGuard())->getTable().',email,' . $request->user($this->getGuard())->id],
         ]);
 
-        $request->user($this->getGuard())->fill($request->validated());
+        $request->user($this->getGuard())->fill($request->all());
 
         if ($request->user($this->getGuard())->isDirty('email')) {
             $request->user($this->getGuard())->email_verified_at = null;
