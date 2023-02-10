@@ -25,21 +25,21 @@
             <div class="bor8 m-b-20 how-pos4-parent">
                 <label for="email" :value="__('Email')"></label>
                 <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
-                    :value="old('email', $request->email)" required autofocus placeholder="Your Email Address">
+                    value="{{old('email', $request->email)}}" required autofocus placeholder="Your Email Address">
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Password -->
             <div class="bor8 m-b-20 how-pos4-parent">
                 <label for="password_confirmation" :value="__('Password')"></label>
-                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="current-password" autofocus placeholder="Your password">
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="current-password" autofocus placeholder=" password">
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
 
             <!-- Confirm Password  -->
             <div class="bor8 m-b-20 how-pos4-parent">
                 <label for="password" :value="__('Confirm Password')"></label>
-                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password" type="password" name="password" required autocomplete="current-password" autofocus placeholder="Your password">
+                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password" type="password" name="password" required autocomplete="current-password" autofocus placeholder="confirm password">
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
