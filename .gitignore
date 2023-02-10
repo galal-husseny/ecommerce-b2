@@ -18,3 +18,5 @@ yarn-error.log
 /.vscode
 /public/dashboard-assets
 /public/frontend-assets
+package-lock.json
+composer.lock
