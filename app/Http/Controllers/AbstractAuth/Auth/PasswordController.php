@@ -19,7 +19,7 @@ abstract class PasswordController extends Controller implements GuardInterface
     public function update(Request $request)
     {
         $validated = $request->validateWithBag('updatePassword', [
-            'current_password' => ['required', 'current_password'],
+            'current_password' => ['required', 'current_password:' . $this->getGuard()],
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
