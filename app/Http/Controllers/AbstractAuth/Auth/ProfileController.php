@@ -48,7 +48,7 @@ ViewPrefixInterface
         if ($request->has('email')) {
             event(new Registered($request->user($this->getGuard())));
         }
-        
+
         return Redirect::route($this->getRouteNamePrefix() . 'profile.edit')
         ->with('status', 'profile-updated');
     }
@@ -74,6 +74,6 @@ ViewPrefixInterface
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::route('welcome');
+        return Redirect::route('users.dashboard');
     }
 }

@@ -1,4 +1,4 @@
-<x-app-seller-layout>
+{{-- <x-app-seller-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Profile') }}
@@ -26,4 +26,37 @@
             </div>
         </div>
     </div>
-</x-app-seller-layout>
+</x-app-seller-layout> --}}
+
+@extends('seller.layouts.parent')
+
+@section('title' , 'Profile')
+
+@section('header')
+    @include('seller.layouts.partials.header')
+@endsection
+
+@section('footer')
+    @include('seller.layouts.partials.footer')
+@endsection
+
+@push('scripts')
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
+@endpush
+
+@push('links')
+<link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+@endpush
+
+@section('content')
+    @parent
+
+    <div class="container" style="width: 90%">
+        @include('seller.profile.partials.update-profile-information-form')
+
+        @include('seller.profile.partials.update-password-form')
+
+        @include('seller.profile.partials.delete-user-form')
+    </div>
+@endsection
