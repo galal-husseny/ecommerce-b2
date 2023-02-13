@@ -2,17 +2,16 @@
 
 @section('title', 'Login')
 
-<div class="container d-flex justify-content-center m-t-100">
+<div class="container d-flex justify-content-center m-t-100" style="margin-top: 100px">
     <div class="register-box shadow p-3 mb-5 bg-body rounded">
         <div class="card-body register-card-body">
-            <p class="login-box-msg">Login to your seller account</p>
+            <p class="login-box-msg">{{__('messages.seller.auth.Login_title')}}</p>
 
             <form action="{{ route('sellers.login') }}" method="POST">
                 @csrf
                 <!-- Email Address -->
                 <div class="input-group mb-3">
-                    <input class="form-control" type="email" name="email" :value="old('email')" required autofocus
-                        placeholder="Email">
+                    <input class="form-control" type="email" name="email" :value="old('email')" required autofocus placeholder="{{__('messages.seller.auth.Email')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -28,8 +27,7 @@
                 </div>
                 <!-- Password -->
                 <div class="input-group mb-3">
-                    <input class="form-control" type="password" name="password" required autocomplete="new-password"
-                        placeholder="Password">
+                    <input class="form-control" type="password" name="password" required autocomplete="new-password" placeholder="{{__('messages.seller.auth.Password')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -44,37 +42,36 @@
                     @endif
                 </div>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-6">
                         <div class="icheck-primary">
                             <input type="checkbox" class="rounded" id="agreeTerms" name="remember" value="agree">
                             <label for="agreeTerms">
-                                Remember me
+                                {{__('messages.seller.auth.Remember_me')}}
                             </label>
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-dark btn-block rounded-pill">Log in</button>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-dark btn-block rounded-pill">{{__("messages.seller.auth.Log_in")}}</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
 
             <div class="social-auth-links text-center">
-                <p class="text-center">- OR -</p>
+                <p class="text-center">{{__('messages.seller.auth.or')}}</p>
                 <a href="#" class="btn btn-block btn-primary rounded-pill">
                     <i class="fab fa-facebook mr-2"></i>
-                    Log in using Facebook
+                    {{__('messages.seller.auth.login_facebook')}}
                 </a>
                 <a href="#" class="btn btn-block btn-danger rounded-pill">
                     <i class="fab fa-google-plus mr-2"></i>
-                    Log in using Google+
+                    {{__('messages.seller.auth.login_google')}}
                 </a>
             </div>
 
             @if (Route::has('sellers.password.request'))
-                <a href="{{ route('sellers.password.request') }}" class="text-center text-dark">Forgot your
-                    password?</a>
+                <a href="{{ route('sellers.password.request') }}" class="text-center text-dark">{{__('messages.seller.auth.forgot_password')}}</a>
             @endif
         </div>
         <!-- /.form-box -->

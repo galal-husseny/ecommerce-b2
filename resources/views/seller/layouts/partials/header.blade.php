@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light navbar-fixed">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -9,7 +9,7 @@
 
         <div class="hidden sm:-my-px  sm:flex">
             <x-nav-link :href="route('sellers.dashboard')" :active="request()->routeIs('admins.dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('messages.seller.header.dashboard') }}
             </x-nav-link>
         </div>
     </ul>
