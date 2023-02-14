@@ -20,14 +20,15 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="card-body register-card-body mb-6" >
-                <p class="mb-6">{{__('messages.seller.auth.message')}}</p>
+            <div class="card-body register-card-body mb-6">
+                <p class="mb-6">{{ __('messages.seller.auth.message') }}</p>
 
                 <form action="{{ route('sellers.password.email') }}" method="POST">
                     @csrf
                     <!-- Email Address -->
                     <div class="input-group mb-3">
-                        <input class="form-control" type="email" name="email" :value="old('email')" required autofocus placeholder="{{__('messages.seller.auth.Email')}}">
+                        <input class="form-control" type="email" name="email" :value="old('email')" required autofocus
+                            placeholder="{{ __('messages.seller.auth.Email') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -44,7 +45,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn bg-dark btn-block rounded-pill"
-                                style="background-color: black;">{{__('messages.seller.auth.send_password_email_reset')}}</button>
+                                style="background-color: black;">{{ __('messages.seller.auth.send_password_email_reset') }}</button>
                         </div>
                     </div>
                 </form>

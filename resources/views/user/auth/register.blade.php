@@ -31,17 +31,17 @@
             @csrf
 
             <h4 class="mtext-105 cl2 txt-center p-b-30">
-                Rigester as User
+                {{__('messages.user.auth.register')}}
             </h4>
 
             <!-- Name -->
             <div class=" m-b-20 how-pos4-parent">
-                <input class="border-grey stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="name" type="text" name="name"
-                    value="{{old('name')}}" required autofocus placeholder="Name">
+                <input class="form-control " id="name" type="text" name="name"
+                    value="{{old('name')}}" required autofocus placeholder="{{__('messages.user.auth.full_name')}}">
                 @if ($errors->get('name'))
                     <ul class = 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
                         @foreach ($errors->get('name') as $message)
-                            <li class="text-danger">{{ $message }}</li>
+                            <p class="text-danger">{{ $message }}</p>
                         @endforeach
                     </ul>
                 @endif
@@ -49,8 +49,8 @@
 
             <!-- Email -->
             <div class=" m-b-20 how-pos4-parent">
-                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
-                    value="{{old('email')}}" required placeholder="Your Email Address">
+                <input class="form-control" id="email" type="email" name="email"
+                    value="{{old('email')}}" required placeholder="{{__('messages.user.auth.Email')}}">
                 @if ($errors->get('email'))
                     <ul class='text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
                         @foreach ($errors->get('email') as $message)
@@ -62,7 +62,7 @@
 
             <!-- Phone -->
             <div class=" m-b-20 how-pos4-parent">
-                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="phone" type="number" name="phone" value="{{old('phone')}}" required placeholder="Your Phone Number">
+                <input class="form-control" id="phone" type="number" name="phone" value="{{old('phone')}}" required placeholder="{{__('messages.user.auth.phone_number')}}">
                 @if ($errors->get('phone'))
                         <ul class='text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
                             @foreach ($errors->get('phone') as $message)
@@ -74,7 +74,7 @@
 
             <!-- Password -->
             <div class=" m-b-20 how-pos4-parent">
-                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password" type="password" name="password" required autocomplete="current-password" placeholder="Your Password">
+                <input class="form-control" id="password" type="password" name="password" required autocomplete="current-password" placeholder="{{__('messages.user.auth.Password')}}">
                 @if ($errors->get('password'))
                         <ul class='text-danger  space-y-1 mt-2'>
                             @foreach ($errors->get('password') as $message)
@@ -86,7 +86,7 @@
 
             <!-- Confirm Password -->
             <div class=" m-b-20 how-pos4-parent">
-                <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="current-password" placeholder="Confirm Password">
+                <input class="form-control" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="current-password" placeholder="{{__('messages.user.auth.confirm_password')}}">
                 @if ($errors->get('password_confirmation'))
                         <ul class='text-danger  space-y-1 mt-2'>
                             @foreach ($errors->get('password_confirmation') as $message)
@@ -98,11 +98,11 @@
 
             <div class="d-flex justify-content-between mt-4">
                 <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('users.login') }}">
-                    Already registered?
+                    {{__('messages.user.auth.registered')}}
                 </a>
 
                 <button class=" stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                    Register
+                    {{__('messages.user.auth.register')}}
                 </button>
             </div>
 
