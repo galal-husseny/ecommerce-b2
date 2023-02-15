@@ -83,18 +83,18 @@
 
                             <ul class="sub-menu">
                                 @auth('web')
-                                    <li><a href="{{ route('users.profile.edit') }}">Profile</a></li>
+                                    <li><a href="{{ route('users.profile.edit') }}"> {{__('messages.user.profile.profile')}} </a></li>
                                     <form method="POST" action="{{ route('users.logout') }}">
                                         @csrf
                                         <li><a href="route('users.logout')"
                                                 onclick="event.preventDefault();
-                                                this.closest('form').submit();">Logout</a>
+                                                this.closest('form').submit();"> {{__('messages.user.auth.logout')}} </a>
                                         </li>
                                     </form>
                                 @else
-                                    <li><a href="{{ route('users.login') }}">Login</a></li>
-                                    <li><a href="{{ route('users.register') }}">Register</a></li>
-                                    <li><a href="{{ route('sellers.index') }}">Your Seller Account</a></li>
+                                    <li><a href="{{ route('users.login') }}"> {{__('messages.user.auth.Log_in')}} </a></li>
+                                    <li><a href="{{ route('users.register') }}"> {{__('messages.user.auth.register')}} </a></li>
+                                    <li><a href="{{ route('sellers.index') }}"> {{__('messages.user.header.seller_account')}} </a></li>
                                 @endauth
                             </ul>
 

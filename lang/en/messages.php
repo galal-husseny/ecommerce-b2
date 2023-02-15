@@ -147,6 +147,7 @@ return [
             'confirm_password' => 'Confirm Password',
             'delete_message' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
             'delete' => 'Delete Account',
+            'profile' => 'Profile',
 
         ],
         'header' => [
@@ -160,12 +161,80 @@ return [
             'blog' => 'Blog',
             'about' => 'About',
             'contact' => 'Contact',
-            
+            'seller_account' => 'Your Seller Account',
+
+        ],
+        'footer' => [
+            'categories' => 'Categories',
+            'help' => 'Help',
+            'track_order' => 'Track Order',
+            'returns' => 'Returns',
+            'shipping' => 'Shipping',
+            'faqs' => 'FAQs',
+            'get_in_touch' => 'GET IN TOUCH',
+            'more_questions' => 'Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on',
+            'newsletter' => 'Newsletter',
+            'subscribe' => 'Subscribe'
+        ],
+        'cart' => [
+            'your_cart' => 'Your Cart',
+            'total' => 'Total :',
+            'view_cart' => 'View Cart',
+            'checkout' => 'Check Out',
         ],
         'index' => [
             'message' => 'Want to become a seller in our website',
             'have_account' => 'Already have a seller account',
             'dont_have_account' => 'Do not have account',
+        ]
+    ],
+    'frontend' => [
+        'index' => [
+            'product_overview' => 'Product Overview',
+            'shop_now' => 'SHOP NOW',
+            'all_products' => 'All Products',
+            'filter' => 'Filter',
+            'search' => 'Search',
+            'sort_by' => 'Sort By',
+            'default' => 'Default',
+            'popularity' => 'Popularity',
+            'avg_rating' => 'Average rating',
+            'newest' => 'Newest',
+            'price_low_high' => 'Price: Low to High',
+            'price_high_low' => 'Price: High to Low',
+            'price' => 'Price',
+            'all' => 'All',
+            'color' => 'Color',
+            'black' => 'Black',
+            'blue' => 'Blue',
+            'grey' => 'Grey',
+            'green' => 'Green',
+            'red' => 'Red',
+            'white' => 'White',
+            'tags' => 'Tags',
+            'fashion' => 'Fashion',
+            'lifestyle' => 'Lifestyle',
+            'denim' => 'Denim',
+            'streetstyle' => 'Streetstyle',
+            'crafts' => 'Crafts',
+            'quick_view' => 'Quick View',
+            'load_more' => 'Load More'
+        ],
+        'about' => [
+            'about' => 'About',
+            'our_story' => 'Our Story',
+            'our_mission' => 'Our Mission'
+        ],
+        'contact' => [
+            'contact' => 'Contact',
+            'send_messages' => 'Send Us A Message',
+            'email' => 'Your Email Address',
+            'how_we_help' => 'How Can We Help ?',
+            'submit' => 'Submit',
+            'address' => 'Address',
+            'talk' => 'Lets Talk',
+            'sale_support' => 'Sale Support',
+
         ]
     ]
 

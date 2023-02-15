@@ -38,7 +38,7 @@
                             <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
                                 <a href="{{route('shop')}}"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Shop Now
+                                    {{__('messages.frontend.index.shop_now')}}
                                 </a>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
                                 <a href="{{route('shop')}}"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Shop Now
+                                    {{__('messages.frontend.index.shop_now')}}
                                 </a>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
                                 <a href="{{route('shop')}}"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Shop Now
+                                    {{__('messages.frontend.index.shop_now')}}
                                 </a>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
 
                             <div class="block1-txt-child2 p-b-4 trans-05">
                                 <div class="block1-link stext-101 cl0 trans-09">
-                                    Shop Now
+                                    {{__('messages.frontend.index.shop_now')}}
                                 </div>
                             </div>
                         </a>
@@ -148,7 +148,7 @@
 
                             <div class="block1-txt-child2 p-b-4 trans-05">
                                 <div class="block1-link stext-101 cl0 trans-09">
-                                    Shop Now
+                                    {{__('messages.frontend.index.shop_now')}}
                                 </div>
                             </div>
                         </a>
@@ -174,7 +174,7 @@
 
                             <div class="block1-txt-child2 p-b-4 trans-05">
                                 <div class="block1-link stext-101 cl0 trans-09">
-                                    Shop Now
+                                    {{__('messages.frontend.index.shop_now')}}
                                 </div>
                             </div>
                         </a>
@@ -190,14 +190,14 @@
         <div class=" mx-auto" style="width: 90%">
             <div class="p-b-10">
                 <h3 class="ltext-103 cl5">
-                    Product Overview
+                    {{__('messages.frontend.index.product_overview')}}
                 </h3>
             </div>
 
             <div class="flex-w flex-sb-m p-b-52">
                 <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                     <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                        All Products
+                        {{__('messages.frontend.index.all_products')}}
                     </button>
 
                     <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
@@ -226,13 +226,13 @@
                         class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
                         <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
                         <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                        Filter
+                        {{__('messages.frontend.index.filter')}}
                     </div>
 
                     <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                         <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                         <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                        Search
+                        {{__('messages.frontend.index.search')}}
                     </div>
                 </div>
 
@@ -243,8 +243,7 @@
                             <i class="zmdi zmdi-search"></i>
                         </button>
 
-                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
-                            placeholder="Search">
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="{{__('messages.frontend.index.search')}}">
                     </div>
                 </div>
 
@@ -253,43 +252,43 @@
                     <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                         <div class="filter-col1 p-r-15 p-b-27">
                             <div class="mtext-102 cl2 p-b-15">
-                                Sort By
+                                {{__('messages.frontend.index.sort_by')}}
                             </div>
 
                             <ul>
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Default
+                                        {{__('messages.frontend.index.default')}}
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Popularity
+                                        {{__('messages.frontend.index.popularity')}}
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Average rating
+                                        {{__('messages.frontend.index.avg_rating')}}
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                        Newness
+                                        {{__('messages.frontend.index.newest')}}
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Price: Low to High
+                                        {{__('messages.frontend.index.price_low_high')}}
                                     </a>
                                 </li>
 
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Price: High to Low
+                                        {{__('messages.frontend.index.price_high_low')}}
                                     </a>
                                 </li>
                             </ul>
@@ -297,13 +296,13 @@
 
                         <div class="filter-col2 p-r-15 p-b-27">
                             <div class="mtext-102 cl2 p-b-15">
-                                Price
+                                {{__('messages.frontend.index.price')}}
                             </div>
 
                             <ul>
                                 <li class="p-b-6">
                                     <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                        All
+                                        {{__('messages.frontend.index.all')}}
                                     </a>
                                 </li>
 
@@ -341,7 +340,7 @@
 
                         <div class="filter-col3 p-r-15 p-b-27">
                             <div class="mtext-102 cl2 p-b-15">
-                                Color
+                                {{__('messages.frontend.index.color')}}
                             </div>
 
                             <ul>
@@ -351,7 +350,7 @@
                                     </span>
 
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Black
+                                        {{__('messages.frontend.index.black')}}
                                     </a>
                                 </li>
 
@@ -361,7 +360,7 @@
                                     </span>
 
                                     <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                        Blue
+                                        {{__('messages.frontend.index.blue')}}
                                     </a>
                                 </li>
 
@@ -371,7 +370,7 @@
                                     </span>
 
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Grey
+                                        {{__('messages.frontend.index.grey')}}
                                     </a>
                                 </li>
 
@@ -381,7 +380,7 @@
                                     </span>
 
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Green
+                                        {{__('messages.frontend.index.green')}}
                                     </a>
                                 </li>
 
@@ -391,7 +390,7 @@
                                     </span>
 
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        Red
+                                        {{__('messages.frontend.index.red')}}
                                     </a>
                                 </li>
 
@@ -401,7 +400,7 @@
                                     </span>
 
                                     <a href="#" class="filter-link stext-106 trans-04">
-                                        White
+                                        {{__('messages.frontend.index.white')}}
                                     </a>
                                 </li>
                             </ul>
@@ -409,33 +408,33 @@
 
                         <div class="filter-col4 p-b-27">
                             <div class="mtext-102 cl2 p-b-15">
-                                Tags
+                                {{__('messages.frontend.index.tags')}}
                             </div>
 
                             <div class="flex-w p-t-4 m-r--5">
                                 <a href="#"
                                     class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                    Fashion
+                                    {{__('messages.frontend.index.fashion')}}
                                 </a>
 
                                 <a href="#"
                                     class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                    Lifestyle
+                                    {{__('messages.frontend.index.lifestyle')}}
                                 </a>
 
                                 <a href="#"
                                     class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                    Denim
+                                    {{__('messages.frontend.index.denim')}}
                                 </a>
 
                                 <a href="#"
                                     class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                    Streetstyle
+                                    {{__('messages.frontend.index.streetstyle')}}
                                 </a>
 
                                 <a href="#"
                                     class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                    Crafts
+                                    {{__('messages.frontend.index.crafts')}}
                                 </a>
                             </div>
                         </div>
@@ -452,7 +451,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -489,7 +488,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -526,7 +525,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -563,7 +562,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -600,7 +599,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -637,7 +636,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -674,7 +673,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -711,7 +710,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -748,7 +747,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -785,7 +784,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -822,7 +821,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -859,7 +858,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -896,7 +895,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -933,7 +932,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -970,7 +969,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -1007,7 +1006,7 @@
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Quick View
+                                {{__('messages.frontend.index.quick_view')}}
                             </a>
                         </div>
 
@@ -1040,7 +1039,7 @@
             <!-- Load more -->
             <div class="flex-c-m flex-w w-full p-t-45">
                 <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                    Load More
+                    {{__('messages.frontend.index.load_more')}}
                 </a>
             </div>
         </div>
