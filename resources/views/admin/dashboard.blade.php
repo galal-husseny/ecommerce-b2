@@ -38,13 +38,15 @@
                             <div class="inner">
                                 <h3>150</h3>
 
-                                <p>New Orders</p>
+                                <p> {{__('messages.admin.dashboard.new_orders')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer">
+                                {{__('messages.admin.dashboard.more_info')}}
+                                <i class="fas fa-arrow-circle-right"></i>
+                            </a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -54,13 +56,15 @@
                             <div class="inner">
                                 <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                                <p>Bounce Rate</p>
+                                <p> {{__('messages.admin.dashboard.bounce_rate')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer">
+                                {{__('messages.admin.dashboard.more_info')}}
+                                <i class="fas fa-arrow-circle-right"></i>
+                            </a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -70,13 +74,15 @@
                             <div class="inner">
                                 <h3>44</h3>
 
-                                <p>User Registrations</p>
+                                <p> {{__('messages.admin.dashboard.user_register')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer">
+                                {{__('messages.admin.dashboard.more_info')}}
+                                <i class="fas fa-arrow-circle-right"></i>
+                            </a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -86,13 +92,15 @@
                             <div class="inner">
                                 <h3>65</h3>
 
-                                <p>Unique Visitors</p>
+                                <p> {{__('messages.admin.dashboard.unique_visitors')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer">
+                                {{__('messages.admin.dashboard.more_info')}}
+                                <i class="fas fa-arrow-circle-right"></i>
+                            </a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -107,15 +115,15 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="fas fa-chart-pie mr-1"></i>
-                                    Sales
+                                    {{__('messages.admin.dashboard.sales')}}
                                 </h3>
                                 <div class="card-tools">
                                     <ul class="nav nav-pills ml-auto">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab"> {{__('messages.admin.dashboard.area')}} </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                                            <a class="nav-link" href="#sales-chart" data-toggle="tab"> {{__('messages.admin.dashboard.pie')}} </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -138,7 +146,7 @@
                         <!-- DIRECT CHAT -->
                         <div class="card direct-chat direct-chat-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Direct Chat</h3>
+                                <h3 class="card-title"> {{__('messages.admin.dashboard.direct_chat')}} </h3>
 
                                 <div class="card-tools">
                                     <span title="3 New Messages" class="badge badge-primary">3</span>
@@ -348,10 +356,9 @@
                             <div class="card-footer">
                                 <form action="#" method="post">
                                     <div class="input-group">
-                                        <input type="text" name="message" placeholder="Type Message ..."
-                                            class="form-control">
+                                        <input type="text" name="message" placeholder="{{__('messages.admin.dashboard.type_message')}}" class="form-control">
                                         <span class="input-group-append">
-                                            <button type="button" class="btn btn-primary">Send</button>
+                                            <button type="button" class="btn btn-primary" style="color: #000;"> {{__('messages.admin.dashboard.type_message')}} </button>
                                         </span>
                                     </div>
                                 </form>
@@ -365,7 +372,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="ion ion-clipboard mr-1"></i>
-                                    To Do List
+                                    {{__('messages.admin.dashboard.todo')}}
                                 </h3>
 
                                 <div class="card-tools">
@@ -495,8 +502,10 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
-                                <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
-                                    Add item</button>
+                                <button type="button" class="btn btn-primary float-right" style="color: #000;">
+                                    <i class="fas fa-plus"></i>
+                                    {{__('messages.admin.dashboard.add_item')}}
+                                </button>
                             </div>
                         </div>
                         <!-- /.card -->
@@ -510,7 +519,7 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">
                                     <i class="fas fa-map-marker-alt mr-1"></i>
-                                    Visitors
+                                    {{__('messages.admin.dashboard.visitors')}}
                                 </h3>
                                 <!-- card tools -->
                                 <div class="card-tools">

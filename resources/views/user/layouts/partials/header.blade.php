@@ -66,11 +66,12 @@
 
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
                         data-notify="2">
+                        <a href="{{route('cart')}}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti">
                             <i class="zmdi zmdi-shopping-cart"></i>
+                        </a>
                     </div>
 
-                    <a href="#"
-                        class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
                         data-notify="0">
                         <i class="zmdi zmdi-favorite-outline"></i>
                     </a>
