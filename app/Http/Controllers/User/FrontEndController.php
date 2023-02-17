@@ -10,10 +10,9 @@ class FrontEndController extends Controller
     /**
      * shop
      *
-     * @param  mixed $request
      * @return shop view
      */
-    public function shop(Request $request)
+    public function shop()
     {
         return view('user.shop');
     }
@@ -21,10 +20,9 @@ class FrontEndController extends Controller
     /**
      * blog
      *
-     * @param  mixed $request
-     * @return void
+     * @return blog view
      */
-    public function blog(Request $request)
+    public function blog()
     {
         return view('user.blog');
     }
@@ -32,17 +30,30 @@ class FrontEndController extends Controller
     /**
      * about
      *
-     * @param  mixed $request
-     * @return void
+     * @return about view
      */
-    public function about(Request $request)
+    public function about()
     {
         return view('user.about');
     }
 
-    public function contact(Request $request)
+    /**
+     * contact
+     *
+     * @return contact view
+     */
+    public function contact()
     {
-        
         return view('user.contact');
+    }
+
+    /**
+     * cart
+     *
+     * @return cart view
+     */
+    public function cart()
+    {
+        return view('user.cart');
     }
 }

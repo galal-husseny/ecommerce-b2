@@ -27,17 +27,17 @@
         <form method="POST" action="{{ route('users.password.email') }}">
             @csrf
             <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                {{ __('messages.user.auth.message') }}
             </div>
             <div class="bor8 m-b-20 how-pos4-parent">
                 <label for="email" :value="__('Email')"></label>
                 <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
-                    :value="old('email')" required autofocus placeholder="Your Email Address">
+                    :value="old('email')" required autofocus placeholder="{{__('messages.user.auth.Email')}}">
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                Email Password Reset Link
+                {{__('messages.user.auth.send_password_email_reset')}}
             </button>
         </form>
     </div>

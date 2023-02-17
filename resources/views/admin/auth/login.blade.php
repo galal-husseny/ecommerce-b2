@@ -1,47 +1,74 @@
-<x-guest-admin-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('admin.layouts.parent')
 
-    <form method="POST" action="{{ route('admins.login') }}">
-        @csrf
+@section('title', 'Login')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('content')
+    @parent
+    <div class="container  d-flex justify-content-center m-t-100" style="margin-top: 100px">
+        <div class="w-50 shadow p-3 mb-5 bg-body rounded">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">{{ __('messages.admin.auth.Login-title') }}</p>
+
+                <form action="{{ route('admins.login') }}" method="POST">
+                    @csrf
+                    <!-- Email Address -->
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="email" name="email" :value="old('email')" required autofocus
+                            placeholder="{{ __('messages.admin.auth.Email') }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        @if ($errors->get('email'))
+                            <ul class='text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
+                                @foreach ($errors->get('email') as $message)
+                                    <p class="text-danger">{{ $message }}</p>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                    <!-- Password -->
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="password" name="password" required autocomplete="new-password"
+                            placeholder="{{ __('messages.admin.auth.Password') }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        @if ($errors->get('password'))
+                            <ul class='text-danger  space-y-1 mt-2'>
+                                @foreach ($errors->get('password') as $message)
+                                    <p class="text-danger">{{ $message }}</p>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" class="rounded" id="agreeTerms" name="remember" value="agree"
+                                    class="border">
+                                <label for="agreeTerms">
+                                    {{ __('messages.admin.auth.Remember_me') }}
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit"
+                                class="btn btn-dark btn-block rounded-pill">{{ __('messages.admin.auth.Log_in') }}</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                @if (Route::has('admins.password.request'))
+                    <a href="{{ route('admins.password.request') }}"
+                        class="text-center text-dark">{{ __('messages.admin.auth.forgot_password') }}</a>
+                @endif
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('admins.password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('admins.password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-admin-layout>
+    </div>
+@endsection

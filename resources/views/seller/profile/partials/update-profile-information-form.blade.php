@@ -1,11 +1,11 @@
-<section class="shadow m-t-120 p-10">
+<section class="shadow m-t-50 p-10" style="margin-top: 50px">
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+            {{ __('messages.seller.profile.profile_info') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("messages.seller.profile.message") }}
         </p>
     </header>
 
@@ -19,7 +19,7 @@
 
         <!-- Name -->
         <div>
-            <label for="name">Name</label>
+            <label for="name">{{__('messages.seller.profile.name')}}</label>
             <input id="name" name="name" type="text" class="mt-1 block w-full border"
                 value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" />
             @if ($errors->get('name'))
@@ -32,7 +32,7 @@
         </div>
 
         <div>
-            <label for="email">Email </label>
+            <label for="email">{{__('messages.seller.profile.email')}} </label>
             <input id="email" name="email" type="email" class="mt-1 block w-full border"
                 value="{{ old('email', $user->email) }}" required autocomplete="email" />
             @if ($errors->get('email'))
@@ -50,13 +50,13 @@
 
                         <button form="send-verification"
                             class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('messages.seller.profile.resend_verification_mail') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('messages.seller.profile.verification_message') }}
                         </p>
                     @endif
                 </div>
@@ -64,11 +64,12 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button class="stext-101 text-center cl0 w-25 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">{{ __('Save') }}</button>
+            <button
+                class="stext-101 text-center cl0 w-25 bg-dark rounded-pill bor1 hov-btn3 p-lr-15 trans-04 pointer">{{ __('messages.seller.profile.save') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"
-                    class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
+                    class="text-sm text-gray-600 dark:text-gray-400">{{ __('messages.seller.profile.saved') }}</p>
             @endif
         </div>
     </form>

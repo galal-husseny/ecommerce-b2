@@ -8,8 +8,8 @@
         </li>
 
         <div class="hidden sm:-my-px  sm:flex">
-            <x-nav-link :href="route('sellers.dashboard')" :active="request()->routeIs('admins.dashboard')">
-                {{ __('messages.seller.header.dashboard') }}
+            <x-nav-link :href="route('admins.dashboard')" :active="request()->routeIs('admins.dashboard')">
+                {{ __('messages.admin.header.dashboard') }}
             </x-nav-link>
         </div>
     </ul>
@@ -146,7 +146,7 @@
             <x-dropdown align="right" width="50">
                 <x-slot name="trigger">
                     <button class="d-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                        <div> {{ Auth::guard('seller')->user()->name }} </div>
+                        <div> {{ Auth::guard('admin')->user()->name }} </div>
 
                         <div class="ml-3">
                             <i class="fa fa-chevron-down"></i>
@@ -155,14 +155,14 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-dropdown-link :href="route('sellers.profile.edit')">
+                    <x-dropdown-link :href="route('admins.profile.edit')">
                         {{ __('Profile') }}
                     </x-dropdown-link>
 
                     <!-- Authentication -->
-                    <form method="POST" action="{{ route('sellers.logout') }}">
+                    <form method="POST" action="{{ route('admins.logout') }}">
                         @csrf
-                        <x-dropdown-link :href="route('sellers.logout')"
+                        <x-dropdown-link :href="route('admins.logout')"
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">
                             {{ __('Log Out') }}

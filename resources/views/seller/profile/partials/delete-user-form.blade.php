@@ -1,11 +1,11 @@
-<section class="shadow m-tb-50 p-10">
+<section class="shadow m-tb-50 p-10" style="margin-top: 50px; margin-bottom: 50px ">
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            Delete Account
+            {{__('messages.seller.profile.delete')}}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400" style="margin-bottom: 25px">
+            {{__('messages.seller.profile.delete_message')}}
         </p>
     </header>
 

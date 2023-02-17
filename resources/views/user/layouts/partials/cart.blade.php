@@ -5,7 +5,7 @@
     <div class="header-cart flex-col-l p-l-65 p-r-25">
         <div class="header-cart-title flex-w flex-sb-m p-b-8">
             <span class="mtext-103 cl2">
-                Your Cart
+                {{__('messages.user.cart.your_cart')}}
             </span>
 
             <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
@@ -66,16 +66,16 @@
 
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Total: $75.00
+                    {{__('messages.user.cart.total')}} $75.00
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
                     <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                        View Cart
+                        {{__('messages.user.cart.view_cart')}}
                     </a>
 
                     <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                        Check Out
+                        {{__('messages.user.cart.checkout')}}
                     </a>
                 </div>
             </div>
