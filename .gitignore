@@ -18,5 +18,6 @@ yarn-error.log
 /.vscode
 /public/dashboard-assets
 /public/frontend-assets
+/public/AdminLTE-3.2.0
 package-lock.json
 composer.lock

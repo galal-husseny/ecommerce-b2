@@ -57,7 +57,7 @@ return [
             'todo' => 'قائمة المهام',
             'add_item' => 'أضف مهمة',
             'visitors' => 'الزوار',
-            
+
         ]
     ],
     'seller' => [
@@ -215,6 +215,9 @@ return [
             'message' => 'تريد أن تصبح بائع في موقعنا',
             'have_account' => 'لديك بالفعل حساب بائع',
             'dont_have_account' => 'ليس لديك حساب',
+        ],
+        'shared' => [
+            'currency' => 'جنيه'
         ]
     ],
     'frontend' => [

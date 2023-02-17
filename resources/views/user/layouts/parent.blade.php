@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+@if (App::currentLocale() == 'en')
+    <html lang="en" dir="ltr">
+@else
+    <html lang="ar" dir="rtl">
+@endif
 <head>
 	<title>@yield('title')</title>
 	<meta charset="UTF-8">
