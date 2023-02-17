@@ -20,7 +20,7 @@
 @endpush
 
 @push('scripts')
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 @endpush
 
 @section('content')

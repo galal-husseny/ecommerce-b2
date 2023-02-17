@@ -14,7 +14,7 @@
         </div>
         <div class="d-flex justify-content-center align-items-center">
             <div class="container h-full d-flex justify-content-between align-items-center bg-transpernet ">
-                <div class="shadow p-4 border rounded " style="width: 45%">
+                <div class="shadow p-4  " style="width: 45%">
                     <h3 class="text-dark fw-bolder my-4">
                         {{ __('messages.seller.index.have_account') }}
                     </h3>
