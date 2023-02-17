@@ -58,7 +58,7 @@ return [
             'todo' => 'To Do List',
             'add_item' => 'Add item',
             'visitors' => 'Visitors',
-            
+
         ]
     ],
     'seller' => [
@@ -219,6 +219,9 @@ return [
             'message' => 'Want to become a seller in our website',
             'have_account' => 'Already have a seller account',
             'dont_have_account' => 'Do not have account',
+        ],
+        'shared' => [
+            'currency' => 'EGP'
         ]
     ],
     'frontend' => [
