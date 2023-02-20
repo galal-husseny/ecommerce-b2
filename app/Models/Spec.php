@@ -5,26 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Spec extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
-        'status',
     ];
 
     /**
-     * products relation showing that category has many products
+     * products relation showing that spec belongs to many products
      *
      * @return void
      */
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('value');
     }
 }

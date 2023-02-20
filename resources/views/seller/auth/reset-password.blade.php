@@ -1,6 +1,6 @@
 @extends('seller.layouts.parent')
 
-@section('title', 'Reset password')
+@section('title', __('seller.auth.reset_password.title'))
 
 @push('scripts')
     @vite('resources/js/app.js')
@@ -20,7 +20,7 @@
                 <!-- Email Address -->
                 <div class="input-group mb-3">
                     <input class="form-control" type="email" name="email" value="{{ $request->input('email') }}"
-                        required autofocus placeholder="{{ __('messages.seller.auth.Email') }}">
+                        required autofocus placeholder="{{ __('seller.auth.login.email') }}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -37,7 +37,7 @@
                 <!-- Password -->
                 <div class="input-group mb-3">
                     <input class="form-control" type="password" name="password" required autocomplete="new-password"
-                        placeholder="{{ __('messages.seller.auth.Password') }}">
+                        placeholder="{{ __('seller.auth.login.password') }}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -54,7 +54,7 @@
                 <!-- Confirm Password -->
                 <div class="input-group mb-3">
                     <input class="form-control" type="password" name="password_confirmation" required
-                        placeholder="{{ __('messages.seller.auth.confirm_password') }}">
+                        placeholder="{{ __('seller.auth.reset_password.confirm_password') }}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-dark btn-block rounded-pill"
-                            style="background-color: black;">{{ __('messages.seller.auth.reset_password') }}</button>
+                            style="background-color: black;">{{ __('seller.auth.reset_password.reset_password') }}</button>
                     </div>
                 </div>
             </form>

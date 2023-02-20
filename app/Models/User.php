@@ -51,24 +51,48 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function addresses()
-    {
+    /**
+     * addresses relation showing that a user has many addresses
+     *
+     * @return void
+     */
+    public function addresses(){
         return $this->hasMany(Address::class);
     }
 
-    public function favs()
-    {
-        return $this->belongsToMany(Product::class,'favs','user_id','product_id')->as('favs');
+    /**
+     * favs relation showing that a user belongs to many products
+     *
+     * @return void
+     */
+    public function favs(){
+        return $this->belongsToMany(Product::class , 'favs' , 'user_id' , 'product_id')->as('favs');
     }
 
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
+    /**
+     * carts relation showing that a user belongs to many products
+     *
+     * @return void
+     */
+    public function carts(){
+        return $this->belongsToMany(Product::class , 'carts' , 'user_id' , 'product_id')->as('carts')->withPivot('quantity');
     }
 
-    public function carts()
-    {
-        return $this->belongsToMany(Product::class,'carts','user_id','product_id')
-        ->as('carts')->withPivot('quantity');
+    /**
+     * reviews relation showing that a user has many reviews
+     *
+     * @return void
+     */
+    public function reviews(){
+        return $this->hasMany(Review::class );
+    }
+
+    /**
+     * coupons relation showing that a user belongs to many coupons
+     *
+     * @return void
+     */
+    public function coupons(){
+        return $this->belongsToMany(Coupon::class)->withPivot('coupon_expired_at' , 'max_no_of_users_per_coupon');
     }
 }

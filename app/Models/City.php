@@ -9,8 +9,22 @@ class City extends Model
 {
     use HasFactory;
 
-    public function regions()
-    {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'status',
+    ];
+
+    /**
+     * regions relation showing that a city has many regions
+     *
+     * @return void
+     */
+    public function regions(){
         return $this->hasMany(Region::class);
     }
 }

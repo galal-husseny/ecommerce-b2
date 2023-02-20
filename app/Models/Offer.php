@@ -5,26 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Offer extends Model
 {
     use HasFactory;
 
-    /**
+        /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'status',
+        'title',
+        'max_discount',
+        'start_date',
+        'end_date',
     ];
 
     /**
-     * products relation showing that category has many products
+     * products relation showing that offer has many products
      *
      * @return void
      */
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('discount' , 'price_after_discount');
     }
 }
