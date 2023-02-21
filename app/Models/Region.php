@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Translatable\HasTranslations;
 
 class Region extends Model
 {
-    use HasFactory;
+    use HasFactory , HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +19,16 @@ class Region extends Model
         'name',
         'status',
         'city_id',
+    ];
+
+    /**
+     * The attributes to be translated.
+     *
+     * @var array<int, string>
+     */
+    public $translatable = [
+        'name',
+        'status'
     ];
 
     /**

@@ -1,7 +1,7 @@
-<footer class=" p-5 bg-dark text-white main-header navbar navbar-expand">
-    <strong class="text-white">Copyright &copy; 2023 <a href="">E-commerce by Mina Adbelmalak</a>.</strong>
-    <p class="text-white">All rights reserved. </p>
+<footer class="main-footer">
+    <strong>Copyright &copy; 2023 <a href="{{route('users.dashboard')}}"> {{__('seller.footer.website')}} {{__('seller.footer.author')}}</a> . </strong>
+    {{__('seller.footer.rights')}}
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
+      <b>Version</b> 3.2.0
     </div>
-</footer>
+  </footer>

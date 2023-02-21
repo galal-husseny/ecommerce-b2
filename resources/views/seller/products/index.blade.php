@@ -26,45 +26,45 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">DataTable with default features</h3>
+                                <h3 class="card-title"> {{__('All products')}} </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('id') }}</th>
-                                            <th>{{ __('name') }}</th>
-                                            <th>{{ __('code') }}</th>
-                                            <th>{{ __('sale_price') }}</th>
-                                            <th>{{ __('purchase_price') }}</th>
-                                            <th>{{ __('profit') }}</th>
-                                            <th>{{ __('quantity') }}</th>
-                                            <th>{{ __('profit_with_quantities') }}</th>
-                                            <th>{{ __('status') }}</th>
-                                            <th>{{ __('seller') }}</th>
-                                            <th>{{ __('category') }}</th>
-                                            <th>{{ __('operations') }}</th>
+                                            <th class="col-1">{{ __('id') }}</th>
+                                            <th class="col-1">{{ __('name') }}</th>
+                                            <th class="col-1">{{ __('code') }}</th>
+                                            <th class="col-1">{{ __('sale_price') }}</th>
+                                            <th class="col-1">{{ __('purchase_price') }}</th>
+                                            <th class="col-1">{{ __('profit') }}</th>
+                                            <th class="col-1">{{ __('quantity') }}</th>
+                                            <th class="col-1">{{ __('profit_with_quantities') }}</th>
+                                            <th class="col-1">{{ __('status') }}</th>
+                                            <th class="col-1">{{ __('sellersd') }}</th>
+                                            <th class="col-1">{{ __('category') }}</th>
+                                            <th class="col-1">{{ __('operations') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($products as $index => $product)
                                         <tr>
-                                            <td>{{++$index}}</td>
-                                            <td>{{$product->getTranslation('name','en') .' - ' . $product->getTranslation('name','ar')}}</td>
-                                            <td>{{$product->code}}</td>
-                                            <td>{{$product->sale_price_with_currency()}}</td>
-                                            <td>{{$product->purchase_price_with_currency()}}</td>
-                                            <td>{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
-                                            <td>{{$product->quantity}}</td>
-                                            <td>{{$profit * $product->quantity}}</td>
-                                            <td>{{$product->status}}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <a href="">Show</a>
-                                                <a href="">Edit</a>
-                                                <a href="">Delete</a>
+                                            <td class="col-1">{{++$index}}</td>
+                                            <td class="col-1">{{$product->getTranslation('name','en') .' - ' . $product->getTranslation('name','ar')}}</td>
+                                            <td class="col-1">{{$product->code}}</td>
+                                            <td class="col-1">{{$product->sale_price_with_currency()}}</td>
+                                            <td class="col-1">{{$product->purchase_price_with_currency()}}</td>
+                                            <td class="col-1">{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
+                                            <td class="col-1">{{$product->quantity}}</td>
+                                            <td class="col-1">{{$profit * $product->quantity}}</td>
+                                            <td class="col-1">{{$product->status}}</td>
+                                            <td class="col-1"></td>
+                                            <td class="col-1"></td>
+                                            <td class="col-1">
+                                                <a href="" class="btn btn-success mb-1 rounded-pill w-100">Show</a>
+                                                <a href="" class="btn btn-primary mt-1 rounded-pill w-100">Edit</a>
+                                                <a href="" class="btn btn-danger mt-1 rounded-pill w-100">Delete</a>
                                             </td>
                                         </tr>
                                         @endforeach

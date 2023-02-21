@@ -2,12 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class City extends Model
 {
-    use HasFactory;
+    use HasFactory , HasTranslations;
+
+    /**
+     * The attributes to be translated.
+     *
+     * @var array<int, string>
+     */
+    public $translatable = [
+        'name',
+        'status'
+    ];
 
     /**
      * The attributes that are mass assignable.

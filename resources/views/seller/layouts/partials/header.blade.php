@@ -9,7 +9,7 @@
 
         <div class="hidden sm:-my-px  sm:flex">
             <x-nav-link :href="route('sellers.dashboard')" :active="request()->routeIs('admins.dashboard')">
-                {{ __('messages.seller.header.dashboard') }}
+                {{ __('seller.header.dashboard') }}
             </x-nav-link>
         </div>
     </ul>

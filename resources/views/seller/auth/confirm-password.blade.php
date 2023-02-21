@@ -5,7 +5,7 @@
 @section('content')
     @parent
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('messages.seller.auth.confirm_password_title') }}
+        {{ __('seller.auth.confirm_password_title') }}
     </div>
 
     <form method="POST" action="{{ route('sellers.password.confirm') }}">
@@ -13,17 +13,23 @@
 
         <!-- Password -->
         <div>
-            <label for="password"> {{ __('messages.seller.auth.Password') }} </label>
+            <label for="password"> {{ __('seller.auth.login.password') }} </label>
 
             <input id="password" class="block mt-1 w-full" type="password" name="password" required
                 autocomplete="current-password">
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                @if ($errors->get('password'))
+                <ul class = 'text-sm text-red-600 dark:text-red-400 space-y-1 mt-2'>
+                    @foreach ($errors->get('password') as $message)
+                        <p class="text-danger">{{ $message }}</p>
+                    @endforeach
+                </ul>
+            @endif
         </div>
 
         <div class="flex justify-end mt-4">
             <button class="btn btn-primary w-50 rounded-pill">
-                {{ __('messages.seller.auth.confirm') }}
+                {{ __('seller.auth.verify_email.confirm') }}
             </button>
         </div>
     </form>

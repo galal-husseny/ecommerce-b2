@@ -62,7 +62,7 @@
                     </form>
 
                     <div class="social-auth-links text-center">
-                        <p class="text-center">{{__('messages.seller.auth.or')}}</p>
+                        <p class="text-center">{{__('seller.auth.register.or')}}</p>
                         <a href="#" class="btn btn-block btn-primary rounded-pill">
                             <i class="fab fa-facebook mr-2"></i>
                             {{__('seller.auth.login.login_facebook')}}

@@ -14,6 +14,16 @@ class Spec extends Model
     ];
 
     /**
+     * The attributes to be translated.
+     *
+     * @var array<int, string>
+     */
+    public $translatable = [
+        'name',
+        'status'
+    ];
+
+    /**
      * products relation showing that spec belongs to many products
      *
      * @return void

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Spatie\Translatable\HasTranslations;
 
 class Review extends Model
 {
-    use HasFactory;
+    use HasFactory , HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,15 @@ class Review extends Model
         'comment',
         'product_id',
         'user_id',
+    ];
+
+    /**
+     * The attributes to be translated.
+     *
+     * @var array<int, string>
+     */
+    public $translatable = [
+        'comment',
     ];
 
     /**

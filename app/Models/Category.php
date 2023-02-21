@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +18,16 @@ class Category extends Model
     protected $fillable = [
         'name',
         'status',
+    ];
+
+    /**
+     * The attributes to be translated.
+     *
+     * @var array<int, string>
+     */
+    public $translatable = [
+        'name',
+        'description'
     ];
 
     /**
