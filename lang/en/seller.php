@@ -74,6 +74,14 @@ return [
         'delete_account' => [
             'delete_message' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
             'delete' => 'Delete Account',
+            'title' => 'Are you sure ?',
+            'text' => 'You will not be able to recover this account!',
+            'confirm_button_text' => 'Yes, delete it!',
+            'cancel_button_text' => 'No, cancel please!',
+            'deleted' => 'Deleted',
+            'deleted_text' => 'Your account has been deleted.',
+            'cancelled' => 'Cancelled',
+            'cancelled_text' => 'Your account is safe',
         ],
 
 
