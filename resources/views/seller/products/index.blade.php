@@ -1,6 +1,6 @@
 @extends('seller.layouts.parent')
 
-@section('title', 'Home')
+@section('title', __('seller.all_products.title'))
 
 @section('header')
     @include('seller.layouts.partials.header')
@@ -33,38 +33,38 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="col-1">{{ __('id') }}</th>
-                                            <th class="col-1">{{ __('name') }}</th>
-                                            <th class="col-1">{{ __('code') }}</th>
-                                            <th class="col-1">{{ __('sale_price') }}</th>
-                                            <th class="col-1">{{ __('purchase_price') }}</th>
-                                            <th class="col-1">{{ __('profit') }}</th>
-                                            <th class="col-1">{{ __('quantity') }}</th>
-                                            <th class="col-1">{{ __('profit_with_quantities') }}</th>
-                                            <th class="col-1">{{ __('status') }}</th>
-                                            <th class="col-1">{{ __('sellersd') }}</th>
-                                            <th class="col-1">{{ __('category') }}</th>
-                                            <th class="col-1">{{ __('operations') }}</th>
+                                            <th>{{ __('seller.all_products.id') }}</th>
+                                            <th>{{ __('seller.all_products.name') }}</th>
+                                            <th>{{ __('seller.all_products.code') }}</th>
+                                            <th>{{ __('seller.all_products.sale_price') }}</th>
+                                            <th>{{ __('seller.all_products.purchase_price') }}</th>
+                                            <th>{{ __('seller.all_products.profit') }}</th>
+                                            <th>{{ __('seller.all_products.quantity') }}</th>
+                                            <th>{{ __('seller.all_products.profit_with_quantities') }}</th>
+                                            <th>{{ __('seller.all_products.status') }}</th>
+                                            <th>{{ __('seller.all_products.seller_id') }}</th>
+                                            <th>{{ __('seller.all_products.category') }}</th>
+                                            <th>{{ __('seller.all_products.operations') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($products as $index => $product)
                                         <tr>
-                                            <td class="col-1">{{++$index}}</td>
-                                            <td class="col-1">{{$product->getTranslation('name','en') .' - ' . $product->getTranslation('name','ar')}}</td>
-                                            <td class="col-1">{{$product->code}}</td>
-                                            <td class="col-1">{{$product->sale_price_with_currency()}}</td>
-                                            <td class="col-1">{{$product->purchase_price_with_currency()}}</td>
-                                            <td class="col-1">{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
-                                            <td class="col-1">{{$product->quantity}}</td>
-                                            <td class="col-1">{{$profit * $product->quantity}}</td>
-                                            <td class="col-1">{{$product->status}}</td>
-                                            <td class="col-1"></td>
-                                            <td class="col-1"></td>
-                                            <td class="col-1">
-                                                <a href="" class="btn btn-success mb-1 rounded-pill w-100">Show</a>
-                                                <a href="" class="btn btn-primary mt-1 rounded-pill w-100">Edit</a>
-                                                <a href="" class="btn btn-danger mt-1 rounded-pill w-100">Delete</a>
+                                            <td>{{++$index}}</td>
+                                            <td>{{$product->getTranslation('name','en') .' - ' . $product->getTranslation('name','ar')}}</td>
+                                            <td>{{$product->code}}</td>
+                                            <td>{{$product->sale_price_with_currency()}}</td>
+                                            <td>{{$product->purchase_price_with_currency()}}</td>
+                                            <td>{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
+                                            <td>{{$product->quantity}}</td>
+                                            <td>{{$profit * $product->quantity}}</td>
+                                            <td>{{$product->status}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <a href="" class="btn btn-success mb-1 rounded-pill w-100"> {{__('seller.all_products.show')}} </a>
+                                                <a href="" class="btn btn-primary mt-1 rounded-pill w-100"> {{__('seller.all_products.edit')}} </a>
+                                                <a href="" class="btn btn-danger mt-1 rounded-pill w-100"> {{__('seller.all_products.delete')}} </a>
                                             </td>
                                         </tr>
                                         @endforeach

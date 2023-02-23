@@ -54,6 +54,7 @@ return [
 
     ],
     'profile' => [
+        'profile' => 'Profile',
         'update_info' => [
             'profile_info' => 'Profile Information',
             'message' => "Update your account's profile information and email address.",
@@ -105,6 +106,29 @@ return [
         'author' => 'Mina Abdelmalak',
         'website' => 'E-commerce website by',
         'rights' => 'All rights reserved.',
+    ],
+    'dashboard' => [
+        'title' => 'Dashboard',
+
+    ],
+    'all_products' => [
+        'title' => 'Products',
+        'id' => 'id',
+        'name' => 'name',
+        'code' => 'code',
+        'sale_price' => 'Sale Price',
+        'purchase_price' => 'Purchase Price',
+        'profit' => 'Profit',
+        'quantity' => 'Quantity',
+        'profit_with_quantities' => 'Profit With Quantities',
+        'status' => 'Status',
+        'seller_id' => 'Seller id',
+        'category' => 'Category',
+        'operations' => 'Operations',
+        'show' => 'Show',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+
     ],
 
 ];

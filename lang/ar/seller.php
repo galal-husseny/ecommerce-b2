@@ -54,6 +54,7 @@ return [
 
     ],
     'profile' => [
+        'profile' => 'حساب تعريفي',
         'update_info' => [
             'profile_info' => 'معلومات الحساب',
             'message' => "قم بتحديث معلومات الملف الشخصي لحسابك وعنوان البريد الإلكتروني ",
@@ -104,6 +105,28 @@ return [
         'author' => 'مينا عبد الملاك',
         'website' => 'متجر الكتروني بواسطة',
         'rights' => 'جميع الحقوق محفوظة',
+    ],
+    'dashboard' => [
+        'title' => 'لوحة التحكم',
+
+    ],
+    'all_products' => [
+        'title' => 'المنتجات',
+        'id' => 'الرقم',
+        'name' => 'الاسم',
+        'code' => 'كود',
+        'sale_price' => 'سعر البيع',
+        'purchase_price' => 'سعر الشراء',
+        'profit' => 'الربح',
+        'quantity' => 'الكمية',
+        'profit_with_quantities' => 'الربح حسب الكمية',
+        'status' => 'الحالة',
+        'seller_id' => 'كود البائع',
+        'category' => 'القسم',
+        'operations' => 'العمليات',
+        'show' => 'أعرض',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
     ],
 
 ];

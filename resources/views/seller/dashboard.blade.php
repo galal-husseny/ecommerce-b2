@@ -1,6 +1,6 @@
 @extends('seller.layouts.parent')
 
-@section('title', 'Home')
+@section('title', __('seller.dashboard.title'))
 
 @section('header')
     @include('seller.layouts.partials.header')
