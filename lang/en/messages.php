@@ -13,6 +13,7 @@ return [
 
     'frontend' => [
         'index' => [
+            'title' => 'Home',
             'product_overview' => 'Product Overview',
             'shop_now' => 'SHOP NOW',
             'all_products' => 'All Products',
@@ -58,7 +59,32 @@ return [
             'talk' => 'Lets Talk',
             'sale_support' => 'Sale Support',
 
-        ]
+        ],
+        'cart' => [
+            'your_cart' => 'Your Cart',
+            'total' => 'Total :',
+            'view_cart' => 'View Cart',
+            'checkout' => 'Check Out',
+            'product' => 'Product',
+            'price' => 'Price',
+            'quantity' => 'Quantity',
+            'total' => 'Total',
+            'coupon_code' => 'Coupon Code',
+            'apply_coupon' => 'Apply coupon',
+            'updates_cart' => 'Update Cart',
+            'cart_total' => 'Cart Totals',
+            'subtotal' => 'Subtotal:',
+            'shipping' => 'Shipping:',
+            'calc_shipping' => 'Calculate Shipping',
+            'select_country' => 'Select a country...',
+            'state_country' => 'State /  country',
+            'postcode' => 'Postcode / Zip' ,
+            'update_total' => 'Update Totals',
+            'proceed' => 'Proceed to Checkout',
+        ],
+        'shop' => [
+            'title' => 'Shop',
+        ],
     ]
 
 ];

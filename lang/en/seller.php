@@ -90,7 +90,7 @@ return [
         'dashboard' => 'Dashboard',
     ],
     'index' => [
-        'title' => 'Index',
+        'title' => 'Sellers Center',
         'message' => 'Want to become a seller in our website',
         'have_account' => 'Already have a seller account',
         'dont_have_account' => 'Do not have account',

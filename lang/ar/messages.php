@@ -10,9 +10,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    
+
     'frontend' => [
         'index' => [
+            'title' => 'الرئيسية',
             'product_overview' => 'نظرة عامة على المنتج',
             'shop_now' => 'تسوق الآن',
             'all_products' => 'جميع المنتجات',
@@ -57,8 +58,32 @@ return [
             'address' => 'العنوان',
             'talk' => 'دعونا نتحدث',
             'sale_support' => 'دعم المبيعات',
-
-        ]
+        ],
+        'cart' => [
+            'your_cart' => 'عربة التسوق الخاصة بك',
+            'total' => 'إجمالي :',
+            'view_cart' => 'عرض عربة التسوق',
+            'checkout' => 'الدفع',
+            'product' => 'المنتج',
+            'price' => 'السعر',
+            'quantity' => 'الكمية',
+            'total' => 'الإجمالي الكلي',
+            'coupon_code' => 'كود الكوبون',
+            'apply_coupon' => 'تطبيق الكوبون',
+            'update_cart' => 'تحديث عربة التسوق',
+            'cart_total' => 'اجمالي عربة التسوق',
+            'subtotal' => 'المجموع الفرعي:',
+            'shipping' => 'الشحن:',
+            'calc_shipping' => 'احسب الشحن',
+            'select_country' => 'اختر دولة ...',
+            'state_country' => 'ولايه/ دوله',
+            'postcode' => 'الرمز البريدي',
+            'update_total' => 'تحديث الإجمالي',
+            'proceed' => 'المتابعة للدفع',
+        ],
+        'shop' => [
+            'title' => 'المتجر',
+        ],
     ]
 
 ];

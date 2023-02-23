@@ -10,18 +10,18 @@
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a style="text-decoration: none" href="#" class="flex-c-m trans-04 p-lr-25">
                         {{ __('user.header.faq') }}
                     </a>
                     @foreach (LaravelLocalization::getSupportedLocales() as $lang => $value)
                         @if ($lang == App::currentLocale())
                             @continue
                         @endif
-                        <a rel="alternate" hreflang="{{ $lang }}" href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="flex-c-m trans-04 p-lr-25">
+                        <a style="text-decoration: none" rel="alternate" hreflang="{{ $lang }}" href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="flex-c-m trans-04 p-lr-25">
                             {{ Str::upper($lang) }}
                         </a>
                     @endforeach
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a style="text-decoration: none" href="#" class="flex-c-m trans-04 p-lr-25">
                         {{ __('user.header.currency') }}
                     </a>
                 </div>
@@ -40,26 +40,26 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li>
-                            <a href="{{ route('users.dashboard') }}"> {{ __('user.header.home') }} </a>
+                            <a style="text-decoration: none" href="{{ route('users.dashboard') }}"> {{ __('user.header.home') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('shop') }}"> {{ __('user.header.shop') }} </a>
+                            <a style="text-decoration: none" href="{{ route('shop') }}"> {{ __('user.header.shop') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('blog') }}"> {{ __('user.header.blog') }} </a>
+                            <a style="text-decoration: none" href="{{ route('blog') }}"> {{ __('user.header.blog') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('about') }}"> {{ __('user.header.about') }} </a>
+                            <a style="text-decoration: none" href="{{ route('about') }}"> {{ __('user.header.about') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('contact') }}"> {{ __('user.header.contact') }} </a>
+                            <a style="text-decoration: none" href="{{ route('contact') }}"> {{ __('user.header.contact') }} </a>
                         </li>
                         <li>
-                            <a href="{{ route('sellers.index') }}"> {{__('user.header.seller_account')}}
+                            <a style="text-decoration: none" href="{{ route('sellers.index') }}"> {{__('user.header.seller_account')}}
                             </a>
                         </li>
                     </ul>
@@ -91,17 +91,17 @@
 
                             <ul class="sub-menu">
                                 @auth('web')
-                                    <li><a href="{{ route('users.profile.edit') }}"> {{__('user.profile.profile')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.profile.edit') }}"> {{__('user.profile.profile')}} </a></li>
                                     <form method="POST" action="{{ route('users.logout') }}">
                                         @csrf
-                                        <li><a href="route('users.logout')"
+                                        <li><a style="text-decoration: none" href="route('users.logout')"
                                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();"> {{__('user.header.logout')}} </a>
                                         </li>
                                     </form>
                                 @else
-                                    <li><a href="{{ route('users.login') }}"> {{__('user.header.login')}} </a></li>
-                                    <li><a href="{{ route('users.register') }}"> {{__('user.header.register')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.login') }}"> {{__('user.header.login')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.register') }}"> {{__('user.header.register')}} </a></li>
                                 @endauth
                             </ul>
 

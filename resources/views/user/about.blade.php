@@ -1,6 +1,6 @@
 @extends('user.layouts.parent')
 
-@section('title', 'About')
+@section('title', __('messages.frontend.about.about'))
 
 @section('header')
     @include('user.layouts.partials.header')

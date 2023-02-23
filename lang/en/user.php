@@ -40,6 +40,8 @@ return [
             'terms' => 'terms',
             'registered' => 'Already registered ?',
             'register' => 'Register',
+            'confirm_password' => 'Confirm password',
+
         ],
         'verify_email' => [
             'email' => 'Email',
@@ -55,26 +57,43 @@ return [
             'message' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
             'send_password_email_reset' => 'Email Password Reset Link',
         ],
-        'confirm_password_title' => 'This is a secure area of the application. Please confirm your password before continuing.',
+        'confirm_password' => [
+            'page_title' => 'Confirm Password',
+            'confirm_password_title' => 'This is a secure area of the application. Please confirm your password before continuing.',
+            'message' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
+            'confirm' => 'Confirm',
+        ],
+        'reset_password' => [
+            'page_title' => 'Reset Password',
+            'password' => 'Password',
+            'confirm_password' => 'Confirm password',
+        ],
 
     ],
     'profile' => [
-        'profile_info' => 'Profile Information',
-        'message' => "Update your account's profile information and email address.",
-        'name' => 'Name',
-        'email' => 'Email',
-        'resend_verification_mail' => 'Click here to re-send the verification email.',
-        'verification_message' => 'A new verification link has been sent to your email address.',
-        'saved' => 'Saved.',
-        'save' => 'Save',
-        'update_password' => 'Update Password',
-        'update_password_message' => 'Ensure your account is using a long, random password to stay secure.',
-        'current_password' => 'Current Password',
-        'new_password' => 'New Password',
-        'confirm_password' => 'Confirm Password',
-        'delete_message' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
-        'delete' => 'Delete Account',
         'profile' => 'Profile',
+        'update_info' => [
+            'profile_info' => 'Profile Information',
+            'message' => "Update your account's profile information and email address.",
+            'name' => 'Name',
+            'email' => 'Email',
+            'resend_verification_mail' => 'Click here to re-send the verification email.',
+            'verification_message' => 'A new verification link has been sent to your email address.',
+            'saved' => 'Saved.',
+            'save' => 'Save',
+        ],
+        'update_password' => [
+            'update_password' => 'Update Password',
+            'update_password_message' => 'Ensure your account is using a long, random password to stay secure.',
+            'current_password' => 'Current Password',
+            'new_password' => 'New Password',
+            'confirm_password' => 'Confirm Password',
+        ],
+        'delete_account' => [
+            'delete_message' => 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
+            'delete' => 'Delete Account',
+        ],
+
 
     ],
     'header' => [
@@ -106,28 +125,7 @@ return [
         'newsletter' => 'Newsletter',
         'subscribe' => 'Subscribe'
     ],
-    'cart' => [
-        'your_cart' => 'Your Cart',
-        'total' => 'Total :',
-        'view_cart' => 'View Cart',
-        'checkout' => 'Check Out',
-        'product' => 'Product',
-        'price' => 'Price',
-        'quantity' => 'Quantity',
-        'total' => 'Total',
-        'coupon_code' => 'Coupon Code',
-        'apply_coupon' => 'Apply coupon',
-        'updates_cart' => 'Update Cart',
-        'cart_total' => 'Cart Totals',
-        'subtotal' => 'Subtotal:',
-        'shipping' => 'Shipping:',
-        'calc_shipping' => 'Calculate Shipping',
-        'select_country' => 'Select a country...',
-        'state_country' => 'State /  country',
-        'postcode' => 'Postcode / Zip' ,
-        'update_total' => 'Update Totals',
-        'proceed' => 'Proceed to Checkout',
-    ],
+    
     'index' => [
         'message' => 'Want to become a seller in our website',
         'have_account' => 'Already have a seller account',
