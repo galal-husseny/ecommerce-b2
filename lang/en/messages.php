@@ -84,6 +84,7 @@ return [
         ],
         'shop' => [
             'title' => 'Shop',
+            ''
         ],
     ]
 
