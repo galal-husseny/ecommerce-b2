@@ -44,7 +44,7 @@ class Product extends Model
      */
     public function sale_price_with_currency() :string
     {
-        return $this->sale_price  . ' ' . __('messages.user.shared.currency');
+        return $this->sale_price  . ' ' . __('user.shared.currency');
     }
 
        /**
@@ -54,7 +54,7 @@ class Product extends Model
      */
     public function purchase_price_with_currency() :string
     {
-        return $this->purchase_price  . ' ' . __('messages.user.shared.currency');
+        return $this->purchase_price  . ' ' . __('user.shared.currency');
     }
 
     /**

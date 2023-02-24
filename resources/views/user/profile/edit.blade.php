@@ -1,22 +1,21 @@
-
 @extends('user.layouts.parent')
 
-@section('title' , 'Profile')
+@section('title')
+    {{__('user.profile.edit_profile')}}
+@endsection
 
 @section('header')
+    @parent
     @include('user.layouts.partials.header')
 @endsection
 
 @section('footer')
+    @parent
     @include('user.layouts.partials.footer')
 @endsection
 
 @push('links')
 <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-@endpush
-
-@push('scripts')
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @endpush
 
 @section('content')

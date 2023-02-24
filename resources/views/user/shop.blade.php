@@ -1,8 +1,11 @@
 @extends('user.layouts.parent')
 
-@section('title', 'Shop')
+@section('title' )
+    {{__('messages.frontend.index.shop_title')}}
+@endsection
 
 @section('header')
+    @parent
     @include('user.layouts.partials.header')
 @endsection
 
@@ -874,5 +877,6 @@
 @endsection
 
 @section('footer')
+    @parent
     @include('user.layouts.partials.footer')
 @endsection

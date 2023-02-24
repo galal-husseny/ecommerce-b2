@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    {{__('messages.user.footer.categories')}}
+                    {{__('user.footer.categories')}}
                 </h4>
 
                 <ul>
@@ -36,31 +36,31 @@
 
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    {{__('messages.user.footer.help')}}
+                    {{__('user.footer.help')}}
                 </h4>
 
                 <ul>
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            {{__('messages.user.footer.track_order')}}
+                            {{__('user.footer.track_order')}}
                         </a>
                     </li>
 
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            {{__('messages.user.footer.returns')}}
+                            {{__('user.footer.returns')}}
                         </a>
                     </li>
 
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            {{__('messages.user.footer.shipping')}}
+                            {{__('user.footer.shipping')}}
                         </a>
                     </li>
 
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            {{__('messages.user.footer.faqs')}}
+                            {{__('user.footer.faqs')}}
                         </a>
                     </li>
                 </ul>
@@ -68,11 +68,11 @@
 
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    {{__('messages.user.footer.get_in_touch')}}
+                    {{__('user.footer.get_in_touch')}}
                 </h4>
 
                 <p class="stext-107 cl7 size-201">
-                    {{__('messages.user.footer.more_questions')}} (+1) 96 716 6879
+                    {{__('user.footer.more_questions')}} (+1) 96 716 6879
                 </p>
 
                 <div class="p-t-27">
@@ -92,7 +92,7 @@
 
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    {{__('messages.user.footer.newsletter')}}
+                    {{__('user.footer.newsletter')}}
                 </h4>
 
                 <form>
@@ -103,7 +103,7 @@
 
                     <div class="p-t-18">
                         <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-                            {{__('messages.user.footer.subscribe')}}
+                            {{__('user.footer.subscribe')}}
                         </button>
                     </div>
                 </form>

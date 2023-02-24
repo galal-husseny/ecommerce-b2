@@ -1,8 +1,9 @@
 @extends('user.layouts.parent')
 
-@section('title', 'Home')
+@section('title', __('messages.frontend.index.index_title'))
 
 @section('header')
+    @parent
     @include('user.layouts.partials.header')
 @endsection
 
@@ -11,6 +12,7 @@
 @endsection
 
 @section('footer')
+    @parent
     @include('user.layouts.partials.footer')
 @endsection
 

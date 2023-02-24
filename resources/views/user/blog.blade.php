@@ -1,8 +1,11 @@
 @extends('user.layouts.parent')
 
-@section('title' , 'Blog')
+@section('title')
+ {{__('messages.frontend.blog.blog_title')}}
+@endsection
 
 @section('header')
+    @parent
     @include('user.layouts.partials.header')
 @endsection
 
@@ -11,6 +14,7 @@
 @endsection
 
 @section('footer')
+    @parent
     @include('user.layouts.partials.footer')
 @endsection
 
