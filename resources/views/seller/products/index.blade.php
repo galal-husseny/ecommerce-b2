@@ -62,9 +62,9 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                <a href="" class="btn btn-success mb-1 rounded-pill w-100"> {{__('seller.all_products.show')}} </a>
-                                                <a href="" class="btn btn-primary mt-1 rounded-pill w-100"> {{__('seller.all_products.edit')}} </a>
-                                                <a href="" class="btn btn-danger mt-1 rounded-pill w-100"> {{__('seller.all_products.delete')}} </a>
+                                                <a href="" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
+                                                <a href="" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <a href="" class="btn btn-sm btn-danger  my-2 rounded-pill "> {{__('seller.all_products.delete')}} </a>
                                             </td>
                                         </tr>
                                         @endforeach

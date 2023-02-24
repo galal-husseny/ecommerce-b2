@@ -15,7 +15,7 @@
 
         <div class="mb-3">
             <label for="current_password" class="d-block"> {{__('seller.profile.update_password.current_password')}} </label>
-            <input id="current_password" name="current_password" type="password" class="mt-1 w-75 border" autocomplete="current-password" />
+            <input id="current_password" name="current_password" type="password" class="mt-1 w-75 border form-control" autocomplete="current-password" />
             @if ($errors->updatePassword->get('current_password'))
                 <ul class='text-danger  space-y-1 mt-2'>
                     @foreach ($errors->updatePassword->get('current_password') as $message)
@@ -27,7 +27,7 @@
 
         <div class="mt-3">
             <label for="password" class="d-block"> {{__('seller.profile.update_password.new_password')}} </label>
-            <input id="password" name="password" type="password" class="mt-1 block w-75 border"
+            <input id="password" name="password" type="password" class="mt-1 block w-75 border form-control"
                 autocomplete="new-password" />
             @if ($errors->updatePassword->get('password'))
                 <ul class='text-danger  space-y-1 mt-2'>
@@ -41,7 +41,7 @@
         <div class="mt-3">
             <label for="password_confirmation" class="d-block"> {{__('seller.profile.update_password.confirm_password')}} </label>
             <input id="password_confirmation" name="password_confirmation" type="password"
-                class="mt-1 w-75 border" autocomplete="new-password" />
+                class="mt-1 w-75 border form-control" autocomplete="new-password" />
             @if ($errors->updatePassword->get('password_confirmation'))
                 <ul class='text-danger  space-y-1 mt-2'>
                     @foreach ($errors->updatePassword->get('password_confirmation') as $message)

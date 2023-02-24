@@ -20,7 +20,7 @@
         <!-- Name -->
         <div class="mb-3">
             <label for="name" class="d-block">{{__('seller.profile.update_info.name')}}</label>
-            <input id="name" name="name" type="text" class="mt-1 block w-75 border"
+            <input id="name" name="name" type="text" class="mt-1 block w-75 border form-control"
                 value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" />
             @if ($errors->get('name'))
                 <ul class='text-danger  space-y-1 mt-2'>
@@ -33,7 +33,7 @@
 
         <div class="mt-3">
             <label for="email" class="d-block">{{__('seller.profile.update_info.email')}} </label>
-            <input id="email" name="email" type="email" class="mt-1 block w-75 border"
+            <input id="email" name="email" type="email" class="mt-1 block w-75 border form-control"
                 value="{{ old('email', $user->email) }}" required autocomplete="email" />
             @if ($errors->get('email'))
                 <ul class='text-danger  space-y-1 mt-2'>
