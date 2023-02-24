@@ -6,9 +6,7 @@
     @include('seller.layouts.partials.header')
 @endsection
 
-@push('links')
-    @vite('resources/css/app.css')
-@endpush
+
 @push('links')
     <link rel="stylesheet" href="{{ asset('dashboard-assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet"
@@ -26,7 +24,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title"> {{__('All products')}} </h3>
+                                <h3 class="card-title"> {{__('seller.sidebar.all')}} </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
