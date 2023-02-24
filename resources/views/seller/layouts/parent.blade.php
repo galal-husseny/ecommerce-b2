@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{asset('dashboard-assets/plugins/summernote/summernote-bs4.min.css')}}">
 
     <!-- main css -->
-    <link rel="stylesheet" href="{{asset('dashboard-assets/dist/css/index.css')}}">
+    <link rel="stylesheet" href="{{asset('custom-css/seller.css')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
