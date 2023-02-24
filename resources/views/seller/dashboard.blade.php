@@ -1,18 +1,10 @@
 @extends('seller.layouts.parent')
 
-@section('title', 'Home')
+@section('title', __('seller.dashboard.title'))
 
 @section('header')
     @include('seller.layouts.partials.header')
 @endsection
-
-@section('footer')
-    @include('seller.layouts.partials.footer')
-@endsection
-
-@push('scripts')
-    @vite('resources/js/app.js')
-@endpush
 
 @push('links')
     @vite('resources/css/app.css')
@@ -22,8 +14,6 @@
     @parent
     @include('seller.layouts.partials.sidebar')
     <div class="content-wrapper">
-
-        <!-- Main content -->
         <section class="content my-5">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
@@ -645,6 +635,13 @@
                 <!-- /.row (main row) -->
             </div><!-- /.container-fluid -->
         </section>
-        <!-- /.content -->
     </div>
 @endsection
+
+@section('footer')
+    @include('seller.layouts.partials.footer')
+@endsection
+
+@push('scripts')
+    @vite('resources/js/app.js')
+@endpush

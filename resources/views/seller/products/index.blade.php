@@ -1,6 +1,6 @@
 @extends('seller.layouts.parent')
 
-@section('title', 'Home')
+@section('title', __('seller.all_products.title'))
 
 @section('header')
     @include('seller.layouts.partials.header')
@@ -26,25 +26,25 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">DataTable with default features</h3>
+                                <h3 class="card-title"> {{__('All products')}} </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('id') }}</th>
-                                            <th>{{ __('name') }}</th>
-                                            <th>{{ __('code') }}</th>
-                                            <th>{{ __('sale_price') }}</th>
-                                            <th>{{ __('purchase_price') }}</th>
-                                            <th>{{ __('profit') }}</th>
-                                            <th>{{ __('quantity') }}</th>
-                                            <th>{{ __('profit_with_quantities') }}</th>
-                                            <th>{{ __('status') }}</th>
-                                            <th>{{ __('seller') }}</th>
-                                            <th>{{ __('category') }}</th>
-                                            <th>{{ __('operations') }}</th>
+                                            <th>{{ __('seller.all_products.id') }}</th>
+                                            <th>{{ __('seller.all_products.name') }}</th>
+                                            <th>{{ __('seller.all_products.code') }}</th>
+                                            <th>{{ __('seller.all_products.sale_price') }}</th>
+                                            <th>{{ __('seller.all_products.purchase_price') }}</th>
+                                            <th>{{ __('seller.all_products.profit') }}</th>
+                                            <th>{{ __('seller.all_products.quantity') }}</th>
+                                            <th>{{ __('seller.all_products.profit_with_quantities') }}</th>
+                                            <th>{{ __('seller.all_products.status') }}</th>
+                                            <th>{{ __('seller.all_products.seller_id') }}</th>
+                                            <th>{{ __('seller.all_products.category') }}</th>
+                                            <th>{{ __('seller.all_products.operations') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,9 +62,9 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                <a href="">Show</a>
-                                                <a href="">Edit</a>
-                                                <a href="">Delete</a>
+                                                <a href="" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
+                                                <a href="" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <a href="" class="btn btn-sm btn-danger  my-2 rounded-pill "> {{__('seller.all_products.delete')}} </a>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -44,46 +44,88 @@ class Product extends Model
      */
     public function sale_price_with_currency() :string
     {
-        return $this->sale_price  . ' ' . __('messages.user.shared.currency');
+        return $this->sale_price  . ' ' . __('user.shared.currency');
     }
 
-       /**
+    /**
      * purchase_price_with_currency
      *
      * @return string
      */
     public function purchase_price_with_currency() :string
     {
-        return $this->purchase_price  . ' ' . __('messages.user.shared.currency');
+        return $this->purchase_price  . ' ' . __('user.shared.currency');
     }
 
     /**
-     * favs
+     * seller relation showing that a product belongs to one seller
      *
      * @return void
      */
-    public function favs()
-    {
-        return $this->belongsToMany(User::class,'favs','product_id','user_id')->as('favs');
+    public function seller(){
+        return $this->belongsTo(Seller::class);
     }
 
     /**
-     * reviews
+     * category relation showing that a product belongs to one category
      *
      * @return void
      */
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 
     /**
-     * carts
+     * orders relation showing that a product has many orders
      *
      * @return void
      */
-    public function carts()
-    {
-        return $this->belongsToMany(User::class,'carts','product_id','user_id')->as('carts')->withPivot('quantity');
+    public function orders(){
+        return $this->hasMany(Order::class)->withPivot('price' , 'quantity' , 'quantity');
+    }
+
+    /**
+     * specs relation showing that a product belongs to many specs
+     *
+     * @return void
+     */
+    public function specs(){
+        return $this->belongsToMany(Spec::class)->withPivot('value');
+    }
+
+    /**
+     * offers relation showing that a product belongs to many offers
+     *
+     * @return void
+     */
+    public function offers(){
+        return $this->belongsToMany(Offer::class)->withPivot('discount' , 'price_after_discount');
+    }
+
+    /**
+     * favs relation showing that a product belongs to many favs
+     *
+     * @return void
+     */
+    public function favs(){
+        return $this->belongsToMany(User::class , 'favs' , 'product_id' , 'user_id')->as('favs');
+    }
+
+    /**
+     * carts relation showing that a product belongs to many carts
+     *
+     * @return void
+     */
+    public function carts(){
+        return $this->belongsToMany(User::class , 'carts' , 'product_id' , 'user_id')->as('carts')->withPivot('quantity');
+    }
+
+    /**
+     * reviews relation showing that a product has many reviews
+     *
+     * @return void
+     */
+    public function reviews(){
+        return $this->hasMany(Review::class );
     }
 }

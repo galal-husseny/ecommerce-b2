@@ -32,7 +32,6 @@ class Seller extends Authenticatable implements MustVerifyEmail
         'remember_token'
     ];
 
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -50,4 +49,13 @@ class Seller extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * products relation showing that a seller has many products
+     *
+     * @return void
+     */
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }

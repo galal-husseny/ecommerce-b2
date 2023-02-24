@@ -6,23 +6,23 @@
         <div class="top-bar">
             <div class="content-topbar flex-sb-m h-full container">
                 <div class="left-top-bar">
-                    {{ __('messages.user.header.free_shipping') }}
+                    {{ __('user.header.free_shipping') }}
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        {{ __('messages.user.header.faq') }}
+                    <a style="text-decoration: none" href="#" class="flex-c-m trans-04 p-lr-25">
+                        {{ __('user.header.faq') }}
                     </a>
                     @foreach (LaravelLocalization::getSupportedLocales() as $lang => $value)
                         @if ($lang == App::currentLocale())
                             @continue
                         @endif
-                        <a rel="alternate" hreflang="{{ $lang }}" href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="flex-c-m trans-04 p-lr-25">
+                        <a style="text-decoration: none" rel="alternate" hreflang="{{ $lang }}" href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="flex-c-m trans-04 p-lr-25">
                             {{ Str::upper($lang) }}
                         </a>
                     @endforeach
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        {{ __('messages.user.header.currency') }}
+                    <a style="text-decoration: none" href="#" class="flex-c-m trans-04 p-lr-25">
+                        {{ __('user.header.currency') }}
                     </a>
                 </div>
             </div>
@@ -40,23 +40,27 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li>
-                            <a href="{{ route('users.dashboard') }}"> {{ __('messages.user.header.home') }} </a>
+                            <a style="text-decoration: none" href="{{ route('users.dashboard') }}"> {{ __('user.header.home') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('shop') }}"> {{ __('messages.user.header.shop') }} </a>
+                            <a style="text-decoration: none" href="{{ route('shop') }}"> {{ __('user.header.shop') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('blog') }}"> {{ __('messages.user.header.blog') }} </a>
+                            <a style="text-decoration: none" href="{{ route('blog') }}"> {{ __('user.header.blog') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('about') }}"> {{ __('messages.user.header.about') }} </a>
+                            <a style="text-decoration: none" href="{{ route('about') }}"> {{ __('user.header.about') }} </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('contact') }}"> {{ __('messages.user.header.contact') }} </a>
+                            <a style="text-decoration: none" href="{{ route('contact') }}"> {{ __('user.header.contact') }} </a>
+                        </li>
+                        <li>
+                            <a style="text-decoration: none" href="{{ route('sellers.index') }}"> {{__('user.header.seller_account')}}
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -87,18 +91,17 @@
 
                             <ul class="sub-menu">
                                 @auth('web')
-                                    <li><a href="{{ route('users.profile.edit') }}"> {{__('messages.user.profile.profile')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.profile.edit') }}"> {{__('user.profile.profile')}} </a></li>
                                     <form method="POST" action="{{ route('users.logout') }}">
                                         @csrf
-                                        <li><a href="route('users.logout')"
+                                        <li><a style="text-decoration: none" href="route('users.logout')"
                                                 onclick="event.preventDefault();
-                                                this.closest('form').submit();"> {{__('messages.user.auth.logout')}} </a>
+                                                this.closest('form').submit();"> {{__('user.header.logout')}} </a>
                                         </li>
                                     </form>
                                 @else
-                                    <li><a href="{{ route('users.login') }}"> {{__('messages.user.auth.Log_in')}} </a></li>
-                                    <li><a href="{{ route('users.register') }}"> {{__('messages.user.auth.register')}} </a></li>
-                                    <li><a href="{{ route('sellers.index') }}"> {{__('messages.user.header.seller_account')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.login') }}"> {{__('user.header.login')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.register') }}"> {{__('user.header.register')}} </a></li>
                                 @endauth
                             </ul>
 
@@ -115,54 +118,6 @@
         <!-- Logo moblie -->
         <div class="logo-mobile">
             <a href="index.html"><img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
-        </div>
-
-        <!-- Icon header -->
-        <div class="wrap-icon-header flex-w flex-r-m m-r-15">
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-                <i class="zmdi zmdi-search"></i>
-            </div>
-
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                data-notify="2">
-                <i class="zmdi zmdi-shopping-cart"></i>
-            </div>
-
-
-
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-                data-notify="0">
-                <i class="zmdi zmdi-favorite-outline"></i>
-            </a>
-
-            <ul class="main-menu">
-                <li>
-                    <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
-                        style="font-size: 2rem">
-                        <i class="zmdi zmdi-account"></i>
-                    </a>
-
-                    <ul class="sub-menu">
-                        @auth('web')
-                            <li><a href="{{ route('users.profile.edit') }}">Profile</a></li>
-                            <form method="POST" action="{{ route('users.logout') }}">
-                                @csrf
-                                <li><a href="route('users.logout')"
-                                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">Logout</a>
-                                </li>
-                            </form>
-                        @else
-                            <li><a href="{{ route('users.login') }}">Login</a></li>
-                            <li><a href="{{ route('users.register') }}">Register</a></li>
-                            <li><a href="{{ route('sellers.index') }}">Your Seller Account</a></li>
-                        @endauth
-                    </ul>
-
-                </li>
-            </ul>
-
-
         </div>
 
         <!-- Button show menu -->

@@ -4,7 +4,7 @@
     <a href="{{route('sellers.dashboard')}}" class="brand-link">
         <img src="{{ asset('dashboard-assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">{{__('Seller')}}</span>
+        <span class="brand-text text-white">{{__('Seller.sidebar.title')}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -42,21 +42,21 @@
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            {{__('Products')}}
+                            {{__('seller.sidebar.products')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link active">
+                            <a href="{{route('sellers.products.index')}}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('All')}}</p>
+                                <p>{{__('seller.sidebar.all')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="./index2.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('Create')}}</p>
+                                <p>{{__('seller.sidebar.create')}}</p>
                             </a>
                         </li>
                     </ul>
