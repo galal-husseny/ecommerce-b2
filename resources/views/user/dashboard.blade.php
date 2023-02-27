@@ -17,7 +17,7 @@
 @section('content')
     @parent
     <!-- Slider -->
-    <section class="section-slide">
+    <section class="section-slide" style="margin-top: 5.5rem">
         <div class="wrap-slick1">
             <div class="slick1">
                 <div class="item-slick1" style="background-image: url({{ asset('frontend-assets/images/slide-01.jpg') }});">

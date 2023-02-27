@@ -34,7 +34,7 @@
         </div>
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-2 sidebar">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
@@ -48,16 +48,28 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('sellers.products.index')}}" class="nav-link active">
+                            <a href="{{route('sellers.products.index')}}" class="nav-link button active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('seller.sidebar.all')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('sellers.products.create')}}" class="nav-link">
+                            <a href="{{route('sellers.products.create')}}" class="nav-link button">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('seller.sidebar.create')}}</p>
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            {{-- <a href="{{route('sellers.products.show')}}" class="nav-link button">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('seller.sidebar.show')}}</p>
+                            </a> --}}
+                        </li>
+                        <li class="nav-item">
+                            {{-- <a href="{{route('sellers.products.edit')}}" class="nav-link button">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('seller.sidebar.edit')}}</p>
+                            </a> --}}
                         </li>
                     </ul>
                 </li>

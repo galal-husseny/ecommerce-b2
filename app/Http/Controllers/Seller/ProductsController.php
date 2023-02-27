@@ -53,7 +53,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::where('seller_id', Auth::guard('seller')->id() , 'id' , $id)->get();
+        $id = 1;
+        return view('seller.products.show', compact(['product'=>'product= ' . $id , $product]) );
     }
 
     /**
@@ -64,7 +66,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::where('seller_id', Auth::guard('seller')->id() , 'id' , $id)->get();
+        $id = 1;
+        return view('seller.products.edit', compact(['product'=>'product= ' . $id , $product]) );
     }
 
     /**
