@@ -8,6 +8,11 @@
         <div class="container d-flex justify-content-center m-t-100 " style="margin-top: 100px">
             <div class="w-50 shadow p-3 mb-5 bg-white">
                 <div class="card-body register-card-body">
+                    <div class="mb-2" style="text-align: center">
+                        <a href="" class="logo mr-auto">
+                            <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO" style="height: 1rem">
+                        </a>
+                    </div>
                     <h4 class="title">{{ __('seller.auth.login.login_title') }}</h4>
 
                     <form action="{{ route('sellers.login') }}" method="POST">
@@ -40,7 +45,7 @@
                         <div class="mb-3 form-check d-flex justify-content-around  mt-4">
                             <div>
                                 <input type="checkbox" class="form-check-input border" id="remember_me" name="remember">
-                                <label class=" text-sm text-dark mr-4"
+                                <label class=" text-sm text-dark mr-3"
                                     for="remember_me">{{ __('seller.auth.login.remember_me') }}</label>
                             </div>
                             @if (Route::has('sellers.password.request'))
@@ -54,13 +59,13 @@
 
                     <div class="social-auth-links text-center">
                         <p class="text-center">{{ __('seller.auth.register.or') }}</p>
-                        <a href="#" class="button-general mb-2">
-                            <i class="fab fa-facebook text-white mr-2"></i>
+                        <a href="#" class="button-facebook mb-2">
                             {{ __('seller.auth.login.login_facebook') }}
+                            <i class="fab fa-facebook text-white mx-2"></i>
                         </a>
                         <a href="#" class="button-gmail">
-                            <i class="fab fa-google-plus text-white mr-2"></i>
                             {{ __('seller.auth.login.login_google') }}
+                            <i class="fab fa-google-plus text-white mx-2"></i>
                         </a>
                     </div>
                 </div>

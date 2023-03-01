@@ -36,7 +36,7 @@ return [
             'or' => '- أو -',
             'register' => 'حساب جديد',
             'register_title' => 'تسجيل عضوية جديدة',
-            'full_name' => 'ألأسم بالكامل',
+            'full_name' => 'الأسم بالكامل',
             'shop_name' => 'اسم المحل',
             'phone_number' => 'رقم الهاتف',
             'confirm_password' => 'تأكيد كلمة المرور',

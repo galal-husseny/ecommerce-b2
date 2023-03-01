@@ -59,18 +59,6 @@
                                 <p>{{__('seller.sidebar.create')}}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            {{-- <a href="{{route('sellers.products.show')}}" class="nav-link button">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('seller.sidebar.show')}}</p>
-                            </a> --}}
-                        </li>
-                        <li class="nav-item">
-                            {{-- <a href="{{route('sellers.products.edit')}}" class="nav-link button">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('seller.sidebar.edit')}}</p>
-                            </a> --}}
-                        </li>
                     </ul>
                 </li>
             </ul>

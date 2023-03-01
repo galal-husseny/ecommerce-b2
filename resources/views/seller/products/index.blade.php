@@ -60,8 +60,8 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
-                                                <a href="" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <a href="{{route('sellers.show')}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
+                                                <a href="{{route('sellers.edit')}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
                                                 <a href="" class="btn btn-sm btn-danger  my-2 rounded-pill "> {{__('seller.all_products.delete')}} </a>
                                             </td>
                                         </tr>

@@ -54,23 +54,22 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{++$index}}</td>
-                                            <td>{{$product->getTranslation('name','en')}}</td>
-                                            <td>{{$product->getTranslation('name','ar')}}</td>
-                                            <td>{{$product->code}}</td>
-                                            <td>{{$product->sale_price_with_currency()}}</td>
-                                            <td>{{$product->purchase_price_with_currency()}}</td>
-                                            <td>{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
-                                            <td>{{$product->quantity}}</td>
-                                            <td>{{$profit * $product->quantity}}</td>
-                                            <td>{{$product->status}}</td>
-                                            <td> {{$product->category}} </td>
+                                            <td class="text-center">{{$product[0]->id}}</td>
+                                            <td class="text-center">{{$product[0]->getTranslation('name','en')}}</td>
+                                            <td class="text-center">{{$product[0]->getTranslation('name','ar')}}</td>
+                                            <td class="text-center">{{$product[0]->code}}</td>
+                                            <td class="text-center">{{$product[0]->sale_price_with_currency()}}</td>
+                                            <td class="text-center">{{$product[0]->purchase_price_with_currency()}}</td>
+                                            <td class="text-center">{{$profit = $product[0]->sale_price - $product[0]->purchase_price}} EGP</td>
+                                            <td class="text-center">{{$product[0]->quantity}}</td>
+                                            <td class="text-center">{{$profit * $product[0]->quantity}}</td>
+                                            <td class="text-center">{{$product[0]->status}}</td>
+                                            <td class="text-center"> {{$category[0]->name}} </td>
                                         </tr>
                                     </tbody>
 
                                 </table>
                             </div>
-                            <!-- /.card-body -->
                         </div>
                     </div>
                 </div>
@@ -83,9 +82,6 @@
     @include('seller.layouts.partials.footer')
 @endsection
 
-@push('scripts')
-    @vite('resources/js/app.js')
-@endpush
 @push('scripts')
     <script src="{{ asset('dashboard-assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('dashboard-assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>

@@ -18,7 +18,7 @@ return [
             'password' => 'Password',
             'remember_me' => 'Remember me',
             'login' => 'Log in',
-            'login_google' => 'Log in using Google +',
+            'login_google' => 'Log in using Google',
             'login_facebook' => 'Log in using Facebook',
             'forgot_password' => 'Forgot your password ?',
         ],

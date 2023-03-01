@@ -52,7 +52,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button class=" text-center w-25 bg-dark rounded-pill mt-5">{{__('seller.profile.update_info.save')}}</button>
+            <button class="button-general w-25 mt-5">{{__('seller.profile.update_info.save')}}</button>
 
             @if (session('status') === 'password-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
