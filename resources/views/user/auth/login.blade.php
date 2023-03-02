@@ -24,22 +24,22 @@
 
 @section('content')
     @parent
-    <div class="bg-login">
-    <div class="container d-flex justify-content-center align-items-center m-t-200 ">
-        <div class=" w-50 p-3 bg-white" style="margin-bottom: 10rem">
-            <div class="card-body">
+    <div class="container m-t-200">
+        <div class="m-lr-auto size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md m-b-100">
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
             <form method="POST" action="{{ route('users.login') }}">
                 @csrf
 
-                <h4 class="title">
+                <h4 class="mtext-105 cl2 txt-center p-b-30">
                     {{ __('user.auth.login.login_title') }}
                 </h4>
                 <!-- Email -->
-                <div class=" mb-3">
-                    <input class="form-control p-3" id="email" type="email" name="email"
+                <div class="bor8 m-b-20 how-pos4-parent">
+                    <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
                         value="{{ old('email') }}" required autofocus placeholder="{{ __('user.auth.login.email') }}">
+
+                </div>
                 @if ($errors->get('email'))
                     <ul class='text-sm text-red-600 dark:text-red-400  m-t-20'>
                         @foreach ($errors->get('email') as $message)
@@ -50,7 +50,7 @@
 
                 <!-- Password -->
                 <div class="bor8 m-tb-20 how-pos4-parent">
-                    <input class="form-control p-3" id="password"type="password" name="password"
+                    <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="password"type="password" name="password"
                         required autocomplete="current-password" placeholder="{{ __('user.auth.login.password') }}">
 
                 </div>
@@ -66,7 +66,7 @@
                 <div class="mb-3 form-check d-flex justify-content-around  mt-4">
                     <div>
                         <input type="checkbox" class="form-check-input border" id="remember_me" name="remember">
-                        <label class=" text-sm text-dark mr-4"
+                        <label class=" text-sm text-gray-600 dark:text-gray-400 mr-4"
                             for="remember_me">{{ __('user.auth.login.remember_me') }}</label>
                     </div>
                     @if (Route::has('users.password.request'))
@@ -76,12 +76,10 @@
                     @endif
                 </div>
 
-                <button class="button-general">
+                <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
                     {{ __('user.auth.login.login') }}
                 </button>
             </form>
         </div>
-        </div>
-    </div>
     </div>
 @endsection
