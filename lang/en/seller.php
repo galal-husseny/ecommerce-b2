@@ -173,7 +173,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'اضافة',
+        'submit' => 'ُEdit',
     ],
 
 ];

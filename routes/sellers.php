@@ -11,4 +11,5 @@ Route::get('/products/show' , [IndexController::class , 'showtest'])->name('sell
 
 Route::prefix('sellers')->name('sellers.')->middleware(['auth:seller', 'verified:seller'])->group(function() {
     Route::resource('products', ProductsController::class);
+    Route::resource('products/{product}', ProductsController::class);
 });

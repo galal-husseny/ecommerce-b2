@@ -20,55 +20,83 @@
     <div class="content-wrapper">
         <section class="content my-5">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title"> {{__('seller.show_product.title')}} </h3>
+                <div class="row card">
+                    <div class="card-header col-12">
+                        <h3 class="card-title"> {{ __('seller.show_product.title') }} </h3>
+                    </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <div class="card mb-3 col-9" >
+                        <div class="row g-0 p-2">
+                            <div class="col-md-4">
+                                <img src="{{ asset('frontend-assets/images/product-01.jpg') }}"
+                                    class="img-fluid rounded-start" alt="...">
                             </div>
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{$product[0]->name}}</h3>
+                                    <p class="card-text"> {{$product[0]->description}} </p>
                                 </div>
-                            @endif
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>{{ __('seller.show_product.id') }}</th>
-                                            <th>{{ __('seller.show_product.name_en') }}</th>
-                                            <th>{{ __('seller.show_product.name_ar') }}</th>
-                                            <th>{{ __('seller.show_product.code') }}</th>
-                                            <th>{{ __('seller.show_product.sale_price') }}</th>
-                                            <th>{{ __('seller.show_product.purchase_price') }}</th>
-                                            <th>{{ __('seller.show_product.profit') }}</th>
-                                            <th>{{ __('seller.show_product.quantity') }}</th>
-                                            <th>{{ __('seller.show_product.profit_with_quantities') }}</th>
-                                            <th>{{ __('seller.show_product.status') }}</th>
-                                            <th>{{ __('seller.show_product.category') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">{{$product[0]->id}}</td>
-                                            <td class="text-center">{{$product[0]->getTranslation('name','en')}}</td>
-                                            <td class="text-center">{{$product[0]->getTranslation('name','ar')}}</td>
-                                            <td class="text-center">{{$product[0]->code}}</td>
-                                            <td class="text-center">{{$product[0]->sale_price_with_currency()}}</td>
-                                            <td class="text-center">{{$product[0]->purchase_price_with_currency()}}</td>
-                                            <td class="text-center">{{$profit = $product[0]->sale_price - $product[0]->purchase_price}} EGP</td>
-                                            <td class="text-center">{{$product[0]->quantity}}</td>
-                                            <td class="text-center">{{$profit * $product[0]->quantity}}</td>
-                                            <td class="text-center">{{$product[0]->status}}</td>
-                                            <td class="text-center"> {{$category[0]->name}} </td>
-                                        </tr>
-                                    </tbody>
+                                <div class="card-body">
+                                    <table id="example1" class="table  table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.id') }}</td>
+                                                <td class="text-center">{{ $product[0]->id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.name_en') }}</td>
+                                                <td class="text-center">{{ $product[0]->getTranslation('name', 'en') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.name_ar') }}</td>
+                                                <td class="text-center">{{ $product[0]->getTranslation('name', 'ar') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.code') }}</td>
+                                                <td class="text-center">{{ $product[0]->code }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.sale_price') }}</td>
+                                                <td class="text-center">{{ $product[0]->sale_price_with_currency() }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.purchase_price') }}</td>
+                                                <td class="text-center">{{ $product[0]->purchase_price_with_currency() }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.profit') }}</td>
+                                                <td class="text-center">
+                                                    {{ $profit = $product[0]->sale_price - $product[0]->purchase_price }} EGP
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.quantity') }}</td>
+                                                <td class="text-center">{{ $product[0]->quantity }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.profit_with_quantities') }}</td>
+                                                <td class="text-center">{{ $profit * $product[0]->quantity }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.status') }}</td>
+                                                <td class="text-center">{{ $product[0]->status }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.category') }}</td>
+                                                <td class="text-center"> {{ $category[0]->name }} </td>
+                                            </tr>
+                                        </tbody>
 
-                                </table>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
