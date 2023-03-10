@@ -213,8 +213,8 @@
     </div>
 
     <!-- Modal Verify Email -->
-    {{-- @auth('web') --}}
-        {{-- <div class="modal flex-c-m trans-04">
+    @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
+        <div class="modal flex-c-m trans-04">
             <div class="container p-t-80 ">
                 <div class="bg-light m-auto w-75 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
 
@@ -252,8 +252,8 @@
                     </form>
                 </div>
             </div>
-        </div> --}}
-    {{-- @endauth --}}
+        </div>
+    @endif
 </header>
 
 <script>
