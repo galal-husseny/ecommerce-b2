@@ -12,7 +12,13 @@ return [
     */
 
     'frontend' => [
-        'index' => [
+        'index' => [  
+            'slider1_title' => 'Women Collection 2023',
+            'slider1_big_title' => 'NEW SEASON',
+            'slider2_title' => 'Men Collection 2023',
+            'slider2_big_title' => 'Jackets & Coats',
+            'slider3_title' => 'Men Collection 2023',
+            'slider3_big_title' => 'New arrivals',
             'title' => 'Home',
             'product_overview' => 'Product Overview',
             'shop_now' => 'SHOP NOW',

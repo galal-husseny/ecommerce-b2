@@ -13,6 +13,12 @@ return [
 
     'frontend' => [
         'index' => [
+            'slider1_title' => 'العرض النسائي 2023',
+            'slider1_big_title' => 'موسم جديد',
+            'slider2_title' => 'العرض الرجالي 2023',
+            'slider2_big_title' => 'جواكت ',
+            'slider3_title' => 'العرض الرجالي 2023',
+            'slider3_big_title' => 'الملابس الجديده',
             'title' => 'الرئيسية',
             'product_overview' => 'نظرة عامة على المنتج',
             'shop_now' => 'تسوق الآن',
