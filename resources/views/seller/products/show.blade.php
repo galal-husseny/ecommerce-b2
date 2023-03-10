@@ -31,6 +31,7 @@
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
+                            
                         </div>
                     @endif
                     <div class="card mb-3 col-9" >
