@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 
 function getProviderFromModel (Model $model) :?string {
@@ -31,4 +32,17 @@ function getGuardFromModel (Model $model) :?string {
 function getRouteGuardMap(string $guard) :string
 {
     return config('auth.route_guard_map')[$guard] ?? 'users.';
+}
+
+
+if (! function_exists('product_code')) {
+    function product_code(string $name): ?string
+    {
+        $id = (int)Product::max('id') + 1000;
+        if (empty($name)) {
+            return null;
+        }
+        $firstCharacter = strtoupper($name[0]);
+        return "{$firstCharacter}{$id}";
+    }
 }

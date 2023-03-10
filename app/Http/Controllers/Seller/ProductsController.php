@@ -42,7 +42,15 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request->validated());
+        $code = product_code($request->name['en']);
+        $product = Product::create(array_merge($request->validated(),
+        [
+            'code' => $code,
+            'seller_id' => Auth::guard('seller')->id()
+        ]));
+        $product->addMediaFromRequest('image')->toMediaCollection('product');
+        // save specs
+        return redirect()->route('sellers.products.index')->with('success', __('general.messages.created'));
     }
 
     /**
@@ -62,9 +70,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        
+        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
+        return view('seller.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -74,9 +83,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+
     }
 
     /**
@@ -85,9 +94,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->back()->with('success', __('general.messages.deleted'));
     }
 
 

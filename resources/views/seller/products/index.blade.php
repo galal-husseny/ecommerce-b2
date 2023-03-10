@@ -60,9 +60,15 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                <a href="{{route('sellers.show')}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
-                                                <a href="{{route('sellers.edit')}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
-                                                <a href="" class="btn btn-sm btn-danger  my-2 rounded-pill "> {{__('seller.all_products.delete')}} </a>
+                                                <a href="{{route('sellers.products.show', $product->id)}}" class="btn btn-sm btn-success my-2 rounded-pill d-inline"> {{__('seller.all_products.show')}} </a>
+                                                <a href="{{route('sellers.products.edit', $product->id)}}" class="btn btn-sm btn-primary my-2  rounded-pill d-inline"> {{__('seller.all_products.edit')}} </a>
+                                                <form action="{{route('sellers.products.destroy', $product->id)}}" method="post" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill" type="submit">
+                                                        {{__('seller.all_products.delete')}}
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -110,4 +116,21 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>
+    @if (session()->has('success'))
+        <script>
+            Swal.fire(
+                'Good job!',
+                '{{session()->get('success')}}',
+                'success'
+                );
+        </script>
+    @elseif (session()->has('error'))
+        <script>
+            Swal.fire(
+                'Good job!',
+                '{{session()->get('error')}}',
+                'error'
+                );
+        </script>
+    @endif
 @endpush
