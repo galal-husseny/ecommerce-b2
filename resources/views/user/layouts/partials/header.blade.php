@@ -84,7 +84,7 @@
                     </a>
                     <ul class="main-menu">
                         <li>
-                            <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
+                            <a class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
                                 style="font-size: 2rem">
                                 <i class="zmdi zmdi-account"></i>
                             </a>
@@ -131,29 +131,29 @@
 
     <!-- Menu Mobile -->
     <div class="menu-mobile">
-        <ul class="topbar-mobile">
+        <ul class="topbar-mobile p-0">
             <li>
                 <div class="left-top-bar">
-                    Free shipping for standard order over $100
+                    {{ __('user.header.free_shipping') }}
                 </div>
             </li>
-
             <li>
                 <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        Help & FAQs
+                    <a style="text-decoration: none" href="#" class="flex-c-m trans-04 p-lr-25">
+                        {{ __('user.header.faq') }}
                     </a>
 
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        My Account
-                    </a>
+                    @foreach (LaravelLocalization::getSupportedLocales() as $lang => $value)
+                        @if ($lang == App::currentLocale())
+                            @continue
+                        @endif
+                        <a style="text-decoration: none" rel="alternate" hreflang="{{ $lang }}" href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="flex-c-m trans-04 p-lr-25">
+                            {{ Str::upper($lang) }}
+                        </a>
+                    @endforeach
 
                     <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        EN
-                    </a>
-
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        USD
+                        {{ __('user.header.currency') }}
                     </a>
                 </div>
             </li>
@@ -161,9 +161,10 @@
 
         <ul class="main-menu-m">
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{ route('users.dashboard') }}">{{ __('user.header.home') }}</a>
+                
                 <ul class="sub-menu-m">
-                    <li><a href="index.html">Homepage 1</a></li>
+                    <li><a href="{{ route('users.dashboard') }}">{{ __('user.header.home') }}</a></li>
                     <li><a href="home-02.html">Homepage 2</a></li>
                     <li><a href="home-03.html">Homepage 3</a></li>
                 </ul>
@@ -173,23 +174,22 @@
             </li>
 
             <li>
-                <a href="product.html">Shop</a>
+                <a style="text-decoration: none" href="{{ route('shop') }}"> {{ __('user.header.shop') }} </a>
             </li>
 
             <li>
-                <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+                <a style="text-decoration: none" href="{{ route('blog') }}"> {{ __('user.header.blog') }} </a>
             </li>
 
             <li>
-                <a href="blog.html">Blog</a>
+                <a style="text-decoration: none" href="{{ route('about') }}"> {{ __('user.header.about') }} </a>
             </li>
 
             <li>
-                <a href="about.html">About</a>
+                <a style="text-decoration: none" href="{{ route('contact') }}"> {{ __('user.header.contact') }} </a>
             </li>
-
             <li>
-                <a href="contact.html">Contact</a>
+                <a style="text-decoration: none" href="{{ route('sellers.index') }}"> {{__('user.header.seller_account')}} </a>
             </li>
         </ul>
     </div>
@@ -211,4 +211,53 @@
         </div>
 
     </div>
+
+    <!-- Modal Verify Email -->
+    {{-- @auth('web') --}}
+        {{-- <div class="modal flex-c-m trans-04">
+            <div class="container p-t-80 ">
+                <div class="bg-light m-auto w-75 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+
+                    <button class="flex-c-m btn trans-04 mb-4 close-modal-email-verify">
+                        <img src="{{ asset('frontend-assets/images/icons/icon-close2.png') }}" alt="CLOSE">
+                    </button>
+                    
+                    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                        {{ __('user.auth.verify_email.verify_email_head') }}
+                    </div>
+    
+                    @if (session('status') == 'verification-link-sent')
+                        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                            {{ __('user.auth.verify_email.verify_email_confrmation') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('users.verification.send') }}">
+                        @csrf
+                        
+                        <!-- Logo desktop -->
+                        <a href="#" class="logo p-t-20">
+                            <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO" style="margin: auto; padding-bottom: 20px;">
+                        </a>
+    
+                        <button class="flex-c-m stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mx-auto m-t-6">
+                            {{__('user.auth.verify_email.confirm')}}
+                        </button>
+                    </form>
+                    <form method="POST" action="{{ route('users.logout') }}">
+                        @csrf
+    
+                        <button class="flex-c-m stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mx-auto m-t-6">
+                            {{__('user.auth.verify_email.logout')}}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div> --}}
+    {{-- @endauth --}}
 </header>
+
+<script>
+     /*==================================================================
+    [ Show / hide modal search ]*/
+    
+</script>

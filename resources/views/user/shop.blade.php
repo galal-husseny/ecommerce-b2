@@ -3,6 +3,7 @@
 @section('title', __('messages.frontend.shop.title'))
 
 @section('header')
+    @parent
     @include('user.layouts.partials.header')
 @endsection
 
@@ -286,11 +287,11 @@
                             <div class="block2-txt flex-w flex-t p-t-14">
                                 <div class="block2-txt-child1 flex-col-l ">
                                     <a style="text-decoration: none" href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        {{$product->name}}
+                                        {{ $product->name }}
                                     </a>
 
                                     <span class="stext-105 cl3">
-                                        {{$product->sale_price_with_currency()}}
+                                        {{ $product->sale_price_with_currency() }}
                                     </span>
                                 </div>
 
@@ -321,5 +322,6 @@
 @endsection
 
 @section('footer')
+    @parent
     @include('user.layouts.partials.footer')
 @endsection

@@ -3,6 +3,7 @@
 @section('title', __('messages.frontend.about.about'))
 
 @section('header')
+    @parent
     @include('user.layouts.partials.header')
 
 @endsection
@@ -12,6 +13,7 @@
 @endsection
 
 @section('footer')
+    @parent
     @include('user.layouts.partials.footer')
 @endsection
 
