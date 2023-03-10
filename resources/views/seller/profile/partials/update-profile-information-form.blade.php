@@ -65,7 +65,7 @@
 
         <div class="flex items-center gap-4">
             <button
-                class=" text-center w-25 bg-dark rounded-pill mt-5 ">{{ __('seller.profile.update_info.save') }}</button>
+                class=" button-general w-25 mt-5 ">{{ __('seller.profile.update_info.save') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)"

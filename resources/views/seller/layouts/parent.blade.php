@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+@if (App::currentLocale() == 'en')
+    <html lang="en" dir="ltr">
+@else
+    <html lang="ar" dir="rtl">
+@endif
 
 <head>
     <meta charset="utf-8">

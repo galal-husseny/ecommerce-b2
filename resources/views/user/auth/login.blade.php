@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 @endpush
 
+@push('links')
+    <link rel="stylesheet" href="{{asset('custom-css/user.css')}}">
+@endpush
+
 @section('content')
     @parent
     <div class="container m-t-200">

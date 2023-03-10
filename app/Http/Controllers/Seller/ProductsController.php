@@ -53,7 +53,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('seller.products.show', compact(['product' , 'category']) );
     }
 
     /**
@@ -64,7 +64,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -89,4 +89,6 @@ class ProductsController extends Controller
     {
         //
     }
+
+
 }

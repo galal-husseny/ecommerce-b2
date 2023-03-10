@@ -14,11 +14,11 @@
 	<link rel="icon" type="image/png" href="{{asset('frontend-assets/images/icons/favicon.png')}}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend-assets/vendor/bootstrap/css/bootstrap.min.css')}}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
 
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend-assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('dashboard-assets/plugins/fontawesome-free/css/all.min.css')}}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend-assets/fonts/iconic/css/material-design-iconic-font.min.css')}}">
 <!--===============================================================================================-->
@@ -43,6 +43,8 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend-assets/css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend-assets/css/main.css')}}">
 <!--===============================================================================================-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
 @stack('links')
 

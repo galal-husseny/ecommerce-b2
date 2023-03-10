@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Seller;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Category;
+use App\Enums\CategoryEnum;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
 
 class IndexController extends Controller
 {
@@ -17,4 +22,5 @@ class IndexController extends Controller
     {
         return view('seller.index');
     }
+
 }

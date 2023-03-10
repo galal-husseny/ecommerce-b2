@@ -1,7 +1,7 @@
 <!-- Header -->
 <header>
     <!-- Header desktop -->
-    <div class="container-menu-desktop">
+    <div class="container-menu-desktop ">
         <!-- Topbar -->
         <div class="top-bar">
             <div class="content-topbar flex-sb-m h-full container">
@@ -10,25 +10,24 @@
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
-                    <a style="text-decoration: none" href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a style="text-decoration: none" href="#" class="py-2 px-4 ">
                         {{ __('user.header.faq') }}
                     </a>
                     @foreach (LaravelLocalization::getSupportedLocales() as $lang => $value)
                         @if ($lang == App::currentLocale())
                             @continue
                         @endif
-                        <a style="text-decoration: none" rel="alternate" hreflang="{{ $lang }}" href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="flex-c-m trans-04 p-lr-25">
+                        <a style="text-decoration: none" rel="alternate" hreflang="{{ $lang }}" href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="py-2 px-4">
                             {{ Str::upper($lang) }}
                         </a>
                     @endforeach
-                    <a style="text-decoration: none" href="#" class="flex-c-m trans-04 p-lr-25">
-                        {{ __('user.header.currency') }}
-                    </a>
+                        <a style="text-decoration: none" class="py-2 px-4" href="{{ route('sellers.index') }}"> {{__('user.header.seller_account')}}
+                        </a>
                 </div>
             </div>
         </div>
 
-        <div class="wrap-menu-desktop">
+        <div class="wrap-menu-desktop bg-white">
             <nav class="limiter-menu-desktop container" style="width: 90%">
 
                 <!-- Logo desktop -->
@@ -58,10 +57,7 @@
                         <li>
                             <a style="text-decoration: none" href="{{ route('contact') }}"> {{ __('user.header.contact') }} </a>
                         </li>
-                        <li>
-                            <a style="text-decoration: none" href="{{ route('sellers.index') }}"> {{__('user.header.seller_account')}}
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
 
@@ -129,7 +125,7 @@
     </div>
 
 
-    <!-- Menu Mobile -->
+    {{-- <!-- Menu Mobile -->
     <div class="menu-mobile">
         <ul class="topbar-mobile">
             <li>
@@ -192,7 +188,7 @@
                 <a href="contact.html">Contact</a>
             </li>
         </ul>
-    </div>
+    </div> --}}
 
     <!-- Modal Search -->
     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
