@@ -33,30 +33,30 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="name_en">{{ __('seller.add_product.name_en') }}</label>
-                                            <input type="text" name="name[en]" class="form-control" id="name_en">
+                                            <input type="text" name="name[en]" class="form-control" id="name_en" value="{{old('name.en')}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="name_ar">{{ __('seller.add_product.name_ar') }}</label>
-                                            <input type="text" name="name[ar]" class="form-control" id="name_ar">
+                                            <input type="text" name="name[ar]" class="form-control" id="name_ar" value="{{old('name.ar')}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="purchase_price">{{ __('seller.add_product.purchase_price') }}</label>
-                                            <input type="number" name="purchase_price" class="form-control" id="purchase_price">
+                                            <input type="number" name="purchase_price" class="form-control" id="purchase_price" value="{{old('purchase_price')}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="sale_price">{{ __('seller.add_product.sale_price') }}</label>
-                                            <input type="number" name="sale_price" class="form-control"  id="sale_price">
+                                            <input type="number" name="sale_price" class="form-control"  id="sale_price" value="{{old('sale_price')}}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="quantiy">{{ __('seller.add_product.quantity') }}</label>
-                                            <input type="number" name="quantiy" class="form-control" id="quantiy">
+                                            <label for="quantity">{{ __('seller.add_product.quantity') }}</label>
+                                            <input type="number" name="quantity" class="form-control" id="quantity" value="{{old('quantity')}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="status">{{ __('seller.add_product.status') }}</label>
                                             <select name="status" class="form-control" id="status">
                                                 <option value="" disabled selected></option>
-                                                <option value="1">{{__('seller.add_product.active')}}</option>
-                                                <option value="0">{{__('seller.add_product.not_active')}}</option>
+                                                <option @selected(old('status') == '1') value="1" >{{__('seller.add_product.active')}}</option>
+                                                <option @selected(old('status') == '0') value="0">{{__('seller.add_product.not_active')}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -64,15 +64,15 @@
                                             <select name="category_id" class="form-control" id="category_id">
                                                 @foreach ($categories as $category)
                                                     <option value="" disabled selected></option>
-                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    <option @selected(old('category_id') == $category->id) value="{{$category->id}}">{{$category->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[en]" placeholder="{{__('seller.add_product.description_en')}}"></textarea>
+                                            <textarea class="form-control" name="description[en]" placeholder="{{__('seller.add_product.description_en')}}"> {{old('description.en')}} </textarea>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[ar]" placeholder="{{__('seller.add_product.description_ar')}}"></textarea>
+                                            <textarea class="form-control" name="description[ar]" placeholder="{{__('seller.add_product.description_ar')}}"> {{old('description.ar')}} </textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">

@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest
             'name.*' => ['required', 'min:2', 'max:128'],
             "purchase_price" => ['required', 'numeric', 'min:1', 'max:99999999.99'],
             "sale_price" => ['required', 'numeric', 'min:1', 'max:99999999.99'],
-            "quantiy" => ['required', 'integer', 'min:1', 'max:999'],
+            "quantity" => ['required', 'integer', 'min:1', 'max:999'],
             "status" => ['required', 'in:0,1'],
             "category_id" => ['required', 'integer', 'exists:categories,id'],
             "description" => ['required', 'array:ar,en'],

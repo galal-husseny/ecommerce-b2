@@ -14,19 +14,19 @@
         <div class="d-flex justify-content-center align-items-center">
             <div class="container h-full d-flex justify-content-between align-items-center bg-transpernet ">
                 <div class="shadow p-4  " style="width: 45%">
-                    <h3 class="text-dark fw-bolder my-4">
+                    <h3 class="text-dark text-center my-4">
                         {{ __('seller.index.have_account') }}
                     </h3>
-                    <a href="{{ route('sellers.login') }}" class="btn btn-dark rounded-pill w-50 m-l-auto">
+                    <a href="{{ route('sellers.login') }}" class="button-general w-50 m-l-auto">
                         {{__('seller.auth.login.login')}}
                     </a>
                 </div>
 
                 <div class="shadow p-4 " style="width: 45%">
-                    <h3 class="text-dark my-4">
+                    <h3 class="text-dark text-center my-4">
                         {{ __('seller.index.dont_have_account') }}
                     </h3>
-                    <a href="{{ route('sellers.register') }}" class="btn btn-dark rounded-pill w-50 m-l-auto">
+                    <a href="{{ route('sellers.register') }}" class="button-general w-50 ml-auto">
                         {{ __('seller.auth.register.register') }}
                     </a>
                 </div>

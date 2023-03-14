@@ -64,6 +64,7 @@
 .button-general:hover {
     background-color: rgb(87, 157, 237);
     border-color: rgb(87, 157, 237);
+    color: #fff;
 }
 
 .title{

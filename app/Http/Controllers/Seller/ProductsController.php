@@ -42,7 +42,17 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request->validated());
+        $code = product_code($request->name['en']);
+        $product = array_merge($request->validated() ,
+        [
+            'code'=> $code,
+            'seller_id' => Auth::guard('seller')->id(),
+        ]);
+        dd($product);
+        //generate product code
+        //get image url
+        //add specs
+        //save data to db
     }
 
     /**
@@ -64,7 +74,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
