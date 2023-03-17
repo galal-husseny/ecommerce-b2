@@ -20,7 +20,7 @@
                             </div>
                             @include('seller.layouts.partials.errors')
                             <div class="card-body">
-                                <form method="post" action="{{ route('sellers.products.update', $product->id) }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('sellers.products.update', $product->slug) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="card-body">
