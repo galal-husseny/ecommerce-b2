@@ -3,17 +3,25 @@
 namespace App\Models;
 
 use Spatie\Image\Manipulations;
+use App\Traits\EscapeUnicodeJson;
+use App\Traits\HasEncryptedIds;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 class Product extends Model implements HasMedia
 {
     use HasFactory;
     use HasTranslations;
     use InteractsWithMedia;
+    use HasTranslatableSlug;
+    use EscapeUnicodeJson;
+    use HasEncryptedIds;
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +37,7 @@ class Product extends Model implements HasMedia
         'description',
         'purchase_price',
         'seller_id',
-        'category_id'
+        'category_id',
     ];
 
     /**
@@ -39,7 +47,8 @@ class Product extends Model implements HasMedia
      */
     public $translatable = [
         'name',
-        'description'
+        'description',
+        'slug'
     ];
 
     /**
@@ -142,8 +151,6 @@ class Product extends Model implements HasMedia
         return $this->hasMany(Review::class);
     }
 
-
-
     /**
      * registerMediaConversions
      *
@@ -157,4 +164,16 @@ class Product extends Model implements HasMedia
             ->fit(Manipulations::FIT_CROP, 300, 300)
             ->nonQueued();
     }
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->usingLanguage(false);
+    }
+
 }
