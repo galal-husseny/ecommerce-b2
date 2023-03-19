@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -128,4 +132,12 @@ class Product extends Model
     public function reviews(){
         return $this->hasMany(Review::class );
     }
+
+    public function registerMediaConversions(Media $media = null): void
+        {
+            $this
+                ->addMediaConversion('preview')
+                ->fit(Manipulations::FIT_CROP, 300, 300)
+                ->nonQueued();
+        }
 }

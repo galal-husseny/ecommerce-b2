@@ -18,15 +18,7 @@
                             <div class="card-header">
                                 <h3 class="card-title"> {{ __('seller.sidebar.create') }} </h3>
                             </div>
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+                            @include('seller.layouts.partials.errors')
                             <div class="card-body">
                                 <form method="post" action="{{ route('sellers.products.store') }}" enctype="multipart/form-data">
                                     @csrf
@@ -55,8 +47,8 @@
                                             <label for="status">{{ __('seller.add_product.status') }}</label>
                                             <select name="status" class="form-control" id="status">
                                                 <option value="" disabled selected></option>
-                                                <option @selected(old('status') == '1') value="1" >{{__('seller.add_product.active')}}</option>
-                                                <option @selected(old('status') == '0') value="0">{{__('seller.add_product.not_active')}}</option>
+                                                <option @selected(old('status') === '1') value="1" >{{__('seller.add_product.active')}}</option>
+                                                <option @selected(old('status') === '0') value="0">{{__('seller.add_product.not_active')}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -69,10 +61,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[en]" placeholder="{{__('seller.add_product.description_en')}}"> {{old('description.en')}} </textarea>
+                                            <label for="description_en">{{ __('seller.add_product.description_en') }}</label>
+                                            <textarea id='description_en' class="form-control" name="description[en]" placeholder="{{__('seller.add_product.description_en')}}"> {{old('description.en')}} </textarea>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[ar]" placeholder="{{__('seller.add_product.description_ar')}}"> {{old('description.ar')}} </textarea>
+                                            <label for="description_ar">{{ __('seller.add_product.description_ar') }}</label>
+                                            <textarea id="description_ar" class="form-control" name="description[ar]" placeholder="{{__('seller.add_product.description_ar')}}"> {{old('description.ar')}} </textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
