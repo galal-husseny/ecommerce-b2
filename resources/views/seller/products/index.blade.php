@@ -60,12 +60,12 @@
                                             <td>{{$product->seller_id}}</td>
                                             <td>{{$product->category_id}}</td>
                                             <td>
-                                                <a href="{{route('sellers.products.show', ['slug' =>$product->slug, 'product' => \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill d-inline"> {{__('seller.all_products.show')}} </a>
-                                                <a href="{{route('sellers.products.edit', ['slug' =>$product->slug, 'product' => \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill d-inline"> {{__('seller.all_products.edit')}} </a>
-                                                <form action="{{route('sellers.products.destroy', ['slug' =>$product->slug, 'product' => $product->id])}}" method="post" class="d-inline">
+                                                <a href="{{route('sellers.products.show' , $product->id)}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
+                                                <a href="{{route('sellers.products.edit' , $product->id)}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <form action="{{route('sellers.products.destroy' , $product->id)}}" method="post" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill" type="submit">
+                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill " type="submit">
                                                         {{__('seller.all_products.delete')}}
                                                     </button>
                                                 </form>
@@ -116,21 +116,22 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>
-    @if (session()->has('success'))
+    @if(session()->has('success'))
         <script>
             Swal.fire(
-                'Good job!',
+                'Good Job',
                 '{{session()->get('success')}}',
                 'success'
-                );
+            );
         </script>
     @elseif (session()->has('error'))
         <script>
             Swal.fire(
-                'Good job!',
+                'Failed',
                 '{{session()->get('error')}}',
                 'error'
-                );
+            );
         </script>
     @endif
+
 @endpush

@@ -9,13 +9,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\StoreProductRequest;
-use Illuminate\Support\Facades\Crypt;
 
 class ProductsController extends Controller
 {
-    public function __construct() {
-        $this->middleware('decrypt.ids')->only('show');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -63,7 +59,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, string $slug = null)
+    public function show($id)
     {
         return view('seller.products.show', compact(['product' , 'category']) );
     }
@@ -74,9 +70,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product, string $slug = null)
+    public function edit(Product $product)
     {
-
+        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
+        return view('seller.products.edit' , compact(['product' , 'categories']));
     }
 
     /**
@@ -86,14 +83,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        $product->name = [
-            "en" => 'hello',
-            'ar' => 'آهلا'
-        ];
-        $product->save();
-        return redirect()->back();
+        //
     }
 
     /**
@@ -102,10 +94,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        $product = Product::find($id);
         $product->delete();
-        return redirect()->back()->with('success', __('general.messages.deleted'));
+        return redirect()->back()->with('success' , __('general.messages.deleted'));
     }
 
 

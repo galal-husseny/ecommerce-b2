@@ -116,7 +116,7 @@
     <script>
         var loadFile = function(event) {
             var output = document.getElementById('image');
-            output.src = URL.createObjectURL(event.target.files);
+            output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function() {
                 URL.revokeObjectURL(output.src) // free memory
             }

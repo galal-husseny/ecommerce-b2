@@ -3,7 +3,6 @@
 @section('title', __('messages.frontend.index.title'))
 
 @section('header')
-    @parent
     @include('user.layouts.partials.header')
 @endsection
 
@@ -12,7 +11,6 @@
 @endsection
 
 @section('footer')
-    @parent
     @include('user.layouts.partials.footer')
 @endsection
 
@@ -27,13 +25,13 @@
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
                                 <span class="ltext-101 cl2 respon2">
-                                    {{__('messages.frontend.index.slider1_title')}}
+                                    Women Collection 2018
                                 </span>
                             </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    {{__('messages.frontend.index.slider1_big_title')}}
+                                    NEW SEASON
                                 </h2>
                             </div>
 
@@ -52,13 +50,13 @@
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
                                 <span class="ltext-101 cl2 respon2">
-                                {{__('messages.frontend.index.slider2_title')}}
+                                    Men New-Season
                                 </span>
                             </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                {{__('messages.frontend.index.slider2_big_title')}}
+                                    Jackets & Coats
                                 </h2>
                             </div>
 
@@ -77,13 +75,13 @@
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
                                 <span class="ltext-101 cl2 respon2">
-                                {{__('messages.frontend.index.slider3_title')}}
+                                    Men Collection 2018
                                 </span>
                             </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                {{__('messages.frontend.index.slider3_big_title')}}
+                                    New arrivals
                                 </h2>
                             </div>
 
@@ -99,6 +97,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Banner -->
     <div class="sec-banner bg0 p-t-80 p-b-50">
@@ -184,6 +183,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Product -->
     <section class="bg0 p-t-23 p-b-140">
@@ -490,8 +490,5 @@
                 </a>
             </div>
         </div>
-
-        
     </section>
-
 @endsection
