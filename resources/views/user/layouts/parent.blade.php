@@ -51,7 +51,8 @@
 </head>
 <body >
 
-@yield('header')
+@section('header')
+@show
 
 
 @yield('cart')
@@ -61,7 +62,9 @@
 @show
 
 
-@yield('footer')
+@section('footer')
+@show
+
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">

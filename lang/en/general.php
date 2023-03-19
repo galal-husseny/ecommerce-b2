@@ -1,10 +1,11 @@
 <?php
+
 return [
     'messages' => [
-        'success' => 'Successful Operation',
-        'updated' => 'Item Updated Successfuly',
-        'created' => 'Item Created Successfuly',
-        'deleted' => 'Item Deleted Successfuly',
-        'error' => 'Something Went Wrong'
+        'success' => 'Successfull Operation',
+        'updated' => 'Item Updated Successfully',
+        'created' => 'Item Created Successfully',
+        'deleted' => 'Item Deleted Successfully',
+        'error' => 'Something Went Wrong',
     ]
 ];

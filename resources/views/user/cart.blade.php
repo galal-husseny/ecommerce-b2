@@ -3,10 +3,12 @@
 @section('title', __('messages.frontend.cart.your_cart'))
 
 @section('header')
+    @parent
     @include('user.layouts.partials.header')
 @endsection
 
 @section('footer')
+    @parent
     @include('user.layouts.partials.footer')
 @endsection
 

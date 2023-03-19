@@ -56,32 +56,7 @@ if(! function_exists('getGuardFromModel')){
 
 
 
-if(! function_exists('getRouteGuardMap')){
-    /**
-     * getRouteGuardMap
-     *
-     * @param  string $guard
-     * @return string
-     */
-    function getRouteGuardMap(string $guard) :string
-        {
-            return config('auth.route_guard_map')[$guard] ?? 'users.';
-        }
-}
-
-if(! function_exists('product_code')){
-    /**
-     * product_code
-     *
-     * @param  string $name
-     * @return string
-     */
-    function product_code(string $name) :?string
-    {
-        if(empty($name)){
-            return null;
-        }
-        $id = (int)Product::max('id') + 1000;
-        return strtoupper($name[0]).$id;
-    }
+function getRouteGuardMap(string $guard) :string
+{
+    return config('auth.route_guard_map')[$guard] ?? 'users.';
 }
