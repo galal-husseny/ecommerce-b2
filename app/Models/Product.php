@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -16,11 +17,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory,
-    HasTranslations,
-    InteractsWithMedia,
-    HasSlug,
-    EscapeUnicodeJson;
+    use HasFactory;
+    use HasTranslations;
+    use InteractsWithMedia;
+    use HasTranslatableSlug;
+    use EscapeUnicodeJson;
 
     /**
      * The attributes that are mass assignable.
