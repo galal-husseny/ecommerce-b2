@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Spatie\Sluggable\HasSlug;
 use Spatie\Image\Manipulations;
 use App\Traits\EscapeUnicodeJson;
+use App\Traits\HasEcryptedIds;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +22,7 @@ class Product extends Model implements HasMedia
     use InteractsWithMedia;
     use HasTranslatableSlug;
     use EscapeUnicodeJson;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.

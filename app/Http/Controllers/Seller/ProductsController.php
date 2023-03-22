@@ -59,8 +59,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product, string $slug = null)
     {
+        $category = Category::select(['id', 'name'])->where('id' , $product->category_id)->get();
+        // dd($category);
         return view('seller.products.show', compact(['product' , 'category']) );
     }
 
@@ -83,9 +85,14 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $product->name = [
+            "en" => 'hello',
+            'ar' => 'آهلا'
+        ];
+        $product->save();
+        return redirect()->back();
     }
 
     /**
@@ -94,11 +101,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::find($id);
         $product->delete();
-        return redirect()->back()->with('success' , __('general.messages.deleted'));
+        return redirect()->back()->with('success', __('general.messages.deleted'));
     }
 
 

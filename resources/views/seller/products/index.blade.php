@@ -25,6 +25,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title"> {{__('seller.sidebar.all')}} </h3>
+                                <a href="{{route('sellers.products.create')}}" class="button-general col-3 ml-auto"> {{__('seller.sidebar.create')}} </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -60,9 +61,9 @@
                                             <td>{{$product->seller_id}}</td>
                                             <td>{{$product->category_id}}</td>
                                             <td>
-                                                <a href="{{route('sellers.products.show' , ['slug' => $product->slug,'product' => $product->id])}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
-                                                <a href="{{route('sellers.products.edit' , ['slug' => $product->slug,'product' => $product->id])}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
-                                                <form action="{{route('sellers.products.destroy' , ['slug' => $product->slug,'product' => $product->id])}}" method="post" class="d-inline">
+                                                <a href="{{route('sellers.products.show' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
+                                                <a href="{{route('sellers.products.edit' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <form action="{{route('sellers.products.destroy' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" method="post" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-sm btn-danger  my-2 rounded-pill " type="submit">
