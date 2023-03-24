@@ -35,8 +35,8 @@ function getRouteGuardMap(string $guard) :string
 }
 
 
-if (! function_exists('product_code')) {
-    function product_code(string $name): ?string
+if (! function_exists('productCode')) {
+    function productCode(string $name): ?string
     {
         $id = (int)Product::max('id') + 1000;
         if (empty($name)) {
@@ -44,5 +44,13 @@ if (! function_exists('product_code')) {
         }
         $firstCharacter = strtoupper($name[0]);
         return "{$firstCharacter}{$id}";
+    }
+}
+
+
+if (! function_exists('printEnum')) {
+    function printEnum($enum,mixed $value): string
+    {
+        return ucfirst(strtolower(str_replace('_',' ', $enum::tryFrom($value)?->name)));
     }
 }

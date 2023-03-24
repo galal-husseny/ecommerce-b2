@@ -125,7 +125,7 @@ return [
         'quantity' => 'Quantity',
         'profit_with_quantities' => 'Profit With Quantities',
         'status' => 'Status',
-        'seller_id' => 'Seller id',
+        'seller' => 'Seller',
         'category' => 'Category',
         'operations' => 'Operations',
         'show' => 'Show',
@@ -173,7 +173,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'ُEdit',
+        'submit' => 'Edit',
     ],
 
 ];
