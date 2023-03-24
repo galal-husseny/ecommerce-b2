@@ -24,7 +24,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title"> {{__('seller.sidebar.all')}} </h3>
+                                <h3 class="card-title "> {{__('seller.sidebar.all')}} </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -40,7 +40,6 @@
                                             <th>{{ __('seller.all_products.quantity') }}</th>
                                             <th>{{ __('seller.all_products.profit_with_quantities') }}</th>
                                             <th>{{ __('seller.all_products.status') }}</th>
-                                            <th>{{ __('seller.all_products.seller_id') }}</th>
                                             <th>{{ __('seller.all_products.category') }}</th>
                                             <th>{{ __('seller.all_products.operations') }}</th>
                                         </tr>
@@ -56,16 +55,20 @@
                                             <td>{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$profit * $product->quantity}}</td>
-                                            <td>{{$product->status}}</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td @class([
+                                                'text-success' => $product->status,
+                                                'text-danger' => ! $product->status,
+                                             ])>{{PrintEnum(App\Enums\CategoryEnum::class, $product->status)}}</td>
+                                            <td>
+                                                {{$product->category->name}}
+                                            </td>
                                             <td>
                                                 <a href="{{route('sellers.products.show', ['slug' =>$product->slug, 'product' => \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill d-inline"> {{__('seller.all_products.show')}} </a>
                                                 <a href="{{route('sellers.products.edit', ['slug' =>$product->slug, 'product' => \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill d-inline"> {{__('seller.all_products.edit')}} </a>
-                                                <form action="{{route('sellers.products.destroy', ['slug' =>$product->slug, 'product' => $product->id])}}" method="post" class="d-inline">
+                                                <form class="" action="{{route('sellers.products.destroy', \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}" method="post" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill" type="submit">
+                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill x" type="submit">
                                                         {{__('seller.all_products.delete')}}
                                                     </button>
                                                 </form>

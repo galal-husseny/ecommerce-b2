@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\CategoryEnum;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class Category extends Model
 {
@@ -37,5 +40,9 @@ class Category extends Model
      */
     public function products(){
         return $this->hasMany(Product::class);
+    }
+
+    public function scopeActive(Builder $query): void {
+        $query->where('status', CategoryEnum::ACTIVE->value);
     }
 }
