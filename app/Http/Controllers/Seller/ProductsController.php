@@ -30,7 +30,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
+        $categories = Category::select(['id', 'name'])->active()->get();
         return view('seller.products.create', compact('categories'));
     }
 
