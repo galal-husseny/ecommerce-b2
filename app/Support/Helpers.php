@@ -69,19 +69,26 @@ if(! function_exists('getRouteGuardMap')){
         }
 }
 
-if(! function_exists('product_code')){
+if(! function_exists('productCode')){
     /**
-     * product_code
+     * productCode
      *
      * @param  string $name
      * @return string
      */
-    function product_code(string $name) :?string
+    function productCode(string $name) :?string
     {
         if(empty($name)){
             return null;
         }
         $id = (int)Product::max('id') + 1000;
         return strtoupper($name[0]).$id;
+    }
+}
+
+if(! function_exists('printEnum')){
+    function printEnum($enum , mixed $value) :string
+    {
+        return strtolower($enum::tryFrom($value)?->name);
     }
 }

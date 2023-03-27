@@ -19,7 +19,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::where('seller_id', Auth::guard('seller')->id())->get();
+        $products = Product::with('category')->where('seller_id', Auth::guard('seller')->id())->get();
         return view('seller.products.index', compact('products'));
     }
 
@@ -42,7 +42,7 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $code = product_code($request->name['en']);
+        $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated() ,
         [
             'code'=> $code,
@@ -50,6 +50,7 @@ class ProductsController extends Controller
         ]));
         $product->addMediaFromRequest('image')->toMediaCollection('product');
         //add specs
+        dd($request->all());
         return redirect()->route('sellers.products.index')->with('success' , __('general.messages.created'));
     }
 
@@ -92,6 +93,7 @@ class ProductsController extends Controller
             'ar' => 'آهلا'
         ];
         $product->save();
+
         return redirect()->back();
     }
 

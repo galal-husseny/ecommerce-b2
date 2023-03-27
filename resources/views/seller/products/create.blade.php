@@ -99,15 +99,37 @@
                                             <img src="{{ asset('custom-images/default.png') }}" alt="default"
                                                 class="w-100 " id="image" style="cursor: pointer">
                                         </label>
-                                        <input id='files' type='file' name="image" class="d-none" multiple >
+                                        <input id='files' type='file' name="image" class="d-none" multiple>
                                         <output id='result'></output>
-                                        
-                                        <div class="form-group " id="spec">
+
+                                        {{-- <div class="form-group " id="spec">
                                             <button class="button-general w-50 mt-3" type="button" name="button"
                                                 onclick="newinput()">Add spec</button>
                                             <button class="button-general w-50 mt-4" type="button" name="button"
                                                 onclick="saveSpec()">Save Specs</button>
-                                        </div>
+                                        </div> --}}
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <table class="table  table-responsive">
+                                            <thead>
+                                                <th class="col-4">Spec </th>
+                                                <th class="col-4">Spec Value </th>
+                                                <th class="col-4"> <a href="javascript:void(0)"
+                                                        class="btn btn-success addRow">
+                                                        Add Spec </a> </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="specs[]" class="p-2 form-control" ></td>
+                                                    <td><input type="text" name="spec_values[]" class="p-2 form-control" >
+                                                    </td>
+                                                    <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">
+                                                            Delete </a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <!-- /.card-body -->
 
@@ -216,5 +238,73 @@
                 console.log("Your browser does not support File API");
             }
         }
+    </script>
+
+    <script src="path/to/jquery.js"></script>
+    <script src="path/to/jquery.repeater/jquery.repeater.js"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('.repeater').repeater({
+                // (Optional)
+                // start with an empty list of repeaters. Set your first (and only)
+                // "data-repeater-item" with style="display:none;" and pass the
+                // following configuration flag
+                initEmpty: true,
+                // (Optional)
+                // "defaultValues" sets the values of added items.  The keys of
+                // defaultValues refer to the value of the input's name attribute.
+                // If a default value is not specified for an input, then it will
+                // have its value cleared.
+                defaultValues: {
+                    'text-input': 'foo'
+                },
+                // (Optional)
+                // "show" is called just after an item is added.  The item is hidden
+                // at this point.  If a show callback is not given the item will
+                // have $(this).show() called on it.
+                show: function() {
+                    $(this).slideDown();
+                },
+                // (Optional)
+                // "hide" is called when a user clicks on a data-repeater-delete
+                // element.  The item is still visible.  "hide" is passed a function
+                // as its first argument which will properly remove the item.
+                // "hide" allows for a confirmation step, to send a delete request
+                // to the server, etc.  If a hide callback is not given the item
+                // will be deleted.
+                hide: function(deleteElement) {
+                    if (confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                },
+                // (Optional)
+                // You can use this if you need to manually re-index the list
+                // for example if you are using a drag and drop library to reorder
+                // list items.
+                ready: function(setIndexes) {
+                    $dragAndDrop.on('drop', setIndexes);
+                },
+                // (Optional)
+                // Removes the delete button from the first list item,
+                // defaults to false.
+                isFirstItemUndeletable: true
+            })
+            console.log($('.repeater').repeaterVal());
+        });
+    </script> --}}
+    <script>
+        $('thead').on('click', '.addRow', function() {
+            var tr = `<tr>
+                        <td><input type="text" name="specs[]" class="p-2 form-control"></td>
+                            <td><input type="text" name="spec_values[]" class="p-2 form-control"></td>
+                            <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">
+                                    Delete </a></td>
+                            </tr>`;
+            $('tbody').append(tr);
+        });
+
+        $('tbody').on('click' , '.deleteRow' , function(){
+            $(this).parent().parent().remove();
+        })
     </script>
 @endpush

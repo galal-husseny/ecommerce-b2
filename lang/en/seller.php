@@ -131,6 +131,8 @@ return [
         'show' => 'Show',
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'active' => 'Active',
+        'not_active' => 'Not Active'
     ],
     'add_product' => [
         'name_en' => 'Name (EN)',
@@ -173,7 +175,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'ُEdit',
+        'submit' => 'Edit',
     ],
 
 ];

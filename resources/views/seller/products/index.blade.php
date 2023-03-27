@@ -41,7 +41,6 @@
                                             <th>{{ __('seller.all_products.quantity') }}</th>
                                             <th>{{ __('seller.all_products.profit_with_quantities') }}</th>
                                             <th>{{ __('seller.all_products.status') }}</th>
-                                            <th>{{ __('seller.all_products.seller_id') }}</th>
                                             <th>{{ __('seller.all_products.category') }}</th>
                                             <th>{{ __('seller.all_products.operations') }}</th>
                                         </tr>
@@ -57,9 +56,12 @@
                                             <td>{{$profit = $product->sale_price - $product->purchase_price}} EGP</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$profit * $product->quantity}}</td>
-                                            <td>{{$product->status}}</td>
-                                            <td>{{$product->seller_id}}</td>
-                                            <td>{{$product->category_id}}</td>
+                                            <td @class([
+                                                'p-2',
+                                                'text-success' => $product->status,
+                                                'text-danger' => ! $product->status,
+                                                ])>{{__('seller.all_products.' . printEnum(App\Enums\CategoryEnum::class , $product->status))}}</td>
+                                            <td>{{$product->category->name}}</td>
                                             <td>
                                                 <a href="{{route('sellers.products.show' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
                                                 <a href="{{route('sellers.products.edit' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>

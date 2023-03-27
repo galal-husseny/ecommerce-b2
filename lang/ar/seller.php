@@ -130,6 +130,8 @@ return [
         'show' => 'أعرض',
         'edit' => 'تعديل',
         'delete' => 'حذف',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح'
     ],
     'add_product' => [
         'name_en' => 'الآسم بالانجليزية',
