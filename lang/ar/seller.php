@@ -160,6 +160,8 @@ return [
         'profit_with_quantities' => 'الربح حسب الكمية',
         'status' => 'الحالة',
         'category' => 'القسم',
+        'description_en' => 'الوصف بالانجليزية',
+        'description_ar' => 'الوصف بالعربية',
     ],
     'edit_product' => [
         'title' => 'تعديل بيانات منتج',

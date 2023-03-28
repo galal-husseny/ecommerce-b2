@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 
 class ProductsController extends Controller
 {
@@ -62,9 +63,8 @@ class ProductsController extends Controller
      */
     public function show(Product $product, string $slug = null)
     {
-        $category = Category::select(['id', 'name'])->where('id' , $product->category_id)->get();
-        // dd($category);
-        return view('seller.products.show', compact(['product' , 'category']) );
+        $product->load('category');
+        return view('seller.products.show', compact('product'));
     }
 
     /**
@@ -86,15 +86,17 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->name = [
-            "en" => 'hello',
-            'ar' => 'آهلا'
-        ];
-        $product->save();
+        // dd($request->all());
+        if($request->has('image')){
+            $media = $product->getFirstMedia('product');
+            $media->delete();
+            $product->addMediaFromRequest('image')->toMediaCollection('product');
+        }
+        $product->update($request->validated());
 
-        return redirect()->back();
+        return redirect()->route('sellers.products.index')->with('success' , __('general.messages.updated'));
     }
 
     /**

@@ -64,7 +64,7 @@
                                             <td>{{$product->category->name}}</td>
                                             <td>
                                                 <a href="{{route('sellers.products.show' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
-                                                <a href="{{route('sellers.products.edit' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <a href="{{route('sellers.products.edit' ,  \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
                                                 <form action="{{route('sellers.products.destroy' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" method="post" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')

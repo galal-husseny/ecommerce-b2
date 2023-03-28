@@ -161,6 +161,9 @@ return [
         'profit_with_quantities' => 'Profit With Quantities',
         'status' => 'Status',
         'category' => 'Category',
+        'description_en' => 'Description (EN)',
+        'description_ar' => 'Description (AR)',
+
     ],
     'edit_product' => [
         'title' => 'Edit product details',
@@ -175,7 +178,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'Edit',
+        'submit' => 'Update',
     ],
 
 ];

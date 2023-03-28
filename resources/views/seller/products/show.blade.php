@@ -24,27 +24,14 @@
                     <div class="card-header col-12">
                         <h3 class="card-title"> {{ __('seller.show_product.title') }} </h3>
                     </div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-
-                        </div>
-                    @endif
-                    <div class="card mb-3 col-9" >
-                        <div class="row g-0 p-2">
+                    @include('seller.layouts.partials.errors')
+                    <div class="card mb-3 col-12" >
+                        <div class="row g-0 p-2 align-items-center">
                             <div class="col-md-4">
-                                <img src="{{ asset('frontend-assets/images/product-01.jpg') }}"
+                                <img src="{{ $product->getFirstMediaUrl('product') }}"
                                     class="img-fluid rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{$product->name}}</h3>
-                                    <p class="card-text"> {{$product->description}} </p>
-                                </div>
                                 <div class="card-body">
                                     <table id="example1" class="table  table-striped">
                                         <tbody>
@@ -59,6 +46,14 @@
                                             <tr>
                                                 <td>{{ __('seller.show_product.name_ar') }}</td>
                                                 <td class="text-center">{{ $product->getTranslation('name', 'ar') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.description_en') }}</td>
+                                                <td class="text-center">{{ $product->getTranslation('description', 'en') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('seller.show_product.description_ar') }}</td>
+                                                <td class="text-center">{{ $product->getTranslation('description', 'ar') }}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{ __('seller.show_product.code') }}</td>
@@ -88,11 +83,15 @@
                                             </tr>
                                             <tr>
                                                 <td>{{ __('seller.show_product.status') }}</td>
-                                                <td class="text-center">{{ $product->status }}</td>
+                                                <td @class([
+                                                    'text-center',
+                                                    'text-success' => $product->status,
+                                                    'text-danger' => ! $product->status,
+                                                    ])>{{ __('seller.all_products.' . printEnum(App\Enums\CategoryEnum::class , $product->status)) }}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{ __('seller.show_product.category') }}</td>
-                                                <td class="text-center"> {{ $category[0]->name }} </td>
+                                                <td class="text-center"> {{ $product->category->name }} </td>
                                             </tr>
                                         </tbody>
 

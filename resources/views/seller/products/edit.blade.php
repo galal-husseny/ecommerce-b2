@@ -20,7 +20,8 @@
                             </div>
                             @include('seller.layouts.partials.errors')
                             <div class="card-body">
-                                <form method="post" action="{{ route('sellers.products.update' , $product->slug) }}"
+                                <form method="post"
+                                    action="{{ route('sellers.products.update', \Illuminate\Support\Facades\Crypt::encryptString($product->id)) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -55,10 +56,10 @@
                                         <div class="form-group">
                                             <label for="status">{{ __('seller.edit_product.status') }}</label>
                                             <select name="status" class="form-control" id="status">
-                                                <option value="1" @selected(old('staus', $product->status === '1'))>
+                                                <option value="1" @selected((string) old('staus', $product->status) === '1')>
                                                     {{ __('seller.edit_product.active') }}
                                                 </option>
-                                                <option value="0" @selected(old('staus', $product->status === '0'))>
+                                                <option value="0" @selected((string) old('staus', $product->status) === '0')>
                                                     {{ __('seller.edit_product.not_active') }}
                                                 </option>
                                             </select>
@@ -67,16 +68,17 @@
                                             <label for="category_id">{{ __('seller.edit_product.category') }}</label>
                                             <select name="category_id" class="form-control" id="category_id">
                                                 @foreach ($categories as $category)
-                                                    <option @selected(old('category_id' , $product->category_id == $category->id)) value="{{ $category->id }}">{{ $category->name }}
+                                                    <option @selected(old('category_id', $product->category_id == $category->id)) value="{{ $category->id }}">
+                                                        {{ $category->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[en]" placeholder="{{ __('seller.edit_product.description_en') }}"> {{ old( 'description.en',$product->getTranslation('description', 'en')) }} </textarea>
+                                            <textarea class="form-control" name="description[en]" placeholder="{{ __('seller.edit_product.description_en') }}"> {{ old('description.en', $product->getTranslation('description', 'en')) }} </textarea>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[ar]" placeholder="{{ __('seller.edit_product.description_ar') }}"> {{ old( 'description.ar',$product->getTranslation('description', 'ar')) }} </textarea>
+                                            <textarea class="form-control" name="description[ar]" placeholder="{{ __('seller.edit_product.description_ar') }}"> {{ old('description.ar', $product->getTranslation('description', 'ar')) }} </textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
@@ -84,10 +86,15 @@
                                                     <input type="file" class="d-none" name="image" id="file"
                                                         onchange="loadFile(event)">
                                                     <label for="file">
-                                                        <img src="{{ $product->getFirstMediaUrl('product') }}" alt="default"
-                                                            class="w-100 " id="image" style="cursor: pointer">
+                                                        <img src="{{ $product->getFirstMediaUrl('product') }}"
+                                                            alt="default" class="w-100 " id="image" name="image"
+                                                            style="cursor: pointer">
                                                     </label>
+
                                                 </div>
+                                                <a @style(['height: 20%', 'width: 5%']) class="btn btn-danger  p-2 mt-4">
+                                                    <i @style(['color: #fff']) class="zmdi zmdi-delete"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
