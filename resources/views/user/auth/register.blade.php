@@ -12,8 +12,8 @@
 
 @section('content')
 @parent
-    <div class="vh-100" style="background-image: url({{ asset('frontend-assets/images/blog-04.jpg') }}); background-size: cover;">
-        <div class="container p-t-60 ">
+    <div class="vh-100" style="background-image: url({{ asset('frontend-assets/images/about-02.jpg') }}); height: 100vh; background-size: cover;">
+        <div class="container p-t-40 ">
             <div class="bg-light m-lr-auto size-210 bor10 p-lr-70 p-t-20 p-b-10 p-lr-15-lg w-full-md m-b-50">
                 
                 <!-- Logo desktop -->
@@ -90,14 +90,15 @@
                         @endif
                     </div>
 
+
+                    <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                        {{__('user.auth.register.register')}}
+                    </button>
+
                     <div class="d-flex justify-content-between mt-4">
                         <a class="text-underline text-dark" href="{{ route('users.login') }}">
                             {{__('user.auth.register.registered')}}
                         </a>
-
-                        <button class=" stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                            {{__('user.auth.register.register')}}
-                        </button>
                     </div>
 
                 </form>

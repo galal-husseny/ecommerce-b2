@@ -16,7 +16,7 @@
 
 @section('content')
     @parent
-    <div class="vh-100" style="background-image: url({{ asset('frontend-assets/images/blog-04.jpg') }}); background-size: cover;">
+    <div class="" style="background-image: url({{ asset('frontend-assets/images/about-02.jpg') }}); height: 100vh; background-size: cover;">
         <div class="container p-t-40 ">
             <div class="bg-light m-lr-auto size-210 bor10 p-lr-70 p-t-20 p-b-10 p-lr-15-lg w-full-md m-b-50 m-t-50">
             
@@ -31,11 +31,9 @@
                     </div>
                 @endif
                 
-
                 <form method="POST" action="{{ route('users.login') }}">
                     @csrf
                     
-
                     <h4 class="mtext-105 cl2 txt-center p-b-30">
                         {{ __('user.auth.login.login_title') }}
                     </h4>
@@ -43,8 +41,8 @@
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
                             value="{{ old('email') }}" required autofocus placeholder="{{ __('user.auth.login.email') }}">
-
                     </div>
+                    
                     @if ($errors->get('email'))
                         <ul class='text-sm text-red-600 dark:text-red-400  m-t-20'>
                             @foreach ($errors->get('email') as $message)
@@ -79,6 +77,12 @@
                                 {{ __('user.auth.login.forgot_password') }}
                             </a>
                         @endif
+                    </div>
+
+                    <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                        {{ __('user.auth.login.login') }}
+                    </button>
+                    <div class="mb-3 d-flex justify-content-between  mt-4">
                         @if (Route::has('users.register'))
                             <a class="mr-5 text-dark " href="{{ route('users.register') }}">
                                 {{ __('user.auth.register.register_title') }}
@@ -86,9 +90,6 @@
                         @endif
                     </div>
 
-                    <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                        {{ __('user.auth.login.login') }}
-                    </button>
                 </form>
                 <p class="stext-107 cl6 txt-center bg-gray p-t-20">
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
