@@ -8,7 +8,7 @@
 
 @section('content')
     @parent
-    <div class="vh-100" style="background-image: url({{ asset('frontend-assets/images/blog-04.jpg') }}); background-size: cover;">
+    <div class="" style="background-image: url({{ asset('frontend-assets/images/about-02.jpg') }}); height: 100vh; background-size: cover;">
         <div class="container p-t-80 ">
             <div class="bg-light m-auto size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
                 

@@ -42,7 +42,7 @@
         <div class="mt-2">
             <label for="password_confirmation"> {{__('user.profile.update_password.confirm_password')}} </label>
             <input id="password_confirmation" name="password_confirmation" type="password"
-                class="mt-1 block w-full p-2 border" autocomplete="new-password" />
+            class="mt-1 block w-full p-2 border" autocomplete="new-password" />
             @if ($errors->updatePassword->get('password_confirmation'))
                 <ul class='text-danger  space-y-1 mt-2'>
                     @foreach ($errors->updatePassword->get('password_confirmation') as $message)
@@ -56,8 +56,7 @@
             <button class="text-center w-25 btn btn-dark rounded-pill mt-5">{{ __('user.profile.update_info.save') }}</button>
 
             @if (session('status') === 'password-updated')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">{{ __('user.profile.update_info.saved') }}</p>
             @endif
         </div>
     </form>
