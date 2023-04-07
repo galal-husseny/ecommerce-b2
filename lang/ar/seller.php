@@ -145,7 +145,7 @@ return [
         'category' => 'القسم',
         'description_en' => 'الوصف بالانجليزية',
         'description_ar' => 'الوصف بالعربية',
-        'submit' => ' اضافة منتج',
+        'submit' => ' اضافة',
     ],
     'show_product' => [
         'title' => 'عرض تفاصيل منتج',

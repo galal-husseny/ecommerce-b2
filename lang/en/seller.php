@@ -146,7 +146,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'اضافة',
+        'submit' => 'Create',
     ],
     'show_product' => [
         'title' => 'Show product details',
