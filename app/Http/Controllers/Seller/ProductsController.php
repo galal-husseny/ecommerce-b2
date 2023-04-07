@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Http\Services\SpecService;
 
 class ProductsController extends Controller
 {
@@ -42,7 +43,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request, SpecService $specService)
     {
         $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated(),
@@ -51,6 +52,7 @@ class ProductsController extends Controller
             'seller_id' => Auth::guard('seller')->id(),
         ]));
         $product->addMediaFromRequest('image')->toMediaCollection('product');
+        $specService->saveSpecs($request->spec_names)->matchIds($request->spec_values)->saveProductSpecs($product);
         // save specs
         return redirect()->route('sellers.products.index')->with('success', __('general.messages.created'));
     }
