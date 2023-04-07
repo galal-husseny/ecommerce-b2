@@ -124,7 +124,7 @@ return [
         'quantity' => 'الكمية',
         'profit_with_quantities' => 'الربح حسب الكمية',
         'status' => 'الحالة',
-        'seller_id' => 'كود البائع',
+        'seller' => ' البائع',
         'category' => 'القسم',
         'operations' => 'العمليات',
         'show' => 'أعرض',

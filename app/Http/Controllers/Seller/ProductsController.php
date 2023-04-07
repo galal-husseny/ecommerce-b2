@@ -8,10 +8,15 @@ use App\Enums\CategoryEnum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 
 class ProductsController extends Controller
 {
+    public function __construct() {
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::where('seller_id', Auth::guard('seller')->id())->get();
+        $products = Product::with('category')->where('seller_id', Auth::guard('seller')->id())->get();
         return view('seller.products.index', compact('products'));
     }
 
@@ -30,7 +35,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
+        $categories = Category::select(['id', 'name'])->active()->get();
         return view('seller.products.create', compact('categories'));
     }
 
@@ -42,7 +47,7 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $code = product_code($request->name['en']);
+        $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated(),
         [
             'code' => $code,
@@ -59,9 +64,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product, string $slug = null)
     {
-        return view('seller.products.show', compact(['product' , 'category']) );
+        return view('seller.products.show', compact(['product']) );
     }
 
     /**
@@ -70,9 +75,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product, string $slug = null)
     {
-        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
+        $categories = Category::select(['id', 'name'])->active()->get();
         return view('seller.products.edit', compact('product', 'categories'));
     }
 
@@ -83,8 +88,15 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
+        if ($request->has('image')) {
+            $media = $product->getFirstMedia('product');
+            $media->delete();
+            $product->addMediaFromRequest('image')->toMediaCollection('product');
+        }
+        $product->update($request->validated());
+        return redirect()->route('sellers.products.index')->with('success', __('general.messages.updated'));
 
     }
 
@@ -96,7 +108,7 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        // $product->delete();
         return redirect()->back()->with('success', __('general.messages.deleted'));
     }
 

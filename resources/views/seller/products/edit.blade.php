@@ -20,7 +20,7 @@
                             </div>
                             @include('seller.layouts.partials.errors')
                             <div class="card-body">
-                                <form method="post" action="{{ route('sellers.products.update', $product->id) }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('sellers.products.update', \Illuminate\Support\Facades\Crypt::encryptString($product->id)) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="card-body">
@@ -46,16 +46,16 @@
                                                 value="{{ old('sale_price', $product->sale_price) }}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="quantiy">{{ __('seller.edit_product.quantity') }}</label>
-                                            <input type="number" name="quantiy" class="form-control" id="quantiy"
+                                            <label for="quantity">{{ __('seller.edit_product.quantity') }}</label>
+                                            <input type="number" name="quantity" class="form-control" id="quantity"
                                                 value="{{ old('quantity', $product->quantity)}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="status">{{ __('seller.edit_product.status') }}</label>
                                             <select name="status" class="form-control" id="status">
                                                 <option value="" disabled selected></option>
-                                                <option @selected(old('status', $product->status) === '1') value="1">{{__('seller.add_product.active')}}</option>
-                                                <option @selected(old('status', $product->status) === '0') value="0">{{__('seller.add_product.not_active')}}</option>
+                                                <option @selected(old('status', (string)$product->status) === '1') value="1">{{__('seller.add_product.active')}}</option>
+                                                <option @selected(old('status', (string)$product->status) === '0') value="0">{{__('seller.add_product.not_active')}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -109,9 +109,9 @@
     <script>
         var loadFile = function(event) {
             var output = document.getElementById('image');
-            output.src = URL.createObjectURL(event.target.files);
+            output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function() {
-                URL.revokeObjectURL(output.src) // free memory
+            URL.revokeObjectURL(output.src) // free memory
             }
         };
     </script>
