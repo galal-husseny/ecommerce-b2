@@ -8,7 +8,6 @@ use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class Category extends Model
 {
     use HasFactory, HasTranslations;
@@ -48,7 +47,7 @@ class Category extends Model
      * @param  mixed $query
      * @return void
      */
-    public function scopeActive(Builder $query)
+    public function scopeActive(Builder $query) :void
     {
         $query->where('status', CategoryEnum::ACTIVE->value);
     }

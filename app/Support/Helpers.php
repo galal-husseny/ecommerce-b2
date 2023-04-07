@@ -92,3 +92,11 @@ if(! function_exists('printEnum')){
         return strtolower($enum::tryFrom($value)?->name);
     }
 }
+
+
+if (! function_exists('printEnum')) {
+    function printEnum($enum,mixed $value): string
+    {
+        return ucfirst(strtolower(str_replace('_',' ', $enum::tryFrom($value)?->name)));
+    }
+}

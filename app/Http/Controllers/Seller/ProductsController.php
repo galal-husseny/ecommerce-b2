@@ -8,6 +8,7 @@ use App\Enums\CategoryEnum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 
@@ -44,15 +45,14 @@ class ProductsController extends Controller
     public function store(StoreProductRequest $request)
     {
         $code = productCode($request->name['en']);
-        $product = Product::create(array_merge($request->validated() ,
+        $product = Product::create(array_merge($request->validated(),
         [
             'code'=> $code,
             'seller_id' => Auth::guard('seller')->id(),
         ]));
         $product->addMediaFromRequest('image')->toMediaCollection('product');
-        //add specs
-        dd($request->all());
-        return redirect()->route('sellers.products.index')->with('success' , __('general.messages.created'));
+        // save specs
+        return redirect()->route('sellers.products.index')->with('success', __('general.messages.created'));
     }
 
     /**
@@ -75,8 +75,8 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::select(['id', 'name'])->where('status', CategoryEnum::ACTIVE->value)->get();
-        return view('seller.products.edit' , compact(['product' , 'categories']));
+        $categories = Category::select(['id', 'name'])->active()->get();
+        return view('seller.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -88,15 +88,14 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        // dd($request->all());
         if($request->has('image')){
             $media = $product->getFirstMedia('product');
             $media->delete();
             $product->addMediaFromRequest('image')->toMediaCollection('product');
         }
         $product->update($request->validated());
+        return redirect()->route('sellers.products.index')->with('success', __('general.messages.updated'));
 
-        return redirect()->route('sellers.products.index')->with('success' , __('general.messages.updated'));
     }
 
     /**
@@ -107,7 +106,7 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        // $product->delete();
         return redirect()->back()->with('success', __('general.messages.deleted'));
     }
 

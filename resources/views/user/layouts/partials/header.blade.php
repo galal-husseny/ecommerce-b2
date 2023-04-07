@@ -157,7 +157,8 @@
 
         <ul class="main-menu-m">
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{ route('users.dashboard') }}">{{ __('user.header.home') }}</a>
+
                 <ul class="sub-menu-m">
                     <li><a href="index.html">Homepage 1</a></li>
                     <li><a href="home-02.html">Homepage 2</a></li>
@@ -207,4 +208,55 @@
         </div>
 
     </div>
+
+    <!-- Modal Verify Email -->
+    @auth('web')
+        @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
+            <div class="modal flex-c-m trans-04">
+                <div class="container p-t-80 ">
+                    <div class="bg-light m-auto w-75 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+
+                        <button class="flex-c-m btn trans-04 mb-4 close-modal-email-verify">
+                            <img src="{{ asset('frontend-assets/images/icons/icon-close2.png') }}" alt="CLOSE">
+                        </button>
+
+                        <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                            {{ __('user.auth.verify_email.verify_email_head') }}
+                        </div>
+
+                        @if (session('status') == 'verification-link-sent')
+                            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                                {{ __('user.auth.verify_email.verify_email_confrmation') }}
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('users.verification.send') }}">
+                            @csrf
+
+                            <!-- Logo desktop -->
+                            <a href="#" class="logo p-t-20">
+                                <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO" style="margin: auto; padding-bottom: 20px;">
+                            </a>
+
+                            <button class="flex-c-m stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mx-auto m-t-6">
+                                {{__('user.auth.verify_email.confirm')}}
+                            </button>
+                        </form>
+                        <form method="POST" action="{{ route('users.logout') }}">
+                            @csrf
+
+                            <button class="flex-c-m stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mx-auto m-t-6">
+                                {{__('user.auth.verify_email.logout')}}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endauth
 </header>
+
+<script>
+     /*==================================================================
+    [ Show / hide modal search ]*/
+
+</script>
