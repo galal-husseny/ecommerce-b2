@@ -41,9 +41,9 @@ ModelInterface
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'min:3'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'. $this->getModel()],
-            'phone' => ['required', 'regex://', 'unique:'.$this->getModel()],
+            'phone' => ['required', 'regex:/^01[0125][0-9]{8}$/', 'unique:'.$this->getModel()],
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 

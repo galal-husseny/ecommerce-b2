@@ -124,73 +124,6 @@
         </div>
     </div>
 
-
-    {{-- <!-- Menu Mobile -->
-    <div class="menu-mobile">
-        <ul class="topbar-mobile">
-            <li>
-                <div class="left-top-bar">
-                    Free shipping for standard order over $100
-                </div>
-            </li>
-
-            <li>
-                <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        Help & FAQs
-                    </a>
-
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        My Account
-                    </a>
-
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        EN
-                    </a>
-
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        USD
-                    </a>
-                </div>
-            </li>
-        </ul>
-
-        <ul class="main-menu-m">
-            <li>
-                <a href="{{ route('users.dashboard') }}">{{ __('user.header.home') }}</a>
-
-                <ul class="sub-menu-m">
-                    <li><a href="index.html">Homepage 1</a></li>
-                    <li><a href="home-02.html">Homepage 2</a></li>
-                    <li><a href="home-03.html">Homepage 3</a></li>
-                </ul>
-                <span class="arrow-main-menu-m">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </span>
-            </li>
-
-            <li>
-                <a href="product.html">Shop</a>
-            </li>
-
-            <li>
-                <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-            </li>
-
-            <li>
-                <a href="blog.html">Blog</a>
-            </li>
-
-            <li>
-                <a href="about.html">About</a>
-            </li>
-
-            <li>
-                <a href="contact.html">Contact</a>
-            </li>
-        </ul>
-    </div> --}}
-
     <!-- Modal Search -->
     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
         <div class="container-search-header">
@@ -212,11 +145,12 @@
     <!-- Modal Verify Email -->
     @auth('web')
         @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-            <div class="modal flex-c-m trans-04">
-                <div class="container p-t-80 ">
-                    <div class="bg-light m-auto w-75 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
 
-                        <button class="flex-c-m btn trans-04 mb-4 close-modal-email-verify">
+            <div class="modal flex-c-m m-auto w-50 trans-04 modal-verify-email" id="modal_verify_email">
+                <div class="container p-t-80 ">
+                    <div class="bg-light m-auto bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+
+                        <button class="flex-c-m btn trans-04 mb-4 close-modal-email-verify" onclick="closeModal()">
                             <img src="{{ asset('frontend-assets/images/icons/icon-close2.png') }}" alt="CLOSE">
                         </button>
 
@@ -253,10 +187,16 @@
             </div>
         @endif
     @endauth
+
 </header>
-
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script>
-     /*==================================================================
-    [ Show / hide modal search ]*/
-
+    function closeModal(){
+        document.getElementById("modal_verify_email").style.opacity = "0";
+    }
+    $('body').click(function (event){
+        if(!$(event.target).closest('#modal_verify_email').length && !$(event.target).is('#modal_verify_email')) {
+            $("#modal_verify_email").hide();
+        }
+    });
 </script>

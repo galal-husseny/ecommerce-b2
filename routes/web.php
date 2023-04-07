@@ -24,3 +24,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     require __DIR__ . "/frontend.php";
     require __DIR__ . "/sellers.php";
 });
+Route::get('test',function(){
+    return view('user.modal');
+});

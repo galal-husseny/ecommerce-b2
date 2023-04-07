@@ -12,8 +12,14 @@
 
 @section('content')
     @parent
-    <div class="container m-tb-200">
-        <div class="m-auto size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+    <div class="" style="background-image: url({{ asset('frontend-assets/images/about-02.jpg') }}); background-size: cover; height: 100vh;">
+        <div class="container p-t-60">
+            <div class="bg-light m-auto size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+
+                <!-- Logo desktop -->
+                <a href="#" class="logo p-t-20">
+                    <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO" style="margin: auto; padding-bottom: 20px;">
+                </a>
 
             <form method="POST" action="{{ route('users.password.store') }}">
                 @csrf
