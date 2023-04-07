@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
+class CreateMediaTable extends Migration
 {
-    public function up(): void
+    public function up()
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
 
             $table->morphs('model');
             $table->uuid('uuid')->nullable()->unique();
@@ -29,4 +29,4 @@ return new class extends Migration
             $table->nullableTimestamps();
         });
     }
-};
+}

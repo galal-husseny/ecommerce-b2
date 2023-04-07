@@ -2,6 +2,14 @@
 
 @section('title', __('user.auth.login.login'))
 
+@section('header')
+    @include('user.layouts.partials.header')
+@endsection
+
+@section('footer')
+    @include('user.layouts.partials.footer')
+@endsection
+
 @push('links')
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 @endpush
@@ -19,21 +27,21 @@
     <div class="" style="background-image: url({{ asset('frontend-assets/images/about-02.jpg') }}); height: 100vh; background-size: cover;">
         <div class="container p-t-40 ">
             <div class="bg-light m-lr-auto size-210 bor10 p-lr-70 p-t-20 p-b-10 p-lr-15-lg w-full-md m-b-50 m-t-50">
-            
+
                 <!-- Logo desktop -->
                 <a href="#" class="logo p-t-20">
                     <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO" style="margin: auto; padding-bottom: 20px;">
                 </a>
-                
+
                 @if(session('status'))
                     <div class="alert alert-success" role="alert">
                         {{__('user.auth.reset')}}
                     </div>
                 @endif
-                
+
                 <form method="POST" action="{{ route('users.login') }}">
                     @csrf
-                    
+
                     <h4 class="mtext-105 cl2 txt-center p-b-30">
                         {{ __('user.auth.login.login_title') }}
                     </h4>
@@ -42,7 +50,7 @@
                         <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" id="email" type="email" name="email"
                             value="{{ old('email') }}" required autofocus placeholder="{{ __('user.auth.login.email') }}">
                     </div>
-                    
+
                     @if ($errors->get('email'))
                         <ul class='text-sm text-red-600 dark:text-red-400  m-t-20'>
                             @foreach ($errors->get('email') as $message)
@@ -50,6 +58,8 @@
                             @endforeach
                         </ul>
                     @endif
+                </div>
+
 
                     <!-- Password -->
                     <div class="bor8 m-tb-20 how-pos4-parent">
@@ -96,5 +106,3 @@
                 </p>
             </div>
         </div>
-    </div>
-@endsection

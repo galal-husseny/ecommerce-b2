@@ -80,7 +80,7 @@
                     </a>
                     <ul class="main-menu">
                         <li>
-                            <a class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
+                            <a href="" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10"
                                 style="font-size: 2rem">
                                 <i class="zmdi zmdi-account"></i>
                             </a>
@@ -157,7 +157,7 @@
                         <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
                             {{ __('user.auth.verify_email.verify_email_head') }}
                         </div>
-        
+
                         @if (session('status') == 'verification-link-sent')
                             <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
                                 {{ __('user.auth.verify_email.verify_email_confrmation') }}
@@ -165,19 +165,19 @@
                         @endif
                         <form method="POST" action="{{ route('users.verification.send') }}">
                             @csrf
-                            
+
                             <!-- Logo desktop -->
                             <a href="#" class="logo p-t-20">
                                 <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO" style="margin: auto; padding-bottom: 20px;">
                             </a>
-        
+
                             <button class="flex-c-m stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mx-auto m-t-6">
                                 {{__('user.auth.verify_email.confirm')}}
                             </button>
                         </form>
                         <form method="POST" action="{{ route('users.logout') }}">
                             @csrf
-        
+
                             <button class="flex-c-m stext-101 cl0 w-50 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mx-auto m-t-6">
                                 {{__('user.auth.verify_email.logout')}}
                             </button>
@@ -197,6 +197,6 @@
     $('body').click(function (event){
         if(!$(event.target).closest('#modal_verify_email').length && !$(event.target).is('#modal_verify_email')) {
             $("#modal_verify_email").hide();
-        }     
+        }
     });
 </script>

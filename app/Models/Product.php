@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Spatie\Image\Manipulations;
 use App\Traits\EscapeUnicodeJson;
-use App\Traits\HasEncryptedIds;
+use App\Traits\HasEcryptedIds;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+
 class Product extends Model implements HasMedia
 {
     use HasFactory;
@@ -21,7 +22,7 @@ class Product extends Model implements HasMedia
     use InteractsWithMedia;
     use HasTranslatableSlug;
     use EscapeUnicodeJson;
-    use HasEncryptedIds;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.
@@ -37,7 +38,7 @@ class Product extends Model implements HasMedia
         'description',
         'purchase_price',
         'seller_id',
-        'category_id',
+        'category_id'
     ];
 
     /**
@@ -56,7 +57,7 @@ class Product extends Model implements HasMedia
      *
      * @return string
      */
-    public function sale_price_with_currency(): string
+    public function sale_price_with_currency() :string
     {
         return $this->sale_price  . ' ' . __('user.shared.currency');
     }
@@ -66,7 +67,7 @@ class Product extends Model implements HasMedia
      *
      * @return string
      */
-    public function purchase_price_with_currency(): string
+    public function purchase_price_with_currency() :string
     {
         return $this->purchase_price  . ' ' . __('user.shared.currency');
     }
@@ -76,8 +77,7 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function seller()
-    {
+    public function seller(){
         return $this->belongsTo(Seller::class);
     }
 
@@ -86,8 +86,7 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function category()
-    {
+    public function category(){
         return $this->belongsTo(Category::class);
     }
 
@@ -96,9 +95,8 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function orders()
-    {
-        return $this->hasMany(Order::class)->withPivot('price', 'quantity', 'quantity');
+    public function orders(){
+        return $this->hasMany(Order::class)->withPivot('price' , 'quantity' , 'quantity');
     }
 
     /**
@@ -106,8 +104,7 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function specs()
-    {
+    public function specs(){
         return $this->belongsToMany(Spec::class)->withPivot('value');
     }
 
@@ -116,9 +113,8 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function offers()
-    {
-        return $this->belongsToMany(Offer::class)->withPivot('discount', 'price_after_discount');
+    public function offers(){
+        return $this->belongsToMany(Offer::class)->withPivot('discount' , 'price_after_discount');
     }
 
     /**
@@ -126,9 +122,8 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function favs()
-    {
-        return $this->belongsToMany(User::class, 'favs', 'product_id', 'user_id')->as('favs');
+    public function favs(){
+        return $this->belongsToMany(User::class , 'favs' , 'product_id' , 'user_id')->as('favs');
     }
 
     /**
@@ -136,9 +131,8 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function carts()
-    {
-        return $this->belongsToMany(User::class, 'carts', 'product_id', 'user_id')->as('carts')->withPivot('quantity');
+    public function carts(){
+        return $this->belongsToMany(User::class , 'carts' , 'product_id' , 'user_id')->as('carts')->withPivot('quantity');
     }
 
     /**
@@ -146,34 +140,26 @@ class Product extends Model implements HasMedia
      *
      * @return void
      */
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
+    public function reviews(){
+        return $this->hasMany(Review::class );
     }
 
-    /**
-     * registerMediaConversions
-     *
-     * @param  Media $media
-     * @return void
-     */
     public function registerMediaConversions(Media $media = null): void
-    {
-        $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
-            ->nonQueued();
-    }
+        {
+            $this
+                ->addMediaConversion('preview')
+                ->fit(Manipulations::FIT_CROP, 300, 300)
+                ->nonQueued();
+        }
 
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions(): SlugOptions
+    public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
             ->usingLanguage(false);
     }
-
 }

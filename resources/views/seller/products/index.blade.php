@@ -24,7 +24,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title "> {{__('seller.sidebar.all')}} </h3>
+                                <h3 class="card-title"> {{__('seller.sidebar.all')}} </h3>
+                                <a href="{{route('sellers.products.create')}}" class="button-general col-3 ml-auto"> {{__('seller.sidebar.create')}} </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -56,19 +57,18 @@
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$profit * $product->quantity}}</td>
                                             <td @class([
+                                                'p-2',
                                                 'text-success' => $product->status,
                                                 'text-danger' => ! $product->status,
-                                             ])>{{PrintEnum(App\Enums\CategoryEnum::class, $product->status)}}</td>
+                                                ])>{{__('seller.all_products.' . printEnum(App\Enums\CategoryEnum::class , $product->status))}}</td>
+                                            <td>{{$product->category->name}}</td>
                                             <td>
-                                                {{$product->category->name}}
-                                            </td>
-                                            <td>
-                                                <a href="{{route('sellers.products.show', ['slug' =>$product->slug, 'product' => \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill d-inline"> {{__('seller.all_products.show')}} </a>
-                                                <a href="{{route('sellers.products.edit', ['slug' =>$product->slug, 'product' => \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill d-inline"> {{__('seller.all_products.edit')}} </a>
-                                                <form class="" action="{{route('sellers.products.destroy', \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}" method="post" class="d-inline">
+                                                <a href="{{route('sellers.products.show' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill "> {{__('seller.all_products.show')}} </a>
+                                                <a href="{{route('sellers.products.edit' ,  \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}" class="btn btn-sm btn-primary my-2  rounded-pill "> {{__('seller.all_products.edit')}} </a>
+                                                <form action="{{route('sellers.products.destroy' , ['slug' => $product->slug, \Illuminate\Support\Facades\Crypt::encryptString($product->id)])}}" method="post" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill x" type="submit">
+                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill " type="submit">
                                                         {{__('seller.all_products.delete')}}
                                                     </button>
                                                 </form>
@@ -119,21 +119,22 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>
-    @if (session()->has('success'))
+    @if(session()->has('success'))
         <script>
             Swal.fire(
-                'Good job!',
+                'Good Job',
                 '{{session()->get('success')}}',
                 'success'
-                );
+            );
         </script>
     @elseif (session()->has('error'))
         <script>
             Swal.fire(
-                'Good job!',
+                'Failed',
                 '{{session()->get('error')}}',
                 'error'
-                );
+            );
         </script>
     @endif
+
 @endpush

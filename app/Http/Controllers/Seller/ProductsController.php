@@ -14,9 +14,6 @@ use App\Http\Requests\Product\UpdateProductRequest;
 
 class ProductsController extends Controller
 {
-    public function __construct() {
-
-    }
     /**
      * Display a listing of the resource.
      *
@@ -50,8 +47,8 @@ class ProductsController extends Controller
         $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated(),
         [
-            'code' => $code,
-            'seller_id' => Auth::guard('seller')->id()
+            'code'=> $code,
+            'seller_id' => Auth::guard('seller')->id(),
         ]));
         $product->addMediaFromRequest('image')->toMediaCollection('product');
         // save specs
@@ -66,7 +63,8 @@ class ProductsController extends Controller
      */
     public function show(Product $product, string $slug = null)
     {
-        return view('seller.products.show', compact(['product']) );
+        $product->load('category');
+        return view('seller.products.show', compact('product'));
     }
 
     /**
@@ -75,7 +73,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product, string $slug = null)
+    public function edit(Product $product)
     {
         $categories = Category::select(['id', 'name'])->active()->get();
         return view('seller.products.edit', compact('product', 'categories'));
@@ -90,7 +88,7 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        if ($request->has('image')) {
+        if($request->has('image')){
             $media = $product->getFirstMedia('product');
             $media->delete();
             $product->addMediaFromRequest('image')->toMediaCollection('product');

@@ -20,35 +20,44 @@
                             </div>
                             @include('seller.layouts.partials.errors')
                             <div class="card-body">
-                                <form method="post" action="{{ route('sellers.products.store') }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('sellers.products.store') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="name_en">{{ __('seller.add_product.name_en') }}</label>
-                                            <input type="text" name="name[en]" class="form-control" id="name_en" value="{{old('name.en')}}">
+                                            <input type="text" name="name[en]" class="form-control" id="name_en"
+                                                value="{{ old('name.en') }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="name_ar">{{ __('seller.add_product.name_ar') }}</label>
-                                            <input type="text" name="name[ar]" class="form-control" id="name_ar" value="{{old('name.ar')}}">
+                                            <input type="text" name="name[ar]" class="form-control" id="name_ar"
+                                                value="{{ old('name.ar') }}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="purchase_price">{{ __('seller.add_product.purchase_price') }}</label>
-                                            <input type="number" name="purchase_price" class="form-control" id="purchase_price" value="{{old('purchase_price')}}">
+                                            <label
+                                                for="purchase_price">{{ __('seller.add_product.purchase_price') }}</label>
+                                            <input type="number" name="purchase_price" class="form-control"
+                                                id="purchase_price" value="{{ old('purchase_price') }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="sale_price">{{ __('seller.add_product.sale_price') }}</label>
-                                            <input type="number" name="sale_price" class="form-control"  id="sale_price" value="{{old('sale_price')}}">
+                                            <input type="number" name="sale_price" class="form-control" id="sale_price"
+                                                value="{{ old('sale_price') }}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="quantiy">{{ __('seller.add_product.quantity') }}</label>
-                                            <input type="number" name="quantity" class="form-control" id="quantiy" value="{{old('quantity')}}">
+                                            <label for="quantity">{{ __('seller.add_product.quantity') }}</label>
+                                            <input type="number" name="quantity" class="form-control" id="quantity"
+                                                value="{{ old('quantity') }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="status">{{ __('seller.add_product.status') }}</label>
                                             <select name="status" class="form-control" id="status">
                                                 <option value="" disabled selected></option>
-                                                <option @selected(old('status') === '1') value="1">{{__('seller.add_product.active')}}</option>
-                                                <option @selected(old('status') === '0') value="0">{{__('seller.add_product.not_active')}}</option>
+                                                <option @selected(old('status') === '1') value="1">
+                                                    {{ __('seller.add_product.active') }}</option>
+                                                <option @selected(old('status') === '0') value="0">
+                                                    {{ __('seller.add_product.not_active') }}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -56,31 +65,77 @@
                                             <select name="category_id" class="form-control" id="category_id">
                                                 @foreach ($categories as $category)
                                                     <option value="" disabled selected></option>
-                                                    <option @selected(old('category_id') == $category->id) value="{{$category->id}}">{{$category->name}}</option>
+                                                    <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
+                                                        {{ $category->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[en]" placeholder="{{__('seller.add_product.description_en')}}">{{old('description.en')}}</textarea>
+                                            <label
+                                                for="description_en">{{ __('seller.add_product.description_en') }}</label>
+                                            <textarea id='description_en' class="form-control" name="description[en]"
+                                                placeholder="{{ __('seller.add_product.description_en') }}"> {{ old('description.en') }} </textarea>
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description[ar]" placeholder="{{__('seller.add_product.description_ar')}}">{{old('description.ar')}}</textarea>
+                                            <label
+                                                for="description_ar">{{ __('seller.add_product.description_ar') }}</label>
+                                            <textarea id="description_ar" class="form-control" name="description[ar]"
+                                                placeholder="{{ __('seller.add_product.description_ar') }}"> {{ old('description.ar') }} </textarea>
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <div class="row">
                                                 <div class="col-2">
-                                                    <input type="file" class="d-none" name="image" id="file" onchange="loadFile(event)">
+                                                    <input type="file" class="d-none" name="image" id="file"
+                                                        onchange="loadFile(event)">
                                                     <label for="file">
-                                                        <img src="{{asset('custom-images/default.png')}}" alt="default" class="w-100 " id="image" style="cursor: pointer">
+                                                        <img src="{{ asset('custom-images/default.png') }}" alt="default"
+                                                            class="w-100 " id="image" style="cursor: pointer">
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
+
+                                        <label for="files">
+                                            <img src="{{ asset('custom-images/default.png') }}" alt="default"
+                                                class="w-100 " id="image" style="cursor: pointer">
+                                        </label>
+                                        <input id='files' type='file' name="image" class="d-none" multiple>
+                                        <output id='result'></output>
+
+                                        {{-- <div class="form-group " id="spec">
+                                            <button class="button-general w-50 mt-3" type="button" name="button"
+                                                onclick="newinput()">Add spec</button>
+                                            <button class="button-general w-50 mt-4" type="button" name="button"
+                                                onclick="saveSpec()">Save Specs</button>
+                                        </div> --}}
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <table class="table  table-responsive">
+                                            <thead>
+                                                <th class="col-4">Spec </th>
+                                                <th class="col-4">Spec Value </th>
+                                                <th class="col-4"> <a href="javascript:void(0)"
+                                                        class="btn btn-success addRow">
+                                                        Add Spec </a> </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="specs[]" class="p-2 form-control" ></td>
+                                                    <td><input type="text" name="spec_values[]" class="p-2 form-control" >
+                                                    </td>
+                                                    <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">
+                                                            Delete </a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer ">
-                                        <button type="submit" class="button-general w-50"> {{__('seller.add_product.submit')}} </button>
+                                        <button type="submit" class="button-general w-50">
+                                            {{ __('seller.add_product.submit') }} </button>
                                     </div>
                                 </form>
                             </div>
@@ -103,8 +158,153 @@
             var output = document.getElementById('image');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
+                URL.revokeObjectURL(output.src) // free memory
             }
         };
+    </script>
+    <script>
+        var id = 1;
+        var inputs = [];
+        var newinput = function() {
+            var parent = document.getElementById('spec')
+            if (id % 2 != 0) {
+                var wraper = document.createElement('div')
+                wraper.className = 'row justify-content-between';
+                wraper.id = 'row' + id;
+                parent.appendChild(wraper)
+                var specKey = document.createElement("input")
+                specKey.className = id + " col-5 form-control p-2 mt-2";
+                specKey.style = "display:inline-block;";
+                specKey.id = "input" + id;
+                inputs.push(specKey.id);
+                specKey.type = 'text';
+                specKey.name = specKey.inner;
+                wraper.appendChild(specKey);
+            } else {
+                var wraper = document.getElementById('row' + (id - 1))
+                var specValue = document.createElement("input")
+                specValue.className = " col-5 form-control p-2 mt-2"
+                specValue.style = "display:inline-block;"
+                specValue.id = "input" + id;
+                inputs.push(specValue.id);
+                wraper.appendChild(specValue);
+            }
+            id += 1;
+            return inputs;
+        }
+
+        var specs = {};
+        var saveSpec = function() {
+            for (let counter = 1; counter <= (inputs.length);) {
+                if ((counter + 1) > (inputs.length)) {
+                    break;
+                }
+                var specKey = document.getElementById("input" + counter);
+                var specValue = document.getElementById('input' + (counter + 1));
+                specs[specKey.value] = specValue.value;
+                counter += 2;
+            }
+            console.log(specs);
+            return specs;
+        }
+    </script>
+
+    <script>
+        window.onload = function() {
+            //Check File API support
+            if (window.File && window.FileList && window.FileReader) {
+                var filesInput = document.getElementById("files");
+                filesInput.addEventListener("change", function(event) {
+                    var files = event.target.files; //FileList object
+                    var output = document.getElementById("result");
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        //Only pics
+                        if (!file.type.match('image'))
+                            continue;
+                        var picReader = new FileReader();
+                        picReader.addEventListener("load", function(event) {
+                            var picFile = event.target;
+                            var div = document.createElement("div");
+                            div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+                                "title='" + picFile.name + "'/>";
+                            output.insertBefore(div, null);
+                        });
+                        //Read the image
+                        picReader.readAsDataURL(file);
+                    }
+                });
+            } else {
+                console.log("Your browser does not support File API");
+            }
+        }
+    </script>
+
+    <script src="path/to/jquery.js"></script>
+    <script src="path/to/jquery.repeater/jquery.repeater.js"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('.repeater').repeater({
+                // (Optional)
+                // start with an empty list of repeaters. Set your first (and only)
+                // "data-repeater-item" with style="display:none;" and pass the
+                // following configuration flag
+                initEmpty: true,
+                // (Optional)
+                // "defaultValues" sets the values of added items.  The keys of
+                // defaultValues refer to the value of the input's name attribute.
+                // If a default value is not specified for an input, then it will
+                // have its value cleared.
+                defaultValues: {
+                    'text-input': 'foo'
+                },
+                // (Optional)
+                // "show" is called just after an item is added.  The item is hidden
+                // at this point.  If a show callback is not given the item will
+                // have $(this).show() called on it.
+                show: function() {
+                    $(this).slideDown();
+                },
+                // (Optional)
+                // "hide" is called when a user clicks on a data-repeater-delete
+                // element.  The item is still visible.  "hide" is passed a function
+                // as its first argument which will properly remove the item.
+                // "hide" allows for a confirmation step, to send a delete request
+                // to the server, etc.  If a hide callback is not given the item
+                // will be deleted.
+                hide: function(deleteElement) {
+                    if (confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                },
+                // (Optional)
+                // You can use this if you need to manually re-index the list
+                // for example if you are using a drag and drop library to reorder
+                // list items.
+                ready: function(setIndexes) {
+                    $dragAndDrop.on('drop', setIndexes);
+                },
+                // (Optional)
+                // Removes the delete button from the first list item,
+                // defaults to false.
+                isFirstItemUndeletable: true
+            })
+            console.log($('.repeater').repeaterVal());
+        });
+    </script> --}}
+    <script>
+        $('thead').on('click', '.addRow', function() {
+            var tr = `<tr>
+                        <td><input type="text" name="specs[]" class="p-2 form-control"></td>
+                            <td><input type="text" name="spec_values[]" class="p-2 form-control"></td>
+                            <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">
+                                    Delete </a></td>
+                            </tr>`;
+            $('tbody').append(tr);
+        });
+
+        $('tbody').on('click' , '.deleteRow' , function(){
+            $(this).parent().parent().remove();
+        })
     </script>
 @endpush

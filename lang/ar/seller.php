@@ -130,6 +130,8 @@ return [
         'show' => 'أعرض',
         'edit' => 'تعديل',
         'delete' => 'حذف',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح'
     ],
     'add_product' => [
         'name_en' => 'الآسم بالانجليزية',
@@ -143,7 +145,7 @@ return [
         'category' => 'القسم',
         'description_en' => 'الوصف بالانجليزية',
         'description_ar' => 'الوصف بالعربية',
-        'submit' => ' اضافة منتج',
+        'submit' => ' اضافة',
     ],
     'show_product' => [
         'title' => 'عرض تفاصيل منتج',
@@ -158,6 +160,8 @@ return [
         'profit_with_quantities' => 'الربح حسب الكمية',
         'status' => 'الحالة',
         'category' => 'القسم',
+        'description_en' => 'الوصف بالانجليزية',
+        'description_ar' => 'الوصف بالعربية',
     ],
     'edit_product' => [
         'title' => 'تعديل بيانات منتج',

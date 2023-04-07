@@ -131,6 +131,8 @@ return [
         'show' => 'Show',
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'active' => 'Active',
+        'not_active' => 'Not Active'
     ],
     'add_product' => [
         'name_en' => 'Name (EN)',
@@ -144,7 +146,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'اضافة',
+        'submit' => 'Create',
     ],
     'show_product' => [
         'title' => 'Show product details',
@@ -159,6 +161,9 @@ return [
         'profit_with_quantities' => 'Profit With Quantities',
         'status' => 'Status',
         'category' => 'Category',
+        'description_en' => 'Description (EN)',
+        'description_ar' => 'Description (AR)',
+
     ],
     'edit_product' => [
         'title' => 'Edit product details',
@@ -173,7 +178,7 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
-        'submit' => 'Edit',
+        'submit' => 'Update',
     ],
 
 ];

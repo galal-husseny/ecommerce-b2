@@ -1,9 +1,9 @@
 <?php
 namespace App\Traits;
-
 use Illuminate\Support\Facades\Crypt;
 
-trait HasEncryptedIds
+
+trait HasEcryptedIds
 {
     /**
      * Retrieve the model for a bound value.

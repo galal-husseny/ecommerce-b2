@@ -1,13 +1,22 @@
+
 @extends('user.layouts.parent')
 
 @section('title', __('user.auth.register.register'))
+
+@section('header')
+    @include('user.layouts.partials.header')
+@endsection
+
+@section('footer')
+    @include('user.layouts.partials.footer')
+@endsection
 
 @push('links')
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 @endpush
 
 @push('links')
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 @endpush
 
 @section('content')
@@ -15,7 +24,7 @@
     <div class="vh-100" style="background-image: url({{ asset('frontend-assets/images/about-02.jpg') }}); height: 100vh; background-size: cover;">
         <div class="container p-t-40 ">
             <div class="bg-light m-lr-auto size-210 bor10 p-lr-70 p-t-20 p-b-10 p-lr-15-lg w-full-md m-b-50">
-                
+
                 <!-- Logo desktop -->
                 <a href="#" class="logo p-t-20">
                     <img src="{{ asset('frontend-assets/images/icons/logo-01.png') }}" alt="IMG-LOGO" style="margin: auto; padding-bottom: 20px;">
@@ -106,6 +115,9 @@
                     Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
                 </p>
             </div>
-        </div>
+
+        </form>
     </div>
+</div>
 @endsection
+
