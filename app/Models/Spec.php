@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Spec extends Model
 {
     use HasFactory;
+    use HasTranslations;
 
     protected $fillable = [
         'name',
@@ -20,7 +22,6 @@ class Spec extends Model
      */
     public $translatable = [
         'name',
-        'status'
     ];
 
     /**
@@ -28,7 +29,8 @@ class Spec extends Model
      *
      * @return void
      */
-    public function products(){
-        return $this->belongsToMany(Product::class)->withPivot('value');
+    public function products()
+    {
+        return $this->belongsToMany(Product::class)->withPivot('value')->withTimestamps()->using(ProductSpec::class);
     }
 }
