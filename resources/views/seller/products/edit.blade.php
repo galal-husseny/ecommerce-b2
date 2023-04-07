@@ -99,7 +99,6 @@
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
-
                                     <div class="card-footer ">
                                         <button type="submit" class="button-general w-50">
                                             {{ __('seller.edit_product.submit') }} </button>
