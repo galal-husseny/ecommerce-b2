@@ -82,18 +82,6 @@
                                             <textarea id="description_ar" class="form-control" name="description[ar]"
                                                 placeholder="{{ __('seller.add_product.description_ar') }}"> {{ old('description.ar') }} </textarea>
                                         </div>
-                                        {{-- <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <input type="file" class="d-none" name="image" id="file"
-                                                        onchange="loadFile(event)">
-                                                    <label for="file">
-                                                        <img src="{{ asset('custom-images/default.png') }}" alt="default"
-                                                            class="w-100 " id="image" style="cursor: pointer">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> --}}
 
                                         <label for="files">
                                             <img src="{{ asset('custom-images/default.png') }}" alt="default"
@@ -102,31 +90,30 @@
                                         <input id='files' type='file' name="image" class="d-none" multiple>
                                         <output id='result'></output>
 
-                                        {{-- <div class="form-group " id="spec">
-                                            <button class="button-general w-50 mt-3" type="button" name="button"
-                                                onclick="newinput()">Add spec</button>
-                                            <button class="button-general w-50 mt-4" type="button" name="button"
-                                                onclick="saveSpec()">Save Specs</button>
-                                        </div> --}}
-
 
                                     </div>
                                     <div class="form-group">
                                         <table class="table  table-responsive">
                                             <thead>
-                                                <th class="col-4">Spec </th>
-                                                <th class="col-4">Spec Value </th>
-                                                <th class="col-4"> <a href="javascript:void(0)"
-                                                        class="btn btn-success addRow">
-                                                        Add Spec </a> </th>
+                                                <th class="col-2">Spec Name (AR) </th>
+                                                <th class="col-2">Spec Value (AR)</th>
+                                                <th class="col-2">Spec Name (EN) </th>
+                                                <th class="col-2">Spec Value (EN) </th>
+                                                <th class="col-2">
+                                                    <a href="javascript:void(0)" class="btn btn-success addRow">Add Spec </a>
+                                                </th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="specs[]" class="p-2 form-control" ></td>
-                                                    <td><input type="text" name="spec_values[]" class="p-2 form-control" >
+                                                    <td><input type="text" name="spec_names[0][ar]" class="p-2 form-control" ></td>
+                                                    <td><input type="text" name="spec_values[0][ar]" class="p-2 form-control" >
                                                     </td>
-                                                    <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">
-                                                            Delete </a></td>
+                                                    <td><input type="text" name="spec_names[0][en]" class="p-2 form-control" ></td>
+                                                    <td><input type="text" name="spec_values[0][en]" class="p-2 form-control" >
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" class="btn btn-danger deleteRow">Delete </a>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -162,52 +149,6 @@
             }
         };
     </script>
-    <script>
-        var id = 1;
-        var inputs = [];
-        var newinput = function() {
-            var parent = document.getElementById('spec')
-            if (id % 2 != 0) {
-                var wraper = document.createElement('div')
-                wraper.className = 'row justify-content-between';
-                wraper.id = 'row' + id;
-                parent.appendChild(wraper)
-                var specKey = document.createElement("input")
-                specKey.className = id + " col-5 form-control p-2 mt-2";
-                specKey.style = "display:inline-block;";
-                specKey.id = "input" + id;
-                inputs.push(specKey.id);
-                specKey.type = 'text';
-                specKey.name = specKey.inner;
-                wraper.appendChild(specKey);
-            } else {
-                var wraper = document.getElementById('row' + (id - 1))
-                var specValue = document.createElement("input")
-                specValue.className = " col-5 form-control p-2 mt-2"
-                specValue.style = "display:inline-block;"
-                specValue.id = "input" + id;
-                inputs.push(specValue.id);
-                wraper.appendChild(specValue);
-            }
-            id += 1;
-            return inputs;
-        }
-
-        var specs = {};
-        var saveSpec = function() {
-            for (let counter = 1; counter <= (inputs.length);) {
-                if ((counter + 1) > (inputs.length)) {
-                    break;
-                }
-                var specKey = document.getElementById("input" + counter);
-                var specValue = document.getElementById('input' + (counter + 1));
-                specs[specKey.value] = specValue.value;
-                counter += 2;
-            }
-            console.log(specs);
-            return specs;
-        }
-    </script>
 
     <script>
         window.onload = function() {
@@ -240,67 +181,29 @@
         }
     </script>
 
-    <script src="path/to/jquery.js"></script>
-    <script src="path/to/jquery.repeater/jquery.repeater.js"></script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('.repeater').repeater({
-                // (Optional)
-                // start with an empty list of repeaters. Set your first (and only)
-                // "data-repeater-item" with style="display:none;" and pass the
-                // following configuration flag
-                initEmpty: true,
-                // (Optional)
-                // "defaultValues" sets the values of added items.  The keys of
-                // defaultValues refer to the value of the input's name attribute.
-                // If a default value is not specified for an input, then it will
-                // have its value cleared.
-                defaultValues: {
-                    'text-input': 'foo'
-                },
-                // (Optional)
-                // "show" is called just after an item is added.  The item is hidden
-                // at this point.  If a show callback is not given the item will
-                // have $(this).show() called on it.
-                show: function() {
-                    $(this).slideDown();
-                },
-                // (Optional)
-                // "hide" is called when a user clicks on a data-repeater-delete
-                // element.  The item is still visible.  "hide" is passed a function
-                // as its first argument which will properly remove the item.
-                // "hide" allows for a confirmation step, to send a delete request
-                // to the server, etc.  If a hide callback is not given the item
-                // will be deleted.
-                hide: function(deleteElement) {
-                    if (confirm('Are you sure you want to delete this element?')) {
-                        $(this).slideUp(deleteElement);
-                    }
-                },
-                // (Optional)
-                // You can use this if you need to manually re-index the list
-                // for example if you are using a drag and drop library to reorder
-                // list items.
-                ready: function(setIndexes) {
-                    $dragAndDrop.on('drop', setIndexes);
-                },
-                // (Optional)
-                // Removes the delete button from the first list item,
-                // defaults to false.
-                isFirstItemUndeletable: true
-            })
-            console.log($('.repeater').repeaterVal());
-        });
-    </script> --}}
     <script>
+        var i = 1;
         $('thead').on('click', '.addRow', function() {
+
             var tr = `<tr>
-                        <td><input type="text" name="specs[]" class="p-2 form-control"></td>
-                            <td><input type="text" name="spec_values[]" class="p-2 form-control"></td>
-                            <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">
-                                    Delete </a></td>
-                            </tr>`;
+                        <td>
+                            <input type="text" name="spec_names[`+i+`][ar]" class="p-2 form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="spec_values[`+i+`][ar]" class="p-2 form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="spec_names[`+i+`][en]" class="p-2 form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="spec_values[`+i+`][en]" class="p-2 form-control">
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" class="btn btn-danger deleteRow">Delete </a>
+                        </td>
+                    </tr>`;
             $('tbody').append(tr);
+            i++;
         });
 
         $('tbody').on('click' , '.deleteRow' , function(){

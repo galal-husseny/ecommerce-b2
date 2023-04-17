@@ -9,7 +9,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-
 	<link rel="icon" type="image/png" href="{{asset('frontend-assets/images/icons/favicon.png')}}"/>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

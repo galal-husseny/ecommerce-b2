@@ -105,7 +105,7 @@ class Product extends Model implements HasMedia
      * @return void
      */
     public function specs(){
-        return $this->belongsToMany(Spec::class)->withPivot('value');
+        return $this->belongsToMany(Spec::class)->withPivot('value')->withTimestamps()->using(ProductSpec::class);
     }
 
     /**

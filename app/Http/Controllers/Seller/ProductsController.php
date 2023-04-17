@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Seller;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Enums\CategoryEnum;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\ProductSpec;
+use App\Models\Spec;
+use App\Services\SpecService;
 
 class ProductsController extends Controller
 {
@@ -42,7 +42,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request , SpecService $specService)
     {
         $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated(),
@@ -51,7 +51,9 @@ class ProductsController extends Controller
             'seller_id' => Auth::guard('seller')->id(),
         ]));
         $product->addMediaFromRequest('image')->toMediaCollection('product');
-        // save specs
+        $specIds=$specService->saveSpecs($request->spec_names);
+        $productSpecs = $specService->matchIds($specIds , $request->spec_values);
+        $specService->saveProductSpecs($productSpecs , $product);
         return redirect()->route('sellers.products.index')->with('success', __('general.messages.created'));
     }
 
@@ -61,9 +63,17 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, string $slug = null)
+    public function show(Product $product, SpecService $specService, string $slug = null)
     {
         $product->load('category');
+        $productSpecs = ProductSpec::where('product_id' , $product->id)->get();
+        foreach ($productSpecs as $productSpec){
+            $productIds[] = $productSpec->spec_id;
+            $specnames []= Spec::find($productSpec->spec_id)->get('name');
+        }
+        dump($productIds);
+        dump($specnames);
+        dd($productSpecs);
         return view('seller.products.show', compact('product'));
     }
 
@@ -106,7 +116,7 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        // $product->delete();
+        $product->delete();
         return redirect()->back()->with('success', __('general.messages.deleted'));
     }
 
