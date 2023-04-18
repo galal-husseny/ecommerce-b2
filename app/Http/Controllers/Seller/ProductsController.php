@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\ProductSpec;
+use App\Models\Review;
 use App\Models\Spec;
+use App\Models\User;
+use App\Services\ReviewService;
 use App\Services\SpecService;
 
 class ProductsController extends Controller
@@ -63,18 +66,15 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, SpecService $specService, string $slug = null)
+    public function show(Product $product, SpecService $specService, ReviewService $reviewService, string $slug = null)
     {
         $product->load('category');
-        $productSpecs = ProductSpec::where('product_id' , $product->id)->get();
-        foreach ($productSpecs as $productSpec){
-            $productIds[] = $productSpec->spec_id;
-            $specnames []= Spec::find($productSpec->spec_id)->get('name');
-        }
-        dump($productIds);
-        dump($specnames);
-        dd($productSpecs);
-        return view('seller.products.show', compact('product'));
+        $reviews = $reviewService->getProductReviews($product);
+        $specIds = $specService->getSpecsIds($product);
+        $specNames = $specService->getSpecsNames($specIds);
+        $specValues = $specService->getSpecsValues($product);
+        $specs = $specService->generateSpecs($specNames , $specValues);
+        return view('seller.products.show', compact(['product' , 'specs' , 'reviews']));
     }
 
     /**
