@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="{{ asset('dashboard-assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endpush
 
+@push('links')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+@endpush
+
 @section('content')
     @parent
     @include('seller.layouts.partials.sidebar')
@@ -121,14 +125,25 @@
                             </div>
                             <div class="col-md-12 mt-3">
                                 <h3> {{__('seller.show_product.reviews')}} </h3>
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-striped review">
                                     <tbody>
-                                        @foreach ($reviews as $review )
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
+                                        @foreach ($reviews as $index=>$review )
+                                        <tr class="{{$review['user'][0]->name}}">
+                                            <td class="col-4">
+                                                <div class="w-50 d-inline-block">
+                                                    <i class="zmdi zmdi-account mr-1"></i>
+                                                    {{ $review['user'][0]->name }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="stars-outer">
+                                                    <div class="stars-inner"></div>
+                                                </div>
+                                            </td>
+                                            <td class="col-4">
+                                                {{ $review['comment'] }}
+                                            </td>
                                         </tr>
-
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -211,5 +226,23 @@
             );
         </script>
     @endif
+
+    @push('script')
+    console.log(reviews);
+    <script>
+        var reviews = @json($reviews)
+        var reviews = [1=>'user']
+        console.log(reviews)
+        $('tbody').on('click' , '.stars-outer' , function(){
+            var reviews = @json($reviews)
+            var reviews = [1=>'user']
+            console.log(reviews)
+            const starTotal = 5;
+            const starPercentage = (rate / starTotal) * 100;
+            const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+            document.querySelector(`.${rate} .stars-inner`).style.width = starPercentageRounded; 
+        })
+    </script>
+    @endpush
 
 @endpush

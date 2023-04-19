@@ -70,6 +70,7 @@ class ProductsController extends Controller
     {
         $product->load('category');
         $reviews = $reviewService->getProductReviews($product);
+        // dd($reviews);
         $specIds = $specService->getSpecsIds($product);
         $specNames = $specService->getSpecsNames($specIds);
         $specValues = $specService->getSpecsValues($product);

@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Review extends Model
 {
     use HasFactory , HasTranslations;
-    use EscapeUnicodeJson;
 
 
     /**
@@ -32,7 +31,6 @@ class Review extends Model
      * @var array<int, string>
      */
     public $translatable = [
-        'comment',
     ];
 
     /**
