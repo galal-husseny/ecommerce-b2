@@ -14,6 +14,7 @@ use App\Models\Spec;
 use App\Models\User;
 use App\Services\ReviewService;
 use App\Services\SpecService;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -35,8 +36,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        $specs = Spec::all();
+        // dd($specs);
         $categories = Category::select(['id', 'name'])->active()->get();
-        return view('seller.products.create', compact('categories'));
+        return view('seller.products.create', compact(['categories' , 'specs']));
     }
 
     /**
@@ -45,8 +48,9 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request , SpecService $specService)
+    public function store(Request $request , SpecService $specService)
     {
+        dd($request->all());
         $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated(),
         [

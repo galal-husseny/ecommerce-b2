@@ -93,26 +93,46 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <table class="table  table-responsive">
+                                        <table id="specs" data-specs ="<?= htmlspecialchars($specs) ?>"  class="table  table-responsive specs">
                                             <thead>
                                                 <th class="col-2">Spec Name (AR) </th>
                                                 <th class="col-2">Spec Value (AR)</th>
                                                 <th class="col-2">Spec Name (EN) </th>
                                                 <th class="col-2">Spec Value (EN) </th>
                                                 <th class="col-2">
-                                                    <a href="javascript:void(0)" class="btn btn-success addRow">Add Spec </a>
+                                                    <a href="javascript:void(0)" class="btn btn-success addRow">Add Spec
+                                                    </a>
                                                 </th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="spec_names[0][ar]" class="p-2 form-control" ></td>
-                                                    <td><input type="text" name="spec_values[0][ar]" class="p-2 form-control" >
+                                                    <td>
+                                                        <select id="state" class="js-example-basic-single form-control " type="text"
+                                                        style="width:90% ; height: 35px;" name='spec_names[0][ar]'>
+                                                        @foreach ($specs as $spec)
+                                                        <option value="{{$spec->getTranslation('name','ar')}}" class="p-2">{{$spec->getTranslation('name','ar')}}</option>
+                                                        @endforeach
+                                                    </select>
                                                     </td>
-                                                    <td><input type="text" name="spec_names[0][en]" class="p-2 form-control" ></td>
-                                                    <td><input type="text" name="spec_values[0][en]" class="p-2 form-control" >
+                                                    {{-- <td><input type="text" name="spec_names[0][ar]" class="p-2 form-control"></td> --}}
+                                                    <td><input type="text" name="spec_values[0][ar]" class="p-2 form-control">
                                                     </td>
                                                     <td>
-                                                        <a href="javascript:void(0)" class="btn btn-danger deleteRow">Delete </a>
+                                                        <select id="state2" class="js-example-basic-single form-control p-2" type="text"
+                                                        style="width:90% ; padding: 5px;" name='spec_names[0][en]'>
+                                                        @foreach ($specs as $spec)
+                                                        <option value="{{$spec->getTranslation('name','en')}}" class="p-2">{{$spec->getTranslation('name','en')}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    </td>
+                                                    {{-- <td><input type="text" name="spec_names[0][en]"
+                                                            class="p-2 form-control"></td> --}}
+                                                    <td><input type="text" name="spec_values[0][en]"
+                                                            class="p-2 form-control">
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)"
+                                                            class="btn btn-danger deleteRow">Delete </a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -133,6 +153,7 @@
             </div>
         </section>
     </div>
+    <input type="hidden" value="<?= htmlspecialchars($specs) ?>">
 @endsection
 
 @section('footer')
@@ -183,31 +204,87 @@
 
     <script>
         var i = 1;
+        var specs = document.getElementById('specs').dataset.specs
+        console.log(specs)
         $('thead').on('click', '.addRow', function() {
 
             var tr = `<tr>
                         <td>
-                            <input type="text" name="spec_names[`+i+`][ar]" class="p-2 form-control">
+                            <input type="text" name="spec_names[` + i + `][ar]" class="p-2 form-control">
                         </td>
                         <td>
-                            <input type="text" name="spec_values[`+i+`][ar]" class="p-2 form-control">
+                            <select id="state" class="js-example-basic-single form-control " type="text" tyle="width:90% ; padding: 5px;" name='spec_names[` + i + `][ar]'>`;
+
+                                for (const spec in specs ){
+
+                                    tr.concat(`<option value="`+ spec.name+`" class="p-2">`+ spec.name + `</option>`)
+                                }
+                                tr.concat(`</select>
                         </td>
                         <td>
-                            <input type="text" name="spec_names[`+i+`][en]" class="p-2 form-control">
+                            <input type="text" name="spec_values[` + i + `][ar]" class="p-2 form-control">
                         </td>
                         <td>
-                            <input type="text" name="spec_values[`+i+`][en]" class="p-2 form-control">
+                            <input type="text" name="spec_names[` + i + `][en]" class="p-2 form-control">
+                        </td>
+                        <td>
+                            <input type="text" name="spec_values[` + i + `][en]" class="p-2 form-control">
                         </td>
                         <td>
                             <a href="javascript:void(0)" class="btn btn-danger deleteRow">Delete </a>
                         </td>
-                    </tr>`;
+                    </tr>`);
             $('tbody').append(tr);
             i++;
         });
 
-        $('tbody').on('click' , '.deleteRow' , function(){
+        $('tbody').on('click', '.deleteRow', function() {
             $(this).parent().parent().remove();
         })
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#state").select2({
+            tags: true
+            // height: resolve
+            });
+
+            $("#btn-add-state").on("click", function(){
+            var newStateVal = $("#new-state").val();
+            // Set the value, creating a new option if necessary
+            if ($("#state").find("option[value='" + newStateVal + "']").length) {
+                $("#state").val(newStateVal).trigger("change");
+            } else {
+                // Create the DOM option that is pre-selected by default
+                var newState = new Option(newStateVal, newStateVal, true, true);
+                // Append it to the select
+                $("#state").append(newState).trigger('change');
+            }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#state2").select2({
+            tags: true,
+
+            });
+
+            $("#btn-add-state").on("click", function(){
+            var newStateVal = $("#new-state").val();
+            // Set the value, creating a new option if necessary
+            if ($("#state").find("option[value='" + newStateVal + "']").length) {
+                $("#state").val(newStateVal).trigger("change");
+            } else {
+                // Create the DOM option that is pre-selected by default
+                var newState = new Option(newStateVal, newStateVal, true, true);
+                // Append it to the select
+                $("#state").append(newState).trigger('change');
+            }
+            });
+        });
+
+
     </script>
 @endpush
