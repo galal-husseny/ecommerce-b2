@@ -117,7 +117,7 @@
                                                     <td><input type="text" name="spec_values[0][ar]" class="p-2 form-control">
                                                     </td>
                                                     <td>
-                                                        <select id="state2" class="js-example-basic-single form-control p-2" type="text"
+                                                        <select id="state0" class="js-example-basic-single form-control p-2" type="text"
                                                         style="width:90% ; padding: 5px;" name='spec_names[0][en]'>
                                                         @foreach ($specs as $spec)
                                                         <option value="{{$spec->getTranslation('name','en')}}" class="p-2">{{$spec->getTranslation('name','en')}}</option>
@@ -211,7 +211,7 @@
             var td5 = document.createElement('td');
 
             var select = document.createElement('select');
-            select.setAttribute('id' , 'state');
+            select.setAttribute('id' , 'state'+i+'');
             select.setAttribute('class' , 'js-example-basic-single form-control');
             select.setAttribute('type' , 'text');
             select.setAttribute('name' , 'spec_names['+ i +'][ar]');
@@ -225,7 +225,7 @@
             td1.appendChild(select);
             td2.innerHTML = `<input type="text" name="spec_values[` + i + `][ar]" class="p-2 form-control">`;
             var select2 = document.createElement('select');
-            select2.setAttribute('id' , 'state');
+            select2.setAttribute('id' , 'state'+(i+2)+'');
             select2.setAttribute('class' , 'js-example-basic-single form-control');
             select2.setAttribute('type' , 'text');
             select2.setAttribute('name' , 'spec_names['+ i +'][en]');
@@ -245,6 +245,12 @@
             tRow.append(td5);
 
             $('tbody').append(tRow);
+            $("#state"+i+"").select2({
+            tags: true
+            });
+            $("#state"+(i+2)+"").select2({
+            tags: true
+            });
             i++;
         });
 
@@ -275,7 +281,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $("#state2").select2({
+            $("#state0").select2({
             tags: true,
 
             });
