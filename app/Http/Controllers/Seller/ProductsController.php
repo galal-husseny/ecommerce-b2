@@ -37,7 +37,6 @@ class ProductsController extends Controller
     public function create()
     {
         $specs = Spec::all();
-        // dd($specs);
         $categories = Category::select(['id', 'name'])->active()->get();
         return view('seller.products.create', compact(['categories' , 'specs']));
     }
@@ -74,6 +73,7 @@ class ProductsController extends Controller
     {
         $product->load('category');
         $reviews = $reviewService->getProductReviews($product);
+
         // dd($reviews);
         $specIds = $specService->getSpecsIds($product);
         $specNames = $specService->getSpecsNames($specIds);

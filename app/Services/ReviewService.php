@@ -11,8 +11,9 @@ class ReviewService
     {
         $reviews = Review::where('product_id' , $product->id)->get(['user_id' , 'comment' , 'rate']);
         foreach ($reviews as $index => $review){
+            $review->load('user');
             $reviewsFinal []=[
-                'user' => User::where('id',$review->user_id)->get('name'),
+                'user' => $review->user->name,
                 'comment' => $review->comment,
                 'rate' => $review->rate
             ];

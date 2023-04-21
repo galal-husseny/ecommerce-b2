@@ -125,14 +125,14 @@
                             </div>
                             <div class="col-md-12 mt-3">
                                 <h3> {{__('seller.show_product.reviews')}} </h3>
-                                <table class="table table-striped review">
+                                <table id="reviews"  class="table table-striped review">
                                     <tbody>
                                         @foreach ($reviews as $index=>$review )
-                                        <tr class="{{$review['user'][0]->name}}">
+                                        <tr class="{{$review['user']}}">
                                             <td class="col-4">
                                                 <div class="w-50 d-inline-block">
                                                     <i class="zmdi zmdi-account mr-1"></i>
-                                                    {{ $review['user'][0]->name }}
+                                                    {{ $review['user'] }}
                                                 </div>
                                             </td>
                                             <td>
@@ -227,22 +227,25 @@
         </script>
     @endif
 
-    @push('script')
-    console.log(reviews);
+
+
+@endpush
+@push('scripts')
     <script>
-        var reviews = @json($reviews)
-        var reviews = [1=>'user']
-        console.log(reviews)
+        // var reviews = =document.getElementById('reviews').dataset.reviews;
+        var reviews = "<?= json_encode($reviews) ?>";
+        reviews= json.parse(reviews);
+        console.log(reviews);
+        var reviewRates = new Array();
+        for (letx=0; x<reviews.length; x++){
+            reviewRates.reviews[x].user = reviews[x].rate;
+        }
+        console.log(reviewRates);
         $('tbody').on('click' , '.stars-outer' , function(){
-            var reviews = @json($reviews)
-            var reviews = [1=>'user']
-            console.log(reviews)
             const starTotal = 5;
             const starPercentage = (rate / starTotal) * 100;
             const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
-            document.querySelector(`.${rate} .stars-inner`).style.width = starPercentageRounded; 
+            document.querySelector(`.${rate} .stars-inner`).style.width = starPercentageRounded;
         })
     </script>
     @endpush
-
-@endpush

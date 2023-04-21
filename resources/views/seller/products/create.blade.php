@@ -114,7 +114,6 @@
                                                         @endforeach
                                                     </select>
                                                     </td>
-                                                    {{-- <td><input type="text" name="spec_names[0][ar]" class="p-2 form-control"></td> --}}
                                                     <td><input type="text" name="spec_values[0][ar]" class="p-2 form-control">
                                                     </td>
                                                     <td>
@@ -125,10 +124,7 @@
                                                         @endforeach
                                                     </select>
                                                     </td>
-                                                    {{-- <td><input type="text" name="spec_names[0][en]"
-                                                            class="p-2 form-control"></td> --}}
-                                                    <td><input type="text" name="spec_values[0][en]"
-                                                            class="p-2 form-control">
+                                                    <td><input type="text" name="spec_values[0][en]" class="p-2 form-control">
                                                     </td>
                                                     <td>
                                                         <a href="javascript:void(0)"
@@ -205,36 +201,50 @@
     <script>
         var i = 1;
         var specs = document.getElementById('specs').dataset.specs
-        console.log(specs)
+        var specs = JSON.parse(specs)
         $('thead').on('click', '.addRow', function() {
+            let tRow = document.createElement('tr');
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            var td3 = document.createElement('td');
+            var td4 = document.createElement('td');
+            var td5 = document.createElement('td');
 
-            var tr = `<tr>
-                        <td>
-                            <input type="text" name="spec_names[` + i + `][ar]" class="p-2 form-control">
-                        </td>
-                        <td>
-                            <select id="state" class="js-example-basic-single form-control " type="text" tyle="width:90% ; padding: 5px;" name='spec_names[` + i + `][ar]'>`;
+            var select = document.createElement('select');
+            select.setAttribute('id' , 'state');
+            select.setAttribute('class' , 'js-example-basic-single form-control');
+            select.setAttribute('type' , 'text');
+            select.setAttribute('name' , 'spec_names['+ i +'][ar]');
+            select.style.width = "90%";
+            select.style.padding = "5px";
 
-                                for (const spec in specs ){
+            for (let x = 0; x<specs.length; x++){
+                var option = `<option value="`+ specs[x].name.ar+`" class="p-2">`+ specs[x].name.ar + `</option>`;
+                select.innerHTML+=option;
+            }
+            td1.appendChild(select);
+            td2.innerHTML = `<input type="text" name="spec_values[` + i + `][ar]" class="p-2 form-control">`;
+            var select2 = document.createElement('select');
+            select2.setAttribute('id' , 'state');
+            select2.setAttribute('class' , 'js-example-basic-single form-control');
+            select2.setAttribute('type' , 'text');
+            select2.setAttribute('name' , 'spec_names['+ i +'][en]');
+            select2.style.width = "90%";
+            select2.style.padding = "5px";
+            for (let x = 0; x<specs.length; x++){
+                var option = `<option value="`+ specs[x].name.en+`" class="p-2">`+ specs[x].name.en + `</option>`;
+                select2.innerHTML+=option;
+            }
+            td3.appendChild(select2);
+            td4.innerHTML= `<input type="text" name="spec_values[` + i + `][en]" class="p-2 form-control">`;
+            td5.innerHTML = `<a href="javascript:void(0)" class="btn btn-danger deleteRow">Delete </a>`;
+            tRow.append(td1);
+            tRow.append(td2);
+            tRow.append(td3);
+            tRow.append(td4);
+            tRow.append(td5);
 
-                                    tr.concat(`<option value="`+ spec.name+`" class="p-2">`+ spec.name + `</option>`)
-                                }
-                                tr.concat(`</select>
-                        </td>
-                        <td>
-                            <input type="text" name="spec_values[` + i + `][ar]" class="p-2 form-control">
-                        </td>
-                        <td>
-                            <input type="text" name="spec_names[` + i + `][en]" class="p-2 form-control">
-                        </td>
-                        <td>
-                            <input type="text" name="spec_values[` + i + `][en]" class="p-2 form-control">
-                        </td>
-                        <td>
-                            <a href="javascript:void(0)" class="btn btn-danger deleteRow">Delete </a>
-                        </td>
-                    </tr>`);
-            $('tbody').append(tr);
+            $('tbody').append(tRow);
             i++;
         });
 
@@ -247,7 +257,6 @@
         $(document).ready(function() {
             $("#state").select2({
             tags: true
-            // height: resolve
             });
 
             $("#btn-add-state").on("click", function(){
