@@ -14,6 +14,7 @@ class ReviewService
             $review->load('user');
             $reviewsFinal []=[
                 'user' => $review->user->name,
+                'user_id' => $review->user->id,
                 'comment' => $review->comment,
                 'rate' => $review->rate
             ];

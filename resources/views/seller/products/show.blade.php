@@ -15,7 +15,7 @@
 @endpush
 
 @push('links')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 @endpush
 
 @section('content')
@@ -26,14 +26,14 @@
             <div class="container-fluid">
                 <div class="row card">
                     <div class="card-header col-12">
-                        <h3 > {{ __('seller.show_product.title') }} </h3>
+                        <h3> {{ __('seller.show_product.title') }} </h3>
                     </div>
                     @include('seller.layouts.partials.errors')
-                    <div class="card mb-3 col-12" >
+                    <div class="card mb-3 col-12">
                         <div class="row g-0 p-2 align-items-center">
                             <div class="col-md-4">
-                                <img src="{{ $product->getFirstMediaUrl('product') }}"
-                                    class="img-fluid rounded-start" alt="...">
+                                <img src="{{ $product->getFirstMediaUrl('product') }}" class="img-fluid rounded-start"
+                                    alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -53,11 +53,13 @@
                                             </tr>
                                             <tr>
                                                 <td>{{ __('seller.show_product.description_en') }}</td>
-                                                <td class="text-center">{{ $product->getTranslation('description', 'en') }}</td>
+                                                <td class="text-center">{{ $product->getTranslation('description', 'en') }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>{{ __('seller.show_product.description_ar') }}</td>
-                                                <td class="text-center">{{ $product->getTranslation('description', 'ar') }}</td>
+                                                <td class="text-center">{{ $product->getTranslation('description', 'ar') }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>{{ __('seller.show_product.code') }}</td>
@@ -90,8 +92,10 @@
                                                 <td @class([
                                                     'text-center',
                                                     'text-success' => $product->status,
-                                                    'text-danger' => ! $product->status,
-                                                    ])>{{ __('seller.all_products.' . printEnum(App\Enums\CategoryEnum::class , $product->status)) }}</td>
+                                                    'text-danger' => !$product->status,
+                                                ])>
+                                                    {{ __('seller.all_products.' . printEnum(App\Enums\CategoryEnum::class, $product->status)) }}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>{{ __('seller.show_product.category') }}</td>
@@ -103,9 +107,9 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mt-3">
-                                <h3>{{__('seller.show_product.specs')}}</h3>
+                                <h3>{{ __('seller.show_product.specs') }}</h3>
                                 <table id="example1" class="table table-bordered table-striped caption-top">
-                                    <caption>  </caption>
+                                    <caption> </caption>
                                     <thead>
                                         <tr>
                                             <th>{{ __('seller.show_product.spec_name') }}</th>
@@ -114,36 +118,37 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($specs as $index => $spec)
-                                        <tr>
-                                            <td>{{$index}}</td>
-                                            <td>{{$spec}}</td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $index }}</td>
+                                                <td>{{ $spec }}</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
 
                                 </table>
                             </div>
                             <div class="col-md-12 mt-3">
-                                <h3> {{__('seller.show_product.reviews')}} </h3>
-                                <table id="reviews"   class="table table-striped review">
+                                <h3> {{ __('seller.show_product.reviews') }} </h3>
+                                <table id="reviews" class="table table-striped review">
                                     <tbody>
-                                        @foreach ($reviews as $index=>$review )
-                                        <tr class="{{$review['user']}}">
-                                            <td class="col-4">
-                                                <div class="w-50 d-inline-block">
-                                                    <i class="zmdi zmdi-account mr-1"></i>
-                                                    {{ $review['user'] }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                            </td>
-                                            <td class="col-4">
-                                                {{ $review['comment'] }}
-                                            </td>
-                                        </tr>
+                                        @foreach ($reviews as $index => $review)
+                                            <tr class="{{ explode(' ', $review['user'])[0] . $review['user_id'] }}"
+                                                id="{{ $review['user_id'] }}">
+                                                <td class="col-4">
+                                                    <div class="w-50 d-inline-block">
+                                                        <i class="zmdi zmdi-account mr-1"></i>
+                                                        {{ $review['user'] }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="stars-outer">
+                                                        <div class="stars-inner" id="stars-inner"></div>
+                                                    </div>
+                                                </td>
+                                                <td class="col-4">
+                                                    {{ $review['comment'] }}
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -209,11 +214,11 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>
-    @if(session()->has('success'))
+    @if (session()->has('success'))
         <script>
             Swal.fire(
                 'Good Job',
-                '{{session()->get('success')}}',
+                '{{ session()->get('success') }}',
                 'success'
             );
         </script>
@@ -221,7 +226,7 @@
         <script>
             Swal.fire(
                 'Failed',
-                '{{session()->get('error')}}',
+                '{{ session()->get('error') }}',
                 'error'
             );
         </script>
@@ -233,20 +238,13 @@
 @push('scripts')
     <script>
         var reviews = '<?= json_encode($reviews) ?>';
-        reviews= JSON.parse(reviews);
-        console.log(reviews);
-            for(let i=0; i<reviews.length; i++){
-                // console.log(reviews[i]);
-                const starTotal = 5;
-                const starPercentage = (reviews[i].rate / starTotal) * 100;
-                const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
-                // console.log(starPercentageRounded);
-                var td = document.querySelector(`.${reviews[i].user} .stars-inner`);
-                console.log(td);
-
-                td.style.width = starPercentageRounded;
-                // concole.log(review);
-            }
-
+        reviews = JSON.parse(reviews);
+        for (let i = 0; i <= reviews.length; i++) {
+            const starTotal = 5;
+            const starPercentage = ((reviews[i].rate) / starTotal) * 100;
+            const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+            var td = document.querySelector('.' + reviews[i].user.split(' ')[0] + reviews[i].user_id + '  .stars-inner');
+            td.style.width = starPercentageRounded;
+        }
     </script>
-    @endpush
+@endpush
