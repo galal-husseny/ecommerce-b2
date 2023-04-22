@@ -18,6 +18,6 @@ class ReviewService
                 'rate' => $review->rate
             ];
         }
-        return $reviewsFinal;
+        return ($reviewsFinal);
     }
 }

@@ -125,7 +125,7 @@
                             </div>
                             <div class="col-md-12 mt-3">
                                 <h3> {{__('seller.show_product.reviews')}} </h3>
-                                <table id="reviews"  class="table table-striped review">
+                                <table id="reviews"   class="table table-striped review">
                                     <tbody>
                                         @foreach ($reviews as $index=>$review )
                                         <tr class="{{$review['user']}}">
@@ -232,20 +232,21 @@
 @endpush
 @push('scripts')
     <script>
-        // var reviews = =document.getElementById('reviews').dataset.reviews;
-        var reviews = "<?= json_encode($reviews) ?>";
-        reviews= json.parse(reviews);
+        var reviews = '<?= json_encode($reviews) ?>';
+        reviews= JSON.parse(reviews);
         console.log(reviews);
-        var reviewRates = new Array();
-        for (letx=0; x<reviews.length; x++){
-            reviewRates.reviews[x].user = reviews[x].rate;
-        }
-        console.log(reviewRates);
-        $('tbody').on('click' , '.stars-outer' , function(){
-            const starTotal = 5;
-            const starPercentage = (rate / starTotal) * 100;
-            const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
-            document.querySelector(`.${rate} .stars-inner`).style.width = starPercentageRounded;
-        })
+            for(let i=0; i<reviews.length; i++){
+                // console.log(reviews[i]);
+                const starTotal = 5;
+                const starPercentage = (reviews[i].rate / starTotal) * 100;
+                const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+                // console.log(starPercentageRounded);
+                var td = document.querySelector(`.${reviews[i].user} .stars-inner`);
+                console.log(td);
+
+                td.style.width = starPercentageRounded;
+                // concole.log(review);
+            }
+
     </script>
     @endpush
