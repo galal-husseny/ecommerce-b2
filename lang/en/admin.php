@@ -15,7 +15,7 @@ return [
         'Email' => 'Email',
         'Login-title' => 'Login to your account',
         'Password' => 'Password',
-        'Remember_me' => 'Remember me',
+        'remember_me' => 'Remember me',
         'Log_in' => 'Log in',
         'forgot_password' => 'Forgot your password ?',
         'message' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',

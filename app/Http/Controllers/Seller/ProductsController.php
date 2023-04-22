@@ -25,6 +25,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
+
         $products = Product::with('category')->where('seller_id', Auth::guard('seller')->id())->get();
         return view('seller.products.index', compact('products'));
     }
