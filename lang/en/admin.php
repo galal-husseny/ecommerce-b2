@@ -58,6 +58,44 @@ return [
         'add_item' => 'Add item',
         'visitors' => 'Visitors',
 
-    ]
+    ],
+    'sidebar'=>[
+        'categories'=>[
+            'categories'=> 'Categories',
+            'all'=> 'All',
+            'create' => 'Create',
+            'show' => 'Show',
+            'edit' => 'Edit',
+        ]
+    ],
+    'footer' => [
+        'author' => 'Mina Abdelmalak',
+        'website' => 'E-commerce website by',
+        'rights' => 'All rights reserved.',
+    ],
+    'dashboard' => [
+        'title' => 'Dashboard',
+
+    ],
+    'all_categories' => [
+        'title' => 'Categories',
+        'id' => 'id',
+        'name' => 'name',
+        'status' => 'Status',
+        'operations' => 'Operations',
+        'show' => 'Show',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'active' => 'Active',
+        'not_active' => 'Not Active'
+    ],
+    'add_category' => [
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'submit' => 'Create',
+    ],
 
 ];

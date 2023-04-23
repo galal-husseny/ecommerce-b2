@@ -14,14 +14,6 @@
     @include('admin.layouts.partials.footer')
 @endsection
 
-@push('scripts')
-    @vite('resources/js/app.js')
-@endpush
-
-@push('links')
-    @vite('resources/css/app.css')
-@endpush
-
 @section('content')
     @parent
     @include('admin.layouts.partials.sidebar')
@@ -38,13 +30,13 @@
                             <div class="inner">
                                 <h3>150</h3>
 
-                                <p> {{__('messages.admin.dashboard.new_orders')}} </p>
+                                <p> {{__('admin.dashboard.new_orders')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
                             <a href="#" class="small-box-footer">
-                                {{__('messages.admin.dashboard.more_info')}}
+                                {{__('admin.dashboard.more_info')}}
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -56,13 +48,13 @@
                             <div class="inner">
                                 <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                                <p> {{__('messages.admin.dashboard.bounce_rate')}} </p>
+                                <p> {{__('admin.dashboard.bounce_rate')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
                             <a href="#" class="small-box-footer">
-                                {{__('messages.admin.dashboard.more_info')}}
+                                {{__('admin.dashboard.more_info')}}
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -74,13 +66,13 @@
                             <div class="inner">
                                 <h3>44</h3>
 
-                                <p> {{__('messages.admin.dashboard.user_register')}} </p>
+                                <p> {{__('admin.dashboard.user_register')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
                             <a href="#" class="small-box-footer">
-                                {{__('messages.admin.dashboard.more_info')}}
+                                {{__('admin.dashboard.more_info')}}
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -92,13 +84,13 @@
                             <div class="inner">
                                 <h3>65</h3>
 
-                                <p> {{__('messages.admin.dashboard.unique_visitors')}} </p>
+                                <p> {{__('admin.dashboard.unique_visitors')}} </p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
                             <a href="#" class="small-box-footer">
-                                {{__('messages.admin.dashboard.more_info')}}
+                                {{__('admin.dashboard.more_info')}}
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -115,15 +107,15 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="fas fa-chart-pie mr-1"></i>
-                                    {{__('messages.admin.dashboard.sales')}}
+                                    {{__('admin.dashboard.sales')}}
                                 </h3>
                                 <div class="card-tools">
                                     <ul class="nav nav-pills ml-auto">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab"> {{__('messages.admin.dashboard.area')}} </a>
+                                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab"> {{__('admin.dashboard.area')}} </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#sales-chart" data-toggle="tab"> {{__('messages.admin.dashboard.pie')}} </a>
+                                            <a class="nav-link" href="#sales-chart" data-toggle="tab"> {{__('admin.dashboard.pie')}} </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -146,7 +138,7 @@
                         <!-- DIRECT CHAT -->
                         <div class="card direct-chat direct-chat-primary">
                             <div class="card-header">
-                                <h3 class="card-title"> {{__('messages.admin.dashboard.direct_chat')}} </h3>
+                                <h3 class="card-title"> {{__('admin.dashboard.direct_chat')}} </h3>
 
                                 <div class="card-tools">
                                     <span title="3 New Messages" class="badge badge-primary">3</span>
@@ -356,9 +348,9 @@
                             <div class="card-footer">
                                 <form action="#" method="post">
                                     <div class="input-group">
-                                        <input type="text" name="message" placeholder="{{__('messages.admin.dashboard.type_message')}}" class="form-control">
+                                        <input type="text" name="message" placeholder="{{__('admin.dashboard.type_message')}}" class="form-control">
                                         <span class="input-group-append">
-                                            <button type="button" class="btn btn-primary" style="color: #000;"> {{__('messages.admin.dashboard.type_message')}} </button>
+                                            <button type="button" class="btn btn-primary" style="color: #000;"> {{__('admin.dashboard.type_message')}} </button>
                                         </span>
                                     </div>
                                 </form>
@@ -372,7 +364,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="ion ion-clipboard mr-1"></i>
-                                    {{__('messages.admin.dashboard.todo')}}
+                                    {{__('admin.dashboard.todo')}}
                                 </h3>
 
                                 <div class="card-tools">
@@ -504,7 +496,7 @@
                             <div class="card-footer clearfix">
                                 <button type="button" class="btn btn-primary float-right" style="color: #000;">
                                     <i class="fas fa-plus"></i>
-                                    {{__('messages.admin.dashboard.add_item')}}
+                                    {{__('admin.dashboard.add_item')}}
                                 </button>
                             </div>
                         </div>
@@ -519,7 +511,7 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">
                                     <i class="fas fa-map-marker-alt mr-1"></i>
-                                    {{__('messages.admin.dashboard.visitors')}}
+                                    {{__('admin.dashboard.visitors')}}
                                 </h3>
                                 <!-- card tools -->
                                 <div class="card-tools">

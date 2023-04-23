@@ -3,20 +3,30 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                    class="fas fa-bars"></i></a>
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
 
         <div class="hidden sm:-my-px  sm:flex">
-            <x-nav-link :href="route('admins.dashboard')" :active="request()->routeIs('admins.dashboard')">
-                {{ __('messages.admin.header.dashboard') }}
-            </x-nav-link>
+            <a href="{{ route('admins.dashboard') }}" class="nav-link">
+                {{ __('admin.header.dashboard') }}
+            </a>
         </div>
     </ul>
 
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            @foreach (LaravelLocalization::getSupportedLocales() as $lang => $value)
+                @if ($lang == App::currentLocale())
+                    @continue
+                @endif
+                <a class="nav-link" rel="alternate" hreflang="{{ $lang }}"
+                    href="{{ LaravelLocalization::getLocalizedURL($lang, null, [], true) }}"class="flex-c-m trans-04 p-lr-25">
+                    {{ Str::upper($lang) }}
+                </a>
+            @endforeach
+        </li>
         <!-- Navbar Search -->
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -50,8 +60,8 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img
-                            src="{{ asset('dashboard-assets/dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle ">
+                        <img src="{{ asset('dashboard-assets/dist/img/user1-128x128.jpg') }}" alt="User Avatar"
+                            class="img-size-50 mr-3 img-circle ">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -67,8 +77,8 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img
-                            src="{{ asset('dashboard-assets/dist/img/user8-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <img src="{{ asset('dashboard-assets/dist/img/user8-128x128.jpg') }}" alt="User Avatar"
+                            class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce
@@ -84,13 +94,12 @@
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img
-                            src="{{ asset('dashboard-assets/dist/img/user3-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <img src="{{ asset('dashboard-assets/dist/img/user3-128x128.jpg') }}" alt="User Avatar"
+                            class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Nora Silvester
-                                <span class="float-right text-sm text-warning"><i
-                                        class="fas fa-star"></i></span>
+                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">The subject goes here</p>
                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -135,42 +144,39 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true"
-                href="#" role="button">
+            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
+                role="button">
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
 
         <!-- Settings Dropdown -->
-        <div class="hidden sm:flex sm:items-center sm:ml-6">
-            <x-dropdown align="right" width="50">
-                <x-slot name="trigger">
-                    <button class="d-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                        <div> {{ Auth::guard('admin')->user()->name }} </div>
+        <li class="nav-item dropdown">
+            <a href="{{ route('admins.dashboard') }}" class="nav-link" data-toggle="dropdown">
+                <div>
+                    <i class="zmdi zmdi-account mr-1"></i>
+                    {{ Auth::guard('admin')->user()->name }}
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="{{ route('admins.profile.edit') }}" class="dropdown-item">
+                    <i class="zmdi zmdi-account mr-3"></i>{{ __('Profile') }}
+                </a>
+                <div class="dropdown-divider"></div>
 
-                        <div class="ml-3">
-                            <i class="fa fa-chevron-down"></i>
-                        </div>
-                    </button>
-                </x-slot>
-
-                <x-slot name="content">
-                    <x-dropdown-link :href="route('admins.profile.edit')">
-                        {{ __('Profile') }}
-                    </x-dropdown-link>
-
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('admins.logout') }}">
-                        @csrf
-                        <x-dropdown-link :href="route('admins.logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-dropdown-link>
-                    </form>
-                </x-slot>
-            </x-dropdown>
-        </div>
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('admins.logout') }}">
+                    @csrf
+                    <a href="{{ route('admins.logout') }}" class="dropdown-item"
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();">
+                        <i class="zmdi zmdi-minus-square mr-3"></i>
+                        {{ __('Log Out') }}
+                    </a>
+                </form>
+            </div>
+        </li>
     </ul>
 </nav>
 <!-- /.navbar -->
+

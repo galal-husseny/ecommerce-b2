@@ -13,8 +13,9 @@ class SpecService
      * @param  array $specs
      * @return array $specIds
      */
-    public static function saveSpecs (array $specs):array
+    public static function saveSpecs (array $specs)
     {
+        $specIds = [];
         foreach ($specs as $spec) {
             $spec = Spec::create(['name'=>$spec]);
             $specIds[]=$spec->id;
@@ -51,6 +52,7 @@ class SpecService
 
     public static function getSpecsIds(Product $product):array
     {
+        $specIds = [];
         $productSpecs = ProductSpec::where('product_id' , $product->id)->get();
         foreach ($productSpecs as $productSpec){
             $specIds[] = $productSpec->spec_id;
@@ -60,6 +62,7 @@ class SpecService
 
     public static function getSpecsNames (array $specIds):array
     {
+        $specNames = [];
         $specnames []= Spec::all()->only($specIds);
         foreach ($specnames[0] as $key=>$specname){
             $specNames[] = $specname->name;
@@ -69,6 +72,7 @@ class SpecService
 
     public static function getSpecsValues(Product $product)
     {
+        $specValues = [];
         $productSpecs = ProductSpec::where('product_id' , $product->id)->get();
         foreach ($productSpecs as $productSpec){
             $specValues[] = $productSpec->value;

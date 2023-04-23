@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Seller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\StoreProductRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\ProductSpec;
-use App\Models\Review;
 use App\Models\Spec;
-use App\Models\User;
 use App\Services\ReviewService;
 use App\Services\SpecService;
 use Illuminate\Http\Request;
@@ -48,9 +46,8 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , SpecService $specService)
+    public function store(StoreProductRequest $request , SpecService $specService)
     {
-        dd($request->all());
         $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated(),
         [
@@ -74,7 +71,6 @@ class ProductsController extends Controller
     {
         $product->load('category');
         $reviews = $reviewService->getProductReviews($product);
-        // dd($reviews);
         $specIds = $specService->getSpecsIds($product);
         $specNames = $specService->getSpecsNames($specIds);
         $specValues = $specService->getSpecsValues($product);
@@ -121,6 +117,12 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
+        $productSpecs = ProductSpec::where('product_id' , $product->id)->get();
+        // dd($productSpecs);
+        foreach($productSpecs as $productSpec){
+            // dd($productSpec->product_id);
+            ProductSpec::where('product_id', $productSpec->product_id)->delete();
+        }
         $product->delete();
         return redirect()->back()->with('success', __('general.messages.deleted'));
     }

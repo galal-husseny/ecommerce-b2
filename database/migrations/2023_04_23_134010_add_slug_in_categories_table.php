@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('reviews', function (Blueprint $table) {
-            $table->json('comment')->after('product_id')->change();
+        Schema::table('categories', function (Blueprint $table) {
+            $table->json('slug')->after('status');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('reviews', function (Blueprint $table) {
-            $table->text('comment')->after('product_id')->change();
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropColumn('slug');
         });
     }
 };
