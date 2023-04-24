@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
-use App\Models\Category;
+use App\Models\City;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CitiesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index' , compact('categories'));
+        $cities = City::all();
+        return view('admin.cities.index', compact('cities'));
     }
 
     /**
@@ -28,8 +28,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-
-        return view('admin.categories.create');
+        return view('admin.cities.create');
     }
 
     /**
@@ -40,8 +39,8 @@ class CategoriesController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        Category::create($request->validated());
-        return redirect()->route('admins.categories.index')->with('success', __('general.messages.created'));
+        City::create($request->validated());
+        return redirect()->route('admins.cities.index')->with('success', __('general.messages.created'));
     }
 
     /**
@@ -61,9 +60,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category )
+    public function edit(City $city)
     {
-        return view('admin.categories.edit' , compact('category'));
+        return view('admin.cities.edit', compact('city'));
     }
 
     /**
@@ -73,12 +72,10 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, City $city)
     {
-        // dd($request->validated());
-        $category->update($request->validated());
-        return redirect()->route('admins.categories.index')->with('success', __('general.messages.updated'));
-
+        $city->update($request->validated());
+        return redirect()->route('admins.cities.index')->with('success', __('general.messages.updated'));
     }
 
     /**
@@ -87,9 +84,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(City $city)
     {
-        $category->delete();
-        return redirect()->back()->with('success', __('general.messages.deleted'));
+        $city->delete();
+        return redirect()->route('admins.cities.index')->with('success', __('general.messages.deleted'));
     }
 }

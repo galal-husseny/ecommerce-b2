@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\StoreCategoryRequest;
-use App\Http\Requests\Category\UpdateCategoryRequest;
-use App\Models\Category;
+use App\Http\Requests\Region\StoreRegionRequest as RegionStoreRegionRequest;
+use App\Models\City;
+use App\Models\Region;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class RegionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index' , compact('categories'));
+        $regions = Region::all();
+        // foreach($regions as $region){
+        //     dd($region);
+        // }
+        return view('admin.regions.index', compact('regions'));
     }
 
     /**
@@ -28,8 +31,8 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-
-        return view('admin.categories.create');
+        $cities = City::select(['id','name'])->get();
+        return view('admin.regions.create', compact('cities'));
     }
 
     /**
@@ -38,10 +41,11 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(RegionStoreRegionRequest $request)
     {
-        Category::create($request->validated());
-        return redirect()->route('admins.categories.index')->with('success', __('general.messages.created'));
+        // dd($request->validated());
+        Region::create($request->validated());
+        return redirect()->route('admins.regions.index')->with('success', __('general.messages.created'));
     }
 
     /**
@@ -61,9 +65,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category )
+    public function edit($id)
     {
-        return view('admin.categories.edit' , compact('category'));
+        //
     }
 
     /**
@@ -73,12 +77,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(Request $request, $id)
     {
-        // dd($request->validated());
-        $category->update($request->validated());
-        return redirect()->route('admins.categories.index')->with('success', __('general.messages.updated'));
-
+        //
     }
 
     /**
@@ -87,9 +88,8 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        $category->delete();
-        return redirect()->back()->with('success', __('general.messages.deleted'));
+        //
     }
 }

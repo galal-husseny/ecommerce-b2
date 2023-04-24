@@ -18,7 +18,6 @@
     @parent
     @include('admin.layouts.partials.sidebar')
     <div class="content-wrapper">
-
         <!-- Main content -->
         <section class="content my-5">
             <div class="container-fluid">

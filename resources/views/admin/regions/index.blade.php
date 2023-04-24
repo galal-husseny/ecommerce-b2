@@ -1,6 +1,6 @@
 @extends('admin.layouts.parent')
 
-@section('title', __('admin.all_categories.title'))
+@section('title', __('admin.all_regions.title'))
 
 @section('header')
     @include('admin.layouts.partials.header')
@@ -24,38 +24,38 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title"> {{__('admin.sidebar.categories.all')}} </h3>
-                                <a href="{{route('admins.categories.create')}}" class="button-general col-3 ml-auto"> {{__('admin.sidebar.categories.create')}} </a>
+                                <h3 class="card-title"> {{__('admin.sidebar.cities.all')}} </h3>
+                                <a href="{{route('admins.regions.create')}}" class="button-general col-3 ml-auto"> {{__('admin.sidebar.cities.create')}} </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('admin.all_categories.id') }}</th>
-                                            <th>{{ __('admin.all_categories.name') }}</th>
-                                            <th>{{ __('admin.all_categories.status') }}</th>
-                                            <th>{{ __('admin.all_categories.operations') }}</th>
+                                            <th>{{ __('admin.all_regions.id') }}</th>
+                                            <th>{{ __('admin.all_regions.name') }}</th>
+                                            <th>{{ __('admin.all_regions.status') }}</th>
+                                            <th>{{ __('admin.all_regions.operations') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $index => $category)
+                                        @foreach ($regions as $index => $region)
                                         <tr>
                                             <td>{{++$index}}</td>
-                                            <td>{{$category->getTranslation('name','en') .' - ' . $category->getTranslation('name','ar')}}</td>
+                                            <td>{{$region->getTranslation('name','en') .' - ' . $region->getTranslation('name','ar')}}</td>
                                             <td @class([
                                                 'p-2',
-                                                'text-success' => $category->status,
-                                                'text-danger' => ! $category->status,
-                                                ])>{{__('admin.all_categories.' . printEnum(App\Enums\CategoryEnum::class , $category->status))}}</td>
+                                                'text-success' => $region->status,
+                                                'text-danger' => ! $region->status,
+                                                ])>{{__('admin.all_regions.' . printEnum(App\Enums\CategoryEnum::class , $region->status))}}</td>
                                             <td>
-                                                <a href="{{route('admins.categories.show' , [\Illuminate\Support\Facades\Crypt::encryptString($category->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill w-25"> {{__('admin.all_categories.show')}} </a>
-                                                <a href="{{route('admins.categories.edit' ,  ["slug"=> $category->slug ,\Illuminate\Support\Facades\Crypt::encryptString($category->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill w-25"> {{__('admin.all_categories.edit')}} </a>
-                                                <form action="{{route('admins.categories.destroy' , [\Illuminate\Support\Facades\Crypt::encryptString($category->id)])}}" method="post" class="d-inline">
+                                                <a href="{{route('admins.cities.show' , [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill w-25"> {{__('admin.all_regions.show')}} </a>
+                                                <a href="{{route('admins.cities.edit' ,  ["slug"=> $region->slug ,\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill w-25 "> {{__('admin.all_regions.edit')}} </a>
+                                                <form action="{{route('admins.cities.destroy' , [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" method="post" class="d-inline w-25">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-sm btn-danger  my-2 rounded-pill w-25" type="submit">
-                                                        {{__('admin.all_categories.delete')}}
+                                                        {{__('admin.all_regions.delete')}}
                                                     </button>
                                                 </form>
                                             </td>

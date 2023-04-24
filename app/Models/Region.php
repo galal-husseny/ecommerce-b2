@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\HasEcryptedIds;
+use App\Traits\EscapeUnicodeJson;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Region extends Model
 {
     use HasFactory , HasTranslations;
+    use EscapeUnicodeJson;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.

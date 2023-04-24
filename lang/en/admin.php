@@ -42,7 +42,7 @@ return [
     'header' => [
         'dashboard' => 'Dashboard',
     ],
-    'dashboard' =>[
+    'dashboard' => [
         'new_orders' => 'New Orders',
         'more_info' => 'More info',
         'bounce_rate' => 'Bounce Rate',
@@ -66,7 +66,21 @@ return [
             'create' => 'Create',
             'show' => 'Show',
             'edit' => 'Edit',
-        ]
+        ],
+        'cities'=>[
+            'cities'=> 'Cities',
+            'all'=> 'All',
+            'create' => 'Create',
+            'show' => 'Show',
+            'edit' => 'Edit',
+        ],
+        'regions'=>[
+            'regions'=> 'Regions',
+            'all'=> 'All',
+            'create' => 'Create',
+            'show' => 'Show',
+            'edit' => 'Edit',
+        ],
     ],
     'footer' => [
         'author' => 'Mina Abdelmalak',
@@ -92,6 +106,66 @@ return [
     'add_category' => [
         'name_en' => 'Name (EN)',
         'name_ar' => 'Name (AR)',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'submit' => 'Create',
+    ],
+    'edit_category' => [
+        'title' => 'Edit category details',
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'submit' => 'Update',
+    ],
+    'all_cities' => [
+        'title' => 'cities',
+        'id' => 'id',
+        'name' => 'name',
+        'status' => 'Status',
+        'operations' => 'Operations',
+        'show' => 'Show',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'active' => 'Active',
+        'not_active' => 'Not Active'
+    ],
+    'add_city' => [
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'submit' => 'Create',
+    ],
+    'edit_city' => [
+        'title' => 'Edit city details',
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'submit' => 'Update',
+    ],
+    'all_regions' => [
+        'title' => 'regions',
+        'id' => 'id',
+        'name' => 'name',
+        'status' => 'Status',
+        'operations' => 'Operations',
+        'show' => 'Show',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'active' => 'Active',
+        'not_active' => 'Not Active'
+    ],
+    'add_region' => [
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'city'=> 'City',
+        'choose' => 'Choose a City',
         'status' => 'Status',
         'active' => 'Active',
         'not_active' => 'Not Active',

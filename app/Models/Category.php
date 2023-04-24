@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\CategoryEnum;
+use App\Traits\HasEcryptedIds;
 use App\Traits\EscapeUnicodeJson;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ class Category extends Model
 {
     use HasFactory, HasTranslations;
     use EscapeUnicodeJson;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.
