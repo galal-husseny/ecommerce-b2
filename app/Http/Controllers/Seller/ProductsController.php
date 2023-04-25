@@ -54,8 +54,14 @@ class ProductsController extends Controller
             'code'=> $code,
             'seller_id' => Auth::guard('seller')->id(),
         ]));
-        $product->addMediaFromRequest('image')->toMediaCollection('product');
-        $specIds=$specService->saveSpecs($request->spec_names);
+        if($images = $request->file('images')){
+            foreach($images as $image){
+                $product->addMedia($image)->toMediaCollection('product');
+            }
+        }
+        $specsData = Spec::all();
+        // dd($specsData);
+        $specIds=$specService->saveSpecs($request->spec_names , $specsData);
         $productSpecs = $specService->matchIds($specIds , $request->spec_values);
         $specService->saveProductSpecs($productSpecs , $product);
         return redirect()->route('sellers.products.index')->with('success', __('general.messages.created'));

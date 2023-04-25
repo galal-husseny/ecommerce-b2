@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Spec;
 use App\Models\Product;
 use App\Models\ProductSpec;
+use Nette\Utils\Json;
 
 class SpecService
 {
@@ -13,12 +14,16 @@ class SpecService
      * @param  array $specs
      * @return array $specIds
      */
-    public static function saveSpecs (array $specs)
+    public static function saveSpecs (array $specs,  $specsData)
     {
         $specIds = [];
-        foreach ($specs as $spec) {
-            $spec = Spec::create(['name'=>$spec]);
-            $specIds[]=$spec->id;
+        foreach($specs as $index=>$spec){
+            if($specsData[$index]->name == $spec['ar'] || $specsData[$index]->name == $spec['en']){
+                $specIds[] = $specsData[$index]->id;
+            }else{
+                $spec = Spec::create(['name'=>$spec]);
+                $specIds[]=$spec->id;
+            }
         }
         return $specIds;
     }

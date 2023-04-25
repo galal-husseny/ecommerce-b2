@@ -49,7 +49,6 @@
                                             <select name="city_id" class="form-control" id="city_id">
                                                 <option value="{{__('admin.add_region.choose')}}" selected >{{__('admin.add_region.choose')}}</option>
                                                 @foreach ($cities as $city)
-
                                                     <option @selected(old('city_id') == $city->id) value="{{ $city->id }}">
                                                         {{ $city->name }}</option>
                                                 @endforeach

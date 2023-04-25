@@ -34,6 +34,30 @@
                             <div class="col-md-4">
                                 <img src="{{ $product->getFirstMediaUrl('product') }}" class="img-fluid rounded-start"
                                     alt="...">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        @foreach ($product->getMedia('product') as $index=>$media)
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" class="active"></li>
+                                        @endforeach
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        @foreach ($product->getMedia('product') as $media )
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="{{$media->getUrl()}}" alt="Second slide">
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">

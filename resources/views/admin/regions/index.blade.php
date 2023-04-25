@@ -43,15 +43,15 @@
                                         <tr>
                                             <td>{{++$index}}</td>
                                             <td>{{$region->getTranslation('name','en') .' - ' . $region->getTranslation('name','ar')}}</td>
-                                            <td @class([
+                                            {{-- <td @class([
                                                 'p-2',
                                                 'text-success' => $region->status,
                                                 'text-danger' => ! $region->status,
-                                                ])>{{__('admin.all_regions.' . printEnum(App\Enums\CategoryEnum::class , $region->status))}}</td>
+                                                ])>{{__('admin.all_regions.' . printEnum(App\Enums\CategoryEnum::class , $region->status))}}</td> --}}
                                             <td>
-                                                <a href="{{route('admins.cities.show' , [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill w-25"> {{__('admin.all_regions.show')}} </a>
-                                                <a href="{{route('admins.cities.edit' ,  ["slug"=> $region->slug ,\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill w-25 "> {{__('admin.all_regions.edit')}} </a>
-                                                <form action="{{route('admins.cities.destroy' , [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" method="post" class="d-inline w-25">
+                                                <a href="{{route('admins.regions.show' , [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill w-25"> {{__('admin.all_regions.show')}} </a>
+                                                <a href="{{route('admins.regions.edit' ,  [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill w-25 "> {{__('admin.all_regions.edit')}} </a>
+                                                <form action="{{route('admins.regions.destroy' , [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" method="post" class="d-inline w-25">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-sm btn-danger  my-2 rounded-pill w-25" type="submit">

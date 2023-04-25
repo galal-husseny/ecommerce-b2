@@ -87,8 +87,10 @@
                                             <img src="{{ asset('custom-images/default.png') }}" alt="default"
                                                 class="w-100 " id="image" style="cursor: pointer">
                                         </label>
-                                        <input id='files' type='file' name="image" class="d-none" multiple>
-                                        <output id='result'></output>
+                                        <input id='files' type='file' name="images[]" class="d-none" multiple />
+                                        {{-- <output id='result'></output> --}}
+                                        <div id="myImg">
+                                        </div>
 
 
                                     </div>
@@ -157,7 +159,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    {{-- <script>
         var loadFile = function(event) {
             var output = document.getElementById('image');
             output.src = URL.createObjectURL(event.target.files[0]);
@@ -196,6 +198,32 @@
                 console.log("Your browser does not support File API");
             }
         }
+    </script> --}}
+
+    <script>
+        $(function() {
+            $(":file").change(function() {
+                if (this.files && this.files[0]) {
+                for (var i = 0; i < this.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = imageIsLoaded;
+                    reader.readAsDataURL(this.files[i]);
+                }
+                }
+            });
+            });
+
+function imageIsLoaded(e) {
+    $('#myImg').append(`
+    <div class="d-inline">
+    <img src='` + e.target.result + `' style="width:150px; ">
+    <a href="javascript:void(0)" class="btn btn-danger deleteImg"><i class="zmdi zmdi-delete"></i> </a>
+    </div>`);
+};
+
+$('#myImg').on('click', '.deleteImg', function() {
+            $(this).parent().remove();
+        })
     </script>
 
     <script>
