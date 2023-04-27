@@ -18,6 +18,5 @@ class ProductSpec extends Pivot
      */
     public $translatable = [
         'value',
-
     ];
 }
