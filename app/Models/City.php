@@ -7,12 +7,14 @@ use App\Traits\EscapeUnicodeJson;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class City extends Model
 {
     use HasFactory, HasTranslations;
     use EscapeUnicodeJson;
+    use HasTranslatableSlug;
     use HasEcryptedIds;
 
     /**

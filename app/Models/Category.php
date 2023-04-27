@@ -9,12 +9,14 @@ use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
     use HasFactory, HasTranslations;
     use EscapeUnicodeJson;
+    use HasTranslatableSlug;
     use HasEcryptedIds;
 
     /**

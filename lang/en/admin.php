@@ -43,6 +43,7 @@ return [
         'dashboard' => 'Dashboard',
     ],
     'dashboard' => [
+        'title' => 'Dashboard',
         'new_orders' => 'New Orders',
         'more_info' => 'More info',
         'bounce_rate' => 'Bounce Rate',
@@ -81,15 +82,18 @@ return [
             'show' => 'Show',
             'edit' => 'Edit',
         ],
+        'specs'=>[
+            'specs'=> 'Specifications',
+            'all'=> 'All',
+            'create' => 'Create',
+            'show' => 'Show',
+            'edit' => 'Edit',
+        ],
     ],
     'footer' => [
         'author' => 'Mina Abdelmalak',
         'website' => 'E-commerce website by',
         'rights' => 'All rights reserved.',
-    ],
-    'dashboard' => [
-        'title' => 'Dashboard',
-
     ],
     'all_categories' => [
         'title' => 'Categories',
@@ -170,6 +174,26 @@ return [
         'active' => 'Active',
         'not_active' => 'Not Active',
         'submit' => 'Create',
+    ],
+    'all_specs' => [
+        'title' => 'specs',
+        'id' => 'id',
+        'name' => 'name',
+        'operations' => 'Operations',
+        'show' => 'Show',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+    ],
+    'add_spec' => [
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'submit' => 'Create',
+    ],
+    'edit_spec' => [
+        'title' => 'Edit Specification details',
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'submit' => 'Update',
     ],
 
 ];

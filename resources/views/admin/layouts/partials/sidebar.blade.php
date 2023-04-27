@@ -107,6 +107,29 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            {{__('admin.sidebar.specs.specs')}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admins.specs.index')}}" class="nav-link button active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('admin.sidebar.specs.all')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admins.specs.create')}}" class="nav-link button">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('admin.sidebar.specs.create')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
