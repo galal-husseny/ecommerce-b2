@@ -87,30 +87,50 @@
                                             <img src="{{ asset('custom-images/default.png') }}" alt="default"
                                                 class="w-100 " id="image" style="cursor: pointer">
                                         </label>
-                                        <input id='files' type='file' name="image" class="d-none" multiple>
-                                        <output id='result'></output>
+                                        <input id='files' type='file' name="images[]" class="d-none" multiple />
+                                        <div id="myImg">
+                                        </div>
+
 
                                     </div>
                                     <div class="form-group">
-                                        <table class="table  table-responsive">
+                                        <table id="specs" data-specs ="<?= htmlspecialchars($specs) ?>"  class="table  table-responsive specs">
                                             <thead>
                                                 <th class="col-2">Spec Name (AR) </th>
                                                 <th class="col-2">Spec Value (AR)</th>
-                                                <th class="col-2">Spec Name (EN)</th>
-                                                <th class="col-2">Spec Value (EN)</th>
-                                                <th class="col-2"> <a href="javascript:void(0)" class="btn btn-success addRow"> Add Spec </a> </th>
+                                                <th class="col-2">Spec Name (EN) </th>
+                                                <th class="col-2">Spec Value (EN) </th>
+                                                <th class="col-2">
+                                                    <a href="javascript:void(0)" class="btn btn-success addRow">Add Spec
+                                                    </a>
+                                                </th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="spec_names[0][ar]" class="p-2 form-control">
+                                                    <td>
+                                                        <select id="state" class="js-example-basic-single form-control " type="text"
+                                                        style="width:90% ; height: 35px;" name='spec_names[0][ar]'>
+                                                        @foreach ($specs as $spec)
+                                                        <option value="{{$spec->getTranslation('name','ar')}}" class="p-2">{{$spec->getTranslation('name','ar')}}</option>
+                                                        @endforeach
+                                                    </select>
                                                     </td>
                                                     <td><input type="text" name="spec_values[0][ar]" class="p-2 form-control">
                                                     </td>
-                                                    <td><input type="text" name="spec_names[0][en]" class="p-2 form-control">
+                                                    <td>
+                                                        <select id="state0" class="js-example-basic-single form-control p-2" type="text"
+                                                        style="width:90% ; padding: 5px;" name='spec_names[0][en]'>
+                                                        @foreach ($specs as $spec)
+                                                        <option value="{{$spec->getTranslation('name','en')}}" class="p-2">{{$spec->getTranslation('name','en')}}</option>
+                                                        @endforeach
+                                                    </select>
                                                     </td>
                                                     <td><input type="text" name="spec_values[0][en]" class="p-2 form-control">
                                                     </td>
-                                                    <td><a href="javascript:void(0)" class="btn btn-danger deleteRow"> Delete </a></td>
+                                                    <td>
+                                                        <a href="javascript:void(0)"
+                                                            class="btn btn-danger deleteRow">Delete </a>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -130,6 +150,7 @@
             </div>
         </section>
     </div>
+    <input type="hidden" value="<?= htmlspecialchars($specs) ?>">
 @endsection
 
 @section('footer')
@@ -138,77 +159,133 @@
 
 @push('scripts')
     <script>
-        var loadFile = function(event) {
-            var output = document.getElementById('image');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src) // free memory
-            }
-        };
-    </script>
-    <script>
-        var specs = {};
-        var saveSpec = function() {
-            for (let counter = 1; counter <= (inputs.length);) {
-                if ((counter + 1) > (inputs.length)) {
-                    break;
+        $(function() {
+            $(":file").change(function() {
+                if (this.files && this.files[0]) {
+                for (var i = 0; i < this.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = imageIsLoaded;
+                    reader.readAsDataURL(this.files[i]);
                 }
-                var specKey = document.getElementById("input" + counter);
-                var specValue = document.getElementById('input' + (counter + 1));
-                specs[specKey.value] = specValue.value;
-                counter += 2;
-            }
-            console.log(specs);
-            return specs;
-        }
+                }
+            });
+            });
+
+function imageIsLoaded(e) {
+    $('#myImg').append(`
+    <div class="d-inline">
+    <img src='` + e.target.result + `' style="width:150px; ">
+    <a href="javascript:void(0)" class="btn btn-danger deleteImg"><i class="zmdi zmdi-delete"></i> </a>
+    </div>`);
+};
+
+$('#myImg').on('click', '.deleteImg', function() {
+            $(this).parent().remove();
+        })
     </script>
 
     <script>
-        window.onload = function() {
-            //Check File API support
-            if (window.File && window.FileList && window.FileReader) {
-                var filesInput = document.getElementById("files");
-                filesInput.addEventListener("change", function(event) {
-                    var files = event.target.files; //FileList object
-                    var output = document.getElementById("result");
-                    for (var i = 0; i < files.length; i++) {
-                        var file = files[i];
-                        //Only pics
-                        if (!file.type.match('image'))
-                            continue;
-                        var picReader = new FileReader();
-                        picReader.addEventListener("load", function(event) {
-                            var picFile = event.target;
-                            var div = document.createElement("div");
-                            div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-                                "title='" + picFile.name + "'/>";
-                            output.insertBefore(div, null);
-                        });
-                        //Read the image
-                        picReader.readAsDataURL(file);
-                    }
-                });
-            } else {
-                console.log("Your browser does not support File API");
-            }
-        }
-    </script>
-    <script>
         var i = 1;
+        var specs = document.getElementById('specs').dataset.specs
+        var specs = JSON.parse(specs)
         $('thead').on('click', '.addRow', function() {
-            var tr = `<tr>
-                        <td><input type="text" name="spec_names[`+i+`][ar]" class="p-2 form-control"></td>
-                        <td><input type="text" name="spec_values[`+i+`][ar]" class="p-2 form-control"></td>
-                        <td><input type="text" name="spec_names[`+i+`][en]" class="p-2 form-control"></td>
-                        <td><input type="text" name="spec_values[`+i+`][en]" class="p-2 form-control"></td>
-                        <td><a href="javascript:void(0)" class="btn btn-danger deleteRow"> Delete </a></td>
-                    </tr>`;
-            $('tbody').append(tr);
+            let tRow = document.createElement('tr');
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            var td3 = document.createElement('td');
+            var td4 = document.createElement('td');
+            var td5 = document.createElement('td');
+
+            var select = document.createElement('select');
+            select.setAttribute('id' , 'state'+i+'');
+            select.setAttribute('class' , 'js-example-basic-single form-control');
+            select.setAttribute('type' , 'text');
+            select.setAttribute('name' , 'spec_names['+ i +'][ar]');
+            select.style.width = "90%";
+            select.style.padding = "5px";
+
+            for (let x = 0; x<specs.length; x++){
+                var option = `<option value="`+ specs[x].name.ar+`" class="p-2">`+ specs[x].name.ar + `</option>`;
+                select.innerHTML+=option;
+            }
+            td1.appendChild(select);
+            td2.innerHTML = `<input type="text" name="spec_values[` + i + `][ar]" class="p-2 form-control">`;
+            var select2 = document.createElement('select');
+            select2.setAttribute('id' , 'state'+(i+2)+'');
+            select2.setAttribute('class' , 'js-example-basic-single form-control');
+            select2.setAttribute('type' , 'text');
+            select2.setAttribute('name' , 'spec_names['+ i +'][en]');
+            select2.style.width = "90%";
+            select2.style.padding = "5px";
+            for (let x = 0; x<specs.length; x++){
+                var option = `<option value="`+ specs[x].name.en+`" class="p-2">`+ specs[x].name.en + `</option>`;
+                select2.innerHTML+=option;
+            }
+            td3.appendChild(select2);
+            td4.innerHTML= `<input type="text" name="spec_values[` + i + `][en]" class="p-2 form-control">`;
+            td5.innerHTML = `<a href="javascript:void(0)" class="btn btn-danger deleteRow">Delete </a>`;
+            tRow.append(td1);
+            tRow.append(td2);
+            tRow.append(td3);
+            tRow.append(td4);
+            tRow.append(td5);
+
+            $('tbody').append(tRow);
+            $("#state"+i+"").select2({
+            tags: true
+            });
+            $("#state"+(i+2)+"").select2({
+            tags: true
+            });
             i++;
         });
 
         $('tbody').on('click', '.deleteRow', function() {
             $(this).parent().parent().remove();
         })
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#state").select2({
+            tags: true
+            });
+
+            $("#btn-add-state").on("click", function(){
+            var newStateVal = $("#new-state").val();
+            // Set the value, creating a new option if necessary
+            if ($("#state").find("option[value='" + newStateVal + "']").length) {
+                $("#state").val(newStateVal).trigger("change");
+            } else {
+                // Create the DOM option that is pre-selected by default
+                var newState = new Option(newStateVal, newStateVal, true, true);
+                // Append it to the select
+                $("#state").append(newState).trigger('change');
+            }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#state0").select2({
+            tags: true,
+
+            });
+
+            $("#btn-add-state").on("click", function(){
+            var newStateVal = $("#new-state").val();
+            // Set the value, creating a new option if necessary
+            if ($("#state").find("option[value='" + newStateVal + "']").length) {
+                $("#state").val(newStateVal).trigger("change");
+            } else {
+                // Create the DOM option that is pre-selected by default
+                var newState = new Option(newStateVal, newStateVal, true, true);
+                // Append it to the select
+                $("#state").append(newState).trigger('change');
+            }
+            });
+        });
+
+
     </script>
 @endpush

@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard-assets/plugins/summernote/summernote-bs4.min.css') }}">
 
     <!-- main css -->
-    <link rel="stylesheet" href="{{ asset('dashboard-assets/dist/css/index.css') }}">
+    <link rel="stylesheet" href="{{asset('custom-css/admin.css')}}">
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
@@ -91,6 +91,8 @@
     <script src="{{ asset('dashboard-assets/dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('dashboard-assets/dist/js/pages/dashboard.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     @stack('scripts')
 

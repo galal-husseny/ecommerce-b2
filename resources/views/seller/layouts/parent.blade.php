@@ -9,7 +9,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-
 	<link rel="icon" type="image/png" href="{{asset('frontend-assets/images/icons/favicon.png')}}"/>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -37,6 +36,12 @@
     <link rel="stylesheet" href="{{asset('custom-css/seller.css')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <!-- select2 css -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+
+
 
     @stack('links')
 
@@ -64,6 +69,8 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('dashboard-assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
+
     <!-- ChartJS -->
     <script src="{{ asset('dashboard-assets/plugins/chart.js/Chart.min.js') }}"></script>
     <!-- Sparkline -->
@@ -90,6 +97,9 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('dashboard-assets/dist/js/pages/dashboard.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- select2 js -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 
     @stack('scripts')

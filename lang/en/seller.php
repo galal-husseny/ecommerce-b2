@@ -163,6 +163,11 @@ return [
         'category' => 'Category',
         'description_en' => 'Description (EN)',
         'description_ar' => 'Description (AR)',
+        'specs' => 'Specifications',
+        'spec_name' => 'Spec Name',
+        'spec_value' => 'Spec Value',
+        'reviews' => 'Reviews',
+        
 
     ],
     'edit_product' => [

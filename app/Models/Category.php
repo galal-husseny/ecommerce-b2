@@ -3,14 +3,21 @@
 namespace App\Models;
 
 use App\Enums\CategoryEnum;
+use App\Traits\HasEcryptedIds;
+use App\Traits\EscapeUnicodeJson;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
     use HasFactory, HasTranslations;
+    use EscapeUnicodeJson;
+    use HasTranslatableSlug;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +36,7 @@ class Category extends Model
      */
     public $translatable = [
         'name',
-        'description'
+        'slug'
     ];
 
     /**
@@ -50,5 +57,16 @@ class Category extends Model
     public function scopeActive(Builder $query) :void
     {
         $query->where('status', CategoryEnum::ACTIVE->value);
+    }
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->usingLanguage(false);
     }
 }

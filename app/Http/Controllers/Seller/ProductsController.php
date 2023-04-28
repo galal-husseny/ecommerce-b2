@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Seller;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Enums\CategoryEnum;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Product\StoreProductRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\UpdateProductRequest;
-use App\Http\Services\SpecService;
+use App\Models\ProductSpec;
+use App\Models\Spec;
+use App\Services\ReviewService;
+use App\Services\SpecService;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -22,6 +23,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
+
         $products = Product::with('category')->where('seller_id', Auth::guard('seller')->id())->get();
         return view('seller.products.index', compact('products'));
     }
@@ -33,8 +35,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        $specs = Spec::all();
         $categories = Category::select(['id', 'name'])->active()->get();
-        return view('seller.products.create', compact('categories'));
+        return view('seller.products.create', compact(['categories' , 'specs']));
     }
 
     /**
@@ -43,7 +46,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request, SpecService $specService)
+    public function store(StoreProductRequest $request , SpecService $specService)
     {
         $code = productCode($request->name['en']);
         $product = Product::create(array_merge($request->validated(),
@@ -51,9 +54,15 @@ class ProductsController extends Controller
             'code'=> $code,
             'seller_id' => Auth::guard('seller')->id(),
         ]));
-        $product->addMediaFromRequest('image')->toMediaCollection('product');
-        $specService->saveSpecs($request->spec_names)->matchIds($request->spec_values)->saveProductSpecs($product);
-        // save specs
+        if($images = $request->file('images')){
+            foreach($images as $image){
+                $product->addMedia($image)->toMediaCollection('product');
+            }
+        }
+        $specsData = Spec::all();
+        $specIds=$specService->saveSpecs($request->spec_names , $specsData);
+        $productSpecs = $specService->matchIds($specIds , $request->spec_values);
+        $specService->saveProductSpecs($productSpecs , $product);
         return redirect()->route('sellers.products.index')->with('success', __('general.messages.created'));
     }
 
@@ -63,10 +72,15 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, string $slug = null)
+    public function show(Product $product, SpecService $specService, ReviewService $reviewService, string $slug = null)
     {
         $product->load('category');
-        return view('seller.products.show', compact('product'));
+        $reviews = $reviewService->getProductReviews($product);
+        $specIds = $specService->getSpecsIds($product);
+        $specNames = $specService->getSpecsNames($specIds);
+        $specValues = $specService->getSpecsValues($product);
+        $specs = $specService->generateSpecs($specNames , $specValues);
+        return view('seller.products.show', compact(['product' , 'specs' , 'reviews']));
     }
 
     /**
@@ -108,7 +122,8 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        // $product->delete();
+        $product->specs()->detach();
+        $product->delete();
         return redirect()->back()->with('success', __('general.messages.deleted'));
     }
 

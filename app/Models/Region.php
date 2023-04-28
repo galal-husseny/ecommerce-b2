@@ -2,13 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\HasEcryptedIds;
+use App\Traits\EscapeUnicodeJson;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Region extends Model
 {
     use HasFactory , HasTranslations;
+    use EscapeUnicodeJson;
+    use HasTranslatableSlug;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +35,7 @@ class Region extends Model
      */
     public $translatable = [
         'name',
-        'status'
+        'slug'
     ];
 
     /**
@@ -47,5 +54,25 @@ class Region extends Model
      */
     public function city(){
         return $this->belongsTo(City::class);
+    }
+
+    /**
+     * products relation showing that spec belongs to many products
+     *
+     * @return void
+     */
+    public function products(){
+        return $this->belongsToMany(Product::class)->withPivot('value')->withTimestamps()->using(ProductSpec::class);
+    }
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->usingLanguage(false);
     }
 }

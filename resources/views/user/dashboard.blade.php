@@ -443,12 +443,12 @@
             </div>
 
             <div class="row isotope-grid">
-                {{-- @foreach ($products as $product)
+                @foreach ($products as $product)
                     <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
-                                <img src="{{ asset('frontend-assets/images/product-01.jpg') }}" alt="IMG-PRODUCT">
+                                <img src="{{ $product->getFirstMediaUrl('product') }}" alt="IMG-PRODUCT">
 
                                 <a style="text-decoration: none" href="#"
                                     class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -480,7 +480,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach --}}
+                @endforeach
             </div>
 
             <!-- Load more -->

@@ -162,6 +162,10 @@ return [
         'category' => 'القسم',
         'description_en' => 'الوصف بالانجليزية',
         'description_ar' => 'الوصف بالعربية',
+        'specs' => 'المواصفات',
+        'spec_name' => 'المواصفة',
+        'spec_value' => 'القيمة',
+        'reviews' => 'التقييمات',
     ],
     'edit_product' => [
         'title' => 'تعديل بيانات منتج',

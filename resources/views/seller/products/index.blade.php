@@ -25,11 +25,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title"> {{__('seller.sidebar.all')}} </h3>
-                                <a href="{{route('sellers.products.create')}}" class="button-general col-3 ml-auto"> {{__('seller.sidebar.create')}} </a>
+                                <a href="{{route('sellers.products.create')}}" class="button-general col-3 ml-auto" style="text-decoration:none"> {{__('seller.sidebar.create')}} </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>{{ __('seller.all_products.id') }}</th>
