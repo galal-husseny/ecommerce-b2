@@ -35,7 +35,6 @@ class Region extends Model
      */
     public $translatable = [
         'name',
-        'status',
         'slug'
     ];
 

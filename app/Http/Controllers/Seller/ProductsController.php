@@ -60,7 +60,6 @@ class ProductsController extends Controller
             }
         }
         $specsData = Spec::all();
-        // dd($specsData);
         $specIds=$specService->saveSpecs($request->spec_names , $specsData);
         $productSpecs = $specService->matchIds($specIds , $request->spec_values);
         $specService->saveProductSpecs($productSpecs , $product);
@@ -123,12 +122,7 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        $productSpecs = ProductSpec::where('product_id' , $product->id)->get();
-        // dd($productSpecs);
-        foreach($productSpecs as $productSpec){
-            // dd($productSpec->product_id);
-            ProductSpec::where('product_id', $productSpec->product_id)->delete();
-        }
+        $product->specs()->detach();
         $product->delete();
         return redirect()->back()->with('success', __('general.messages.deleted'));
     }

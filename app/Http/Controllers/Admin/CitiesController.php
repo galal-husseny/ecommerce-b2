@@ -86,7 +86,12 @@ class CitiesController extends Controller
      */
     public function destroy(City $city)
     {
-        $city->delete();
+        try {
+            $city->delete();
         return redirect()->route('admins.cities.index')->with('success', __('general.messages.deleted'));
+        }
+        catch (\Exception $error) {
+            return redirect()->route('admins.cities.index')->with('error', __('general.cities.failed'));
+        }
     }
 }

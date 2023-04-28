@@ -32,17 +32,19 @@
                     <div class="card mb-3 col-12">
                         <div class="row g-0 p-2 align-items-center">
                             <div class="col-md-4">
-                                <img src="{{ $product->getFirstMediaUrl('product') }}" class="img-fluid rounded-start"
-                                    alt="...">
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         @foreach ($product->getMedia('product') as $index=>$media)
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" @if ($index==0)
+                                            class="active"
+                                        @endif></li>
                                         @endforeach
                                     </ol>
-                                    <div class="carousel-inner">
-                                        @foreach ($product->getMedia('product') as $media )
-                                        <div class="carousel-item">
+                                    <div class="carousel-inner" >
+                                        @foreach ($product->getMedia('product') as $index => $media )
+                                        <div class="carousel-item @if ($index==0)
+                                            active
+                                        @endif" >
                                             <img class="d-block w-100" src="{{$media->getUrl()}}" alt="Second slide">
                                         </div>
                                         @endforeach

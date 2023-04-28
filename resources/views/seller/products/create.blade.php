@@ -88,7 +88,6 @@
                                                 class="w-100 " id="image" style="cursor: pointer">
                                         </label>
                                         <input id='files' type='file' name="images[]" class="d-none" multiple />
-                                        {{-- <output id='result'></output> --}}
                                         <div id="myImg">
                                         </div>
 
