@@ -1,11 +1,8 @@
 @extends('admin.layouts.parent')
-
 @section('title', __('admin.sidebar.cities.create'))
-
 @section('header')
     @include('admin.layouts.partials.header')
 @endsection
-
 @section('content')
     @parent
     @include('admin.layouts.partials.sidebar')
@@ -26,7 +23,8 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="name_en">{{ __('admin.add_city.name_en') }}</label>
-                                            <input type="text" name="name[en]" class="form-control" id="name_en" value="{{ old('name.en') }}">
+                                            <input type="text" name="name[en]" class="form-control" id="name_en"
+                                                value="{{ old('name.en') }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="name_ar">{{ __('admin.add_city.name_ar') }}</label>
@@ -43,12 +41,11 @@
                                                     {{ __('admin.add_city.not_active') }}</option>
                                             </select>
                                         </div>
-                                    <!-- /.card-body -->
-
-                                    <div class="card-footer ">
-                                        <button type="submit" class="button-general w-50">
-                                            {{ __('admin.add_city.submit') }} </button>
-                                    </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer ">
+                                            <button type="submit" class="button-general w-50">
+                                                {{ __('admin.add_city.submit') }} </button>
+                                        </div>
                                 </form>
                             </div>
                             <!-- /.card-body -->
@@ -59,7 +56,6 @@
         </section>
     </div>
 @endsection
-
 @section('footer')
     @include('admin.layouts.partials.footer')
 @endsection

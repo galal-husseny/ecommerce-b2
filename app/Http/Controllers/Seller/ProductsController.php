@@ -72,15 +72,14 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, SpecService $specService, ReviewService $reviewService, string $slug = null)
+    public function show(Product $product, SpecService $specService, string $slug = null)
     {
-        $product->load('category');
-        $reviews = $reviewService->getProductReviews($product);
+        $product->load('category','reviews.user:id,name');
         $specIds = $specService->getSpecsIds($product);
         $specNames = $specService->getSpecsNames($specIds);
         $specValues = $specService->getSpecsValues($product);
         $specs = $specService->generateSpecs($specNames , $specValues);
-        return view('seller.products.show', compact(['product' , 'specs' , 'reviews']));
+        return view('seller.products.show', compact(['product' , 'specs']));
     }
 
     /**
