@@ -17,13 +17,11 @@ class SpecService
     public static function saveSpecs (array $specs,  $specsData)
     {
         $specIds = [];
-        foreach($specs as $index=>$spec){
-            if($specsData[$index]->name == $spec['ar'] || $specsData[$index]->name == $spec['en']){
-                $specIds[] = $specsData[$index]->id;
-            }else{
-                $spec = Spec::create(['name'=>$spec]);
-                $specIds[]=$spec->id;
-            }
+        foreach($specs as $spec){
+            $spec = Spec::whereJsonContains('name', $spec)->firstOr(function() use($spec) {
+                Spec::create(['name' => $spec]);
+            });
+            $specIds[]=$spec->id;
         }
         return $specIds;
     }

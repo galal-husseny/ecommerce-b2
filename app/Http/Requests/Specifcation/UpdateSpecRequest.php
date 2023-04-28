@@ -25,7 +25,7 @@ class UpdateSpecRequest extends FormRequest
     {
         return [
             "name" => ['required', 'array:ar,en'],
-            'name.*' => ['required', 'min:2', 'max:128'],
+            'name.*' => ['required', 'min:2', 'max:128', "unique_translation:specs,name,{$this->spec->id},id"],
         ];
     }
 }

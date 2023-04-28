@@ -157,22 +157,24 @@
                                 <h3> {{ __('seller.show_product.reviews') }} </h3>
                                 <table id="reviews" class="table table-striped review">
                                     <tbody>
-                                        @foreach ($reviews as $index => $review)
-                                            <tr class="{{ explode(' ', $review['user'])[0] . $review['user_id'] }}"
-                                                id="{{ $review['user_id'] }}">
+                                        @foreach ($product->reviews as $index => $review)
+                                            <tr>
                                                 <td class="col-4">
                                                     <div class="w-50 d-inline-block">
                                                         <i class="zmdi zmdi-account mr-1"></i>
-                                                        {{ $review['user'] }}
+                                                        {{ $review->user->name }}
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="stars-outer">
-                                                        <div class="stars-inner" id="stars-inner"></div>
-                                                    </div>
+                                                    @for  ($i = 0; $i < $review->rate; $i++)
+                                                        <i class="zmdi zmdi-star"></i>
+                                                    @endfor
+                                                    @for  ($i = 0; $i < 5 -$review->rate; $i++)
+                                                        <i class="zmdi zmdi-star-outline"></i>
+                                                    @endfor
                                                 </td>
                                                 <td class="col-4">
-                                                    {{ $review['comment'] }}
+                                                    {{ $review->comment }}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -191,86 +193,3 @@
     @include('seller.layouts.partials.footer')
 @endsection
 
-@push('scripts')
-    <script src="{{ asset('dashboard-assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-@endpush
-@push('scripts')
-    <script src="{{ asset('dashboard-assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('dashboard-assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-    @if (session()->has('success'))
-        <script>
-            Swal.fire(
-                'Good Job',
-                '{{ session()->get('success') }}',
-                'success'
-            );
-        </script>
-    @elseif (session()->has('error'))
-        <script>
-            Swal.fire(
-                'Failed',
-                '{{ session()->get('error') }}',
-                'error'
-            );
-        </script>
-    @endif
-
-
-
-@endpush
-@push('scripts')
-    <script>
-        var reviews = '<?= json_encode($reviews) ?>';
-        reviews = JSON.parse(reviews);
-        for (let i = 0; i <= reviews.length; i++) {
-            const starTotal = 5;
-            const starPercentage = ((reviews[i].rate) / starTotal) * 100;
-            const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
-            var td = document.querySelector('.' + reviews[i].user.split(' ')[0] + reviews[i].user_id + '  .stars-inner');
-            td.style.width = starPercentageRounded;
-        }
-    </script>
-@endpush
