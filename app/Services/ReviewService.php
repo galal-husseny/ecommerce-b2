@@ -7,19 +7,9 @@ use App\Models\Product;
 
 class ReviewService
 {
-    public static function getProductReviews(Product $product):array
+    public static function getProductReviews(Product $product)
     {
-        $reviewsFinal = [];
-        $reviews = Review::where('product_id' , $product->id)->get(['user_id' , 'comment' , 'rate']);
-        foreach ($reviews as $index => $review){
-            $review->load('user');
-            $reviewsFinal []=[
-                'user' => $review->user->name,
-                'user_id' => $review->user->id,
-                'comment' => $review->comment,
-                'rate' => $review->rate
-            ];
-        }
-        return $reviewsFinal;
+        
+        return $product->with('reviews')->get();
     }
 }

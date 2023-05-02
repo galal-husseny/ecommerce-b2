@@ -167,7 +167,7 @@ return [
         'spec_name' => 'Spec Name',
         'spec_value' => 'Spec Value',
         'reviews' => 'Reviews',
-        
+        'no_reviews' => 'No reviews for this product yet',
 
     ],
     'edit_product' => [

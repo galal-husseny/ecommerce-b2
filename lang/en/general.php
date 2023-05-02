@@ -9,5 +9,11 @@ return [
     ],
     'cities' => [
         'failed' => 'Failed to delete the required city as it has regions'
+    ],
+    'categories' => [
+        'failed' => 'Failed to delete the required Category as it contains products'
+    ],
+    'regions' => [
+        'failed' => 'Failed to delete the required Region as it belongs to users addresses'
     ]
 ];

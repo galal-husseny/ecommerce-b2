@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         Admin::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@ecommerce.com',
+            'email' => 'mina.admin@gmail.com',
             'password' => bcrypt('admin'),
-            'phone' => '0100010100'
         ]);
     }
 }

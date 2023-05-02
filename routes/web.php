@@ -28,5 +28,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
 });
 Route::get('test',function(){
-    return view('user.modal');
+    phpinfo();
 });
