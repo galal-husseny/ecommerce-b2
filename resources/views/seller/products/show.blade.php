@@ -149,7 +149,6 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-
                                 </table>
                             </div>
                             <div class="col-md-12 mt-3">
@@ -185,7 +184,7 @@
                                     </tbody>
                                 </table>
                                 @endif
-                                
+
                             </div>
                         </div>
                     </div>

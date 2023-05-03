@@ -532,7 +532,7 @@
                                     <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                                     <div class="slick3 gallery-lb" id="gallery-lb">
-                                        {{-- <div class="item-slick3"
+                                        <div class="item-slick3"
                                             data-thumb="{{ asset('frontend-assets/images/product-detail-01.jpg') }}">
                                             <div class="wrap-pic-w pos-relative">
                                                 <img id="main-img"
@@ -546,10 +546,10 @@
                                             </div>
                                         </div>
                                         <div class="item-slick3"
-                                        data-thumb="{{ asset('frontend-assets/images/product-detail-01.jpg') }}"> --}}
+                                        data-thumb="{{ asset('frontend-assets/images/product-detail-02.jpg') }}">
                                             <div class="wrap-pic-w pos-relative">
                                                 <img id="main-img"
-                                                    src="{{ asset('frontend-assets/images/product-detail-01.jpg') }}"
+                                                    src="{{ asset('frontend-assets/images/product-detail-02.jpg') }}"
                                                     alt="IMG-PRODUCT">
 
                                                 <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
@@ -557,7 +557,7 @@
                                                     <i class="fa fa-expand"></i>
                                                 </a>
                                             </div>
-                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -633,8 +633,7 @@
                                                 </div>
                                             </div>
 
-                                            <button
-                                                class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                            <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                                 Add to cart
                                             </button>
                                         </div>
@@ -654,19 +653,19 @@
                                     <a href="#"
                                         class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
                                         data-tooltip="Facebook">
-                                        <i class="fa fa-facebook"></i>
+                                        <i class="fab fa-facebook"></i>
                                     </a>
 
                                     <a href="#"
                                         class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
                                         data-tooltip="Twitter">
-                                        <i class="fa fa-twitter"></i>
+                                        <i class="fab fa-twitter"></i>
                                     </a>
 
                                     <a href="#"
                                         class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
                                         data-tooltip="Google Plus">
-                                        <i class="fa fa-google-plus"></i>
+                                        <i class="fab fa-google-plus"></i>
                                     </a>
                                 </div>
                             </div>
@@ -680,16 +679,10 @@
 
 @push('scripts')
     <script>
-        function showImg(productId) {
+        function showImg(productId, locale) {
             var products = JSON.parse(document.getElementById('products').dataset.products);
             const product = products.find(obj => obj.id === productId);
             const imgul = document.createElement('ul');
-            // const dragableDiv = document.createElement('div');
-            // dragableDiv.setAttribute('class', 'slick-list draggable');
-            // const trackDiv = document.createElement('div');
-            // trackDiv.setAttribute('class', 'slick-track');
-            // trackDiv.setAttribute('style', 'opacity: 1; width: 526px;');
-            // trackDiv.setAttribute('id', 'track');
             for(var i =0; i< product.media.length; i++){
                 const div = document.createElement('div');
                 div.setAttribute('class', 'item-slick3');
@@ -721,7 +714,19 @@
                 }
                 document.getElementById('wrap-slick3-dots').append(imgul)
             }
-            // dragableDiv.appendChild(trackDiv);
+            console.log(product);
+
+            if(document.getElementsByTagName("html")[0].getAttribute("lang") == 'en'){
+                document.querySelector('h4.mtext-105').innerHTML = product.name.en.replace(/^./, function(match) {
+                    return match.toUpperCase();
+                });
+                document.querySelector('span.mtext-106').innerHTML = product.sale_price+ ' EGP'
+                document.querySelector('p.stext-102').innerHTML = product.description.en
+            }else if(document.getElementsByTagName("html")[0].getAttribute("lang") == 'ar'){
+                document.querySelector('h4.mtext-105').innerHTML = product.name.ar
+                document.querySelector('span.mtext-106').innerHTML = product.sale_price+ ' ج.م'
+                document.querySelector('p.stext-102').innerHTML = product.description.ar
+            }
             // document.getElementById('gallery-lb').append(dragableDiv);
         }
     </script>
