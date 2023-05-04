@@ -546,7 +546,7 @@
                                             </div>
                                         </div>
                                         <div class="item-slick3"
-                                        data-thumb="{{ asset('frontend-assets/images/product-detail-02.jpg') }}">
+                                            data-thumb="{{ asset('frontend-assets/images/product-detail-02.jpg') }}">
                                             <div class="wrap-pic-w pos-relative">
                                                 <img id="main-img"
                                                     src="{{ asset('frontend-assets/images/product-detail-02.jpg') }}"
@@ -579,8 +579,8 @@
                                 </p>
 
                                 <!--  -->
-                                <div class="p-t-33">
-                                    <div class="flex-w flex-r-m p-b-10">
+                                <div class="p-t-33" id="specs">
+                                    {{-- <div class="flex-w flex-r-m p-b-10">
                                         <div class="size-203 flex-c-m respon6">
                                             Size
                                         </div>
@@ -597,26 +597,7 @@
                                                 <div class="dropDownSelect2"></div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="flex-w flex-r-m p-b-10">
-                                        <div class="size-203 flex-c-m respon6">
-                                            Color
-                                        </div>
-
-                                        <div class="size-204 respon6-next">
-                                            <div class="rs1-select2 bor8 bg0">
-                                                <select class="js-select2" name="time">
-                                                    <option>Choose an option</option>
-                                                    <option>Red</option>
-                                                    <option>Blue</option>
-                                                    <option>White</option>
-                                                    <option>Grey</option>
-                                                </select>
-                                                <div class="dropDownSelect2"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="flex-w flex-r-m p-b-10">
                                         <div class="size-204 flex-w flex-m respon6-next">
@@ -633,7 +614,8 @@
                                                 </div>
                                             </div>
 
-                                            <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                            <button
+                                                class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                                 Add to cart
                                             </button>
                                         </div>
@@ -683,7 +665,7 @@
             var products = JSON.parse(document.getElementById('products').dataset.products);
             const product = products.find(obj => obj.id === productId);
             const imgul = document.createElement('ul');
-            for(var i =0; i< product.media.length; i++){
+            for (var i = 0; i < product.media.length; i++) {
                 const div = document.createElement('div');
                 div.setAttribute('class', 'item-slick3');
                 div.setAttribute('data-thumb', product.media[i].preview_url);
@@ -691,43 +673,75 @@
                 div.setAttribute('role', 'tabpanel');
                 div.setAttribute('style', 'width: 50%; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;');
                 div.innerHTML = `<div class="wrap-pic-w pos-relative">
-                                    <img  src="`+product.media[i].preview_url+`">
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="`+product.media[i].preview_url+`">
+                                    <img  src="` + product.media[i].preview_url +
+                    `">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="` + product.media[i].preview_url + `">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>`;
                 document.querySelector('.slick3.gallery-lb .slick-list.draggable .slick-track').append(div);
-                if(i==0){
+                if (i == 0) {
                     const li1 = document.createElement("li");
                     li1.innerHTML = `<li class="slick-active my-3" role="presentation">
-                                            <img style="width:100%" src="`+ product.media[i].preview_url+`">
+                                            <img style="width:100%" src="` + product.media[i].preview_url + `">
                                             <div class="slick3-dot-overlay"></div>
                                         </li>`
                     imgul.appendChild(li1);
-                }else{
+                } else {
                     const li2 = document.createElement("li");
                     li2.innerHTML = `<li  role="presentation">
-                                            <img style="width:100%; " src="`+ product.media[i].preview_url+`">
+                                            <img style="width:100%; " src="` + product.media[i].preview_url + `">
                                             <div class="slick3-dot-overlay"></div>
                                         </li>`
                     imgul.appendChild(li2);
                 }
                 document.getElementById('wrap-slick3-dots').append(imgul)
             }
-            console.log(product);
+            console.log(product.specs);
 
-            if(document.getElementsByTagName("html")[0].getAttribute("lang") == 'en'){
+            if (document.getElementsByTagName("html")[0].getAttribute("lang") == 'en') {
                 document.querySelector('h4.mtext-105').innerHTML = product.name.en.replace(/^./, function(match) {
                     return match.toUpperCase();
                 });
-                document.querySelector('span.mtext-106').innerHTML = product.sale_price+ ' EGP'
+                document.querySelector('span.mtext-106').innerHTML = product.sale_price + ' EGP'
                 document.querySelector('p.stext-102').innerHTML = product.description.en
-            }else if(document.getElementsByTagName("html")[0].getAttribute("lang") == 'ar'){
+            } else if (document.getElementsByTagName("html")[0].getAttribute("lang") == 'ar') {
                 document.querySelector('h4.mtext-105').innerHTML = product.name.ar
-                document.querySelector('span.mtext-106').innerHTML = product.sale_price+ ' ج.م'
+                document.querySelector('span.mtext-106').innerHTML = product.sale_price + ' ج.م'
                 document.querySelector('p.stext-102').innerHTML = product.description.ar
             }
-            // document.getElementById('gallery-lb').append(dragableDiv);
+            product.specs.forEach(spec => {
+                const specWrap = document.createElement('div');
+                specWrap.setAttribute('class', 'flex-w flex-r-m p-b-10')
+                const specName = document.createElement('div');
+                specName.setAttribute('class', 'size-203 flex-c-m respon6');
+                specWrap.appendChild(specName);
+                const specValueWrap = document.createElement('div');
+                specValueWrap.setAttribute('class', 'size-204 respon6-next')
+                const div = document.createElement('div');
+                div.setAttribute('class', 'rs1-select2 bor8 bg0');
+                specValueWrap.appendChild(div);
+                const select = document.createElement('select');
+                select.setAttribute('name', 'time');
+                select.setAttribute('class', 'js-select2  custom-select');
+                div.appendChild(select);
+                const staticOption = document.createElement('option');
+                staticOption.innerHTML = 'Choose an option'
+                select.appendChild(staticOption);
+                const option = document.createElement('option')
+                if (document.getElementsByTagName("html")[0].getAttribute("lang") == 'en'){
+                    specName.innerHTML =spec.name.en
+                    option.setAttribute('value', spec.pivot.value.en)
+                    option.innerHTML = spec.pivot.value.en
+                }else if (document.getElementsByTagName("html")[0].getAttribute("lang") == 'ar'){
+                    specName.innerHTML =spec.name.ar
+                    option.setAttribute('value', spec.pivot.value.ar)
+                    option.innerHTML = spec.pivot.value.ar
+                }
+                select.appendChild(option);
+                specWrap.appendChild(specValueWrap);
+                document.getElementById('specs').prepend(specWrap)
+            });
         }
     </script>
 @endpush
