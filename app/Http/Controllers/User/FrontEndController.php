@@ -58,4 +58,16 @@ class FrontEndController extends Controller
     {
         return view('user.cart');
     }
+
+    /**
+     * product-details
+     *
+     * @return product-detail  view
+     */
+    public function detail(Product $product)
+    {
+        $product->load('specs', 'media', 'reviews.user:id,name','category');
+        // return $product;
+        return view('user.product-detail', compact('product'));
+    }
 }
