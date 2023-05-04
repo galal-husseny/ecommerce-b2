@@ -77,7 +77,6 @@ class ProductsController extends Controller
     public function show(Product $product, string $slug = null)
     {
         $product->load('category:id,name', 'reviews.user:id,name', 'specs');
-        // dd($product->reviews);
         return view('seller.products.show', compact(['product']));
     }
 

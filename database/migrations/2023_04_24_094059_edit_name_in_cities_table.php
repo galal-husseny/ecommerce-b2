@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,9 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('cities', function (Blueprint $table) {
-            $table->json('name')->after('id')->change();
-        });
+        DB::statement("ALTER TABLE `cities` DROP INDEX `cities_name_unique`");
+        DB::statement("ALTER TABLE `cities` CHANGE `name` `name` JSON NOT NULL AFTER id");
     }
 
     /**

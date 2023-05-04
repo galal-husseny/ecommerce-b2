@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Review extends Model
 {
-    use HasFactory , HasTranslations;
+    use HasFactory;
 
 
     /**
@@ -25,13 +25,6 @@ class Review extends Model
         'user_id',
     ];
 
-    /**
-     * The attributes to be translated.
-     *
-     * @var array<int, string>
-     */
-    public $translatable = [
-    ];
 
     /**
      * product relation showing that a review belongs to one product
