@@ -42,7 +42,8 @@ return [
             'streetstyle' => 'أسلوب الشارع',
             'crafts' => 'الحرف اليدوية',
             'quick_view' => 'نظرة سريعة',
-            'load_more' => 'تحميل المزيد'
+            'load_more' => 'تحميل المزيد',
+            'add_to_cart'=> 'اضف للعربة'
         ],
         'about' => [
             'about' => 'نبذة',
