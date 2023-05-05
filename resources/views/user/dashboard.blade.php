@@ -466,17 +466,20 @@
                     <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                         <!-- Block2 -->
                         <div class="block2">
-                            <div class="block2-pic hov-img0" id="products"
-                                data-products="<?= htmlspecialchars($products) ?>">
-                                <img src="{{ $product->getFirstMediaUrl('product', 'preview') }}" alt="IMG-PRODUCT">
-                                {{-- <a style="text-decoration: none" href="#"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
-                                    onclick="showImg({{ $product->id }})">
-                                    {{ __('messages.frontend.index.quick_view') }}
-                                </a> --}}
-                                <button type="button" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                    {{ __('messages.frontend.index.quick_view') }}
-                                </button>
+                            <div class="block2-pic hov-img0" id="products" data-products="<?= htmlspecialchars($products) ?>">
+                                <a style="text-decoration: none" href="{{route('product-details',  \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}">
+                                    <img src="{{ $product->getFirstMediaUrl('product', 'preview') }}" alt="IMG-PRODUCT">
+                                </a>
+                                @auth('web')
+                                    <button type="button" class="addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="{{Auth::guard('web')->id()}}" product-value="{{$product->id}}">
+                                        {{ __('messages.frontend.index.add_to_cart') }}
+                                    </button>
+                                @else
+                                    <button type="button" class="addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="" product-value="{{$product->id}}">
+                                        {{ __('messages.frontend.index.add_to_cart') }}
+                                    </button>
+                                @endauth
+
                             </div>
 
                             <div class="block2-txt flex-w flex-t p-t-14">
@@ -558,7 +561,7 @@
                                                     <i class="fa fa-expand"></i>
                                                 </a>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         <div class="item-slick3"
                                             data-thumb="{{ asset('frontend-assets/images/product-detail-02.jpg') }}">
                                             <div class="wrap-pic-w pos-relative">
@@ -594,24 +597,6 @@
 
                                 <!--  -->
                                 <div class="p-t-33" id="specs">
-                                    {{-- <div class="flex-w flex-r-m p-b-10">
-                                        <div class="size-203 flex-c-m respon6">
-                                            Size
-                                        </div>
-
-                                        <div class="size-204 respon6-next">
-                                            <div class="rs1-select2 bor8 bg0">
-                                                <select class="js-select2" name="time">
-                                                    <option>Choose an option</option>
-                                                    <option>Size S</option>
-                                                    <option>Size M</option>
-                                                    <option>Size L</option>
-                                                    <option>Size XL</option>
-                                                </select>
-                                                <div class="dropDownSelect2"></div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
 
                                     <div class="flex-w flex-r-m p-b-10">
                                         <div class="size-204 flex-w flex-m respon6-next">
@@ -756,5 +741,37 @@
                 document.getElementById('specs').prepend(specWrap)
             });
         }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.addToCart').click(function() {
+                let user_id = $(this).attr('user-value');
+                let product_id = $(this).attr('product-value');
+                let url = "{{ asset('api/products/add') }}";
+                let method = "POST";
+                let data = {"user_id": user_id, "product_id": product_id};
+                $.ajax({
+                    headers: {
+                        "accept": "application/json"
+                    },
+                    data: data,
+                    type: method,
+                    url: url,
+                    success: function(result,status,xhr) {
+                        console.log(result);
+                        $('#cart').attr('data-notify', result.data.carts_count)
+                    },
+                    error: function(xhr,status,error) {
+                        Swal.fire(
+                            'Failed',
+                            'Something went wrong',
+                            'error'
+                        );
+                    }
+                });
+
+            });
+        });
     </script>
 @endpush
