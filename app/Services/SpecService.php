@@ -19,7 +19,9 @@ class SpecService
     {
         $specIds = [];
         foreach($specs as $spec){
-            $spec1 = Spec::whereJsonContains('name', $spec)->firstOr(function() use($spec){
+            // dd($spec);
+            $spec1 = Spec::whereJsonContains('name', $spec)
+            ->firstOr(function() use($spec){
                 Spec::create(['name'=> $spec]);
             });
             // dd($spec1);

@@ -469,11 +469,14 @@
                             <div class="block2-pic hov-img0" id="products"
                                 data-products="<?= htmlspecialchars($products) ?>">
                                 <img src="{{ $product->getFirstMediaUrl('product', 'preview') }}" alt="IMG-PRODUCT">
-                                <a style="text-decoration: none" href="#"
+                                {{-- <a style="text-decoration: none" href="#"
                                     class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
                                     onclick="showImg({{ $product->id }})">
                                     {{ __('messages.frontend.index.quick_view') }}
-                                </a>
+                                </a> --}}
+                                <button type="button" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                    {{ __('messages.frontend.index.quick_view') }}
+                                </button>
                             </div>
 
                             <div class="block2-txt flex-w flex-t p-t-14">
@@ -502,8 +505,11 @@
                             </div>
                         </div>
                     </div>
+
                 @endforeach
+
             </div>
+
 
             <!-- Load more -->
             <div class="flex-c-m flex-w w-full p-t-45">
@@ -514,8 +520,16 @@
             </div>
         </div>
 
+        <div class="modal fade bd-example-modal-lg" tabindex="1000" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                jhbvdhfbdv
+              </div>
+            </div>
+          </div>
+
         <!-- Modal1 -->
-        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+        {{-- <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
             <div class="overlay-modal1 js-hide-modal1"></div>
 
             <div class="container">
@@ -532,7 +546,7 @@
                                     <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                                     <div class="slick3 gallery-lb" id="gallery-lb">
-                                        <div class="item-slick3"
+                                        {{-- <div class="item-slick3"
                                             data-thumb="{{ asset('frontend-assets/images/product-detail-01.jpg') }}">
                                             <div class="wrap-pic-w pos-relative">
                                                 <img id="main-img"
@@ -544,7 +558,7 @@
                                                     <i class="fa fa-expand"></i>
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="item-slick3"
                                             data-thumb="{{ asset('frontend-assets/images/product-detail-02.jpg') }}">
                                             <div class="wrap-pic-w pos-relative">
@@ -655,13 +669,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </section>
 @endsection
 
 @push('scripts')
     <script>
-        function showImg(productId, locale) {
+        function showImg(productId) {
             // showing product media
             var products = JSON.parse(document.getElementById('products').dataset.products);
             const product = products.find(obj => obj.id === productId);
@@ -674,8 +688,7 @@
                 div.setAttribute('role', 'tabpanel');
                 div.setAttribute('style', 'width: 50%; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;');
                 div.innerHTML = `<div class="wrap-pic-w pos-relative">
-                                    <img  src="` + product.media[i].preview_url +
-                    `">
+                                    <img  src="` + product.media[i].preview_url +`">
                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="` + product.media[i].preview_url + `">
                                         <i class="fa fa-expand"></i>
                                     </a>
