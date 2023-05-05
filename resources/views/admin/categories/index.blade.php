@@ -49,7 +49,6 @@
                                                 'text-danger' => ! $category->status,
                                                 ])>{{__('admin.all_categories.' . printEnum(App\Enums\CategoryEnum::class , $category->status))}}</td>
                                             <td>
-                                                <a href="{{route('admins.categories.show' , [\Illuminate\Support\Facades\Crypt::encryptString($category->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill w-25"> {{__('admin.all_categories.show')}} </a>
                                                 <a href="{{route('admins.categories.edit' ,  ["slug"=> $category->slug ,\Illuminate\Support\Facades\Crypt::encryptString($category->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill w-25"> {{__('admin.all_categories.edit')}} </a>
                                                 <form action="{{route('admins.categories.destroy' , [\Illuminate\Support\Facades\Crypt::encryptString($category->id)])}}" method="post" class="d-inline">
                                                     @csrf

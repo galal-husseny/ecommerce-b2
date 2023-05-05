@@ -63,8 +63,8 @@
                                         <div class="form-group">
                                             <label for="category_id">{{ __('seller.add_product.category') }}</label>
                                             <select name="category_id" class="form-control" id="category_id">
+                                                <option value="" disabled selected></option>
                                                 @foreach ($categories as $category)
-                                                    <option value="" disabled selected></option>
                                                     <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
                                                         {{ $category->name }}</option>
                                                 @endforeach

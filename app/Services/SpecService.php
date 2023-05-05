@@ -2,9 +2,10 @@
 namespace App\Services;
 
 use App\Models\Spec;
+use Nette\Utils\Json;
 use App\Models\Product;
 use App\Models\ProductSpec;
-use Nette\Utils\Json;
+use Illuminate\Support\Facades\App;
 
 class SpecService
 {
@@ -18,10 +19,13 @@ class SpecService
     {
         $specIds = [];
         foreach($specs as $spec){
-            $spec = Spec::whereJsonContains('name', $spec)->firstOr(function() use($spec) {
-                Spec::create(['name' => $spec]);
+            // dd($spec);
+            $spec1 = Spec::whereJsonContains('name', $spec)
+            ->firstOr(function() use($spec){
+                Spec::create(['name'=> $spec]);
             });
-            $specIds[]=$spec->id;
+            // dd($spec1);
+            $specIds[] = $spec1->id;
         }
         return $specIds;
     }

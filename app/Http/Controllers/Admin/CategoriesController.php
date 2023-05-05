@@ -89,7 +89,12 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        try {
+            $category->delete();
         return redirect()->back()->with('success', __('general.messages.deleted'));
+        }
+        catch(\Exception $error) {
+        return redirect()->back()->with('error', __('general.categories.failed'));
+        }
     }
 }

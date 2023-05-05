@@ -34,19 +34,17 @@
                             <div class="col-md-4">
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
-                                        @foreach ($product->getMedia('product') as $index=>$media)
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" @if ($index==0)
-                                            class="active"
-                                        @endif></li>
+                                        @foreach ($product->getMedia('product') as $index => $media)
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $index }}"
+                                                @if ($index == 0) class="active" @endif></li>
                                         @endforeach
                                     </ol>
-                                    <div class="carousel-inner" >
-                                        @foreach ($product->getMedia('product') as $index => $media )
-                                        <div class="carousel-item @if ($index==0)
-                                            active
-                                        @endif" >
-                                            <img class="d-block w-100" src="{{$media->getUrl()}}" alt="Second slide">
-                                        </div>
+                                    <div class="carousel-inner">
+                                        @foreach ($product->getMedia('product') as $index => $media)
+                                            <div class="carousel-item @if ($index == 0) active @endif">
+                                                <img class="d-block w-100" src="{{ $media->getUrl('preview') }}"
+                                                    alt="Second slide">
+                                            </div>
                                         @endforeach
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
@@ -134,8 +132,7 @@
                             </div>
                             <div class="col-md-12 mt-3">
                                 <h3>{{ __('seller.show_product.specs') }}</h3>
-                                <table id="example1" class="table table-bordered table-striped caption-top">
-                                    <caption> </caption>
+                                <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>{{ __('seller.show_product.spec_name') }}</th>
@@ -143,43 +140,50 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($specs as $index => $spec)
+                                        @foreach ($product->specs as $spec)
                                             <tr>
-                                                <td>{{ $index }}</td>
-                                                <td>{{ $spec }}</td>
+                                                <td>{{ $spec->name }}</td>
+                                                <td>{{ $spec->pivot->value }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
-
                                 </table>
                             </div>
                             <div class="col-md-12 mt-3">
                                 <h3> {{ __('seller.show_product.reviews') }} </h3>
-                                <table id="reviews" class="table table-striped review">
-                                    <tbody>
-                                        @foreach ($product->reviews as $index => $review)
-                                            <tr>
-                                                <td class="col-4">
-                                                    <div class="w-50 d-inline-block">
-                                                        <i class="zmdi zmdi-account mr-1"></i>
-                                                        {{ $review->user->name }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    @for  ($i = 0; $i < $review->rate; $i++)
-                                                        <i class="zmdi zmdi-star"></i>
-                                                    @endfor
-                                                    @for  ($i = 0; $i < 5 -$review->rate; $i++)
-                                                        <i class="zmdi zmdi-star-outline"></i>
-                                                    @endfor
-                                                </td>
-                                                <td class="col-4">
-                                                    {{ $review->comment }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                @if (count($product->reviews) == 0)
+                                    <div class="bg-light">
+                                        <p class="text-red  p-3 text-center">{{ __('seller.show_product.no_reviews') }}
+                                        </p>
+                                    </div>
+                                @else
+                                    <table id="reviews" class="table table-striped review">
+                                        <tbody>
+                                            @foreach ($product->reviews as $review)
+                                                <tr>
+                                                    <td class="col-4">
+                                                        <div class="w-50 d-inline-block">
+                                                            <i class="zmdi zmdi-account mr-1"></i>
+                                                            {{ $review->user->name }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @for ($i = 0; $i < $review->rate; $i++)
+                                                            <i class="zmdi zmdi-star text-success"></i>
+                                                        @endfor
+                                                        @for ($i = 0; $i < 5 - $review->rate; $i++)
+                                                            <i class="zmdi zmdi-star-outline"></i>
+                                                        @endfor
+                                                    </td>
+                                                    <td class="col-4">
+                                                        {{ $review->comment }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -193,3 +197,22 @@
     @include('seller.layouts.partials.footer')
 @endsection
 
+@push('scripts')
+    @if (session()->has('success'))
+        <script>
+            Swal.fire(
+                'Good Job',
+                '{{ session()->get('success') }}',
+                'success'
+            );
+        </script>
+    @elseif (session()->has('error'))
+        <script>
+            Swal.fire(
+                'Failed',
+                '{{ session()->get('error') }}',
+                'error'
+            );
+        </script>
+    @endif
+@endpush

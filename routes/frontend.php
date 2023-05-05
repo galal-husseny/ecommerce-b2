@@ -17,3 +17,6 @@ Route::get('/contact', [FrontEndController::class, 'contact'])->name('contact');
 
 Route::get('/cart', [FrontEndController::class, 'cart'])->name('cart');
 
+Route::get('/{product}', [FrontEndController::class, 'detail'])->name('product-details');
+
+

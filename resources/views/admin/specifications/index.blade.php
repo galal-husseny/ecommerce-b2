@@ -43,7 +43,6 @@
                                             <td>{{++$index}}</td>
                                             <td>{{$spec->getTranslation('name','en') .' - ' . $spec->getTranslation('name','ar')}}</td>
                                             <td>
-                                                <a href="{{route('admins.specs.show' , [\Illuminate\Support\Facades\Crypt::encryptString($spec->id)])}}" class="btn btn-sm btn-success my-2 rounded-pill w-25"> {{__('admin.all_specs.show')}} </a>
                                                 <a href="{{route('admins.specs.edit' ,  ["slug"=> $spec->slug ,\Illuminate\Support\Facades\Crypt::encryptString($spec->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill w-25 "> {{__('admin.all_specs.edit')}} </a>
                                                 <form action="{{route('admins.specs.destroy' , [\Illuminate\Support\Facades\Crypt::encryptString($spec->id)])}}" method="post" class="d-inline w-25">
                                                     @csrf

@@ -85,8 +85,15 @@ class RegionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Region $region)
     {
-        //
+        try{
+            $region->delete();
+            return redirect()->route('admins.regions.index')->with('success', __('general.messages.deleted'));
+        }
+        catch (\Exception $error){
+            return redirect()->route('admins.regions.index')->with('error', __('general.regions.failed'));
+        }
+        
     }
 }

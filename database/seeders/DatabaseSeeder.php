@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@ecommerce.com',
             'password' => bcrypt('admin'),
-            // 'phone' => '0100010100'
         ]);
     }
 }
