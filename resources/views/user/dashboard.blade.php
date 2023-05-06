@@ -558,7 +558,7 @@
                                                     <i class="fa fa-expand"></i>
                                                 </a>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         <div class="item-slick3"
                                             data-thumb="{{ asset('frontend-assets/images/product-detail-02.jpg') }}">
                                             <div class="wrap-pic-w pos-relative">
@@ -611,7 +611,7 @@
                                                 <div class="dropDownSelect2"></div>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="flex-w flex-r-m p-b-10">
                                         <div class="size-204 flex-w flex-m respon6-next">

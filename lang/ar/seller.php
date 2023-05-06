@@ -102,6 +102,7 @@ return [
         'all' => 'جميع المنتجات',
         'show' => 'عرض تفاصيل منتج',
         'edit' => 'تعديل بيانات منتج',
+        'coupons' => 'الكوبانات'
 
     ],
     'footer' => [
@@ -183,5 +184,58 @@ return [
         'description_ar' => 'الوصف بالعربية',
         'submit' => ' تعديل منتج',
     ],
+    'all_coupons' => [
+        'title' => 'الكوبانات',
+        'id' => 'id',
+        'max_usage_number_per_user' => 'اقصي استخدام للمستخدم',
+        'discount' => 'الخصم',
+        'max_discount_value' => 'اقصي قيمة خصم',
+        'code' => 'الكود',
+        'max_usage_number' => 'اقصي عدد استخدام',
+        'min_order_value' => 'اقل قيمة للطلب ',
+        'status' => 'الحالة',
+        'start_at' => 'موعد التفعيل',
+        'end_at' => 'موعد الانتهاء',
+        'operations' => 'العمليات',
+        'show' => 'اظهر',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح'
+    ],
+    'add_coupon' => [
+        'max_usage_number_per_user' => 'اقصي استخدام للمستخدم',
+        'discount' => ' (%)الخصم',
+        'max_discount_value' => ' اقصي قيمة خصم (جنيه)',
+        'code' => 'الكود',
+        'max_usage_number' => 'اقصي عدد استخدام',
+        'min_order_value' => ' اقل قيمة للطلب (جنيه)',
+        'status' => 'الحالة',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح',
+        'start_at' => 'موعد التفعيل',
+        'end_at' => 'موعد الانتهاء',
+        'submit' => 'انشاء',
+    ],
+
+    'show_coupon' => [
+        'title' => 'عرض تفاصيل الكوبون',
+        'id' => 'id',
+        'max_usage_number_per_user' => 'اقصي استخدام للمستخدم',
+        'discount' => '(%)الخصم',
+        'max_discount_value' => ' اقصي قيمة خصم (جنيه)',
+        'code' => 'الكود',
+        'max_usage_number' => 'اقصي عدد استخدام',
+        'min_order_value' => ' اقل قيمة للطلب (جنيه)',
+        'status' => 'الحالة',
+        'active' => 'متاح',
+        'not_active' => 'غير متاح',
+        'start_at' => 'موعد التفعيل',
+        'end_at' => 'موعد الانتهاء',
+    ],
+    'edit_coupon'=> [
+        'title' => 'تعديل بيانات كوبون',
+        'submit' => 'تعديل'
+    ]
 
 ];

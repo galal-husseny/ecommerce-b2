@@ -15,5 +15,8 @@ return [
     ],
     'regions' => [
         'failed' => 'Failed to delete the required Region as it belongs to users addresses'
+    ],
+    'coupons' => [
+        'failed' => 'Failed to delete the required Coupon as it belongs to an order'
     ]
 ];

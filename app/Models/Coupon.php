@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Order;
+use App\Traits\HasEcryptedIds;
+use App\Traits\EscapeUnicodeJson;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Coupon extends Model
 {
     use HasFactory;
+    use EscapeUnicodeJson;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +27,8 @@ class Coupon extends Model
         'status',
         'max_usage_number',
         'min_order_value',
-        'start_date',
-        'end_date',
+        'start_at',
+        'end_at',
     ];
 
     /**
@@ -42,5 +47,25 @@ class Coupon extends Model
      */
     public function users(){
         return $this->belongsToMany(User::class)->withPivot('coupon_expired_at' , 'max_no_of_users_per_coupon');
+    }
+
+    /**
+     * max_discount_value_with_currency
+     *
+     * @return string
+     */
+    public function max_discount_value_with_currency(): string
+    {
+        return $this->max_discount_value  . ' ' . __('user.shared.currency');
+    }
+
+    /**
+     * min_order_value_with_currency
+     *
+     * @return string
+     */
+    public function min_order_value_with_currency(): string
+    {
+        return $this->min_order_value  . ' ' . __('user.shared.currency');
     }
 }
