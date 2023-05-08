@@ -468,15 +468,23 @@
                         <div class="block2">
                             <div class="block2-pic hov-img0" id="products"
                                 data-products="<?= htmlspecialchars($products) ?>">
-                                <img src="{{ $product->getFirstMediaUrl('product', 'preview') }}" alt="IMG-PRODUCT">
+                                <a style="text-decoration: none" href="{{route('product-details',  \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}">
+                                    <img src="{{ $product->getFirstMediaUrl('product', 'preview') }}" alt="IMG-PRODUCT">
+                                </a>
                                 {{-- <a style="text-decoration: none" href="#"
                                     class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
                                     onclick="showImg({{ $product->id }})">
                                     {{ __('messages.frontend.index.quick_view') }}
                                 </a> --}}
-                                <button type="button" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                    {{ __('messages.frontend.index.quick_view') }}
-                                </button>
+                                @auth('web')
+                                    <button type="button" class=" addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="{{Auth::guard('web')->id()}}" product-value="{{$product->id}}">
+                                        {{ __('messages.frontend.index.add_to_cart') }}
+                                    </button>
+                                @else
+                                    <button type="button" class="addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="" product-value="{{$product->id}}">
+                                        {{ __('messages.frontend.index.add_to_cart') }}
+                                    </button>
+                                @endauth
                             </div>
 
                             <div class="block2-txt flex-w flex-t p-t-14">
@@ -756,5 +764,34 @@
                 document.getElementById('specs').prepend(specWrap)
             });
         }
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('.addToCart').click(function (){
+                const user_id = $(this).attr('user-value');
+                const product_id = $(this).attr('product-value');
+                const url = "{{asset('api/products/add')}}";
+                const method = "POST";
+                const body = {'user_id': user_id, 'product_id': product_id};
+                $.ajax({
+                    url: url,
+                    type: method,
+                    headers: {'accept':'application/json'},
+                    data: body,
+                    success: function(result,status,xhr){
+                        console.log(result);
+                        console.log(status);
+                        console.log(xhr);
+
+                    },
+                    error: function(xhr,status,error){
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    },
+                });
+            })
+        })
     </script>
 @endpush

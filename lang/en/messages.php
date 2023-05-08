@@ -42,7 +42,8 @@ return [
             'streetstyle' => 'Streetstyle',
             'crafts' => 'Crafts',
             'quick_view' => 'Quick View',
-            'load_more' => 'Load More'
+            'load_more' => 'Load More',
+            'add_to_cart' => 'Add to cart'
         ],
         'about' => [
             'about' => 'About',
