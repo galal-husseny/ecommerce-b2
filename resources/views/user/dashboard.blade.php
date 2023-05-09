@@ -500,15 +500,26 @@
                                 </div>
 
                                 <div class="block2-txt-child2 flex-r p-t-3">
-                                    <a style="text-decoration: none" href="#"
-                                        class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                    @auth('web')
+                                    <button type="button" class="btn-addwish-b2 dis-block pos-relative addToWishlist" user-value="{{Auth::guard('web')->id()}}" product-value="{{$product->id}}">
+                                    <img class="icon-heart1 dis-block trans-04"
+                                        src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"
+                                        alt="ICON">
+                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                        src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}"
+                                        alt="ICON">
+                                </button>
+                                    @else
+                                    <button type="button" class="btn-addwish-b2 dis-block pos-relative addToWishlist" user-value="" product-value="{{$product->id}}">
                                         <img class="icon-heart1 dis-block trans-04"
                                             src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"
                                             alt="ICON">
                                         <img class="icon-heart2 dis-block trans-04 ab-t-l"
                                             src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}"
                                             alt="ICON">
-                                    </a>
+                                    </button>
+                                    @endauth
+
                                 </div>
                             </div>
                         </div>
@@ -780,17 +791,44 @@
                     headers: {'accept':'application/json'},
                     data: body,
                     success: function(result,status,xhr){
-                        console.log(result);
-                        console.log(status);
-                        console.log(xhr);
-
+                        $('#cart').attr('data-notify', result.data.carts_count)
                     },
                     error: function(xhr,status,error){
-                        console.log(xhr);
-                        console.log(status);
-                        console.log(error);
+                        Swal.fire(
+                            'Failed',
+                            'somthing went wrong',
+                            'error'
+                        );
                     },
                 });
+            })
+        });
+
+        $(document).ready(function () {
+            $('.addToWishlist').click(function () {
+                const product_id = $(this).attr('product-value');
+                const user_id = $(this).attr('user-value');
+                const url = "{{asset('api/products/addToWishlist')}}";
+                const method = "POST";
+                const body = {'user_id': user_id, 'product_id': product_id};
+                $.ajax({
+                    url: url,
+                    type: method,
+                    headers: {'accept': 'application/json'},
+                    data: body,
+                    success: function (result) {
+                        $('#wishlist').attr('data-notify', result.data.wishlist_counts)
+
+                    },
+                    error: function (result) {
+                        console.log(result);
+                        Swal.fire(
+                            'Failed',
+                            'Something went wrong',
+                            'error'
+                        );
+                    }
+                })
             })
         })
     </script>

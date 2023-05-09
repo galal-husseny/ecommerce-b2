@@ -141,6 +141,16 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * wishlists relation showing that a product belongs to many wishlists
+     *
+     * @return void
+     */
+    public function wishlists()
+    {
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->as('wishlists');
+    }
+
+    /**
      * reviews relation showing that a product has many reviews
      *
      * @return void

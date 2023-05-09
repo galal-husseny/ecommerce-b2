@@ -17,9 +17,7 @@ class FrontEndController extends Controller
     public function shop()
     {
         $products = Product::select('id' , 'name' , 'sale_price')->limit(16)->get();
-        return view('user.shop', [
-            'user' => Auth::guard('web'),
-        ] , compact('products'));
+        return view('user.shop' , compact('products'));
     }
 
     /**
@@ -29,9 +27,7 @@ class FrontEndController extends Controller
      */
     public function blog()
     {
-        return view('user.blog', [
-            'user' => Auth::guard('web'),
-        ]);
+        return view('user.blog');
     }
 
     /**
@@ -41,9 +37,7 @@ class FrontEndController extends Controller
      */
     public function about()
     {
-        return view('user.about', [
-            'user' => Auth::guard('web'),
-        ]);
+        return view('user.about');
     }
 
     /**
@@ -53,9 +47,7 @@ class FrontEndController extends Controller
      */
     public function contact()
     {
-        return view('user.contact', [
-            'user' => Auth::guard('web'),
-        ]);
+        return view('user.contact');
     }
 
     /**
@@ -65,9 +57,7 @@ class FrontEndController extends Controller
      */
     public function cart()
     {
-        return view('user.cart', [
-            'user' => Auth::guard('web'),
-        ]);
+        return view('user.cart');
     }
 
     /**
@@ -79,8 +69,6 @@ class FrontEndController extends Controller
     {
         $product->load('specs', 'media', 'reviews.user:id,name','category');
         // return $product;
-        return view('user.product-detail', [
-            'user' => Auth::guard('web'),
-        ], compact('product'));
+        return view('user.product-detail', compact('product'));
     }
 }

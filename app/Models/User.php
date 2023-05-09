@@ -79,6 +79,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * whishlists relation showing that a user belongs to many whislists
+     *
+     * @return void
+     */
+    public function wishlists(){
+        return $this->belongsToMany(Product::class , 'wishlists' , 'user_id' , 'product_id')->as('wishlists');
+    }
+
+    /**
      * reviews relation showing that a user has many reviews
      *
      * @return void
