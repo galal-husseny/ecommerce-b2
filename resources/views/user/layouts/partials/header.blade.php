@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{Auth::guard('web')->check() ? $user->carts_count :0}}" id="cart">
-                        <a href="{{route('cart')}}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti">
+                        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </a>
                     </div>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Wishlist;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Wishlist\WishlistRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Traits\ApiResponses;
 
 

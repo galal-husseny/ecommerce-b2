@@ -79,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * whishlists relation showing that a user belongs to many whislists
+     * wishlists relation showing that a user belongs to many wishlists
      *
      * @return void
      */

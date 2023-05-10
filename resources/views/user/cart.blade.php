@@ -42,56 +42,34 @@
                                     <th class="column-4 text-center"> {{__('messages.frontend.cart.quantity')}} </th>
                                     <th class="column-5 text-center"> {{__('messages.frontend.cart.total')}} </th>
                                 </tr>
-
-                                <tr class="table_row">
-                                    <td class="column-1">
-                                        <div class="how-itemcart1">
-                                            <img src="{{asset('frontend-assets/images/item-cart-04.jpg')}}" alt="IMG">
-                                        </div>
-                                    </td>
-                                    <td class="column-2">Fresh Strawberries</td>
-                                    <td class="column-3">$ 36.00</td>
-                                    <td class="column-4">
-                                        <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                @foreach ($user->carts as $product)
+                                    <tr class="table_row">
+                                        <td class="column-1">
+                                            <div class="how-itemcart1">
+                                                <img src="{{$product->getFirstMediaUrl('product', 'preview')}}" alt="IMG">
                                             </div>
+                                        </td>
+                                        <td class="column-2">{{$product->name}}</td>
+                                        <td class="column-3 productPrice"> {{$product->sale_price_with_currency()}} </td>
+                                        <td class="column-4">
+                                            <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                    <i class="fs-16 zmdi zmdi-minus"></i>
+                                                </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                name="num-product1" value="1">
+                                                <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                    name="num-product1" value="1">
 
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                    <a class=" num-products" type="submit">
+                                                    <i class="fs-16 zmdi zmdi-plus"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="column-5">$ 36.00</td>
-                                </tr>
-
-                                <tr class="table_row">
-                                    <td class="column-1">
-                                        <div class="how-itemcart1">
-                                            <img src="{{asset('frontend-assets/images/item-cart-05.jpg')}}" alt="IMG">
-                                        </div>
-                                    </td>
-                                    <td class="column-2">Lightweight Jacket</td>
-                                    <td class="column-3">$ 16.00</td>
-                                    <td class="column-4">
-                                        <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-minus"></i>
-                                            </div>
-
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                name="num-product2" value="1">
-
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-plus"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="column-5">$ 16.00</td>
-                                </tr>
+                                        </td>
+                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency()}}</td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
 
@@ -199,3 +177,14 @@
         </div>
     </form>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.num-products').click(function () {
+                let productQuantity = $('input[name="num-product1"]').val();
+                alert(productQuantity)
+            })
+        })
+    </script>
+@endpush

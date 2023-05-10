@@ -511,12 +511,19 @@
                                 </button>
                                     @else
                                     <button type="button" class="btn-addwish-b2 dis-block pos-relative addToWishlist" user-value="" product-value="{{$product->id}}">
+                                    @auth('web')
+                                        @foreach ($user->wishlists as $wishlistProduct)
+                                        @if ($wishlistProduct->id == $product->id)
+                                        {{$wishlistProduct->id}}
+                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}" alt="ICON">
+                                        @endif
                                         <img class="icon-heart1 dis-block trans-04"
-                                            src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"
-                                            alt="ICON">
-                                        <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                            src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}"
-                                            alt="ICON">
+                                        src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"
+                                        alt="ICON">
+
+                                        @endforeach
+                                    @endauth
+
                                     </button>
                                     @endauth
 

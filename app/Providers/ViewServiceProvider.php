@@ -12,10 +12,12 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Facades\View::composer(['user.layouts.partials.header'],
+        Facades\View::composer(['user.layouts.partials.header', 'user.dashboard', 'user.layouts.partials.cart', 'user.cart'],
         function ($view) {
             if(Auth::guard('web')->check()){
-                $view->with('user', Auth::guard('web')->user()->withCount('carts','wishlists')->first());
+                $user = Auth::guard('web')->user()->withCount('carts','wishlists')->first();
+                $userWithWishlists = $user->load('wishlists','carts');
+                $view->with('user', $userWithWishlists);
             }
         });
     }
