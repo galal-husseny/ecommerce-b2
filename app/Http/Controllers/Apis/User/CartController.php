@@ -16,13 +16,13 @@ class CartController extends Controller
 
     public function add(CartRequest $request)
     {
-        $user = User::findOrFail($request->user_id);
+        $user = User::withCount('carts')->findOrFail($request->user_id);
         if($user->carts->contains($request->product_id)){
             $user->carts()->updateExistingPivot($request->product_id, ['quantity' => DB::raw('quantity + 1')]);
-            return $this->data(['carts_count' => $user->carts()->count()] ,'edited in cart successfully', 200);
+            return $this->data(['carts_count' => ++$user->carts_count] ,'edited in cart successfully', 200);
         }else{
             $user->carts()->attach($request->product_id);
-            return $this->data(['carts_count' => $user->carts()->count()], 'added to cart successfully', 201);
+            return $this->data(['carts_count' => ++$user->carts_count], 'added to cart successfully', 201);
         }
     }
 }

@@ -31,8 +31,8 @@ class UpdateCouponRequest extends FormRequest
             'status' => ['sometimes', 'numeric', 'in:0,1'],
             'max_usage_number' => ['sometimes', 'numeric','gt:max_usage_number_per_user'],
             'min_order_value' => ['sometimes', 'numeric', 'min:1'],
-            'start_at' => ['sometimes', 'date','after_or_equal:'. now()->format('Y-m-d'), 'before_or_equal:' . now()->addMonth(4)->format('Y-m-d')],
-            'end_at' => ['sometimes', 'date','after_or_equal:'. now()->format('Y-m-d'), 'before_or_equal:' . now()->addMonth(7)->format('Y-m-d')]
+            'start_at' => ['sometimes', 'date','after_or_equal:'. now()->format('Y-m-d')],
+            'end_at' => ['sometimes', 'date','after_or_equal:'. now()->format('Y-m-d')]
         ];
     }
 }
