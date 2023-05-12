@@ -58,7 +58,7 @@
                                                 </div>
 
                                                 <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                    name="num-product1" value="1">
+                                                    name="num-product1" value="{{$product->carts->quantity}}">
 
                                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                     <a class=" num-products" type="submit">
@@ -67,7 +67,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency()}}</td>
+                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency($product->carts->quantity)}}</td>
                                     </tr>
                                 @endforeach
                             </table>

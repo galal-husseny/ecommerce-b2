@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('cities', function (Blueprint $table) {
-            $table->json('slug')->after('status');
+            // $table->json('slug')->after('status');
         });
     }
 
