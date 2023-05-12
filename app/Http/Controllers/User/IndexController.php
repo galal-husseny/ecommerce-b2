@@ -17,7 +17,7 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         $products = Product::select('id', 'name', 'sale_price','description')->get();
-        $products->load('media','specs');
+        $products->load('media');
         return view('user.dashboard', [
             'user' => $request->user('web'),
         ], compact('products'));
