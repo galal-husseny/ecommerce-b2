@@ -16,8 +16,8 @@ class FrontEndController extends Controller
      */
     public function shop()
     {
-        $products = Product::select('id' , 'name' , 'sale_price')->limit(16)->get();
-        return view('user.shop' , compact('products'));
+        $products = Product::select('id', 'name', 'sale_price')->limit(16)->get();
+        return view('user.shop', compact('products'));
     }
 
     /**
@@ -50,15 +50,6 @@ class FrontEndController extends Controller
         return view('user.contact');
     }
 
-    /**
-     * cart
-     *
-     * @return cart view
-     */
-    public function cart()
-    {
-        return view('user.cart');
-    }
 
     /**
      * product-details
@@ -67,7 +58,7 @@ class FrontEndController extends Controller
      */
     public function detail(Product $product)
     {
-        $product->load('specs', 'media', 'reviews.user:id,name','category');
+        $product->load('specs', 'media', 'reviews.user:id,name', 'category');
         // return $product;
         return view('user.product-detail', compact('product'));
     }

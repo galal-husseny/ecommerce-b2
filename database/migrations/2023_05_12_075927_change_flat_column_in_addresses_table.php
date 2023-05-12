@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('regions', function (Blueprint $table) {
-            // $table->json('slug')->after('city_id');
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->string('flat')->nullable()->after('id')->change();
+            $table->string('floor')->nullable()->after('flat')->change();
         });
     }
 
@@ -25,8 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('regions', function (Blueprint $table) {
-            $table->dropColumn('slug');
+        Schema::table('addresses', function (Blueprint $table) {
+             $table->string('flat')->after('id')->change();
+             $table->string('floor')->after('id')->change();
         });
     }
 };

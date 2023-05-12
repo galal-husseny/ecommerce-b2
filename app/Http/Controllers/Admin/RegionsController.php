@@ -94,6 +94,6 @@ class RegionsController extends Controller
         catch (\Exception $error){
             return redirect()->route('admins.regions.index')->with('error', __('general.regions.failed'));
         }
-        
+
     }
 }

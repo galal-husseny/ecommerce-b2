@@ -1,6 +1,7 @@
 <?php
+namespace App\Http\Controllers\Apis\User;
 
-namespace App\Http\Controllers\Wishlist;
+
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Wishlist\WishlistRequest;
@@ -12,15 +13,15 @@ class WishlistController extends Controller
 {
     use ApiResponses;
 
-    public function add(WishlistRequest $request)
+    public function handle(WishlistRequest $request)
     {
-        $user = User::findOrFail($request->user_id);
+        $user = User::withCount('wishlists')->findOrFail($request->user_id);
         if($user->wishlists->contains($request->product_id)){
             $user->wishlists()->detach($request->product_id);
-            return $this->data(['wishlist_counts' => $user->wishlists()->count()],'',204);
+            return $this->data(['wishlists_count' => -- $user->wishlists_count], 'deleted', 200);
         }else{
             $user->wishlists()->attach($request->product_id);
-            return $this->data(['wishlist_counts' => $user->wishlists()->count()],'',200);
+            return $this->data(['wishlists_count' => ++ $user->wishlists_count], 'added', 200);
         }
     }
 }
