@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 
@@ -98,5 +99,18 @@ if (! function_exists('printEnum')) {
     function printEnum($enum,mixed $value): string
     {
         return ucfirst(strtolower(str_replace('_',' ', $enum::tryFrom($value)?->name)));
+    }
+}
+
+if (! function_exists('couponCode')){
+    /**
+     * couponCode
+     *
+     * @return string
+     */
+    function couponCode() :int
+    {
+        $id = (int)Coupon::max('id') + 1000;
+        return $id;
     }
 }

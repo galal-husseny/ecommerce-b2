@@ -19,11 +19,11 @@ class SpecService
     {
         $specIds = [];
         foreach($specs as $spec){
-            $spec1 = Spec::whereJsonContains('name', $spec)
-            ->firstOr(function() use($spec){
-                Spec::create(['name'=> $spec]);
+            $json = json_encode($spec, JSON_UNESCAPED_UNICODE);
+            $spec = Spec::where('name', $json)->firstOr(function() use($spec){
+                return Spec::create(['name'=> $spec]);
             });
-            $specIds[] = $spec1->id;
+            $specIds[] = $spec->id;
         }
         return $specIds;
     }

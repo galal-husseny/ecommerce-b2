@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Cart;
+namespace App\Http\Requests\Wishlist;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CartRequest extends FormRequest
+class WishlistRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,6 @@ class CartRequest extends FormRequest
         return [
             "user_id" => ['required', 'integer', 'exists:users,id'],
             "product_id" => ['required', 'integer', 'exists:products,id'],
-            "quantity" => ['sometimes', 'integer', 'between:0,1000']
         ];
     }
 }

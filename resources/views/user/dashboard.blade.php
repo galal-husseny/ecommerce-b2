@@ -466,12 +466,18 @@
                     <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                         <!-- Block2 -->
                         <div class="block2">
-                            <div class="block2-pic hov-img0" id="products" data-products="<?= htmlspecialchars($products) ?>">
+                            <div class="block2-pic hov-img0" id="products"
+                                data-products="<?= htmlspecialchars($products) ?>">
                                 <a style="text-decoration: none" href="{{route('product-details',  \Illuminate\Support\Facades\Crypt::encryptString($product->id))}}">
                                     <img src="{{ $product->getFirstMediaUrl('product', 'preview') }}" alt="IMG-PRODUCT">
                                 </a>
+                                {{-- <a style="text-decoration: none" href="#"
+                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
+                                    onclick="showImg({{ $product->id }})">
+                                    {{ __('messages.frontend.index.quick_view') }}
+                                </a> --}}
                                 @auth('web')
-                                    <button type="button" class="addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="{{Auth::guard('web')->id()}}" product-value="{{$product->id}}">
+                                    <button type="button" class=" addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="{{Auth::guard('web')->id()}}" product-value="{{$product->id}}">
                                         {{ __('messages.frontend.index.add_to_cart') }}
                                     </button>
                                 @else
@@ -479,7 +485,6 @@
                                         {{ __('messages.frontend.index.add_to_cart') }}
                                     </button>
                                 @endauth
-
                             </div>
 
                             <div class="block2-txt flex-w flex-t p-t-14">
@@ -495,15 +500,33 @@
                                 </div>
 
                                 <div class="block2-txt-child2 flex-r p-t-3">
-                                    <a style="text-decoration: none" href="#"
-                                        class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                    @auth('web')
+                                    <button type="button" class="btn-addwish-b2 dis-block pos-relative addToWishlist" user-value="{{Auth::guard('web')->id()}}" product-value="{{$product->id}}">
+                                    <img class="icon-heart1 dis-block trans-04"
+                                        src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"
+                                        alt="ICON">
+                                    <img class="icon-heart2 dis-block trans-04 ab-t-l"
+                                        src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}"
+                                        alt="ICON">
+                                </button>
+                                    @else
+                                    <button type="button" class="btn-addwish-b2 dis-block pos-relative addToWishlist" user-value="" product-value="{{$product->id}}">
+                                    @auth('web')
+                                        @foreach ($user->wishlists as $wishlistProduct)
+                                        @if ($wishlistProduct->id == $product->id)
+                                        {{$wishlistProduct->id}}
+                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}" alt="ICON">
+                                        @endif
                                         <img class="icon-heart1 dis-block trans-04"
-                                            src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"
-                                            alt="ICON">
-                                        <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                            src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}"
-                                            alt="ICON">
-                                    </a>
+                                        src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"
+                                        alt="ICON">
+
+                                        @endforeach
+                                    @endauth
+
+                                    </button>
+                                    @endauth
+
                                 </div>
                             </div>
                         </div>
@@ -597,6 +620,24 @@
 
                                 <!--  -->
                                 <div class="p-t-33" id="specs">
+                                    {{-- <div class="flex-w flex-r-m p-b-10">
+                                        <div class="size-203 flex-c-m respon6">
+                                            Size
+                                        </div>
+
+                                        <div class="size-204 respon6-next">
+                                            <div class="rs1-select2 bor8 bg0">
+                                                <select class="js-select2" name="time">
+                                                    <option>Choose an option</option>
+                                                    <option>Size S</option>
+                                                    <option>Size M</option>
+                                                    <option>Size L</option>
+                                                    <option>Size XL</option>
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="flex-w flex-r-m p-b-10">
                                         <div class="size-204 flex-w flex-m respon6-next">
@@ -744,34 +785,58 @@
     </script>
 
     <script>
-        $(document).ready(function () {
-            $('.addToCart').click(function() {
-                let user_id = $(this).attr('user-value');
-                let product_id = $(this).attr('product-value');
-                let url = "{{ asset('api/products/add') }}";
-                let method = "POST";
-                let data = {"user_id": user_id, "product_id": product_id};
+        $(document).ready(function(){
+            $('.addToCart').click(function (){
+                const user_id = $(this).attr('user-value');
+                const product_id = $(this).attr('product-value');
+                const url = "{{asset('api/products/add')}}";
+                const method = "POST";
+                const body = {'user_id': user_id, 'product_id': product_id};
                 $.ajax({
-                    headers: {
-                        "accept": "application/json"
-                    },
-                    data: data,
-                    type: method,
                     url: url,
-                    success: function(result,status,xhr) {
-                        console.log(result);
+                    type: method,
+                    headers: {'accept':'application/json'},
+                    data: body,
+                    success: function(result,status,xhr){
                         $('#cart').attr('data-notify', result.data.carts_count)
                     },
-                    error: function(xhr,status,error) {
+                    error: function(xhr,status,error){
+                        Swal.fire(
+                            'Failed',
+                            'somthing went wrong',
+                            'error'
+                        );
+                    },
+                });
+            })
+        });
+
+        $(document).ready(function () {
+            $('.addToWishlist').click(function () {
+                const product_id = $(this).attr('product-value');
+                const user_id = $(this).attr('user-value');
+                const url = "{{asset('api/products/addToWishlist')}}";
+                const method = "POST";
+                const body = {'user_id': user_id, 'product_id': product_id};
+                $.ajax({
+                    url: url,
+                    type: method,
+                    headers: {'accept': 'application/json'},
+                    data: body,
+                    success: function (result) {
+                        $('#wishlist').attr('data-notify', result.data.wishlist_counts)
+
+                    },
+                    error: function (result) {
+                        console.log(result);
                         Swal.fire(
                             'Failed',
                             'Something went wrong',
                             'error'
                         );
                     }
-                });
-
-            });
-        });
+                })
+            })
+        })
     </script>
 @endpush

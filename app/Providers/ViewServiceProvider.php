@@ -2,24 +2,22 @@
 
 namespace App\Providers;
 
-use Illuminate\View\View;
-use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\View\View;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades;
+
 
 class ViewServiceProvider extends ServiceProvider
 {
-    /**
-     * Define your route model bindings, pattern filters, and other route configuration.
-     *
-     * @return void
-     */
     public function boot()
     {
-        Facades\View::composer('user.layouts.partials.header', function (View $view) {
-            if (Auth::guard('web')->check()) {
-                $user = Auth::guard('web')->user()->with('carts')->withCount('carts')->first();
-                $view->with('user', $user);
+        Facades\View::composer(['user.layouts.partials.header', 'user.dashboard', 'user.layouts.partials.cart', 'user.cart'],
+        function ($view) {
+            if(Auth::guard('web')->check()){
+                $user = Auth::guard('web')->user()->withCount('carts','wishlists')->first();
+                $userWithWishlists = $user->load('wishlists','carts');
+                $view->with('user', $userWithWishlists);
             }
         });
     }

@@ -43,7 +43,7 @@ return [
             'crafts' => 'الحرف اليدوية',
             'quick_view' => 'نظرة سريعة',
             'load_more' => 'تحميل المزيد',
-            'add_to_cart'=> 'اضف للعربة'
+            'add_to_cart' => 'اضف للعربة'
         ],
         'about' => [
             'about' => 'نبذة',

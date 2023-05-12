@@ -43,7 +43,7 @@ return [
             'crafts' => 'Crafts',
             'quick_view' => 'Quick View',
             'load_more' => 'Load More',
-            'add_to_cart' => 'Add To Cart'
+            'add_to_cart' => 'Add to cart'
         ],
         'about' => [
             'about' => 'About',

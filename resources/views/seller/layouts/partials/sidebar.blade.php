@@ -61,6 +61,29 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon zmdi zmdi-leak"></i>
+                        <p>
+                            {{__('seller.sidebar.coupons')}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('sellers.coupons.index')}}" class="nav-link button active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('seller.sidebar.all')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('sellers.coupons.create')}}" class="nav-link button">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('seller.sidebar.create')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

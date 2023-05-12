@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Seller\CouponsController;
 use App\Http\Controllers\Seller\IndexController;
 use App\Http\Controllers\Seller\ProductsController;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,5 @@ Route::prefix('sellers')->name('sellers.')->middleware(['auth:seller', 'verified
             Route::get('edit/{slug?}', 'edit')->name('edit');
         });
     });
+    Route::resource('coupons', CouponsController::class);
 });
