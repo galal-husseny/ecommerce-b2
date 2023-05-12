@@ -39,8 +39,7 @@ class CouponsController extends Controller
      */
     public function store(StoreCouponRequest $request)
     {
-        $code = couponCode();
-        Coupon::create(array_merge($request->validated(),['code' => $code]));
+        Coupon::create($request->validated());
         return redirect()->route('sellers.coupons.index')->with('success', __('general.messages.created'));
     }
 

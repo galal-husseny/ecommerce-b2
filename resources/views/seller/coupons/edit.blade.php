@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title"> {{ __('seller.edit_coupon.title') }} </h3>
+                                <h3 class="card-title"> {{ __('seller.edit_coupon.title') }} ({{$coupon->code}}) </h3>
                             </div>
                             @include('seller.layouts.partials.errors')
                             <div class="card-body">

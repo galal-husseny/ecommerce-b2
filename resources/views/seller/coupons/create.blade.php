@@ -25,6 +25,10 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group">
+                                            <label for="code">{{ __('seller.add_coupon.code') }}</label>
+                                            <input type="text" name="code" class="form-control" id="code" value="{{ old('code') }}">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="max_usage_number_per_user">{{ __('seller.add_coupon.max_usage_number_per_user') }}</label>
                                             <input type="number" name="max_usage_number_per_user" class="form-control" id="max_usage_number_per_user" value="{{ old('max_usage_number_per_user') }}">
                                         </div>

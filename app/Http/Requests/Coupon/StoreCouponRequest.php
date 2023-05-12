@@ -25,14 +25,15 @@ class StoreCouponRequest extends FormRequest
     public function rules()
     {
         return [
+            'code' => ['required', 'unique:coupons,code'],
             "max_usage_number_per_user" => ['required', 'numeric', 'min:1'],
-            "discount" => ['required', 'numeric', 'min:0'],
-            "max_discount_value" => ['required', 'numeric', 'min:1'],
+            "discount" => ['required', 'numeric', 'min:0', 'max:100'],
+            "max_discount_value" => ['required', 'numeric', 'min:1', ],
             'status' => ['required', 'numeric', 'in:0,1'],
             'max_usage_number' => ['required', 'numeric','gt:max_usage_number_per_user'],
             'min_order_value' => ['required', 'numeric', 'min:1'],
-            'start_at' => ['required', 'date','after_or_equal:'. now()->format('Y-m-d'), 'before_or_equal:' . now()->addMonth(4)->format('Y-m-d')],
-            'end_at' => ['required', 'date','after_or_equal:'. now()->format('Y-m-d'), 'before_or_equal:' . now()->addMonth(7)->format('Y-m-d')]
+            'start_at' => ['required', 'date','after_or_equal:'. now()->format('Y-m-d')],
+            'end_at' => ['required', 'date','after_or_equal:'. now()->format('Y-m-d')]
 
         ];
     }
