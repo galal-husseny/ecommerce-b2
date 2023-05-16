@@ -14,12 +14,21 @@ class CartController extends Controller
 {
     use ApiResponses;
 
-    public function add(CartRequest $request)
+    public function handle(CartRequest $request)
     {
         $user = User::withCount('carts')->findOrFail($request->user_id);
         if($user->carts->contains($request->product_id)){
-            $user->carts()->updateExistingPivot($request->product_id, ['quantity' => DB::raw('quantity + 1')]);
-            return $this->data(['carts_count' => ++$user->carts_count] ,'edited in cart successfully', 200);
+            if($request->has('quantity')){
+                if($request->quantity == 0){
+                    $user->carts()->detach($request->product_id);
+                    return $this->data(['carts_count' => --$user->carts_count] ,'deleted in cart successfully', 200);
+
+                }
+            $user->carts()->updateExistingPivot($request->product_id, ['quantity' => $request->quantity]);
+            }else{
+                $user->carts()->updateExistingPivot($request->product_id, ['quantity' => DB::raw('quantity + 1')]);
+            }
+            return $this->data(['carts_count' => $user->carts_count] ,'edited in cart successfully', 200);
         }else{
             $user->carts()->attach($request->product_id);
             return $this->data(['carts_count' => ++$user->carts_count], 'added to cart successfully', 201);

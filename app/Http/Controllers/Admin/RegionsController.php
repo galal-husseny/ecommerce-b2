@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Region\StoreRegionRequest as RegionStoreRegionRequest;
+use App\Http\Requests\Region\UpdateRegionRequest;
 use App\Models\City;
 use App\Models\Region;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class RegionsController extends Controller
      */
     public function index()
     {
-        $regions = Region::all();
+        $regions = Region::with('city')->get();
         return view('admin.regions.index', compact('regions'));
     }
 
@@ -46,25 +47,14 @@ class RegionsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Region $region)
     {
-        //
+        return view('admin.regions.edit', compact('region'));
     }
 
     /**
@@ -74,9 +64,10 @@ class RegionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRegionRequest $request, Region $region)
     {
-        //
+        $region->update($request->validated());
+        return redirect()->route('admins.regions.index')->with('success', __('general.messages.updated'));
     }
 
     /**
@@ -94,6 +85,6 @@ class RegionsController extends Controller
         catch (\Exception $error){
             return redirect()->route('admins.regions.index')->with('error', __('general.regions.failed'));
         }
-        
+
     }
 }
