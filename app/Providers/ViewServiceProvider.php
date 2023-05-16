@@ -15,9 +15,8 @@ class ViewServiceProvider extends ServiceProvider
         Facades\View::composer(['user.layouts.partials.header', 'user.dashboard', 'user.layouts.partials.cart', 'user.cart'],
         function ($view) {
             if(Auth::guard('web')->check()){
-                $user = Auth::guard('web')->user()->withCount('carts','wishlists')->first();
-                $userWithWishlists = $user->load('wishlists','carts');
-                $view->with('user', $userWithWishlists);
+                $user = Auth::guard('web')->user()->with('wishlists','carts')->withCount('carts','wishlists')->first();
+                $view->with('user', $user);
             }
         });
     }
