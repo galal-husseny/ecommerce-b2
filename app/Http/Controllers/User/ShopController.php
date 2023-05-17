@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 
-class ShopPageController extends Controller
+class ShopController extends Controller
 {
     /**
      * shop

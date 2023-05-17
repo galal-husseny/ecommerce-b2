@@ -60,6 +60,7 @@ return [
 
     ],
     'sidebar'=>[
+        
         'categories'=>[
             'categories'=> 'الاقسام',
             'all'=> 'جميع الاقسام',
@@ -157,6 +158,7 @@ return [
         'title' => 'الاحياء',
         'id' => 'الرقم',
         'name' => 'الاسم',
+        'city' => 'المدينة',
         'status' => 'الحالة',
         'operations' => 'العمليات',
         'show' => 'أعرض',

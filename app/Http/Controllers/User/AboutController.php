@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 
-class AboutPageController extends Controller
+class AboutController extends Controller
 {
     /**
      * about

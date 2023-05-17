@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 
-class ContactPageController extends Controller
+class ContactController extends Controller
 {
     /**
      * contact

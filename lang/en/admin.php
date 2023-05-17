@@ -157,6 +157,7 @@ return [
         'title' => 'regions',
         'id' => 'id',
         'name' => 'name',
+        'city' => 'City',
         'status' => 'Status',
         'operations' => 'Operations',
         'show' => 'Show',

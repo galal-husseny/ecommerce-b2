@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency()}}</td>
+                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency($product->carts->quantity)}}</td>
                                     </tr>
                                 @endforeach
                             </table>
@@ -90,7 +90,7 @@
 
                             <div class="size-209">
                                 <span class="mtext-110 cl2">
-                                    $79.65
+                                    {{$user->subTotal}}
                                 </span>
                             </div>
                         </div>

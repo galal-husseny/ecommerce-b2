@@ -1,26 +1,26 @@
 <?php
 
-use App\Http\Controllers\User\AboutPageController;
-use App\Http\Controllers\User\BlogPageController;
-use App\Http\Controllers\User\CartPageController;
-use App\Http\Controllers\User\ContactPageController;
-use App\Http\Controllers\User\IndexController;
-use App\Http\Controllers\User\ProductDetailsController;
-use App\Http\Controllers\User\ShopPageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\BlogController;
+use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\AboutController;
+use App\Http\Controllers\User\IndexController;
+use App\Http\Controllers\User\ContactController;
+use App\Http\Controllers\User\ProductDetailsController;
 
 
 Route::get('/', IndexController::class)->name('users.dashboard');
 
-Route::get('/shop', [ShopPageController::class, 'shop'])->name('shop');
+Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
 
-Route::get('/blog', [BlogPageController::class, 'blog'])->name('blog');
+Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 
-Route::get('/about', [AboutPageController::class, 'about'])->name('about');
+Route::get('/about', [AboutController::class, 'about'])->name('about');
 
-Route::get('/contact', [ContactPageController::class, 'contact'])->name('contact');
+Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
-Route::get('/cart', [CartPageController::class, 'cart'])->name('cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 
 Route::get('/{product}', [ProductDetailsController::class, 'detail'])->name('product-details');
 
