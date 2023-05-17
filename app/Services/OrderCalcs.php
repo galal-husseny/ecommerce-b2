@@ -21,12 +21,13 @@ class OrderCalcs
      * @param  CartProducts $cartProducts
      * @return float
      */
-    public static function subTotal(array $cartProducts) :string
+    public static function subTotal(array $cartProducts, float $discount = 0) :string
     {
         $subTotal = 0;
         foreach($cartProducts as $cartProduct){
             $subTotal += $cartProduct->getPrice() * $cartProduct->getQuantity();
         }
-        return $subTotal  . ' ' . __('user.shared.currency');
+        $subTotalAfterDiscount = $subTotal - $discount;
+        return $subTotalAfterDiscount  . ' ' . __('user.shared.currency');
     }
 }
