@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Apis\User;
 
 use App\Http\Controllers\Controller;
@@ -12,7 +11,7 @@ class WishlistController extends Controller
 {
     use ApiResponses;
 
-    public function add(WishlistRequest $request)
+    public function handle(WishlistRequest $request)
     {
         $user = User::withCount('wishlists')->findOrFail($request->user_id);
         if($user->wishlists->contains($request->product_id)){

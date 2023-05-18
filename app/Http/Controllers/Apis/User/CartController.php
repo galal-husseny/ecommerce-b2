@@ -44,7 +44,7 @@ class CartController extends Controller
         $user = User::with('coupons')->findOrFail($request->user_id);
         if($user){
             if($coupon){
-                
+
             }
         }
         return $request->validated();

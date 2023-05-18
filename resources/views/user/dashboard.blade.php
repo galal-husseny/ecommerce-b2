@@ -542,7 +542,8 @@
             </div>
         </div>
 
-        <div class="modal fade bd-example-modal-lg" tabindex="1000" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" tabindex="1000" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     jhbvdhfbdv
@@ -842,6 +843,6 @@
                     }
                 })
             })
-        })
+        });
     </script>
 @endpush

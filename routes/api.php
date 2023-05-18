@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Apis\User\AddressesController;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apis\User\CartController;
 use App\Http\Controllers\Apis\User\WishlistController;
@@ -26,7 +27,7 @@ Route::prefix('products')->controller(CartController::class)->group(function (){
 });
 
 Route::prefix('products')->controller(WishlistController::class)->group(function (){
-    Route::post('wishlists/handle', 'add');
+    Route::post('wishlists/handle', 'handle');
 });
 
 Route::prefix('products')->controller(AddressesController::class)->group(function (){
