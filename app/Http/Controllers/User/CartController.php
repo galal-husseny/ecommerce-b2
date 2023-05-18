@@ -26,7 +26,7 @@ class CartController extends Controller
             $cartProduct->setQuantity($product->carts->quantity);
             $cartProducts->addProduct($cartProduct);
         }
-        $subTotal = OrderCalcs::subTotal($cartProducts->getProducts());
+        $subTotal = OrderCalcs::subTotal($cartProducts);
         $user->subTotal = $subTotal;
         return view('user.cart', compact('user'));
     }

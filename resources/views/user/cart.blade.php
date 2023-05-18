@@ -88,9 +88,9 @@
                                 </span>
                             </div>
 
-                            <div class="size-209">
+                            <div class="size-209m subTotal" subTotal-value="{{$user->subTotal}}">
                                 <span class="mtext-110 cl2">
-                                    {{$user->subTotal}}
+                                    {{$user->subTotal}} {{__('user.shared.currency')}}
                                 </span>
                             </div>
                         </div>
@@ -141,8 +141,8 @@
                         </div>
                         <div class="flex-w flex-sb-m  p-t-18 p-b-15 ">
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="{{__('messages.frontend.cart.coupon_code')}}">
-                                <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                                <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5 coupon" type="text" name="coupon" placeholder="{{__('messages.frontend.cart.coupon_code')}}" value="{{old('coupon')}}">
+                                <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 applyCoupon" user-value="{{$user->id}}">
                                     {{__('messages.frontend.cart.apply_coupon')}}
                                 </div>
                             </div>
@@ -180,4 +180,39 @@
             })
         })
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('.applyCoupon').click(function() {
+            const user_id = $(this).attr('user-value');
+            const subTotal = $(".subTotal").attr('subTotal-value');
+            const coupon = $('.coupon').val();
+            const url = "{{ asset('api/products/carts/applyCoupon') }}";
+            const method = "POST";
+            const body = {
+                'user_id': user_id,
+                'orderTotal': subTotal,
+                'couponCode' : coupon
+            };
+            $.ajax({
+                url: url,
+                type: method,
+                headers: {
+                    'accept': 'application/json'
+                },
+                data: body,
+                success: function(result, status, xhr) {
+                    // $('#cart').attr('data-notify', result.data.carts_count)
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Failed',
+                        'somthing went wrong',
+                        'error'
+                    );
+                },
+            });
+        })
+    })
+</script>
 @endpush

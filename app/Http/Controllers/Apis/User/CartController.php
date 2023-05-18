@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Apis\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Cart\ApplyCouponRequest;
 use App\Http\Requests\Cart\CartRequest;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\User;
 use App\Traits\ApiResponses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
@@ -33,5 +36,17 @@ class CartController extends Controller
             $user->carts()->attach($request->product_id);
             return $this->data(['carts_count' => ++$user->carts_count], 'added to cart successfully', 201);
         }
+    }
+
+    public function applyCoupon(ApplyCouponRequest $request)
+    {
+        $coupon =Coupon::where('code', $request->couponCode)->first();
+        $user = User::with('coupons')->findOrFail($request->user_id);
+        if($user){
+            if($coupon){
+                
+            }
+        }
+        return $request->validated();
     }
 }
