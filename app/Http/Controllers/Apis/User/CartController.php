@@ -3,14 +3,9 @@
 namespace App\Http\Controllers\Apis\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Cart\ApplyCouponRequest;
 use App\Http\Requests\Cart\CartRequest;
-use App\Models\Coupon;
-use App\Models\Product;
 use App\Models\User;
 use App\Traits\ApiResponses;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
@@ -35,38 +30,6 @@ class CartController extends Controller
         }else{
             $user->carts()->attach($request->product_id);
             return $this->data(['carts_count' => ++$user->carts_count], 'added to cart successfully', 201);
-        }
-    }
-
-    public function applyCoupon(ApplyCouponRequest $request)
-    {
-        $coupon =Coupon::withCount('users')->where('code', $request->couponCode)->first();
-        $user = User::with('coupons')->withCount('coupons')->findOrFail($request->user_id);
-        if($user){
-            if(! $coupon){
-                return $this->error(['coupon' => 'Coupon not found']);
-            }
-            if($coupon->status ==0){
-                return $this->error(['coupon' => 'This coupon is not active']);
-            }
-            if($coupon->max_usage_number <= $coupon->users_count){
-                return $this->error(['coupon' =>'This Coupon reached max number of usage']);
-            }
-            if($coupon->max_usage_number_per_user <= $user->coupons_count){
-                return $this->error(['coupon' => 'This user can not use this coupon anymore']);
-            }
-            if($request->orderTotal < $coupon->min_order_value){
-                return $this->error(['coupon' => 'The order value is lower than coupon min vaue to be applied']);
-            }
-            if($request->couponApplyDate > $coupon->end_date){
-                return $this->error(['coupon' =>'This coupon is no longer valid']);
-            }
-            if($request->orderTotal * (($coupon->discount/100)) > $coupon->max_discount_value){
-                $orderTotal = $request->orderTotal - $coupon->max_discount_value;
-            }else{
-                $orderTotal = $request->orderTotal * ($coupon->discount/100);
-            }
-            return $this->data([$orderTotal]);
         }
     }
 }
