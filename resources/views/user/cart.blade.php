@@ -187,12 +187,14 @@
             const user_id = $(this).attr('user-value');
             const subTotal = $(".subTotal").attr('subTotal-value');
             const coupon = $('.coupon').val();
+            const couponApplyDate = new Date();
             const url = "{{ asset('api/products/carts/applyCoupon') }}";
             const method = "POST";
             const body = {
                 'user_id': user_id,
                 'orderTotal': subTotal,
-                'couponCode' : coupon
+                'couponCode' : coupon,
+                'couponApplyDate': couponApplyDate
             };
             $.ajax({
                 url: url,

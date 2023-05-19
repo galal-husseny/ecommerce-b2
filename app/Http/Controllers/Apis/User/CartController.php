@@ -40,13 +40,30 @@ class CartController extends Controller
 
     public function applyCoupon(ApplyCouponRequest $request)
     {
-        $coupon =Coupon::where('code', $request->couponCode)->first();
-        $user = User::with('coupons')->findOrFail($request->user_id);
+        $coupon =Coupon::withCount('users')->where('code', $request->couponCode)->first();
+        $user = User::with('coupons')->withCount('coupons')->findOrFail($request->user_id);
         if($user){
-            if($coupon){
-
+            if(! $coupon){
+                return $this->success('Coupon not found');
             }
+            if($coupon->status ==0){
+                return $this->success('This coupon is not active');
+            }else if($coupon->max_usage_number <= $coupon->users_count){
+                return $this->success('This Coupon reached max number of usage');
+            }else if($coupon->max_usage_number_per_user <= $user->coupons_count){
+                return $this->success('This user can not use this coupon anymore');
+            }else if($request->orderTotal < $coupon->min_order_value){
+                return $this->success('The order value is lower than coupon min vaue to be applied');
+            }else if($request->couponApplyDate > $coupon->end_date){
+                return $this->success('This coupon is no longer valid');
+            }
+            if($request->orderTotal * (1-($coupon->discount/100)) > $coupon->max_discount_value){
+                $orderTotal = $request->orderTotal - $coupon->max_discount_value;
+
+            }else{
+                $orderTotal = $request->orderTotal * (1-($coupon->discount/100));
+            }
+            return $this->data([$orderTotal]);
         }
-        return $request->validated();
     }
 }
