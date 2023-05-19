@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
 
@@ -15,7 +14,7 @@ class ViewServiceProvider extends ServiceProvider
         Facades\View::composer(['user.layouts.partials.header', 'user.dashboard', 'user.layouts.partials.cart'],
         function ($view) {
             if(Auth::guard('web')->check()){
-                $user = Auth::guard('web')->user()->with(['wishlists', 'carts'])->withCount('carts','wishlists')->first();
+                $user = Auth::guard('web')->user()->with(['wishlists','carts'])->withCount('carts','wishlists')->first();
                 $view->with('user', $user);
             }
         });

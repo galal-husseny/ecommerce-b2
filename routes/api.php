@@ -33,3 +33,7 @@ Route::prefix('products')->controller(WishlistController::class)->group(function
 Route::prefix('products')->controller(AddressesController::class)->group(function (){
     Route::post('addresses/store', 'store');
 });
+
+Route::prefix('products')->controller(CartController::class)->group(function (){
+    Route::post('carts/applyCoupon', 'applyCoupon');
+});

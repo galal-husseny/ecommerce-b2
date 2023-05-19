@@ -34,6 +34,7 @@
                                         <tr>
                                             <th>{{ __('admin.all_regions.id') }}</th>
                                             <th>{{ __('admin.all_regions.name') }}</th>
+                                            <th>{{ __('admin.all_regions.city') }}</th>
                                             <th>{{ __('admin.all_regions.status') }}</th>
                                             <th>{{ __('admin.all_regions.operations') }}</th>
                                         </tr>
@@ -43,6 +44,7 @@
                                         <tr>
                                             <td>{{++$index}}</td>
                                             <td>{{$region->getTranslation('name','en') .' - ' . $region->getTranslation('name','ar')}}</td>
+                                            <td> {{$region->city->name}} </td>
                                             <td @class([
                                                 'p-2',
                                                 'text-success' => $region->status,

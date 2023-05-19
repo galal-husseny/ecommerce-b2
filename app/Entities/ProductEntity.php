@@ -1,16 +1,14 @@
 <?php
 namespace App\Entities;
 
-class ProductEntity
+class ProductEntity implements ProductEntityInterface
 {
-    private float $price;
-
-    private int $quantity;
+    private $price,$quantity;
 
     /**
      * Get the value of price
      */
-    public function getPrice()
+    public function getPrice():float
     {
         return $this->price;
     }
@@ -24,13 +22,12 @@ class ProductEntity
     {
         $this->price = $price;
 
-        return $this;
     }
 
     /**
      * Get the value of quantity
      */
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
@@ -40,10 +37,8 @@ class ProductEntity
      *
      * @return  self
      */
-    public function setQuantity($quantity)
+    public function setQuantity(int $quantity)
     {
         $this->quantity = $quantity;
-
-        return $this;
     }
 }

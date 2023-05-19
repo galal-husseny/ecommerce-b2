@@ -157,6 +157,7 @@ return [
         'title' => 'regions',
         'id' => 'id',
         'name' => 'name',
+        'city' => 'City',
         'status' => 'Status',
         'operations' => 'Operations',
         'show' => 'Show',
@@ -164,6 +165,15 @@ return [
         'delete' => 'Delete',
         'active' => 'Active',
         'not_active' => 'Not Active'
+    ],
+    'edit_region' => [
+        'title' => 'Edit Region details',
+        'name_en' => 'Name (EN)',
+        'name_ar' => 'Name (AR)',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'submit' => 'Edit',
     ],
     'add_region' => [
         'name_en' => 'Name (EN)',

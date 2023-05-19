@@ -10,6 +10,10 @@
     @include('user.layouts.partials.cart')
 @endsection
 
+@section('wishlist')
+    @include('user.layouts.partials.wishlist')
+@endsection
+
 @section('footer')
     @include('user.layouts.partials.footer')
 @endsection
@@ -468,8 +472,7 @@
                         <div class="block2">
                             <div class="block2-pic hov-img0" id="products"
                                 data-products="<?= htmlspecialchars($products) ?>">
-                                <a style="text-decoration: none"
-                                    href="{{ route('product-details', \Illuminate\Support\Facades\Crypt::encryptString($product->id)) }}">
+                                <a style="text-decoration: none" href="{{ route('product-details', \Illuminate\Support\Facades\Crypt::encryptString($product->id)) }}">
                                     <img src="{{ $product->getFirstMediaUrl('product', 'preview') }}" alt="IMG-PRODUCT">
                                 </a>
                                 {{-- <a style="text-decoration: none" href="#"
@@ -478,15 +481,11 @@
                                     {{ __('messages.frontend.index.quick_view') }}
                                 </a> --}}
                                 @auth('web')
-                                    <button type="button"
-                                        class=" addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04"
-                                        user-value="{{ Auth::guard('web')->id() }}" product-value="{{ $product->id }}">
+                                    <button type="button" class=" addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="{{ Auth::guard('web')->id() }}" product-value="{{ $product->id }}">
                                         {{ __('messages.frontend.index.add_to_cart') }}
                                     </button>
                                 @else
-                                    <button type="button"
-                                        class="addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04"
-                                        user-value="" product-value="{{ $product->id }}">
+                                    <button type="button" class="addToCart block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" user-value="" product-value="{{ $product->id }}">
                                         {{ __('messages.frontend.index.add_to_cart') }}
                                     </button>
                                 @endauth
@@ -494,8 +493,7 @@
 
                             <div class="block2-txt flex-w flex-t p-t-14">
                                 <div class="block2-txt-child1 flex-col-l ">
-                                    <a style="text-decoration: none"
-                                        href="{{ route('product-details', \Illuminate\Support\Facades\Crypt::encryptString($product->id)) }}"
+                                    <a style="text-decoration: none" href="{{ route('product-details', \Illuminate\Support\Facades\Crypt::encryptString($product->id)) }}"
                                         class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                         {{ $product->name }}
                                     </a>
@@ -507,19 +505,19 @@
 
                                 <div class="block2-txt-child2 flex-r p-t-3">
                                     @auth('web')
-                                        <button type="button" class="btn-addwish-b2 dis-block pos-relative addToWishlist"
-                                            user-value="{{ Auth::guard('web')->id() }}" product-value="{{ $product->id }}">
+                                        <button type="button" class="btn-addwish-b2 dis-block pos-relative addToWishlist" user-value="{{ Auth::guard('web')->id() }}" product-value="{{ $product->id }}">
                                             <img @class([
-                                                'icon-heart1',
+                                                "icon-heart1",
                                                 'dis-block',
                                                 'trans-04'
-                                            ]) src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}"alt="ICON">
+                                            ]) src="{{ asset('frontend-assets/images/icons/icon-heart-01.png') }}" alt="ICON">
                                             <img @class([
-                                                'icon-heart2' => ! in_array($product->id, $user->wishlists->pluck('id')->toArray()),
+                                                'icon-heart2' => !in_array($product->id, $user->wishlists->pluck('id')->toArray()),
                                                 'dis-block',
                                                 'trans-04',
                                                 'ab-t-l'
-                                            ])  src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}" alt="ICON">
+                                            ]) src="{{ asset('frontend-assets/images/icons/icon-heart-02.png') }}"
+                                                alt="ICON">
                                         </button>
                                     @else
 
@@ -713,8 +711,7 @@
                 div.setAttribute('role', 'tabpanel');
                 div.setAttribute('style', 'width: 50%; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;');
                 div.innerHTML = `<div class="wrap-pic-w pos-relative">
-                                    <img  src="` + product.media[i].preview_url +
-                    `">
+                                    <img  src="` + product.media[i].preview_url + `">
                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="` + product.media[i].preview_url + `">
                                         <i class="fa fa-expand"></i>
                                     </a>
@@ -803,7 +800,7 @@
                     },
                     data: body,
                     success: function(result, status, xhr) {
-                        $('#cart').attr('data-notify', result.data.carts_count);
+                        $('#cart').attr('data-notify', result.data.carts_count)
                     },
                     error: function(xhr, status, error) {
                         Swal.fire(
@@ -814,7 +811,6 @@
                     },
                 });
             })
-
             $('.addToWishlist').click(function() {
                 const product_id = $(this).attr('product-value');
                 const user_id = $(this).attr('user-value');
@@ -824,7 +820,7 @@
                     'user_id': user_id,
                     'product_id': product_id
                 };
-                let button = $(this);
+                const button = $(this);
                 $.ajax({
                     url: url,
                     type: method,
@@ -834,7 +830,8 @@
                     data: body,
                     success: function(result) {
                         $('#wishlist').attr('data-notify', result.data.wishlists_count);
-                        button.children().eq(1).toggleClass('icon-heart2');
+                        button.children().eq(1).toggleClass('icon-heart2')
+
                     },
                     error: function(result) {
                         console.log(result);
