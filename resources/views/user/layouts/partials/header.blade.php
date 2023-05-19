@@ -47,10 +47,6 @@
                         </li>
 
                         <li>
-                            <a style="text-decoration: none" href="{{ route('blog') }}"> {{ __('user.header.blog') }} </a>
-                        </li>
-
-                        <li>
                             <a style="text-decoration: none" href="{{ route('about') }}"> {{ __('user.header.about') }} </a>
                         </li>
 
@@ -89,6 +85,7 @@
                             <ul class="sub-menu">
                                 @auth('web')
                                     <li><a style="text-decoration: none" href="{{ route('users.profile.edit') }}"> {{__('user.profile.profile')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.address.index') }}"> My Addresses </a></li>
                                     <form method="POST" action="{{ route('users.logout') }}">
                                         @csrf
                                         <li><a style="text-decoration: none" href="route('users.logout')"
