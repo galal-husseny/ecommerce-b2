@@ -88,8 +88,28 @@ return [
         ],
         'shop' => [
             'title' => 'Shop',
-            ''
         ],
+        'address' => [
+            'title' => 'Address',
+            'add_details' => 'Address details',
+            'all_add' => 'Available addresses',
+            'city' => 'City',
+            'region' => 'Region',
+            'building' => 'Building',
+            'street' => 'Street',
+            'floor' => 'Floor',
+            'flat' => 'Flat',
+            'notes' => 'Notes',
+            'type' => 'Type',
+            'home' => 'Home',
+            'work' => 'Work',
+            'actions' => 'Actions',
+            'edit' => 'Edit',
+            'delete' => 'Delete',
+            'choose_city' => 'Choose a City',
+            'choose_region' => 'Choose a Region',
+            'add_address' => 'Add new address',
+        ]
     ]
 
 ];

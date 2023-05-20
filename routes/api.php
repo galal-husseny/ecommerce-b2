@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Apis\User\AddressesController;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Apis\User\CartController;
+use App\Http\Controllers\Apis\user\RegionsController;
 use App\Http\Controllers\Apis\User\WishlistController;
+use App\Http\Controllers\Apis\User\AddressesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,5 @@ Route::prefix('products')->controller(AddressesController::class)->group(functio
 Route::prefix('products')->controller(CartController::class)->group(function (){
     Route::post('carts/applyCoupon', 'applyCoupon');
 });
+
+Route::post('regions', [RegionsController::class, 'index']);

@@ -134,9 +134,9 @@
                                 </div>
                             </div>
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 " user-value="{{$user->id}}">
+                                <a href="{{route('users.address.index')}}" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 " user-value="{{$user->id}}">
                                     {{__('messages.frontend.cart.add_address')}}
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div class="flex-w flex-sb-m  p-t-18 p-b-15 ">

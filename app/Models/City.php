@@ -57,4 +57,15 @@ class City extends Model
             ->saveSlugsTo('slug')
             ->usingLanguage(false);
     }
+
+    /**
+     * scopeActive
+     *
+     * @param  query $query
+     * @return active instance
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

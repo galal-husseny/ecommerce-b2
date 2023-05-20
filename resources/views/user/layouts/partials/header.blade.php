@@ -47,10 +47,6 @@
                         </li>
 
                         <li>
-                            <a style="text-decoration: none" href="{{ route('blog') }}"> {{ __('user.header.blog') }} </a>
-                        </li>
-
-                        <li>
                             <a style="text-decoration: none" href="{{ route('about') }}"> {{ __('user.header.about') }} </a>
                         </li>
 

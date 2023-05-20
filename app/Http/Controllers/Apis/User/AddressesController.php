@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Apis\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Address\StoreAddressRequest;
 use App\Models\Address;
 use App\Traits\ApiResponses;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AddressApi\StoreAddressRequest;
 
 class AddressesController extends Controller
 {
