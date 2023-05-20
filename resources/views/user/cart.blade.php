@@ -88,9 +88,9 @@
                                 </span>
                             </div>
 
-                            <div class="size-209m subTotal" subTotal-value="{{$user->subTotal}}">
+                            <div class="size-209m subTotal">
                                 <span class="mtext-110 cl2">
-                                    {{$user->subTotal}} {{__('user.shared.currency')}}
+                                    {{$subTotal}} {{__('user.shared.currency')}}
                                 </span>
                             </div>
                         </div>
@@ -104,38 +104,38 @@
 
                             <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
                                 <p class="stext-111 cl6 p-t-2">
-                                    There are no shipping methods available. Please double check your address, or contact us
-                                    if you need any help.
+                                    {{__('messages.frontend.cart.select_address')}}
                                 </p>
 
                                 <div class="p-t-15">
-                                    <span class="stext-112 cl8">
-                                        {{__('messages.frontend.cart.calc_shipping')}}
-                                    </span>
-
+                                @if ($user->addresses)
                                     <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                        <select class="js-select2" name="time">
-                                            <option> {{__('messages.frontend.cart.select_country')}} </option>
-                                            <option>USA</option>
-                                            <option>UK</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
+                                            <select class="js-select2" name="time">
+                                                <option> {{__('messages.frontend.cart.select_address')}} </option>
+                                                @foreach ($user->addresses as $address)
+                                                <option>
+                                                    {{$address->region->city->name}},
+                                                    {{$address->region->name}},
+                                                    {{$address->street}},
+                                                    {{__('messages.frontend.cart.building')}}: {{$address->building}} -
+                                                    @if ($address->floor) {{__('messages.frontend.cart.floor')}}: {{$address->floor}} - @endif
+                                                    @if ($address->flat) {{__('messages.frontend.cart.flat')}}: {{$address->flat}} - @endif
+                                                    @if ($address->notes) {{__('messages.frontend.cart.notes')}}: {{$address->notes}} - @endif
+                                                    ({{$address->type}})
+                                                </option>
 
-                                    <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="{{__('messages.frontend.cart.state_country')}}">
+                                                @endforeach
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
                                     </div>
-
-                                    <div class="bor8 bg0 m-b-22">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="{{__('messages.frontend.cart.postcode')}}">
-                                    </div>
-
-                                    <div class="flex-w">
-                                        <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                            {{__('messages.frontend.cart.update_total')}}
-                                        </div>
-                                    </div>
-
+                                @else
+                                    <p> {{__('messages.frontend.cart.no_addresses')}} </p>
+                                @endif
+                                </div>
+                            </div>
+                            <div class="flex-w flex-m m-r-20 m-tb-5">
+                                <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 " user-value="{{$user->id}}">
+                                    {{__('messages.frontend.cart.add_address')}}
                                 </div>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                             </div>
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2">
-                                    $79.65
+                                    {{$subTotal}} {{__('user.shared.currency')}}
                                 </span>
                             </div>
                         </div>

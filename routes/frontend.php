@@ -20,7 +20,7 @@ Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
-Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart')->middleware('auth:web');
 
 Route::get('/{product}', [ProductDetailsController::class, 'detail'])->name('product-details');
 
