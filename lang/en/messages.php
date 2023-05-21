@@ -109,6 +109,8 @@ return [
             'choose_city' => 'Choose a City',
             'choose_region' => 'Choose a Region',
             'add_address' => 'Add new address',
+            'edit_address' => 'Edit',
+            
         ]
     ]
 

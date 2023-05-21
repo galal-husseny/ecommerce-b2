@@ -81,7 +81,7 @@
                                 </select>
                             </div>
                         </div>
-                        <button href="{{ route('users.address.index') }}" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                        <button href="{{ route('users.address.index') }}" class="button-main w-50 m-tb-5">
                             {{ __('messages.frontend.address.add_address') }}
                         </button>
                     </form>
@@ -117,11 +117,11 @@
                                     <td class="column-8 text-center"> {{ $address->notes }} </td>
                                     <td class="column-9 text-center"> {{ $address->type }} </td>
                                     <td class="column-10 text-center">
-                                        <a href="{{ route('users.address.edit', $address->id) }}" class="button-main mb-2"> {{ __('messages.frontend.address.edit') }} </a>
-                                        <form action="{{ route('users.address.destroy', $address->id) }}" method="post" class="d-iniline">
+                                        <a href="{{ route('users.address.edit', \Illuminate\Support\Facades\Crypt::encryptString($address->id)) }}" class="button-main mb-2"> {{ __('messages.frontend.address.edit') }} </a>
+                                        <form action="{{ route('users.address.destroy', \Illuminate\Support\Facades\Crypt::encryptString($address->id)) }}" method="post" class="d-iniline">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="button-main"> {{ __('messages.frontend.address.delete') }} </button>
+                                            <button class="button-delete"> {{ __('messages.frontend.address.delete') }} </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -209,5 +209,5 @@
         });
     });
 </script>
-{{-- @include('components.redirect-messages') --}}
+@include('components.redirect-messages')
 @endpush

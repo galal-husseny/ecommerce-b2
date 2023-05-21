@@ -37,9 +37,9 @@ class StoreAddressRequest extends FormRequest
     public function messages()
     {
         return [
-            'region_id.required' => 'The region field is required.',
-            'region_id.integer' => 'The region field must be an integer.',
-            'region_id.exists' => 'The region field does n\'t exist.',
+            'region_id.required' => __('general.errors.region_id_required'),
+            'region_id.integer' => __('general.errors.region_id_integer'),
+            'region_id.exists' => __('general.errors.region_id_exists'),
 
         ];
     }

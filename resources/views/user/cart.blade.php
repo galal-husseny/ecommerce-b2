@@ -111,9 +111,8 @@
                                 @if ($user->addresses)
                                     <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
                                             <select class="js-select2" name="time">
-                                                <option> {{__('messages.frontend.cart.select_address')}} </option>
                                                 @foreach ($user->addresses as $address)
-                                                <option>
+                                                <option @selected($loop->last)>
                                                     {{$address->region->city->name}},
                                                     {{$address->region->name}},
                                                     {{$address->street}},

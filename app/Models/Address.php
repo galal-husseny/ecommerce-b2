@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\HasEcryptedIds;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Address extends Model
 {
     use HasFactory;
+    use HasEcryptedIds;
 
     /**
      * The attributes that are mass assignable.
@@ -49,5 +51,16 @@ class Address extends Model
      */
     public function region(){
         return $this->belongsTo(Region::class);
+    }
+
+    /**
+     * scopeActive
+     *
+     * @param  query $query
+     * @return active instance
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
 }

@@ -51,11 +51,11 @@
                                                 'text-danger' => ! $region->status,
                                                 ])>{{__('admin.all_regions.' . printEnum(App\Enums\CategoryEnum::class , $region->status))}}</td>
                                             <td>
-                                                <a href="{{route('admins.regions.edit' ,  [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill w-25 "> {{__('admin.all_regions.edit')}} </a>
+                                                <a href="{{route('admins.regions.edit' ,  [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" class="btn btn-sm btn-primary my-2  rounded-pill " style="width: 45%"> {{__('admin.all_regions.edit')}} </a>
                                                 <form action="{{route('admins.regions.destroy' , [\Illuminate\Support\Facades\Crypt::encryptString($region->id)])}}" method="post" class="d-inline w-25">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill w-25" type="submit">
+                                                    <button class="btn btn-sm btn-danger  my-2 rounded-pill" type="submit" style="width: 45%">
                                                         {{__('admin.all_regions.delete')}}
                                                     </button>
                                                 </form>

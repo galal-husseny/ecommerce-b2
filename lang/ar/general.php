@@ -18,5 +18,10 @@ return [
     ],
     'coupons' => [
         'failed' => 'فشل حذف الكوبون المطلوب لانه ينتمي الى طلب ما'
+    ],
+    'errors' => [
+        'region_id_required' => 'يجب ادخال حقل الحي.',
+        'region_id_integer' => 'حقل الحي غير صحيح.',
+        'region_id_exists' => '.الحي غير موجود',
     ]
 ];

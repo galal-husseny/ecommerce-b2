@@ -108,6 +108,7 @@ return [
             'choose_city' => 'أختر مدينة',
             'choose_region' => 'أختر حي',
             'add_address' => 'اضف عنوان جديد',
+            'edit_address' => 'تعديل'
         ]
     ]
 

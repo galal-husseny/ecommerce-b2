@@ -18,5 +18,10 @@ return [
     ],
     'coupons' => [
         'failed' => 'Failed to delete the required Coupon as it belongs to an order'
+    ],
+    'errors' => [
+        'region_id_required' => 'The region field is required.',
+        'region_id_integer' => 'The region field must be an integer.',
+        'region_id_exists' => 'The region field does n\'t exist.',
     ]
 ];

@@ -16,7 +16,7 @@ Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
 
 Route::name('users.')->group(function() {
     Route::middleware('auth:web')->prefix('address')->controller(AddressController::class)->name('address.')->group(function() {
-        Route::get('/', 'index')->name('index');
+        Route::get('/', 'index')->name('index')->middleware('address.redirection');
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{address}', 'edit')->name('edit');
         Route::put('/update/{address}', 'update')->name('update');
