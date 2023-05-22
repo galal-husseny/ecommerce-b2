@@ -44,7 +44,7 @@
                                 @foreach ($user->carts as $product)
                                     <tr class="table_row">
                                         <td class="column-1">
-                                            <div class="how-itemcart1">
+                                            <div class="how-itemcart1 deleteProduct" data-product ="<?= htmlspecialchars($product) ?>">
                                                 <img src="{{$product->getFirstMediaUrl('product', 'preview')}}" alt="IMG">
                                             </div>
                                         </td>
@@ -56,7 +56,7 @@
                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                 </div>
 
-                                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="{{$product->carts->quantity}}">
+                                                <input data-product ="<?= htmlspecialchars($product) ?>" class="mtext-104 cl3 txt-center num-product product" type="number" name="num-product1" value="{{$product->carts->quantity}}" >
 
                                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                     <a class=" num-products" type="submit">
@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency($product->carts->quantity)}}</td>
+                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency($product->carts->quantity) }}</td>
                                     </tr>
                                 @endforeach
                             </table>
@@ -154,7 +154,7 @@
                                 </span>
                             </div>
                             <div class="size-209 p-t-1">
-                                <span class="mtext-110 cl2">
+                                <span class="mtext-110 cl2" id="subTotal">
                                     {{$subTotal}} {{__('user.shared.currency')}}
                                 </span>
                             </div>
@@ -181,6 +181,12 @@
     </script>
 
 <script>
+    var translations = {
+        currency: "{{ __('user.shared.currency') }}"
+    };
+    const subtotal = $('#subTotal')
+    console.log(subTotal)
+
     $(document).ready(function() {
         $('.applyCoupon').click(function() {
             const user_id = $(this).attr('user-value');
@@ -203,7 +209,7 @@
                 },
                 data: body,
                 success: function(result, status, xhr) {
-                    // $('#cart').attr('data-notify', result.data.carts_count)
+                    $('.productTotal').val()
                 },
                 error: function(xhr, status, error) {
                     Swal.fire(
@@ -213,7 +219,82 @@
                     );
                 },
             });
-        })
+        });
+        $('.product').change(function () {
+            var product = $(this).data('product')
+            const product_id = product.id;
+            const user_id = product.carts.user_id;
+            const quantity = $(this).val()
+            const productTotal = $(this).closest('.table_row').find('.productTotal');
+            const url = "{{ asset('api/products/carts/handle') }}";
+            const method = "POST";
+            const body = {
+                'user_id': user_id,
+                'product_id': product_id,
+                'quantity' : quantity,
+            };
+            const tableRow = $(this).closest('.table_row');
+            $.ajax({
+                url: url,
+                type: method,
+                headers: {
+                    'accept': 'application/json'
+                },
+                data: body,
+                success: function(result, status, xhr) {
+                    if (quantity == 0) {
+                    // Remove the table row if the quantity is 0
+                    tableRow.remove();
+                    $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                    } else {
+                        productTotal.html((product.sale_price * quantity) + ' ' + translations.currency);
+                        $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Failed',
+                        'somthing went wrong',
+                        'error'
+                    );
+                },
+            });
+        });
+        $('.deleteProduct').click(function () {
+            var product = $(this).data('product')
+            const product_id = product.id;
+            const user_id = product.carts.user_id;
+            const quantity = 0;
+            const url = "{{ asset('api/products/carts/handle') }}";
+            const method = "POST";
+            const body = {
+                'user_id': user_id,
+                'product_id': product_id,
+                'quantity' : quantity,
+            };
+            const tableRow = $(this).closest('.table_row');
+
+            $.ajax({
+                url: url,
+                type: method,
+                headers: {
+                    'accept': 'application/json'
+                },
+                data: body,
+                success: function(result, status, xhr) {
+                    tableRow.remove();
+                    $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Failed',
+                        'somthing went wrong',
+                        'error'
+                    );
+                },
+            });
+        });
+
     })
 </script>
 @endpush
