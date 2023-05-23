@@ -1,6 +1,6 @@
 @extends('user.layouts.parent')
 
-@section('title', __('messages.frontend.cart.your_cart'))
+@section('title', __("messages.frontend.cart.your_cart"))
 
 @section('header')
     @include('user.layouts.partials.header')
@@ -42,7 +42,7 @@
                                     <th class="column-4 text-center"> {{__('messages.frontend.cart.quantity')}} </th>
                                     <th class="column-5 text-center"> {{__('messages.frontend.cart.total')}} </th>
                                 </tr>
-                                @foreach ($user->carts as $product)
+                                @foreach ($user->carts as $index=>$product)
                                     <tr class="table_row">
                                         <td class="column-1">
                                             <div class="how-itemcart1">
@@ -50,35 +50,38 @@
                                             </div>
                                         </td>
                                         <td class="column-2">{{$product->name}}</td>
-                                        <td class="column-3 productPrice"> {{$product->sale_price_with_currency()}} </td>
+                                        <td name="productPrice{{$index}}" class="column-3 productPrice" data-td="{{$product->sale_price_with_currency()}}" value="{{$product->sale_price_with_currency()}}"> {{$product->sale_price_with_currency()}} </td>
                                         <td class="column-4">
-                                            <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <div class="num-products wrap-num-product flex-w m-l-auto m-r-0" order="{{$index}}">
+                                                <div class=" btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                 </div>
 
-                                                <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                    name="num-product1" value="{{$product->carts->quantity}}">
+                                                <input class="mtext-104 cl3 txt-center num-product productQuantity" type="number"
+                                                    name="productQuantity{{$index}}" order="{{$index}}" value="{{$product->carts->quantity}}">
 
-                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                    <a class=" num-products" type="submit">
-                                                    <i class="fs-16 zmdi zmdi-plus"></i>
-                                                    </a>
+                                                <div class="num-products btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" order="{{$index}}">
+                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="column-5 productTotal">{{$product->sale_price_with_currency($product->carts->quantity)}}</td>
+                                        <td name="totalProductPrice{{$index}}" class="column-5 productTotal" value="" data-price="{{$product->sale_price_with_currency($product->carts->quantity)}}">{{$product->sale_price_with_currency($product->carts->quantity)}}</td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
+                                    <input type="hidden" id="countOfProduct" data-input="{{count($user->carts)}}">
                             </table>
                         </div>
 
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="{{__('messages.frontend.cart.coupon_code')}}">
-                                <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-                                    {{__('messages.frontend.cart.apply_coupon')}}
-                                </div>
+                                <form method="POST">
+                                    <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="couponCode" placeholder="{{__('messages.frontend.cart.coupon_code')}}">
+                                    <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                                        {{__('messages.frontend.cart.apply_coupon')}}
+                                    </div>
+                                </form>
                             </div>
 
                             <div
@@ -103,8 +106,8 @@
                             </div>
 
                             <div class="size-209">
-                                <span class="mtext-110 cl2">
-                                    $79.65
+                                <span class="mtext-110 cl2 total-product-price">
+                                    .....
                                 </span>
                             </div>
                         </div>
@@ -162,8 +165,8 @@
                             </div>
 
                             <div class="size-209 p-t-1">
-                                <span class="mtext-110 cl2">
-                                    $79.65
+                                <span class="mtext-110 cl2 total-product-price">
+                                    .....
                                 </span>
                             </div>
                         </div>
@@ -182,9 +185,42 @@
     <script>
         $(document).ready(function () {
             $('.num-products').click(function () {
-                let productQuantity = $('input[name="num-product1"]').val();
-                alert(productQuantity)
+                let productQuantity = $('input[name="productQuantity"]').val();
+                let rowNo = $(this).attr('order');
+                preparTotalPrice(rowNo);
+                productsPriceTotal();
             })
+            
+            $('.productQuantity').keyup(function () {
+                let rowNo = $(this).attr('order');
+                preparTotalPrice(rowNo);
+                productsPriceTotal();
+            })
+            
+            function preparTotalPrice(rowNo){
+                let productQuantity = $('input[name="productQuantity'+ rowNo +'"]').val();
+                let productPrice = $('td[name="productPrice'+ rowNo +'"]').attr('data-td');
+                let totalProductPriceElement = $('td[name="totalProductPrice'+ rowNo +'"]');
+                let totalProductPriceValue = productPriceTotal(productQuantity, productPrice)
+                totalProductPriceElement.html(totalProductPriceValue);
+                totalProductPriceElement.attr( 'data-price', totalProductPriceValue );
+            }
+            function productPriceTotal(productQuantity, productPrice){                
+                return parseInt(productQuantity) * parseInt(productPrice);
+            }
+            
+            function productsPriceTotal(){
+                let totalProductPrice = 0;
+                countOfProduct = $('#countOfProduct').attr('data-input');
+                for(i = 0 ; i < countOfProduct ; i++){
+                    console.log(parseInt($('td[name="totalProductPrice'+ i +'"]').attr('data-price')));
+                    totalProductPrice += parseInt($('td[name="totalProductPrice'+ i +'"]').attr('data-price'));
+                }
+                $('.total-product-price').html( totalProductPrice );
+                $('.total-product-price').attr( 'data-total-price', totalProductPrice );
+            }
+
+            productsPriceTotal();
         })
     </script>
 @endpush
