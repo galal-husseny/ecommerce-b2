@@ -7,6 +7,7 @@ use App\Http\Controllers\Apis\User\CartController;
 use App\Http\Controllers\Apis\user\RegionsController;
 use App\Http\Controllers\Apis\User\WishlistController;
 use App\Http\Controllers\Apis\User\AddressesController;
+use App\Http\Controllers\Apis\User\ApplyCoupon;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +36,8 @@ Route::prefix('products')->controller(AddressesController::class)->group(functio
     Route::post('addresses/store', 'store');
 });
 
-Route::prefix('products')->controller(CartController::class)->group(function (){
-    Route::post('carts/applyCoupon', 'applyCoupon');
+Route::prefix('products')->controller(ApplyCoupon::class)->group(function (){
+    Route::post('carts/applyCoupon', 'apply');
 });
 
 Route::post('regions', [RegionsController::class, 'index']);

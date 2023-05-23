@@ -34,6 +34,7 @@ class CartController extends Controller
             return $this->data(['carts_count' => $user->carts_count] ,'edited in cart successfully', 200);
         }else{
             $user->carts()->attach($request->product_id);
+            $subTotal = $this->cartSubTotal($user->carts);
             return $this->data(['carts_count' => ++$user->carts_count], 'added to cart successfully', 201);
         }
     }

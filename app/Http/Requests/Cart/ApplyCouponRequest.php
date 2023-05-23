@@ -25,7 +25,6 @@ class ApplyCouponRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'integer'],
-            'orderTotal' => ['required', 'numeric'],
             'couponCode' => ['required', 'string']
         ];
     }
