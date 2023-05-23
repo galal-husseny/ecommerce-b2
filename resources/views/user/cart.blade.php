@@ -237,6 +237,7 @@
                         if (quantity == 0) {
                             // Remove the table row if the quantity is 0
                             tableRow.remove();
+                            $('#cart').attr('data-notify', result.data.carts_count)
                         } else {
                             productTotal.html((product.sale_price * quantity) + ' ' + translations.currency);
                         }
@@ -266,6 +267,7 @@
                     'quantity': quantity,
                 };
                 const tableRow = $(this).closest('.table_row');
+                $(this).prop('disabled', true);
                 $.ajax({
                     url: url,
                     type: method,
@@ -275,6 +277,7 @@
                     data: body,
                     success: function(result, status, xhr) {
                         tableRow.remove();
+                        $('#cart').attr('data-notify', result.data.carts_count)
                     },
                     error: function(xhr, status, error) {
                         Swal.fire(
@@ -284,7 +287,8 @@
                         );
                     },
                     complete: function(result) {
-                        updateSubTotal();
+                        // updateSubTotalOnDelete();
+                        $(this).prop('disabled', false);
                     }
                 });
             });
@@ -292,6 +296,36 @@
         })
 
         function updateSubTotal() {
+            var product = $('.product').data('product')
+            const product_id = product.id;
+            const user_id = product.carts.user_id;
+            const url = "{{ asset('api/products/carts/getSubTotal') }}";
+            const method = "POST";
+            const body = {
+                'user_id': user_id,
+                'product_id': product_id,
+            };
+            $.ajax({
+                url: url,
+                type: method,
+                headers: {
+                    'accept': 'application/json'
+                },
+                data: body,
+                success: function(result, status, xhr) {
+                    $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Failed',
+                        'somthing went wrong',
+                        'error'
+                    );
+                },
+            });
+        }
+
+        function updateSubTotalOnDelete() {
             var product = $('.product').data('product')
             const product_id = product.id;
             const user_id = product.carts.user_id;

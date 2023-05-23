@@ -39,6 +39,15 @@ class CartController extends Controller
         }
     }
 
+    public function getSubTotal(CartRequest $request)
+    {
+        $user = User::with(['wishlists','carts', 'addresses.region.city'])->withCount('carts','wishlists')->findOrFail($request->user_id);
+        if($user->carts->contains($request->product_id)){
+            $subTotal = $this->cartSubTotal($user->carts);
+            return $this->data(['subTotal' => $subTotal] );
+        }
+    }
+
     private function cartSubTotal($carts): float
     {
         $cartProducts = new CartProducts();

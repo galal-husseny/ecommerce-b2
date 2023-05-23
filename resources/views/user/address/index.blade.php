@@ -81,7 +81,7 @@
                                 </select>
                             </div>
                         </div>
-                        <button href="{{ route('users.address.index') }}" class="button-main w-50 m-tb-5">
+                        <button href="{{ route('users.address.index') }}" class="button-main w-25 m-tb-5">
                             {{ __('messages.frontend.address.add_address') }}
                         </button>
                     </form>
