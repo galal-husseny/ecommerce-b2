@@ -84,6 +84,9 @@ return [
             'notes' => 'الملاحظات',
             'no_addresses' => 'لا يوجد عنوانين متاحة الان',
             'add_address' => 'اضف عنوان جديد',
+            'shipping' => 'الشحن',
+            'coupon_saving' => ' لقد وفرت',
+            'discount' => 'الخصم'
         ],
         'shop' => [
             'title' => 'المتجر',

@@ -8,6 +8,7 @@ use App\Http\Controllers\Apis\user\RegionsController;
 use App\Http\Controllers\Apis\User\WishlistController;
 use App\Http\Controllers\Apis\User\AddressesController;
 use App\Http\Controllers\Apis\User\ApplyCoupon;
+use App\Http\Controllers\Apis\User\OrderShipping;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('products')->controller(CartController::class)->group(function (){
     Route::post('carts/handle', 'handle');
     Route::post('carts/getSubTotal', 'getSubTotal');
-
 });
 
 Route::prefix('products')->controller(WishlistController::class)->group(function (){
@@ -43,3 +43,7 @@ Route::prefix('products')->controller(ApplyCoupon::class)->group(function (){
 });
 
 Route::post('regions', [RegionsController::class, 'index']);
+
+Route::prefix('products')->controller(OrderShipping::class)->group(function (){
+    Route::post('carts/getShipping', 'shipping');
+});

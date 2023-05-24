@@ -110,9 +110,9 @@
                                 <div class="p-t-15">
                                     @if ($user->addresses)
                                         <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                            <select class="js-select2" name="time">
+                                            <select class="js-select2" name="time" id="address">
                                                 @foreach ($user->addresses as $address)
-                                                    <option @selected($loop->last)>
+                                                    <option @selected($loop->last) value="{{ $address->id }}">
                                                         {{ $address->region->city->name }},
                                                         {{ $address->region->name }},
                                                         {{ $address->street }},
@@ -152,6 +152,30 @@
                             </div>
                         </div>
 
+                        <div class="flex-w flex-t p-t-27 pb-2 d-none" id="shipping">
+                            <div class="size-208">
+                                <span class="mtext-101 cl2">
+                                    {{ __('messages.frontend.cart.shipping') }}:
+                                </span>
+                            </div>
+                            <div class="size-209 p-t-1">
+                                <span class="mtext-110 cl2" id="shippingValue" shipping-value = "0">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex-w flex-t p-t-27 pb-2 d-none" id="coupon">
+                            <div class="w-50">
+                                <span class="mtext-101 cl2">
+                                    {{ __('messages.frontend.cart.discount') }}:
+                                </span>
+                            </div>
+                            <div class="w-50 p-t-1" >
+                                <span class="mtext-110 cl2" id="couponDiscount">
+
+                                </span>
+                            </div>
+                        </div>
                         <div class="flex-w flex-t p-t-27 p-b-33">
                             <div class="size-208">
                                 <span class="mtext-101 cl2">
@@ -159,7 +183,7 @@
                                 </span>
                             </div>
                             <div class="size-209 p-t-1">
-                                <span class="mtext-110 cl2">
+                                <span class="mtext-110 cl2" id="orderTotal">
                                     {{ $subTotal }} {{ __('user.shared.currency') }}
                                 </span>
                             </div>
@@ -178,12 +202,60 @@
 @push('scripts')
     <script>
         var translations = {
-            currency: "{{ __('user.shared.currency') }}"
+            currency: "{{ __('user.shared.currency') }}",
+            couponSaving: "{{ __('messages.frontend.cart.coupon_saving') }}"
         };
         const subtotal = $('#subTotal')
-        console.log(subTotal)
-
         $(document).ready(function() {
+            // getting the shipping and order total  once the page loads
+            const subTotal = parseFloat("<?= $subTotal ?>")
+            const url = "{{ asset('api/products/carts/getShipping') }}";
+            const method = "POST";
+            $.ajax({
+                url: url,
+                type: method,
+                headers: {
+                    'accept': 'application/json'
+                },
+                success: function(result, status, xhr) {
+                    $('#shipping').removeClass('d-none');
+                    $('#shippingValue').html(result.data.shipping + ' ' + translations.currency)
+                    $('#shippingValue').attr('shipping-value', result.data.shipping);
+                    const total = subTotal + result.data.shipping
+                    $('#orderTotal').html(total + translations.currency);
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Failed',
+                        'somthing went wrong',
+                        'error'
+                    );
+                },
+            });
+            $('#address').on('select2:select', function(e) {
+                const url = "{{ asset('api/products/carts/getShipping') }}";
+                const method = "POST";
+                $.ajax({
+                    url: url,
+                    type: method,
+                    headers: {
+                        'accept': 'application/json'
+                    },
+                    success: function(result, status, xhr) {
+                        $('#shipping').removeClass('d-none');
+                        $('#shippingValue').html(result.data.shipping + ' ' + translations.currency)
+                        $('#shippingValue').attr('shipping-value', result.data.shipping)
+
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire(
+                            'Failed',
+                            'somthing went wrong',
+                            'error'
+                        );
+                    },
+                });
+            })
             $('.applyCoupon').click(function() {
                 const user_id = $(this).attr('user-value');
                 const coupon = $('.coupon').val();
@@ -201,7 +273,10 @@
                     },
                     data: body,
                     success: function(result, status, xhr) {
-                        // $('.productTotal').val()
+                        $('#coupon').removeClass('d-none');
+                        $('#couponDiscount').html(result.data.discountValue + " " + translations.currency + " " + translations.couponSaving + result.data.discountPercent + "%");
+                        const total = result.data.orderTotalAfterDiscount + parseFloat($('#shippingValue').attr('shipping-value'));
+                        $('#orderTotal').html(total + translations.currency);
                     },
                     error: function(xhr, status, error) {
                         Swal.fire(
@@ -214,6 +289,7 @@
             });
             $('.product').change(function() {
                 var product = $(this).data('product')
+                const subTotal = parseFloat("<?= $subTotal ?>")
                 const product_id = product.id;
                 const user_id = product.carts.user_id;
                 const quantity = $(this).val()
@@ -251,11 +327,13 @@
                     },
                     complete: function(result) {
                         updateSubTotal();
+
                     }
                 });
             });
             $('.deleteProduct').click(function() {
                 var product = $(this).data('product')
+                const subTotal = parseFloat("<?= $subTotal ?>")
                 const product_id = product.id;
                 const user_id = product.carts.user_id;
                 const quantity = 0;
@@ -278,6 +356,7 @@
                     success: function(result, status, xhr) {
                         tableRow.remove();
                         $('#cart').attr('data-notify', result.data.carts_count)
+
                     },
                     error: function(xhr, status, error) {
                         Swal.fire(
@@ -287,8 +366,7 @@
                         );
                     },
                     complete: function(result) {
-                        // updateSubTotalOnDelete();
-                        $(this).prop('disabled', false);
+                        updateSubTotalOnDelete();
                     }
                 });
             });
@@ -314,6 +392,8 @@
                 data: body,
                 success: function(result, status, xhr) {
                     $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                    const total = result.data.subTotal + parseFloat($('#shippingValue').attr('shipping-value'))
+                    $('#orderTotal').html(total + translations.currency);
                 },
                 error: function(xhr, status, error) {
                     Swal.fire(
@@ -346,6 +426,8 @@
                 data: body,
                 success: function(result, status, xhr) {
                     $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                    const total = result.data.subTotal + parseFloat($('#shippingValue').attr('shipping-value'))
+                    $('#orderTotal').html(total + translations.currency);
                 },
                 error: function(xhr, status, error) {
                     Swal.fire(

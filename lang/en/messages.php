@@ -85,6 +85,9 @@ return [
             'notes' => 'Notes',
             'no_addresses' => 'No available addresses now',
             'add_address' => 'Add new address',
+            'shipping' => 'Shipping',
+            'coupon_saving' => 'You saved ',
+            'discount' => 'Discount'
         ],
         'shop' => [
             'title' => 'Shop',
@@ -110,7 +113,7 @@ return [
             'choose_region' => 'Choose a Region',
             'add_address' => 'Add new address',
             'edit_address' => 'Edit',
-            
+
         ]
     ]
 

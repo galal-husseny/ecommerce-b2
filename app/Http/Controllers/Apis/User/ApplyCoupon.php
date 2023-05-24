@@ -37,21 +37,25 @@ class ApplyCoupon extends Controller
             $cartProducts->addProduct($cartProduct);
         }
         $subTotal = OrderCalcs::subTotal($cartProducts);
-        // $maxDiscountValue = $coupon->max_discount_value;
-        // foreach ($user->coupons as $userCoupon) {
-        //     if ($userCoupon->code == $coupon->code) {
-        //         $couponUsagePerUser = $userCoupon->pivot->max_no_of_users_per_coupon;
-        //         $maxUsageNumberPerUser = $coupon->max_usage_number_per_user;
-        //         if ($maxUsageNumberPerUser <= $couponUsagePerUser) {
-        //             return ['coupon' => 'This user can not use this coupon anymore'];
-        //         }
-        //     }
-        // }
-        // $couponStatus = $coupon->status;
-        $couponCalcs = ServicesApplyCoupon::apply($subTotal, $user, $coupon);
-        if(Arr::has($couponCalcs, 'subTotal')){
-            return $this->data($couponCalcs);
+        foreach ($user->coupons as $userCoupon) {
+            if ($userCoupon->code == $coupon->code) {
+                $couponUsagePerUser = $userCoupon->pivot->max_no_of_users_per_coupon;
+            }
         }
-        return $this->error($couponCalcs);
+        $maxUsageNumberPerUser = $coupon->max_usage_number_per_user;
+        $orderCouponDiscountValue = $coupon->max_usage_number_per_user;
+        $orderCouponDiscountValue = $subTotal * (($coupon->discount / 100));
+        $couponMaxDiscountValue = $coupon->max_discount_value;
+        $couponStatus = $coupon->status;
+        $couponMaxUsageNumber = $coupon->max_usage_number;
+        $couponUsersCount = $coupon->users_count;
+        $couponMinOrderValue =$coupon->min_order_value;
+        $couponEndDate = $coupon->end_date;
+        $couponCalcs = ServicesApplyCoupon::apply($maxUsageNumberPerUser, $couponUsagePerUser, $orderCouponDiscountValue, $couponMaxDiscountValue, $couponStatus, $couponMaxUsageNumber, $couponUsersCount, $couponMinOrderValue, $couponEndDate, $subTotal);
+        if(Arr::has($couponCalcs, 'orderTotalAfterDiscount')){
+            return $this->data($couponCalcs);
+        }else{
+            return $this->error($couponCalcs);
+        }
     }
 }
