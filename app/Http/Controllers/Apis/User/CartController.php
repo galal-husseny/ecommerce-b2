@@ -18,33 +18,35 @@ class CartController extends Controller
     public function handle(CartRequest $request, CartProducts $cartProducts, OrderCalcs $orderCalcs)
     {
         $user = User::with(['wishlists','carts', 'addresses.region.city'])->withCount('carts','wishlists')->findOrFail($request->user_id);
+        $shippingCost = OrderCalcs::shipping();
         if($user->carts->contains($request->product_id)){
             if($request->has('quantity')){
                 if($request->quantity == 0){
                     $user->carts()->detach($request->product_id);
                     $subTotal = $this->cartSubTotal($user->carts);
-                    return $this->data(['carts_count' => --$user->carts_count, 'subTotal' => $subTotal] ,'deleted in cart successfully', 200);
+                    return $this->data(['carts_count' => --$user->carts_count, 'subTotal' => $subTotal, 'shipping' => $shippingCost] ,'deleted in cart successfully', 200);
                 }
             $user->carts()->updateExistingPivot($request->product_id, ['quantity' => $request->quantity]);
             $subTotal = $this->cartSubTotal($user->carts);
-            return $this->data(['carts_count' => $user->carts_count, 'quantity' => $request->quantity, 'subTotal' => $subTotal] ,'edited in cart successfully', 200);
+            return $this->data(['carts_count' => $user->carts_count, 'quantity' => $request->quantity, 'subTotal' => $subTotal, 'shipping' => $shippingCost] ,'edited in cart successfully', 200);
             }else{
                 $user->carts()->updateExistingPivot($request->product_id, ['quantity' => DB::raw('quantity + 1')]);
             }
-            return $this->data(['carts_count' => $user->carts_count] ,'edited in cart successfully', 200);
+            return $this->data(['carts_count' => $user->carts_count, 'shipping' => $shippingCost] ,'edited in cart successfully', 200);
         }else{
             $user->carts()->attach($request->product_id);
             $subTotal = $this->cartSubTotal($user->carts);
-            return $this->data(['carts_count' => ++$user->carts_count], 'added to cart successfully', 201);
+            return $this->data(['carts_count' => ++$user->carts_count, 'shipping' => $shippingCost], 'added to cart successfully', 201);
         }
     }
 
     public function getSubTotal(CartRequest $request)
     {
         $user = User::with(['wishlists','carts', 'addresses.region.city'])->withCount('carts','wishlists')->findOrFail($request->user_id);
+        $shiipingValue = OrderCalcs::shipping();
         if($user->carts->contains($request->product_id)){
             $subTotal = $this->cartSubTotal($user->carts);
-            return $this->data(['subTotal' => $subTotal] );
+            return $this->data(['subTotal' => $subTotal, 'shipping' => $shiipingValue] );
         }
     }
 

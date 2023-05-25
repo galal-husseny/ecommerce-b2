@@ -138,15 +138,15 @@
                                 </div>
                             </div>
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <a href="{{ route('users.address.index') }}" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 " user-value="{{ $user->id }}">
+                                <a href="{{ route('users.address.index') }}" class="button-main pointer m-tb-5 " user-value="{{ $user->id }}">
                                     {{ __('messages.frontend.cart.add_address') }}
                                 </a>
                             </div>
                         </div>
                         <div class="flex-w flex-sb-m  p-t-18 p-b-15 ">
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5 coupon" type="text" name="coupon" placeholder="{{ __('messages.frontend.cart.coupon_code') }}" value="{{ old('coupon') }}">
-                                <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5 applyCoupon" user-value="{{ $user->id }}">
+                                <input class="stext-104 cl2 plh4 bor13 p-lr-20 m-r-10 m-tb-5 coupon" type="text" name="coupon" placeholder="{{ __('messages.frontend.cart.coupon_code') }}" value="{{ old('coupon') }}" style="height: 2.5rem">
+                                <div class="button-main pointer m-tb-5 applyCoupon" user-value="{{ $user->id }}">
                                     {{ __('messages.frontend.cart.apply_coupon') }}
                                 </div>
                             </div>
@@ -189,7 +189,7 @@
                             </div>
                         </div>
 
-                        <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        <button class="flex-c-m cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" style="height: 2.5rem">
                             {{ __('messages.frontend.cart.proceed') }}
                         </button>
                     </div>
@@ -202,13 +202,37 @@
 @push('scripts')
     <script>
         var translations = {
-            currency: "{{ __('user.shared.currency') }}",
-            couponSaving: "{{ __('messages.frontend.cart.coupon_saving') }}"
-        };
-        const subtotal = $('#subTotal')
-        $(document).ready(function() {
-            // getting the shipping and order total  once the page loads
-            const subTotal = parseFloat("<?= $subTotal ?>")
+        currency: "{{ __('user.shared.currency') }}",
+        couponSaving: "{{ __('messages.frontend.cart.coupon_saving') }}",
+        couponFailed: "{{ __('messages.frontend.cart.coupon_failed') }}"
+    };
+    const subtotal = $('#subTotal')
+    $(document).ready(function() {
+        // getting the shipping and order total  once the page loads
+        const subTotal = parseFloat("<?= $subTotal ?>")
+        const url = "{{ asset('api/products/carts/getShipping') }}";
+        const method = "POST";
+        $.ajax({
+            url: url,
+            type: method,
+            headers: {
+                'accept': 'application/json'
+            },
+            success: function(result, status, xhr) {
+                $('#shipping').removeClass('d-none');
+                $('#shippingValue').html(result.data.shipping + ' ' + translations.currency)
+                const total = subTotal + result.data.shipping
+                $('#orderTotal').html(total + translations.currency);
+            },
+            error: function(xhr, status, error) {
+                Swal.fire(
+                    'Failed',
+                    translations.couponFailed,
+                    'error'
+                );
+            },
+        });
+        $('#address').on('select2:select', function(e) {
             const url = "{{ asset('api/products/carts/getShipping') }}";
             const method = "POST";
             $.ajax({
@@ -220,9 +244,8 @@
                 success: function(result, status, xhr) {
                     $('#shipping').removeClass('d-none');
                     $('#shippingValue').html(result.data.shipping + ' ' + translations.currency)
-                    $('#shippingValue').attr('shipping-value', result.data.shipping);
-                    const total = subTotal + result.data.shipping
-                    $('#orderTotal').html(total + translations.currency);
+                    $('#shippingValue').attr('shipping-value', result.data.shipping)
+
                 },
                 error: function(xhr, status, error) {
                     Swal.fire(
@@ -232,156 +255,15 @@
                     );
                 },
             });
-            $('#address').on('select2:select', function(e) {
-                const url = "{{ asset('api/products/carts/getShipping') }}";
-                const method = "POST";
-                $.ajax({
-                    url: url,
-                    type: method,
-                    headers: {
-                        'accept': 'application/json'
-                    },
-                    success: function(result, status, xhr) {
-                        $('#shipping').removeClass('d-none');
-                        $('#shippingValue').html(result.data.shipping + ' ' + translations.currency)
-                        $('#shippingValue').attr('shipping-value', result.data.shipping)
-
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire(
-                            'Failed',
-                            'somthing went wrong',
-                            'error'
-                        );
-                    },
-                });
-            })
-            $('.applyCoupon').click(function() {
-                const user_id = $(this).attr('user-value');
-                const coupon = $('.coupon').val();
-                const url = "{{ asset('api/products/carts/applyCoupon') }}";
-                const method = "POST";
-                const body = {
-                    'user_id': user_id,
-                    'couponCode': coupon,
-                };
-                $.ajax({
-                    url: url,
-                    type: method,
-                    headers: {
-                        'accept': 'application/json'
-                    },
-                    data: body,
-                    success: function(result, status, xhr) {
-                        $('#coupon').removeClass('d-none');
-                        $('#couponDiscount').html(result.data.discountValue + " " + translations.currency + " " + translations.couponSaving + result.data.discountPercent + "%");
-                        const total = result.data.orderTotalAfterDiscount + parseFloat($('#shippingValue').attr('shipping-value'));
-                        $('#orderTotal').html(total + translations.currency);
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire(
-                            'Failed',
-                            'somthing went wrong',
-                            'error'
-                        );
-                    },
-                });
-            });
-            $('.product').change(function() {
-                var product = $(this).data('product')
-                const subTotal = parseFloat("<?= $subTotal ?>")
-                const product_id = product.id;
-                const user_id = product.carts.user_id;
-                const quantity = $(this).val()
-                const productTotal = $(this).closest('.table_row').find('.productTotal');
-                const url = "{{ asset('api/products/carts/handle') }}";
-                const method = "POST";
-                const body = {
-                    'user_id': user_id,
-                    'product_id': product_id,
-                    'quantity': quantity,
-                };
-                const tableRow = $(this).closest('.table_row');
-                $.ajax({
-                    url: url,
-                    type: method,
-                    headers: {
-                        'accept': 'application/json'
-                    },
-                    data: body,
-                    success: function(result, status, xhr) {
-                        if (quantity == 0) {
-                            // Remove the table row if the quantity is 0
-                            tableRow.remove();
-                            $('#cart').attr('data-notify', result.data.carts_count)
-                        } else {
-                            productTotal.html((product.sale_price * quantity) + ' ' + translations.currency);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire(
-                            'Failed',
-                            'somthing went wrong',
-                            'error'
-                        );
-                    },
-                    complete: function(result) {
-                        updateSubTotal();
-
-                    }
-                });
-            });
-            $('.deleteProduct').click(function() {
-                var product = $(this).data('product')
-                const subTotal = parseFloat("<?= $subTotal ?>")
-                const product_id = product.id;
-                const user_id = product.carts.user_id;
-                const quantity = 0;
-                const url = "{{ asset('api/products/carts/handle') }}";
-                const method = "POST";
-                const body = {
-                    'user_id': user_id,
-                    'product_id': product_id,
-                    'quantity': quantity,
-                };
-                const tableRow = $(this).closest('.table_row');
-                $(this).prop('disabled', true);
-                $.ajax({
-                    url: url,
-                    type: method,
-                    headers: {
-                        'accept': 'application/json'
-                    },
-                    data: body,
-                    success: function(result, status, xhr) {
-                        tableRow.remove();
-                        $('#cart').attr('data-notify', result.data.carts_count)
-
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire(
-                            'Failed',
-                            'somthing went wrong',
-                            'error'
-                        );
-                    },
-                    complete: function(result) {
-                        updateSubTotalOnDelete();
-                    }
-                });
-            });
-
         })
-
-        function updateSubTotal() {
-            var product = $('.product').data('product')
-            const product_id = product.id;
-            const user_id = product.carts.user_id;
-            const url = "{{ asset('api/products/carts/getSubTotal') }}";
+        $('.applyCoupon').click(function() {
+            const user_id = $(this).attr('user-value');
+            const coupon = $('.coupon').val();
+            const url = "{{ asset('api/products/carts/applyCoupon') }}";
             const method = "POST";
             const body = {
                 'user_id': user_id,
-                'product_id': product_id,
+                'couponCode': coupon,
             };
             $.ajax({
                 url: url,
@@ -391,9 +273,50 @@
                 },
                 data: body,
                 success: function(result, status, xhr) {
-                    $('#subTotal').html(result.data.subTotal + " " + translations.currency)
-                    const total = result.data.subTotal + parseFloat($('#shippingValue').attr('shipping-value'))
+                    $('#coupon').removeClass('d-none');
+                    $('#couponDiscount').html(result.data.discountValue + " " + translations.currency + " " + translations.couponSaving + result.data.discountPercent + "%");
+                    const total = result.data.orderTotalAfterDiscount + result.data.shipping;
                     $('#orderTotal').html(total + translations.currency);
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Failed',
+                        translations.couponFailed,
+                        'error'
+                    );
+                },
+            });
+        });
+        $('.product').change(function() {
+            var product = $(this).data('product')
+            const subTotal = parseFloat("<?= $subTotal ?>")
+            const product_id = product.id;
+            const user_id = product.carts.user_id;
+            const quantity = $(this).val()
+            const productTotal = $(this).closest('.table_row').find('.productTotal');
+            const url = "{{ asset('api/products/carts/handle') }}";
+            const method = "POST";
+            const body = {
+                'user_id': user_id,
+                'product_id': product_id,
+                'quantity': quantity,
+            };
+            const tableRow = $(this).closest('.table_row');
+            $.ajax({
+                url: url,
+                type: method,
+                headers: {
+                    'accept': 'application/json'
+                },
+                data: body,
+                success: function(result, status, xhr) {
+                    if (quantity == 0) {
+                        // Remove the table row if the quantity is 0
+                        tableRow.remove();
+                        $('#cart').attr('data-notify', result.data.carts_count)
+                    }else{
+                        productTotal.html((product.sale_price * quantity) + ' ' + translations.currency);
+                    }
                 },
                 error: function(xhr, status, error) {
                     Swal.fire(
@@ -402,11 +325,15 @@
                         'error'
                     );
                 },
+                complete: function(result) {
+                    updateSubTotal();
+                    // updateTotal()
+                }
             });
-        }
-
-        function updateSubTotalOnDelete() {
-            var product = $('.product').data('product')
+        });
+        $('.deleteProduct').click(function() {
+            var product = $(this).data('product')
+            const subTotal = parseFloat("<?= $subTotal ?>")
             const product_id = product.id;
             const user_id = product.carts.user_id;
             const quantity = 0;
@@ -417,6 +344,7 @@
                 'product_id': product_id,
                 'quantity': quantity,
             };
+            const tableRow = $(this).closest('.table_row');
             $.ajax({
                 url: url,
                 type: method,
@@ -425,9 +353,9 @@
                 },
                 data: body,
                 success: function(result, status, xhr) {
-                    $('#subTotal').html(result.data.subTotal + " " + translations.currency)
-                    const total = result.data.subTotal + parseFloat($('#shippingValue').attr('shipping-value'))
-                    $('#orderTotal').html(total + translations.currency);
+                    tableRow.remove();
+                    $('#cart').attr('data-notify', result.data.carts_count)
+
                 },
                 error: function(xhr, status, error) {
                     Swal.fire(
@@ -436,7 +364,145 @@
                         'error'
                     );
                 },
+                complete: function(result) {
+                    updateSubTotalOnDelete();
+
+                }
             });
+        });
+
+    })
+
+    function updateSubTotal() {
+        var product = $('.product').data('product')
+        const product_id = product.id;
+        const user_id = product.carts.user_id;
+        const productTotal = $('.product').closest('.table_row').find('.productTotal');
+        const url = "{{ asset('api/products/carts/getSubTotal') }}";
+        const method = "POST";
+        const body = {
+            'user_id': user_id,
+            'product_id': product_id,
+        };
+        $.ajax({
+            url: url,
+            type: method,
+            headers: {
+                'accept': 'application/json'
+            },
+            data: body,
+            success: function(result, status, xhr) {
+                $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                const total = result.data.subTotal + result.data.shipping
+                $('#orderTotal').html(total + translations.currency);
+
+            },
+            error: function(xhr, status, error) {
+                Swal.fire(
+                    'Failed',
+                    'somthing went wrong',
+                    'error'
+                );
+            },
+        });
+    }
+
+    function updateSubTotalOnDelete() {
+        var product = $('.product').data('product')
+        const product_id = product.id;
+        const user_id = product.carts.user_id;
+        const quantity = 0;
+        const url = "{{ asset('api/products/carts/handle') }}";
+        const method = "POST";
+        const body = {
+            'user_id': user_id,
+            'product_id': product_id,
+            'quantity': quantity,
+        };
+        $.ajax({
+            url: url,
+            type: method,
+            headers: {
+                'accept': 'application/json'
+            },
+            data: body,
+            success: function(result, status, xhr) {
+                $('#subTotal').html(result.data.subTotal + " " + translations.currency)
+                const total = result.data.subTotal + result.data.shipping
+                $('#orderTotal').html(total + translations.currency);
+            },
+            error: function(xhr, status, error) {
+                Swal.fire(
+                    'Failed',
+                    'somthing went wrong',
+                    'error'
+                );
+            },
+        });
+    }
+
+    function updateTotal() {
+        const couponCodeInputValue = $('input[name="coupon"]').val();
+        if(couponCodeInputValue.trim() !== ''){
+            const user_id = $('.applyCoupon').attr('user-value');
+            const coupon = couponCodeInputValue;
+            const url = "{{ asset('api/products/carts/applyCoupon') }}";
+            const method = "POST";
+            const body = {
+                'user_id': user_id,
+                'couponCode': coupon,
+            };
+            $.ajax({
+                url: url,
+                type: method,
+                headers: {
+                    'accept': 'application/json'
+                },
+                data: body,
+                success: function(result, status, xhr) {
+                    const total = result.data.orderTotalAfterDiscount + result.data.shipping;
+                    $('#orderTotal').html(total + translations.currency);
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Failed',
+                        translations.couponFailed,
+                        'error'
+                    );
+                },
+            });
+        }else{
+            var product = $('.product').data('product')
+        const product_id = product.id;
+        const user_id = product.carts.user_id;
+        const productTotal = $('.product').closest('.table_row').find('.productTotal');
+        const url = "{{ asset('api/products/carts/getSubTotal') }}";
+        const method = "POST";
+        const body = {
+            'user_id': user_id,
+            'product_id': product_id,
+        };
+        $.ajax({
+            url: url,
+            type: method,
+            headers: {
+                'accept': 'application/json'
+            },
+            data: body,
+            success: function(result, status, xhr) {
+                const total = result.data.subTotal + result.data.shipping
+                $('#orderTotal').html(total + translations.currency);
+
+            },
+            error: function(xhr, status, error) {
+                Swal.fire(
+                    'Failed',
+                    'somthing went wrong',
+                    'error'
+                );
+            },
+        });
         }
+    }
     </script>
 @endpush

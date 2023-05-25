@@ -86,7 +86,8 @@ return [
             'add_address' => 'اضف عنوان جديد',
             'shipping' => 'الشحن',
             'coupon_saving' => ' لقد وفرت',
-            'discount' => 'الخصم'
+            'discount' => 'الخصم',
+            'coupon_failed' => 'هذا الكود غير صحيح'
         ],
         'shop' => [
             'title' => 'المتجر',

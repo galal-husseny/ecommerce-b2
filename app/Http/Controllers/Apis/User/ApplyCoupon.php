@@ -23,13 +23,13 @@ class ApplyCoupon extends Controller
         $cartProducts = new CartProducts();
         $user = User::where('id', $request->user_id)->with(['coupons', 'carts'])->first();
         $coupon = Coupon::where('code', $request->couponCode)->withCount('users')->first();
+        $shippingValue = OrderCalcs::shipping();
         if(!$user){
             return $this->error(['user' => 'user does not exist']);
         }
         if(!$coupon){
             return $this->error(['coupon' => 'coupon does not exist']);
         }
-        // return [$user];
         foreach($user->carts as $product){
             $cartProduct = new ProductEntity();
             $cartProduct->setPrice($product->sale_price);
@@ -53,7 +53,7 @@ class ApplyCoupon extends Controller
         $couponEndDate = $coupon->end_date;
         $couponCalcs = ServicesApplyCoupon::apply($maxUsageNumberPerUser, $couponUsagePerUser, $orderCouponDiscountValue, $couponMaxDiscountValue, $couponStatus, $couponMaxUsageNumber, $couponUsersCount, $couponMinOrderValue, $couponEndDate, $subTotal);
         if(Arr::has($couponCalcs, 'orderTotalAfterDiscount')){
-            return $this->data($couponCalcs);
+            return $this->data(array_merge($couponCalcs,[ 'shipping' => $shippingValue]));
         }else{
             return $this->error($couponCalcs);
         }

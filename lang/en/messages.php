@@ -87,7 +87,8 @@ return [
             'add_address' => 'Add new address',
             'shipping' => 'Shipping',
             'coupon_saving' => 'You saved ',
-            'discount' => 'Discount'
+            'discount' => 'Discount',
+            'coupon_failed' => 'This Coupon is invalid'
         ],
         'shop' => [
             'title' => 'Shop',

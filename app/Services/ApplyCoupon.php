@@ -34,6 +34,6 @@ class ApplyCoupon
         if (Carbon::now() < $couponEndDate) {
             return ['coupon' => 'This coupon is no longer valid'];
         }
-        return ['coupon' => 'coupon applied', 'orderTotalAfterDiscount' => $orderTotal, 'discountPercent' => $discount, 'discountValue' => $discountValue, 'orderTotalBeforeDiscount' => $subTotal];
+        return ['coupon' => 'coupon applied', 'orderTotalAfterDiscount' => $orderTotal, 'discountPercent' => $discount, 'discountValue' => $discountValue, 'orderSubTotal' => $subTotal];
     }
 }
