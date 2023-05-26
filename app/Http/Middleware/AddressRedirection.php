@@ -17,7 +17,7 @@ class AddressRedirection
     public function handle(Request $request, Closure $next)
     {
         $previousUrl = url()->previous();
-        if(basename($previousUrl) === 'cart'){
+        if (basename($previousUrl) === 'cart') {
             session()->put('redirect_url', route('cart'));
         }
         return $next($request);
