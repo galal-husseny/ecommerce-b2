@@ -15,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::with(['addresses.region.city', 'favs', 'carts.media', 'wishlists', 'reviews', 'coupons'])->get();
+        $users = User::all();
         // dd($users);
         return view('admin.users.index', compact('users'));
     }
@@ -47,9 +47,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $user->load(['addresses.region.city', 'favs', 'carts.media', 'wishlists', 'reviews', 'coupons']);
+        return view('admin.users.show', compact('user'));
     }
 
     /**

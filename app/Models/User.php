@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\SendEmailNotification;
+use App\Traits\HasEcryptedIds;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Traits\SendResetPasswordNotification;
+use App\Traits\SendEmailNotification;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\SendResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,6 +15,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, SendEmailNotification, SendResetPasswordNotification;
+    use HasEcryptedIds;
+
 
     /**
      * The attributes that are mass assignable.
