@@ -27,7 +27,8 @@ class CartController extends Controller
                 $cartProducts->addProduct($cartProduct);
             }
             $subTotal = OrderCalcs::subTotal($cartProducts);
-            return view('user.cart', compact(['user', 'subTotal']));
+            $shipping = OrderCalcs::shipping();
+            return view('user.cart', compact(['user', 'subTotal', 'shipping']));
         }
     }
 }
