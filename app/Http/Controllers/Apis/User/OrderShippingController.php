@@ -6,7 +6,7 @@ use App\Traits\ApiResponses;
 use App\Http\Controllers\Controller;
 use App\Services\OrderCalcs;
 
-class OrderShipping extends Controller
+class OrderShippingController extends Controller
 {
     use ApiResponses;
 

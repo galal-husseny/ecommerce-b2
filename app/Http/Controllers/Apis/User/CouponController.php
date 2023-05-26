@@ -6,15 +6,14 @@ use App\Models\User;
 use App\Models\Coupon;
 use App\Services\OrderCalcs;
 use App\Traits\ApiResponses;
-use Illuminate\Http\Request;
 use App\Entities\CartProducts;
 use App\Entities\ProductEntity;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\ApplyCouponRequest;
-use App\Services\ApplyCoupon as ServicesApplyCoupon;
+use App\Services\ApplyCouponService;
 use Illuminate\Support\Arr;
 
-class ApplyCoupon extends Controller
+class CouponController extends Controller
 {
     use ApiResponses;
 
@@ -37,23 +36,28 @@ class ApplyCoupon extends Controller
             $cartProducts->addProduct($cartProduct);
         }
         $subTotal = OrderCalcs::subTotal($cartProducts);
-        foreach ($user->coupons as $userCoupon) {
-            if ($userCoupon->code == $coupon->code) {
-                $couponUsagePerUser = $userCoupon->pivot->max_no_of_users_per_coupon;
+        $userCoupon = $user->with(['coupons'=>  function ($query) use($coupon)
+        {
+            $query->where('coupon_id', $coupon->id);
+        }])->first();
+        $couponUsagePerUser = 0;
+        foreach ($userCoupon->coupons as $dbCoupon) {
+            if ($dbCoupon->code == $coupon->code) {
+                $couponUsagePerUser = $dbCoupon->pivot->max_no_of_users_per_coupon;
             }
         }
         $maxUsageNumberPerUser = $coupon->max_usage_number_per_user;
-        $orderCouponDiscountValue = $coupon->max_usage_number_per_user;
         $orderCouponDiscountValue = $subTotal * (($coupon->discount / 100));
         $couponMaxDiscountValue = $coupon->max_discount_value;
         $couponStatus = $coupon->status;
         $couponMaxUsageNumber = $coupon->max_usage_number;
-        $couponUsersCount = $coupon->users_count;
+        $couponUsageCount = $coupon->users_count;
         $couponMinOrderValue =$coupon->min_order_value;
         $couponEndDate = $coupon->end_date;
-        $couponCalcs = ServicesApplyCoupon::apply($maxUsageNumberPerUser, $couponUsagePerUser, $orderCouponDiscountValue, $couponMaxDiscountValue, $couponStatus, $couponMaxUsageNumber, $couponUsersCount, $couponMinOrderValue, $couponEndDate, $subTotal);
+        $couponStartDate = $coupon->start_at;
+        $couponCalcs = ApplyCouponService::apply($maxUsageNumberPerUser, $couponUsagePerUser, $orderCouponDiscountValue, $couponMaxDiscountValue, $couponStatus, $couponMaxUsageNumber, $couponUsageCount, $couponMinOrderValue, $couponEndDate, $couponStartDate, $subTotal);
         if(Arr::has($couponCalcs, 'orderTotalAfterDiscount')){
-            return $this->data(array_merge($couponCalcs,[ 'shipping' => $shippingValue]));
+            return $this->data(array_merge($couponCalcs, ['shipping' => $shippingValue]));
         }else{
             return $this->error($couponCalcs);
         }

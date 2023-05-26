@@ -7,8 +7,8 @@ use App\Http\Controllers\Apis\User\CartController;
 use App\Http\Controllers\Apis\user\RegionsController;
 use App\Http\Controllers\Apis\User\WishlistController;
 use App\Http\Controllers\Apis\User\AddressesController;
-use App\Http\Controllers\Apis\User\ApplyCoupon;
-use App\Http\Controllers\Apis\User\OrderShipping;
+use App\Http\Controllers\Apis\User\CouponController;
+use App\Http\Controllers\Apis\User\OrderShippingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +38,12 @@ Route::prefix('products')->controller(AddressesController::class)->group(functio
     Route::post('addresses/store', 'store');
 });
 
-Route::prefix('products')->controller(ApplyCoupon::class)->group(function (){
+Route::prefix('products')->controller(CouponController::class)->group(function (){
     Route::post('carts/applyCoupon', 'apply');
 });
 
 Route::post('regions', [RegionsController::class, 'index']);
 
-Route::prefix('products')->controller(OrderShipping::class)->group(function (){
+Route::prefix('products')->controller(OrderShippingController::class)->group(function (){
     Route::post('carts/getShipping', 'shipping');
 });
