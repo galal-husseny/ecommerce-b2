@@ -89,6 +89,13 @@ return [
             'show' => 'Show',
             'edit' => 'Edit',
         ],
+        'users'=>[
+            'users'=> 'Users',
+            'all'=> 'All',
+            'create' => 'Create',
+            'show' => 'Show',
+            'edit' => 'Edit',
+        ],
     ],
     'footer' => [
         'author' => 'Mina Abdelmalak',
@@ -204,6 +211,20 @@ return [
         'name_en' => 'Name (EN)',
         'name_ar' => 'Name (AR)',
         'submit' => 'Update',
+    ],
+    'all_users' => [
+        'title' => 'users',
+        'id' => 'id',
+        'name' => 'name',
+        'email' => 'Email',
+        'phone' => 'Phone',
+        'status' => 'Status',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+        'operations' => 'Operations',
+        'show' => 'Show',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
     ],
 
 ];

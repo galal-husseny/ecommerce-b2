@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Address;
+namespace App\Http\Requests\AddressApi;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -31,17 +31,16 @@ class StoreAddressRequest extends FormRequest
             'notes' => ['nullable', 'string', 'max:255'],
             'type' => ['required', 'string', 'in:WORK,HOME'],
             'region_id' => ['required', 'integer', 'exists:regions,id'],
-            'city_id' => ['required', 'integer', 'exists:cities,id'],
         ];
     }
-
 
     public function messages()
     {
         return [
-            'region_id.required' => 'The region field is required.',
-            'region_id.integer' => 'The region field must be an integer.',
-            'region_id.exists' => 'The region field does n\'t exists.'
+            'region_id.required' => __('general.errors.region_id_required'),
+            'region_id.integer' => __('general.errors.region_id_integer'),
+            'region_id.exists' => __('general.errors.region_id_exists'),
+
         ];
     }
 }

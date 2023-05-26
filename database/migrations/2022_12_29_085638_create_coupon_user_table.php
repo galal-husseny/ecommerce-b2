@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('coupon_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('coupon_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
-            $table->date('coupon_expired_at');
+            // $table->date('coupon_expired_at');
             $table->smallInteger('max_no_of_users_per_coupon');
             $table->timestamps();
             $table->primary(['user_id' , 'coupon_id']);

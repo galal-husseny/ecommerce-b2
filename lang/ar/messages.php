@@ -76,15 +76,44 @@ return [
             'subtotal' => 'المجموع الفرعي:',
             'shipping' => 'الشحن:',
             'calc_shipping' => 'احسب الشحن',
-            'select_country' => 'اختر دولة ...',
-            'state_country' => 'ولايه/ دوله',
-            'postcode' => 'الرمز البريدي',
-            'update_total' => 'تحديث الإجمالي',
+            'select_address' => 'اختر عنوانك من المتاح ادناه',
             'proceed' => 'المتابعة للدفع',
+            'building' => 'المبني',
+            'floor' => 'الدور',
+            'flat' => 'الشقة',
+            'notes' => 'الملاحظات',
+            'no_addresses' => 'لا يوجد عنوانين متاحة الان',
+            'add_address' => 'اضف عنوان جديد',
+            'shipping' => 'الشحن',
+            'coupon_saving' => ' لقد وفرت',
+            'discount' => 'الخصم',
+            'coupon_failed' => 'هذا الكود غير صحيح'
         ],
         'shop' => [
             'title' => 'المتجر',
         ],
+        'address' => [
+            'title' => 'العنوان',
+            'add_details' => 'تفاصيل العنوان',
+            'all_add' => 'العنواين المتاحة',
+            'city' => 'المدينة',
+            'region' => 'الحي',
+            'building' => 'المبني',
+            'street' => 'الشارع',
+            'floor' => 'الدور',
+            'flat' => 'الشقة',
+            'notes' => 'ملاحظات',
+            'type' => 'النوع',
+            'home' => 'منزل',
+            'work' => 'عمل',
+            'actions' => 'عمليات',
+            'edit' => 'تعديل',
+            'delete' => 'حذف',
+            'choose_city' => 'أختر مدينة',
+            'choose_region' => 'أختر حي',
+            'add_address' => 'اضف عنوان جديد',
+            'edit_address' => 'تعديل'
+        ]
     ]
 
 ];

@@ -68,7 +68,7 @@ return [
             'password' => 'Password',
             'confirm_password' => 'Confirm password',
         ],
-        
+
     ],
     'profile' => [
         'profile' => 'Profile',
@@ -81,7 +81,7 @@ return [
             'verification_message' => 'A new verification link has been sent to your email address.',
             'saved' => 'Saved.',
             'save' => 'Save',
-            
+
         ],
         'update_password' => [
             'update_password' => 'Update Password',
@@ -116,6 +116,7 @@ return [
         'login' => 'Log in',
         'logout' => 'Log out',
         'register' => 'Register',
+        'addresses' => 'My Addresses',
 
     ],
     'footer' => [
@@ -130,7 +131,7 @@ return [
         'newsletter' => 'Newsletter',
         'subscribe' => 'Subscribe'
     ],
-    
+
     'index' => [
         'message' => 'Want to become a seller in our website',
         'have_account' => 'Already have a seller account',

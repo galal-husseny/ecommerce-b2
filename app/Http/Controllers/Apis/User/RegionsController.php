@@ -1,27 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Apis\User;
+namespace App\Http\Controllers\Apis\user;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegionApi\RegionApiRequest;
 use App\Models\Region;
 use App\Traits\ApiResponses;
-use Illuminate\Http\Request;
 
 class RegionsController extends Controller
 {
     use ApiResponses;
 
-    public function index(Request $request)
+    public function index(RegionApiRequest $request)
     {
-        $request->validate([
-            'city_id' => ['required', 'integer']
-        ]);
-        $regions = Region::select('id', 'name')->where('city_id', $request->city_id)->get();
-        if ($regions->count()) {
+        $regions = Region::select('id','name')->where('city_id', $request->validated())->get();
+        if($regions->count()){
             return $this->data($regions->toArray());
-        } else {
+        }else {
             return $this->error([
-                'city_id' => 'has no regions yet'
+                'city_id' => 'This city has no regions yet'
             ]);
         }
     }

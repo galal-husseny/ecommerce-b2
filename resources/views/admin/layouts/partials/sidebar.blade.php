@@ -125,7 +125,33 @@
                             </a>
                         </li>
                     </ul>
+
                 </li>
+                <li class="nav-item ">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            {{__('admin.sidebar.users.users')}}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admins.users.index')}}" class="nav-link button ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('admin.sidebar.users.all')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admins.users.create')}}" class="nav-link button">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('admin.sidebar.users.create')}}</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

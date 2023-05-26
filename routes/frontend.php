@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\AddressController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\User\AboutController;
 use App\Http\Controllers\User\IndexController;
+use App\Http\Controllers\User\AddressController;
 use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\ProductDetailsController;
 

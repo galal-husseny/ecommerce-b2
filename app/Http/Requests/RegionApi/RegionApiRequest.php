@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Cart;
+namespace App\Http\Requests\RegionApi;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplyCouponRequest extends FormRequest
+class RegionApiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class ApplyCouponRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer'],
-            'couponCode' => ['required', 'string']
+            'city_id' => ['required', 'integer']
         ];
     }
 }

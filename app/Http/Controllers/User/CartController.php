@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User;
+use App\Services\OrderCalcs;
 use App\Entities\CartProducts;
 use App\Entities\ProductEntity;
 use App\Http\Controllers\Controller;
-use App\Services\OrderCalcs;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -26,7 +27,7 @@ class CartController extends Controller
                 $cartProducts->addProduct($cartProduct);
             }
             $subTotal = OrderCalcs::subTotal($cartProducts);
-            return view('user.cart', compact('user', 'subTotal'));
+            return view('user.cart', compact(['user', 'subTotal']));
         }
     }
 }

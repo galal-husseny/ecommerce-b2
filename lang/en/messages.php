@@ -77,16 +77,45 @@ return [
             'subtotal' => 'Subtotal:',
             'shipping' => 'Shipping:',
             'calc_shipping' => 'Calculate Shipping',
-            'select_country' => 'Select a country...',
-            'state_country' => 'State /  country',
-            'postcode' => 'Postcode / Zip' ,
-            'update_total' => 'Update Totals',
+            'select_address' => 'Select your address from below list ',
             'proceed' => 'Proceed to Checkout',
+            'building' => 'Building',
+            'floor' => 'Floor',
+            'flat' => 'Flat',
+            'notes' => 'Notes',
+            'no_addresses' => 'No available addresses now',
+            'add_address' => 'Add new address',
+            'shipping' => 'Shipping',
+            'coupon_saving' => 'You saved ',
+            'discount' => 'Discount',
+            'coupon_failed' => 'This Coupon is invalid'
         ],
         'shop' => [
             'title' => 'Shop',
-            ''
         ],
+        'address' => [
+            'title' => 'Address',
+            'add_details' => 'Address details',
+            'all_add' => 'Available addresses',
+            'city' => 'City',
+            'region' => 'Region',
+            'building' => 'Building',
+            'street' => 'Street',
+            'floor' => 'Floor',
+            'flat' => 'Flat',
+            'notes' => 'Notes',
+            'type' => 'Type',
+            'home' => 'Home',
+            'work' => 'Work',
+            'actions' => 'Actions',
+            'edit' => 'Edit',
+            'delete' => 'Delete',
+            'choose_city' => 'Choose a City',
+            'choose_region' => 'Choose a Region',
+            'add_address' => 'Add new address',
+            'edit_address' => 'Edit',
+
+        ]
     ]
 
 ];
