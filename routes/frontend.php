@@ -7,6 +7,7 @@ use App\Http\Controllers\User\AboutController;
 use App\Http\Controllers\User\IndexController;
 use App\Http\Controllers\User\AddressController;
 use App\Http\Controllers\User\ContactController;
+use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProductDetailsController;
 
 
@@ -32,4 +33,4 @@ Route::get('/cart', [CartController::class, 'cart'])->name('cart')->middleware('
 
 Route::get('/{product}', [ProductDetailsController::class, 'detail'])->name('product-details');
 
-
+Route::post('/cart/recipent', [OrderController::class, 'recipent'])->name('recipent');

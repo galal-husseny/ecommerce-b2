@@ -105,6 +105,6 @@ class User extends Authenticatable implements MustVerifyEmail
      * @return void
      */
     public function coupons(){
-        return $this->belongsToMany(Coupon::class)->withPivot('coupon_expired_at' , 'max_no_of_users_per_coupon');
+        return $this->belongsToMany(Coupon::class)->withPivot('max_no_of_usage');
     }
 }
