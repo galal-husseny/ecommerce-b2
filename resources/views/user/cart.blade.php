@@ -191,7 +191,7 @@
                 productsPriceTotal();
             })
             
-            $('.productQuantity').keyup(function () {
+            $('.productQuantity').change(function () {
                 let rowNo = $(this).attr('order');
                 preparTotalPrice(rowNo);
                 productsPriceTotal();
