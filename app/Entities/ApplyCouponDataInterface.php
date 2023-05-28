@@ -7,8 +7,8 @@ interface ApplyCouponDataInterface
     public function setCoupon(string $coupon);
     public function getOrderTotalAfterDiscount(): float;
     public function setOrderTotalAfterDiscount(float $orderTotalAfterDiscount);
-    public function getDiscountPercent(): int;
-    public function setDiscountPercent(int $discountPercent);
+    public function getDiscountPercent(): float;
+    public function setDiscountPercent(float $discountPercent);
     public function getDiscountValue(): float;
     public function setDiscountValue(float $discountValue);
     public function getOrderSubTotal(): float;

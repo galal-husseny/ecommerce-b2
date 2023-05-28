@@ -34,3 +34,6 @@ Route::get('/cart', [CartController::class, 'cart'])->name('cart')->middleware('
 Route::get('/{product}', [ProductDetailsController::class, 'detail'])->name('product-details');
 
 Route::post('/cart/recipent', [OrderController::class, 'recipent'])->name('recipent');
+
+Route::get('/cart/recipent', [OrderController::class, 'display'])->name('display');
+

@@ -54,7 +54,7 @@ class ApplyCouponDataEntity implements ApplyCouponDataInterface
     /**
      * Get the value of discountPercent
      */
-    public function getDiscountPercent(): int
+    public function getDiscountPercent(): float
     {
         return $this->discountPercent;
     }
@@ -64,7 +64,7 @@ class ApplyCouponDataEntity implements ApplyCouponDataInterface
      *
      * @return  self
      */
-    public function setDiscountPercent($discountPercent)
+    public function setDiscountPercent(float $discountPercent)
     {
         $this->discountPercent = $discountPercent;
 
