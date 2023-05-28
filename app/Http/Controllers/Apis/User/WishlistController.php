@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers\Apis\User;
 
-
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Wishlist\WishlistRequest;
 use App\Models\User;
@@ -18,10 +16,10 @@ class WishlistController extends Controller
         $user = User::withCount('wishlists')->findOrFail($request->user_id);
         if($user->wishlists->contains($request->product_id)){
             $user->wishlists()->detach($request->product_id);
-            return $this->data(['wishlists_count' => -- $user->wishlists_count], 'deleted', 200);
+            return $this->data(['wishlists_count' => --$user->wishlists_count],'',200);
         }else{
             $user->wishlists()->attach($request->product_id);
-            return $this->data(['wishlists_count' => ++ $user->wishlists_count], 'added', 200);
+            return $this->data(['wishlists_count' => ++$user->wishlists_count],'',200);
         }
     }
 }

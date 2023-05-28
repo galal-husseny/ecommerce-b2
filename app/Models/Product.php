@@ -56,7 +56,7 @@ class Product extends Model implements HasMedia
      *
      * @return string
      */
-    public function sale_price_with_currency(int $quantity = 1): string
+    public function sale_price_with_currency($quantity = 1): string
     {
         return $this->sale_price * $quantity . ' ' . __('user.shared.currency');
     }
@@ -66,7 +66,7 @@ class Product extends Model implements HasMedia
      *
      * @return string
      */
-    public function purchase_price_with_currency(int $quantity = 1): string
+    public function purchase_price_with_currency($quantity = 1): string
     {
         return $this->purchase_price * $quantity . ' ' . __('user.shared.currency');
     }

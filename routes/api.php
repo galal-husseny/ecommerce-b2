@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Apis\User\AddressesController;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Apis\User\CartController;
+use App\Http\Controllers\Apis\User\RegionsController;
 use App\Http\Controllers\Apis\User\WishlistController;
+use App\Http\Controllers\Apis\User\AddressesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::prefix('products')->controller(WishlistController::class)->group(function
 Route::prefix('products')->controller(AddressesController::class)->group(function (){
     Route::post('addresses/store', 'store');
 });
+
+Route::post('regions', [RegionsController::class, 'index']);

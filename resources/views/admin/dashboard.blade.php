@@ -2,10 +2,6 @@
 
 @section('title', 'Index')
 
-@section('preloader')
-    @include('admin.layouts.partials.preloader')
-@endsection
-
 @section('header')
     @include('admin.layouts.partials.header')
 @endsection

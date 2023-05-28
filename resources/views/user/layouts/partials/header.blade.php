@@ -47,10 +47,6 @@
                         </li>
 
                         <li>
-                            <a style="text-decoration: none" href="{{ route('blog') }}"> {{ __('user.header.blog') }} </a>
-                        </li>
-
-                        <li>
                             <a style="text-decoration: none" href="{{ route('about') }}"> {{ __('user.header.about') }} </a>
                         </li>
 
@@ -73,7 +69,7 @@
                         </a>
                     </div>
 
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="{{Auth::guard('web')->check() ? $user->wishlists_count :0}}" id="wishlist">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-wishlist" data-notify="{{Auth::guard('web')->check() ? $user->wishlists_count :0}}" id="wishlist">
                         <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti">
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
@@ -89,6 +85,7 @@
                             <ul class="sub-menu">
                                 @auth('web')
                                     <li><a style="text-decoration: none" href="{{ route('users.profile.edit') }}"> {{__('user.profile.profile')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.address.index') }}"> My Addresses </a></li>
                                     <form method="POST" action="{{ route('users.logout') }}">
                                         @csrf
                                         <li><a style="text-decoration: none" href="route('users.logout')"

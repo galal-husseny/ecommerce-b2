@@ -1,12 +1,5 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="{{route('admins.dashboard')}}" class="brand-link">
-        <img src="{{ asset('dashboard-assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text text-white">{{__('admin.sidebar.title')}}</span>
-    </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
@@ -37,9 +30,12 @@
         <nav class="mt-2 sidebar">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                <li class="nav-item ">
+                    <a href="#" @class([
+                        'nav-link',
+                        'active' => false,
+                        'color-white'
+                    ])>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             {{__('admin.sidebar.categories.categories')}}
@@ -48,7 +44,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admins.categories.index')}}" class="nav-link button active">
+                            <a href="{{route('admins.categories.index')}}" class="nav-link button ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('admin.sidebar.categories.all')}}</p>
                             </a>
@@ -61,8 +57,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                <li class="nav-item ">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             {{__('admin.sidebar.cities.cities')}}
@@ -71,7 +67,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admins.cities.index')}}" class="nav-link button active">
+                            <a href="{{route('admins.cities.index')}}" class="nav-link button ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('admin.sidebar.cities.all')}}</p>
                             </a>
@@ -84,8 +80,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                <li class="nav-item ">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             {{__('admin.sidebar.regions.regions')}}
@@ -94,7 +90,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admins.regions.index')}}" class="nav-link button active">
+                            <a href="{{route('admins.regions.index')}}" class="nav-link button ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('admin.sidebar.regions.all')}}</p>
                             </a>
@@ -107,8 +103,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                <li class="nav-item ">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             {{__('admin.sidebar.specs.specs')}}
@@ -117,7 +113,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admins.specs.index')}}" class="nav-link button active">
+                            <a href="{{route('admins.specs.index')}}" class="nav-link button ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('admin.sidebar.specs.all')}}</p>
                             </a>
@@ -136,3 +132,13 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.nav-link').click(function () {
+                $(this).toggleClass('active')
+            })
+        })
+    </script>
+@endpush
