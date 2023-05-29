@@ -39,3 +39,6 @@ Route::get('/cart/recipent', [OrderController::class, 'display'])->name('display
 
 Route::get('/cart/placeOrder', [OrderController::class, 'placeorder'])->name('placeOrder');
 
+Route::get('/cart/orderPlaced', [OrderController::class, 'orderPlaced'])->name('orderPlaced');
+
+

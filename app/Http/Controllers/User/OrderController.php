@@ -95,7 +95,7 @@ class OrderController extends Controller
         $this->setCoupon($coupon);
         $this->setAddress($address);
         $this->setSubTotal($subTotal);
-        $recipentData = session([
+        session([
             'recipent' => [
                 'user' => $user,
                 'coupon' => $coupon,
@@ -108,7 +108,7 @@ class OrderController extends Controller
             ]
         ]);
         $this->setShippingValue($shippingValue);
-        return view('user.order', compact(['user', 'coupon', 'address', 'subTotal', 'shippingValue', 'orderTotalAfterDiscount', 'discountPercent', 'discountValue']));
+        return redirect()->route('displayRecipent');
     }
 
     public function display()
@@ -130,9 +130,9 @@ class OrderController extends Controller
         $recipent = session('recipent');
         $user = $recipent['user'];
         $coupon = $recipent['coupon'];
-        if($coupon){
+        if ($coupon) {
             $coupon_id = $coupon->id;
-        }else{
+        } else {
             $coupon_id = null;
         }
         $address = $recipent['address'];
@@ -143,7 +143,7 @@ class OrderController extends Controller
         $discountValue = $recipent['discountValue'];
         $finalPrice = $orderTotalAfterDiscount + $shippingValue;
         $orderCode = orderCode();
-        Order::create([
+        $order = Order::create([
             'code' => $orderCode,
             'status' => 0,
             'total_price' => $subTotal,
@@ -152,6 +152,24 @@ class OrderController extends Controller
             'address_id' => $address->id,
             'coupon_id' => $coupon_id
         ]);
+        $productDiscount = $discountValue / count($user->carts);
+        foreach ($user->carts as $product) {
+            $product->load('orders');
+            $product->orders()->attach($product->id, [
+                'order_id' => $order->id,
+                'quantity' => $product->carts->quantity,
+                'price' => $product->sale_price,
+                'discount' => $productDiscount,
+                'price_after_discount' => ($product->sale_price - $productDiscount),
+            ]);
+        }
+        return redirect()->route('orderPlaced')->with('success', __('general.messages.orderCreated'));
+    }
+
+    public function orderPlaced()
+    {
+        session()->forget('recipent');
+        return view('user.orderCompleted');
     }
 
     /**
