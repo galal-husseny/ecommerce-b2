@@ -35,5 +35,7 @@ Route::get('/{product}', [ProductDetailsController::class, 'detail'])->name('pro
 
 Route::post('/cart/recipent', [OrderController::class, 'recipent'])->name('recipent');
 
-Route::get('/cart/recipent', [OrderController::class, 'display'])->name('display');
+Route::get('/cart/recipent', [OrderController::class, 'display'])->name('displayRecipent');
+
+Route::get('/cart/placeOrder', [OrderController::class, 'placeorder'])->name('placeOrder');
 

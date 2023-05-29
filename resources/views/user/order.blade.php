@@ -21,7 +21,7 @@
         <div class="row border">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" >
                         <div class="invoice-title">
                             <div class="mb-4">
                                 <h2 class="mb-1 text-muted">{{env('WEBSITENAME')}}</h2>
@@ -35,13 +35,13 @@
                         <hr class="my-4">
 
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="">
                                 <div class="text-muted">
                                     <h5 class="font-size-16 mb-3">Billed To:</h5>
                                     <h5 class="font-size-15 mb-2"> {{$user->name}} </h5>
                                     <p class="mb-1">{{$address->region->city->name}}, {{$address->region->name}}, {{$address->street}}, building: {{$address->building}}, floor: {{$address->floor}}, flat: {{$address->flat}}, type: {{$address->type}}, Notes: {{$address->notes}} </p>
                                     <p class="mb-1"> {{$user->email}} </p>
-                                    <p>+20 {{$user->phone}}</p>
+                                    <p>+2 {{$user->phone}}</p>
                                 </div>
                             </div>
                             <!-- end col -->
@@ -136,7 +136,7 @@
                             <!-- end table responsive -->
                             <div class="d-print-none mt-4">
                                 <div class="d-flex flex-row-reverse">
-                                    <a href="#" class="button-main w-50">Place order</a>
+                                    <a href="{{route('placeOrder')}}" class="button-main w-50">Place order</a>
                                     <a href="javascript:window.print()" class="button-main mx-2 w-25"><i class="fa fa-print"></i></a>
 
                                 </div>
