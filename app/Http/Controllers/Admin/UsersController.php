@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 
 class UsersController extends Controller
 {
@@ -27,7 +31,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-
+        return view('admin.users.create');
     }
 
     /**
@@ -36,9 +40,21 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+        ]);
+        event(new Registered($user));
+        return redirect()->route('admins.users.index')->with('success', __('general.messages.created'));
+    }
+
+    public function verify(User $user)
+    {
+        # code...
     }
 
     /**
@@ -59,9 +75,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -71,9 +87,30 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        if($request->email != $user->email){
+            if($request->password == null){
+                $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                ]);
+            } else {
+                $user->update($request->validated());
+            }
+            $user->sendEmailVerificationNotification();
+        }
+        if($request->password == null){
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+            ]);
+        } else {
+            $user->update($request->validated());
+        }
+        return redirect()->route('admins.users.index')->with('success', __('general.messages.updated'));
     }
 
     /**
@@ -82,8 +119,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admins.users.index')->with('success', __('general.messages.deleted'));
     }
 }
