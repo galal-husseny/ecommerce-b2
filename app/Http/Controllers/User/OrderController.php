@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Coupon;
+use App\Models\Address;
 use App\Services\OrderCalcs;
 use App\Entities\CartProducts;
+use Illuminate\Support\Carbon;
 use App\Entities\ProductEntity;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\ApplyCouponService;
 use App\Entities\ApplyCouponDataEntity;
 use App\Http\Requests\Order\OrderRequest;
-use App\Models\Address;
-use App\Models\Order;
-use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
@@ -25,18 +26,6 @@ class OrderController extends Controller
     private $orderTotalAfterDiscount;
     private $discountPercent;
     private $discountValue;
-
-    // public function __construct()
-    // {
-    //     $this->user = null;
-    //     $this->coupon = null;
-    //     $this->address = null;
-    //     $this->subTotal = null;
-    //     $this->shippingValue = null;
-    //     $this->orderTotalAfterDiscount = null;
-    //     $this->discountPercent = null;
-    //     $this->discountValue = null;
-    // }
 
     public function recipent(OrderRequest $request)
     {
@@ -132,6 +121,14 @@ class OrderController extends Controller
         $coupon = $recipent['coupon'];
         if ($coupon) {
             $coupon_id = $coupon->id;
+            $userCoupon = $user->with(['coupons' =>  function ($query) use ($coupon) {
+                $query->where('coupon_id', $coupon->id);
+            }])->first();
+            if(count($userCoupon->coupons) != 0){
+                $user->coupons()->updateExistingPivot($coupon->id, ['max_no_of_usage' => DB::raw('max_no_of_usage + 1')]);
+            } else {
+                $user->coupons()->attach($coupon->id, ['max_no_of_usage' => 1]);
+            }
         } else {
             $coupon_id = null;
         }
@@ -139,7 +136,6 @@ class OrderController extends Controller
         $subTotal = $recipent['subTotal'];
         $shippingValue = $recipent['shippingValue'];
         $orderTotalAfterDiscount = $recipent['orderTotalAfterDiscount'];
-        $discountPercent = $recipent['discountPercent'];
         $discountValue = $recipent['discountValue'];
         $finalPrice = $orderTotalAfterDiscount + $shippingValue;
         $orderCode = orderCode();
@@ -168,6 +164,11 @@ class OrderController extends Controller
 
     public function orderPlaced()
     {
+        $data = session('recipent');
+        $user = $data['user'];
+        foreach($user->carts as $product){
+            $user->carts()->detach($product->id);
+        }
         session()->forget('recipent');
         return view('user.orderCompleted');
     }

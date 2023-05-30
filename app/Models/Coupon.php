@@ -46,7 +46,7 @@ class Coupon extends Model
      * @return void
      */
     public function users(){
-        return $this->belongsToMany(User::class)->withPivot('max_no_of_usage');
+        return $this->belongsToMany(User::class)->withPivot('max_no_of_usage')->withTimestamps();
     }
 
     /**
