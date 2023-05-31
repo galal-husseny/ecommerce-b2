@@ -260,5 +260,14 @@ return [
         'edit' => 'تعديل',
         'delete' => 'حذف',
     ],
+    'all_orders' => [
+        'pending' => 'معلق',
+        'shipped' => 'تم الشحن',
+        'delivered' => 'تم التسليم'
+    ],
+    'all_coupons' => [
+        'active' => 'كوبون نشط',
+        'not_active' => 'كوبون غير نشط',
+    ]
 
 ];

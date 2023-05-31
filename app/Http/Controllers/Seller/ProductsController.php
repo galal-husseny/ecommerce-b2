@@ -103,7 +103,9 @@ class ProductsController extends Controller
     {
         if ($request->has('image')) {
             $media = $product->getFirstMedia('product');
-            $media->delete();
+            if($media){
+                $media->delete();
+            }
             $product->addMediaFromRequest('image')->toMediaCollection('product');
         }
         $product->update($request->validated());

@@ -259,5 +259,14 @@ return [
         'edit' => 'Edit',
         'delete' => 'Delete',
     ],
+    'all_orders' => [
+        'pending' => 'Pending',
+        'shipped' => 'Shipped',
+        'delivered' => 'Delivered'
+    ],
+    'all_coupons' => [
+        'active' => 'Active',
+        'not_active' => 'Not Active',
+    ]
 
 ];

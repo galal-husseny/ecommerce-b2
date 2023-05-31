@@ -84,6 +84,7 @@ class OrderController extends Controller
         $this->setCoupon($coupon);
         $this->setAddress($address);
         $this->setSubTotal($subTotal);
+        $this->setShippingValue($shippingValue);
         session([
             'recipent' => [
                 'user' => $user,
@@ -96,9 +97,9 @@ class OrderController extends Controller
                 'discountValue' => $this->getDiscountValue()
             ]
         ]);
-        $this->setShippingValue($shippingValue);
         return redirect()->route('displayRecipent');
     }
+
 
     public function display()
     {
@@ -111,6 +112,7 @@ class OrderController extends Controller
         $orderTotalAfterDiscount = $recipent['orderTotalAfterDiscount'];
         $discountPercent = $recipent['discountPercent'];
         $discountValue = $recipent['discountValue'];
+
         return view('user.order', compact(['user', 'coupon', 'address', 'subTotal', 'shippingValue', 'orderTotalAfterDiscount', 'discountPercent', 'discountValue']));
     }
 
@@ -124,7 +126,7 @@ class OrderController extends Controller
             $userCoupon = $user->with(['coupons' =>  function ($query) use ($coupon) {
                 $query->where('coupon_id', $coupon->id);
             }])->first();
-            if(count($userCoupon->coupons) != 0){
+            if (count($userCoupon->coupons) != 0) {
                 $user->coupons()->updateExistingPivot($coupon->id, ['max_no_of_usage' => DB::raw('max_no_of_usage + 1')]);
             } else {
                 $user->coupons()->attach($coupon->id, ['max_no_of_usage' => 1]);
@@ -166,7 +168,7 @@ class OrderController extends Controller
     {
         $data = session('recipent');
         $user = $data['user'];
-        foreach($user->carts as $product){
+        foreach ($user->carts as $product) {
             $user->carts()->detach($product->id);
         }
         session()->forget('recipent');

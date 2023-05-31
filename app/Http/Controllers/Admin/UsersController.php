@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use Illuminate\Routing\Route;
 
 class UsersController extends Controller
 {
@@ -65,7 +66,8 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        $user->load(['addresses.region.city', 'favs', 'carts.media', 'wishlists', 'reviews', 'coupons']);
+        $user->load(['addresses.region.city','addresses.orders', 'favs', 'carts.media', 'wishlists', 'reviews.product', 'coupons']);
+        // dd($user->favs);
         return view('admin.users.show', compact('user'));
     }
 
