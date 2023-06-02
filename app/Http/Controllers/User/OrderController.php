@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Address;
+use App\Models\PreOrder;
 use App\Services\OrderCalcs;
+use Illuminate\Http\Request;
 use App\Entities\CartProducts;
 use Illuminate\Support\Carbon;
 use App\Entities\ProductEntity;
@@ -14,24 +16,83 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\ApplyCouponService;
 use App\Entities\ApplyCouponDataEntity;
+use App\Events\OrderCreatedEvent;
 use App\Http\Requests\Order\OrderRequest;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    private $user;
-    private $coupon;
-    private $address;
-    private $subTotal;
-    private $shippingValue;
-    private $orderTotalAfterDiscount;
-    private $discountPercent;
-    private $discountValue;
+    private User $user;
+    private ?Coupon $coupon;
+    private Address $address;
+    private float $subTotal;
+    private float $shippingValue;
+    private float $orderTotalAfterDiscount;
+    private float $discountPercent;
+    private float $discountValue;
 
     public function recipent(OrderRequest $request)
     {
-        $user = User::where('id', $request->user)->with(['carts.media', 'carts.category', 'carts.specs'])->first();
-        $address = Address::where('id', $request->address)->with('region.city')->first();
+        $this->orderCalcs($request);
+        $user = $this->user;
+        $address = $this->address;
+        $coupon = $this->coupon;
+        $shippingValue = $this->shippingValue;
+        $subTotal = $this->subTotal;
+        $orderTotalAfterDiscount = $this->orderTotalAfterDiscount;
+        $discountPercent = $this->discountPercent;
+        $discountValue = $this->discountValue;
+
+        PreOrder::create([
+            'user_id' => $user->id,
+            'address_id' => $address->id,
+            'coupon' => $coupon?->code,
+            'product_ids' => $user->carts->pluck('id')->toArray()
+        ]);
+
+        return view('user.order', compact(['user', 'coupon', 'address', 'subTotal', 'shippingValue', 'orderTotalAfterDiscount', 'discountPercent', 'discountValue']));
+
+    }
+
+    public function display(Request $request)
+    {
+        $preOrder = PreOrder::where('user_id', Auth::guard('web')->id())->where('status', 1)->first();
+        if (! $preOrder) {
+            return redirect()->route('cart');
+        }
+        $request->address = $preOrder->address_id;
+        $request->user = $preOrder->user_id;
+        $request->coupon = $preOrder->coupon;
+
+        $this->orderCalcs($request);
+
+        $user = $this->user;
+        $address = $this->address;
+        $coupon = $this->coupon;
+        $shippingValue = $this->shippingValue;
+        $subTotal = $this->subTotal;
+        $orderTotalAfterDiscount = $this->orderTotalAfterDiscount;
+        $discountPercent = $this->discountPercent;
+        $discountValue = $this->discountValue;
+
+        return view('user.order', compact(['user', 'coupon', 'address', 'subTotal', 'shippingValue', 'orderTotalAfterDiscount', 'discountPercent', 'discountValue']));
+    }
+
+    private function orderCalcs($request)
+    {
         $coupon = Coupon::where('code', $request->coupon)->withCount('users')->first();
+        $user = User::where('id', Auth::guard('web')->id())->with([
+            'carts.media',
+            'carts.category',
+            'carts.specs',
+            'coupons' =>  function ($query) use ($coupon) {
+                if ($coupon) {
+                    $query->where('coupon_id', $coupon->id);
+                }
+        }])->first();
+
+        $address = Address::where('id', $request->address)->with('region.city')->first();
         $cartProducts = new CartProducts();
         $shippingValue = OrderCalcs::shipping();
         if (!$user) {
@@ -45,14 +106,9 @@ class OrderController extends Controller
         }
         $subTotal = OrderCalcs::subTotal($cartProducts);
         if ($coupon) {
-            $userCoupon = $user->with(['coupons' =>  function ($query) use ($coupon) {
-                $query->where('coupon_id', $coupon->id);
-            }])->first();
             $couponUsagePerUser = 0;
-            foreach ($userCoupon->coupons as $dbCoupon) {
-                if ($dbCoupon->code == $coupon->code) {
-                    $couponUsagePerUser = $dbCoupon->pivot->max_no_of_usage;
-                }
+            foreach ($user->coupons as $dbCoupon) {
+                $couponUsagePerUser = $dbCoupon->pivot->max_no_of_usage;
             }
             $maxUsageNumberPerUser = $coupon->max_usage_number_per_user;
             $orderCouponDiscountValue = $subTotal * (($coupon->discount / 100));
@@ -68,59 +124,38 @@ class OrderController extends Controller
                 $orderTotalAfterDiscount = $couponCalcs->getOrderTotalAfterDiscount();
                 $discountPercent = $couponCalcs->getDiscountPercent();
                 $discountValue = $couponCalcs->getDiscountValue();
-                $this->orderTotalAfterDiscount = $orderTotalAfterDiscount;
-                $this->discountPercent = $discountPercent;
-                $this->discountValue = $discountValue;
             }
         } else {
             $orderTotalAfterDiscount = $subTotal;
             $discountPercent = 0;
             $discountValue = 0;
-            $this->setOrderTotalAfterDiscount($orderTotalAfterDiscount);
-            $this->setDiscountPercent($discountPercent);
-            $this->setDiscountValue($discountValue);
         }
-        $this->setUser($user);
-        $this->setCoupon($coupon);
-        $this->setAddress($address);
-        $this->setSubTotal($subTotal);
-        $this->setShippingValue($shippingValue);
-        session([
-            'recipent' => [
-                'user' => $user,
-                'coupon' => $coupon,
-                'address' => $address,
-                'subTotal' => $subTotal,
-                'shippingValue' => $shippingValue,
-                'orderTotalAfterDiscount' => $this->getOrderTotalAfterDiscount(),
-                'discountPercent' => $this->getDiscountPercent(),
-                'discountValue' => $this->getDiscountValue()
-            ]
-        ]);
-        return redirect()->route('displayRecipent');
+
+        $this->user = $user;
+        $this->address = $address;
+        $this->coupon = $coupon;
+        $this->shippingValue = $shippingValue;
+        $this->subTotal = $subTotal;
+        $this->orderTotalAfterDiscount = $orderTotalAfterDiscount;
+        $this->discountPercent = $discountPercent;
+        $this->discountValue = $discountValue;
     }
 
-
-    public function display()
+    public function placeorder(OrderRequest $request)
     {
-        $recipent = session('recipent');
-        $user = $recipent['user'];
-        $coupon = $recipent['coupon'];
-        $address = $recipent['address'];
-        $subTotal = $recipent['subTotal'];
-        $shippingValue = $recipent['shippingValue'];
-        $orderTotalAfterDiscount = $recipent['orderTotalAfterDiscount'];
-        $discountPercent = $recipent['discountPercent'];
-        $discountValue = $recipent['discountValue'];
 
-        return view('user.order', compact(['user', 'coupon', 'address', 'subTotal', 'shippingValue', 'orderTotalAfterDiscount', 'discountPercent', 'discountValue']));
-    }
+        $this->orderCalcs($request);
 
-    public function placeorder()
-    {
-        $recipent = session('recipent');
-        $user = $recipent['user'];
-        $coupon = $recipent['coupon'];
+        $user = $this->user;
+        $address = $this->address;
+        $coupon = $this->coupon;
+        $shippingValue = $this->shippingValue;
+        $subTotal = $this->subTotal;
+        $orderTotalAfterDiscount = $this->orderTotalAfterDiscount;
+        $discountPercent = $this->discountPercent;
+        $products = $user->load('carts.seller')->carts;
+        $admin = Admin::first();
+
         if ($coupon) {
             $coupon_id = $coupon->id;
             $userCoupon = $user->with(['coupons' =>  function ($query) use ($coupon) {
@@ -134,204 +169,46 @@ class OrderController extends Controller
         } else {
             $coupon_id = null;
         }
-        $address = $recipent['address'];
-        $subTotal = $recipent['subTotal'];
-        $shippingValue = $recipent['shippingValue'];
-        $orderTotalAfterDiscount = $recipent['orderTotalAfterDiscount'];
-        $discountValue = $recipent['discountValue'];
         $finalPrice = $orderTotalAfterDiscount + $shippingValue;
         $orderCode = orderCode();
-        $order = Order::create([
-            'code' => $orderCode,
-            'status' => 0,
-            'total_price' => $subTotal,
-            'final_price' => $finalPrice,
-            'delivery_date' => Carbon::now()->addDays(7),
-            'address_id' => $address->id,
-            'coupon_id' => $coupon_id
-        ]);
-        $productDiscount = $discountValue / count($user->carts);
-        foreach ($user->carts as $product) {
-            $product->load('orders');
-            $product->orders()->attach($product->id, [
-                'order_id' => $order->id,
-                'quantity' => $product->carts->quantity,
-                'price' => $product->sale_price,
-                'discount' => $productDiscount,
-                'price_after_discount' => ($product->sale_price - $productDiscount),
+        try {
+            DB::beginTransaction();
+            $order = Order::create([
+                'code' => $orderCode,
+                'status' => 0,
+                'total_price' => $subTotal,
+                'final_price' => $finalPrice,
+                'delivery_date' => Carbon::now()->addDays(7),
+                'address_id' => $address->id,
+                'coupon_id' => $coupon_id
             ]);
+            OrderCreatedEvent::dispatch($user, $admin, $order, $products, $address, $coupon, $shippingValue, $discountPercent, $subTotal);
+            foreach ($user->carts as $product) {
+                $product->orders()->attach($product->id, [
+                    'order_id' => $order->id,
+                    'quantity' => $product->carts->quantity,
+                    'price' => $product->sale_price,
+                    'discount' => $productDiscount = ($discountPercent / 100) * $product->sale_price,
+                    'price_after_discount' => ($product->sale_price - $productDiscount),
+                ]);
+            }
+            $user->carts()->detach();
+
+            PreOrder::where([['status' , 1], ['user_id', Auth::guard('web')->id()]])->update([
+                'status' => 0
+            ]);
+            DB::commit();
+            return redirect()->route('orderPlaced')->with('success', __('general.messages.orderCreated'));
+
+        } catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->route('orderPlaced')->with('error', __('general.messages.error'));
         }
-        return redirect()->route('orderPlaced')->with('success', __('general.messages.orderCreated'));
     }
 
     public function orderPlaced()
     {
-        $data = session('recipent');
-        $user = $data['user'];
-        foreach ($user->carts as $product) {
-            $user->carts()->detach($product->id);
-        }
-        session()->forget('recipent');
         return view('user.orderCompleted');
     }
 
-    /**
-     * Get the value of user
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set the value of user
-     *
-     * @return  self
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of coupon
-     */
-    public function getCoupon()
-    {
-        return $this->coupon;
-    }
-
-    /**
-     * Set the value of coupon
-     *
-     * @return  self
-     */
-    public function setCoupon($coupon)
-    {
-        $this->coupon = $coupon;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of address
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set the value of address
-     *
-     * @return  self
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of subTotal
-     */
-    public function getSubTotal()
-    {
-        return $this->subTotal;
-    }
-
-    /**
-     * Set the value of subTotal
-     *
-     * @return  self
-     */
-    public function setSubTotal($subTotal)
-    {
-        $this->subTotal = $subTotal;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of shippingValue
-     */
-    public function getShippingValue()
-    {
-        return $this->shippingValue;
-    }
-
-    /**
-     * Set the value of shippingValue
-     *
-     * @return  self
-     */
-    public function setShippingValue($shippingValue)
-    {
-        $this->shippingValue = $shippingValue;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of orderTotalAfterDiscount
-     */
-    public function getOrderTotalAfterDiscount()
-    {
-        return $this->orderTotalAfterDiscount;
-    }
-
-    /**
-     * Set the value of orderTotalAfterDiscount
-     *
-     * @return  self
-     */
-    public function setOrderTotalAfterDiscount($orderTotalAfterDiscount)
-    {
-        $this->orderTotalAfterDiscount = $orderTotalAfterDiscount;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of discountPercent
-     */
-    public function getDiscountPercent()
-    {
-        return $this->discountPercent;
-    }
-
-    /**
-     * Set the value of discountPercent
-     *
-     * @return  self
-     */
-    public function setDiscountPercent($discountPercent)
-    {
-        $this->discountPercent = $discountPercent;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of discountValue
-     */
-    public function getDiscountValue()
-    {
-        return $this->discountValue;
-    }
-
-    /**
-     * Set the value of discountValue
-     *
-     * @return  self
-     */
-    public function setDiscountValue($discountValue)
-    {
-        $this->discountValue = $discountValue;
-
-        return $this;
-    }
 }

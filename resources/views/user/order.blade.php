@@ -136,9 +136,13 @@
                             <!-- end table responsive -->
                             <div class="d-print-none mt-4">
                                 <div class="d-flex flex-row-reverse">
-                                    <a href="{{route('placeOrder')}}" class="button-main w-50">Place order</a>
+                                    <form action="{{route('placeOrder')}}" method="post" class="w-50">
+                                        @csrf
+                                        <input type="hidden" name="coupon" value="{{$coupon->code ?? ""}}">
+                                        <input type="hidden" name="address" value="{{$address->id}}">
+                                        <button type="submit" class="button-main w-50">Place order</button>
+                                    </form>
                                     <a href="javascript:window.print()" class="button-main mx-2 w-25"><i class="fa fa-print"></i></a>
-
                                 </div>
                             </div>
                         </div>
