@@ -42,7 +42,6 @@
                                     <th class="column-4 text-center"> {{ __('messages.frontend.cart.quantity') }} </th>
                                     <th class="column-5 text-center"> {{ __('messages.frontend.cart.total') }} </th>
                                 </tr>
-                                <input class="d-none" type="number" name="user" value="{{$user->id}}">
                                 @foreach ($user->carts as $index => $product)
                                     <tr class="table_row">
                                         <td class="column-1">

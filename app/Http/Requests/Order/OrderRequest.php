@@ -24,7 +24,6 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user' => ['required', 'integer'],
             'address' => ['required', 'integer'],
             'coupon' => ['nullable', 'string']
         ];
