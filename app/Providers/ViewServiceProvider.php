@@ -11,7 +11,7 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Facades\View::composer(['user.layouts.partials.header', 'user.dashboard', 'user.layouts.partials.cart'],
+        Facades\View::composer(['user.layouts.partials.header', 'user.dashboard', 'user.layouts.partials.cart', 'user.order', 'user.orderCompleted', 'user.cart'],
         function ($view) {
             if(Auth::guard('web')->check()){
                 $user = Auth::guard('web')->user()->with(['wishlists','carts'])->withCount('carts','wishlists')->first();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AddressesController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\CitiesController;
 use App\Http\Controllers\Admin\RegionsController;
@@ -68,6 +69,20 @@ Route::prefix('admins')->name('admins.')->middleware(['auth:admin', 'verified:ad
         Route::post('/', 'store')->name('store');
         Route::get('/create', 'create')->name('create');
         Route::prefix('{user}')->group(function() {
+            Route::put('/', 'update')->name('update');
+            Route::get('/', 'verify')->name('verify');
+            Route::delete('/', 'destroy')->name('destroy');
+            Route::get('show/{slug?}', 'show')->name('show');
+            Route::get('edit/{slug?}', 'edit')->name('edit');
+        });
+    });
+});
+Route::prefix('admins')->name('admins.')->middleware(['auth:admin', 'verified:admin'])->group(function() {
+    Route::prefix('addresses')->name('addresses.')->controller(AddressesController::class)->group(function() {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+        Route::get('/create', 'create')->name('create');
+        Route::prefix('{address}')->group(function() {
             Route::put('/', 'update')->name('update');
             Route::delete('/', 'destroy')->name('destroy');
             Route::get('show/{slug?}', 'show')->name('show');

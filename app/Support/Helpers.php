@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Coupon;
+use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 if(! function_exists('getProviderFromModel')){
@@ -111,6 +113,19 @@ if (! function_exists('couponCode')){
     function couponCode() :int
     {
         $id = (int)Coupon::max('id') + 1000;
+        return $id;
+    }
+}
+
+if (! function_exists('orderCode')){
+    /**
+     * orderCode
+     *
+     * @return string
+     */
+    function orderCode() :int
+    {
+        $id = (int)Order::max('id') . Carbon::now()->format('Ymd');
         return $id;
     }
 }

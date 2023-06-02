@@ -27,7 +27,8 @@
 
 
     <!-- Shoping Cart -->
-    <form class="bg0 p-t-75 p-b-85">
+    <form method="post" class="bg0 p-t-75 p-b-85" action="{{route('recipent')}}">
+        @csrf
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -41,7 +42,8 @@
                                     <th class="column-4 text-center"> {{ __('messages.frontend.cart.quantity') }} </th>
                                     <th class="column-5 text-center"> {{ __('messages.frontend.cart.total') }} </th>
                                 </tr>
-                                @foreach ($user->carts as $product)
+                                <input class="d-none" type="number" name="user" value="{{$user->id}}">
+                                @foreach ($user->carts as $index => $product)
                                     <tr class="table_row">
                                         <td class="column-1">
                                             <div class="how-itemcart1 deleteProduct"
@@ -59,9 +61,8 @@
                                                 </div>
 
                                                 <input data-product="<?= htmlspecialchars($product) ?>"
-                                                    class="mtext-104 cl3 txt-center num-product product" type="number"
-                                                    pre-value="{{ $product->carts->quantity }}"
-                                                    name="num-product1" value="{{ $product->carts->quantity }}">
+                                                    class="mtext-104 cl3 txt-center num-product product" type="number" pre-value="{{ $product->carts->quantity }}"
+                                                    value="{{ $product->carts->quantity }}">
 
                                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                     <a class=" num-products" type="submit">
@@ -116,7 +117,7 @@
                                 <div class="p-t-15">
                                     @if ($user->addresses)
                                         <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                            <select class="js-select2" name="time" id="address">
+                                            <select class="js-select2" name="address" id="address">
                                                 @foreach ($user->addresses as $address)
                                                     <option @selected($loop->last) value="{{ $address->id }}">
                                                         {{ $address->region->city->name }},
@@ -156,9 +157,8 @@
                         </div>
                         <div class="flex-w flex-sb-m  p-t-18 p-b-15 ">
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <input class="stext-104 cl2 plh4 bor13 p-lr-20 m-r-10 m-tb-5 coupon" type="text" id="coupon"
-                                    name="coupon" placeholder="{{ __('messages.frontend.cart.coupon_code') }}"
-                                    value="{{ old('coupon') }}" style="height: 2.5rem">
+                                <input class="stext-104 cl2 plh4 bor13 p-lr-20 m-r-10 m-tb-5 coupon" type="text" id="coupon" placeholder="{{ __('messages.frontend.cart.coupon_code') }}" value="{{ old('coupon') }}" style="height: 2.5rem">
+                                <input type="hidden" name="coupon" value="" id="hiddenCouponCode">
                                 <p id="couponMessage"></p>
                                 <button type="button" disabled="disabled" btn-type="apply" class="button-main pointer m-tb-5 applyCoupon" id="applyCoupon" user-value="{{ $user->id }}">
                                     {{ __('messages.frontend.cart.apply_coupon') }}
@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="flex-w flex-t p-t-27 pb-2 d-none" id="discount">
-                            <div class="w-25">
+                            <div class="size-208">
                                 <span class="mtext-101 cl2">
                                     {{ __('messages.frontend.cart.discount') }}:
                                 </span>
@@ -204,7 +204,7 @@
                         </div>
 
                         <button class="flex-c-m cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
-                            style="height: 2.5rem">
+                            style="height: 2.5rem" type="submit">
                             {{ __('messages.frontend.cart.proceed') }}
                         </button>
                     </div>
@@ -263,7 +263,7 @@
                     $('#orderTotal').html(subTotal + shipping + translations.currency);
                 }
             });
-            
+
             function applyCoupon(htmlChanges = true) {
                     const user_id = {{Auth::id()}};
                     const coupon = $('.coupon').val();
@@ -290,6 +290,7 @@
                                 $('#discount').removeClass('d-none');
                                 $('#couponMessage').html('Coupon Applied').removeClass('text-danger').addClass('text-success');
                                 $('#coupon').attr('disabled', 'disabled');
+                                $('#hiddenCouponCode').attr('value', $('#coupon').val())
                                 $('#applyCoupon').html("Remove Coupon").attr('btn-type', 'remove');
                             }
                         },

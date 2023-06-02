@@ -6,6 +6,7 @@ return [
         'created' => 'Item Created Successfuly',
         'deleted' => 'Item Deleted Successfuly',
         'error' => 'Something Went Wrong',
+        'orderCreated' => 'Your order has been submitted successfully'
     ],
     'cities' => [
         'failed' => 'Failed to delete the required city as it has regions'

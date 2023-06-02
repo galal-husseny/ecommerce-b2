@@ -98,7 +98,7 @@ class Product extends Model implements HasMedia
      */
     public function orders()
     {
-        return $this->hasMany(Order::class)->withPivot('price', 'quantity', 'quantity');
+        return $this->belongsToMany(Order::class)->withPivot('price', 'quantity', 'discount', 'price_after_discount')->withTimestamps();
     }
 
     /**
