@@ -21,48 +21,52 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="column-1 col-1 text-center"> # </th>
-                                            <th class="column-2 col-1 text-center"> {{ __('messages.frontend.address.city') }} </th>
-                                            <th class="column-3 col-2 text-center"> {{ __('messages.frontend.address.region') }}</th>
-                                            <th class="column-4 col-1 text-center"> {{ __('messages.frontend.address.street') }} </th>
-                                            <th class="column-5 col-1 text-center"> {{ __('messages.frontend.address.building') }} </th>
-                                            <th class="column-6 col-1 text-center"> {{ __('messages.frontend.address.floor') }} </th>
-                                            <th class="column-7 col-1 text-center"> {{ __('messages.frontend.address.flat') }} </th>
-                                            <th class="column-8 col-1 text-center"> {{ __('messages.frontend.address.notes') }} </th>
-                                            <th class="column-9 col-1 text-center"> {{ __('messages.frontend.address.type') }} </th>
-                                            <th class="column-10 col-2 text-center"> {{ __('messages.frontend.address.actions') }} </th>
+                                @if (count($user->addresses) != 0)
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="column-1 col-1 text-center"> # </th>
+                                                <th class="column-2 col-1 text-center"> {{ __('messages.frontend.address.city') }} </th>
+                                                <th class="column-3 col-2 text-center"> {{ __('messages.frontend.address.region') }}</th>
+                                                <th class="column-4 col-1 text-center"> {{ __('messages.frontend.address.street') }} </th>
+                                                <th class="column-5 col-1 text-center"> {{ __('messages.frontend.address.building') }} </th>
+                                                <th class="column-6 col-1 text-center"> {{ __('messages.frontend.address.floor') }} </th>
+                                                <th class="column-7 col-1 text-center"> {{ __('messages.frontend.address.flat') }} </th>
+                                                <th class="column-8 col-1 text-center"> {{ __('messages.frontend.address.notes') }} </th>
+                                                <th class="column-9 col-1 text-center"> {{ __('messages.frontend.address.type') }} </th>
+                                                <th class="column-10 col-2 text-center"> {{ __('messages.frontend.address.actions') }} </th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($user->addresses as $index => $address)
-                                            <tr class="table_row">
-                                                <td class="column-1 text-center"> {{ ++$index }} </td>
-                                                <td class="column-2 text-center">{{ $address->region->city->name }}</td>
-                                                <td class="column-3 text-center"> {{ $address->region->name }} </td>
-                                                <td class="column-4 text-center"> {{ $address->street }} </td>
-                                                <td class="column-5 text-center"> {{ $address->building }} </td>
-                                                <td class="column-6 text-center"> {{ $address->floor }} </td>
-                                                <td class="column-7 text-center"> {{ $address->flat }} </td>
-                                                <td class="column-8 text-center"> {{ $address->notes }} </td>
-                                                <td class="column-9 text-center"> {{ $address->type }} </td>
-                                                <td>
-                                                    <a href="{{ route('admins.addresses.edit', \Illuminate\Support\Facades\Crypt::encryptString($address->id)) }}" class="btn btn-primary rounded-pill  mb-2"> {{ __('messages.frontend.address.edit') }} </a>
-                                                    <form action="{{ route('admins.addresses.destroy', \Illuminate\Support\Facades\Crypt::encryptString($address->id)) }}" method="post" class="d-iniline" style="display: inline-block">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger rounded-pill"> {{ __('messages.frontend.address.delete') }} </button>
-                                                    </form>
-                                                </td>
                                             </tr>
-                                        @endforeach
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($user->addresses as $index => $address)
+                                                <tr class="table_row">
+                                                    <td class="column-1 text-center"> {{ ++$index }} </td>
+                                                    <td class="column-2 text-center">{{ $address->region->city->name }}</td>
+                                                    <td class="column-3 text-center"> {{ $address->region->name }} </td>
+                                                    <td class="column-4 text-center"> {{ $address->street }} </td>
+                                                    <td class="column-5 text-center"> {{ $address->building }} </td>
+                                                    <td class="column-6 text-center"> {{ $address->floor }} </td>
+                                                    <td class="column-7 text-center"> {{ $address->flat }} </td>
+                                                    <td class="column-8 text-center"> {{ $address->notes }} </td>
+                                                    <td class="column-9 text-center"> {{ $address->type }} </td>
+                                                    <td>
+                                                        <a href="{{ route('admins.addresses.edit', \Illuminate\Support\Facades\Crypt::encryptString($address->id)) }}" class="btn btn-primary rounded-pill  mb-2"> {{ __('messages.frontend.address.edit') }} </a>
+                                                        <form action="{{ route('admins.addresses.destroy', \Illuminate\Support\Facades\Crypt::encryptString($address->id)) }}" method="post" class="d-iniline" style="display: inline-block">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger rounded-pill"> {{ __('messages.frontend.address.delete') }} </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
-                                    </tbody>
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <p class="text-center text-danger"> This user have no addresses</p>
+                                @endif
 
-                                </table>
                             </div>
                             <!-- /.card-body -->
                         </div>
