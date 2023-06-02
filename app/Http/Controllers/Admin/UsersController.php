@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
-use Illuminate\Routing\Route;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -48,8 +50,8 @@ class UsersController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-        event(new Registered($user));
         return redirect()->route('admins.users.index')->with('success', __('general.messages.created'));
     }
 
@@ -67,7 +69,6 @@ class UsersController extends Controller
     public function show(User $user)
     {
         $user->load(['addresses.region.city','addresses.orders', 'favs', 'carts.media', 'wishlists', 'reviews.product', 'coupons']);
-        // dd($user->favs);
         return view('admin.users.show', compact('user'));
     }
 
@@ -91,18 +92,6 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        if($request->email != $user->email){
-            if($request->password == null){
-                $user->update([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'phone' => $request->phone,
-                ]);
-            } else {
-                $user->update($request->validated());
-            }
-            $user->sendEmailVerificationNotification();
-        }
         if($request->password == null){
             $user->update([
                 'name' => $request->name,
@@ -123,7 +112,17 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->route('admins.users.index')->with('success', __('general.messages.deleted'));
+        $userAdresses = $user->addresses->pluck('id')->toArray();
+        if(Order::whereIn('address_id', $userAdresses)->count()){
+            return back()->with('error', __('general.errors.region_id_exists'));
+        }else {
+            $user->addresses()->delete();
+            $user->carts()->detach();
+            $user->wishlists()->detach();
+            $user->favs()->detach();
+            $user->delete();
+            return redirect()->route('admins.users.index')->with('success', __('general.messages.deleted'));
+        }
+
     }
 }
