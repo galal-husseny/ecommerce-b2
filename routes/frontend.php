@@ -40,5 +40,3 @@ Route::get('/cart/recipent', [OrderController::class, 'display'])->name('display
 Route::post('/cart/placeOrder', [OrderController::class, 'placeorder'])->name('placeOrder')->middleware('auth:web');
 
 Route::get('/cart/orderPlaced', [OrderController::class, 'orderPlaced'])->name('orderPlaced')->middleware('auth:web');
-
-
