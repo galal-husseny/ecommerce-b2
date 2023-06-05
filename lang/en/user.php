@@ -117,6 +117,7 @@ return [
         'logout' => 'Log out',
         'register' => 'Register',
         'addresses' => 'My Addresses',
+        'orders' => 'My orders'
 
     ],
     'footer' => [

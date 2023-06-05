@@ -121,7 +121,7 @@
                                                     </tr>
                                                 @endforeach
                                             @else
-                                                <p class="text-center text-danger"> This user ha no orders</p>
+                                                <p class="text-center text-danger"> This user have no orders</p>
                                             @endif
                                         @endforeach
 

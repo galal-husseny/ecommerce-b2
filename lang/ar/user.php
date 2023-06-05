@@ -116,7 +116,7 @@ return [
         'logout' => 'تسجيل الخروج',
         'register' => 'حساب جديد',
         'addresses' => 'عنوانيني',
-
+        'orders' => 'طلبات الشراء الخاصة بي'
     ],
     'footer' => [
         'categories' => 'الاقسام',

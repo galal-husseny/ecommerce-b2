@@ -86,6 +86,7 @@
                                 @auth('web')
                                     <li><a style="text-decoration: none" href="{{ route('users.profile.edit') }}"> {{__('user.profile.profile')}} </a></li>
                                     <li><a style="text-decoration: none" href="{{ route('users.address.index') }}"> {{__('user.header.addresses')}} </a></li>
+                                    <li><a style="text-decoration: none" href="{{ route('users.orders.index') }}"> {{__('user.header.orders')}} </a></li>
                                     <form method="POST" action="{{ route('users.logout') }}">
                                         @csrf
                                         <li><a style="text-decoration: none" href="route('users.logout')"

@@ -262,7 +262,8 @@ return [
     'all_orders' => [
         'pending' => 'Pending',
         'shipped' => 'Shipped',
-        'delivered' => 'Delivered'
+        'delivered' => 'Delivered',
+        'cancelled' => 'Cancelled',
     ],
     'all_coupons' => [
         'active' => 'Active',
