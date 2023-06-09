@@ -27,6 +27,3 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
 
 });
-Route::get('test',function(){
-    phpinfo();
-});

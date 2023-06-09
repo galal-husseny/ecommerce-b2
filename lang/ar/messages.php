@@ -113,6 +113,10 @@ return [
             'choose_region' => 'أختر حي',
             'add_address' => 'اضف عنوان جديد',
             'edit_address' => 'تعديل'
+        ],
+        'order' => [
+            'show' => 'عرض',
+            'cancel' => 'الغاء'
         ]
     ]
 

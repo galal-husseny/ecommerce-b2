@@ -263,7 +263,8 @@ return [
     'all_orders' => [
         'pending' => 'معلق',
         'shipped' => 'تم الشحن',
-        'delivered' => 'تم التسليم'
+        'delivered' => 'تم التسليم',
+        'cancelled' => 'تم الالغاء'
     ],
     'all_coupons' => [
         'active' => 'كوبون نشط',

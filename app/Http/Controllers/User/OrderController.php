@@ -17,6 +17,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ApplyCouponService;
 use App\Entities\ApplyCouponDataEntity;
 use App\Events\OrderCreatedEvent;
+use App\Http\Requests\Order\ChangeOrderStatusRequest;
 use App\Http\Requests\Order\OrderRequest;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
@@ -209,6 +210,27 @@ class OrderController extends Controller
     public function orderPlaced()
     {
         return view('user.orderCompleted');
+    }
+
+    public function index ()
+    {
+        $user = Auth::guard('web')->user();
+        $user->load('addresses.orders');
+        return view('user.all-orders', compact('user'));
+    }
+
+    public function show (User $user, Order $order)
+    {
+        $order->load('address.region.city', 'coupon');
+        return view('user.order-details', compact(['user', 'order']));
+    }
+
+    public function update(ChangeOrderStatusRequest $request, Order $order)
+    {
+        if($request->status == 3){
+            $order->update($request->validated());
+            return redirect()->route('users.orders.index')->with('success', __('general.messages.updated'));
+        }
     }
 
 }

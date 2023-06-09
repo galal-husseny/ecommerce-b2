@@ -6,4 +6,5 @@ enum OrderEnum: int
     case PENDING = 0;
     case SHIPPED = 1;
     case DELIVERED = 2;
+    case CANCELLED = 3;
 }

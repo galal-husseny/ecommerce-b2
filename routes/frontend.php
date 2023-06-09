@@ -41,4 +41,11 @@ Route::post('/cart/placeOrder', [OrderController::class, 'placeorder'])->name('p
 
 Route::get('/cart/orderPlaced', [OrderController::class, 'orderPlaced'])->name('orderPlaced')->middleware('auth:web');
 
-
+Route::name('users.')->group(function() {
+    Route::middleware('auth:web')->prefix('orders')->controller(OrderController::class)->name('orders.')->group(function() {
+        Route::get('/index', 'index')->name('index');
+        Route::get('/show/{user}/{order}', 'show')->name('show');
+        Route::get('/edit/{user}/{order}', 'edit')->name('edit');
+        Route::put('/update/{order}', 'update')->name('update');
+    });
+});
