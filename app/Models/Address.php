@@ -63,4 +63,10 @@ class Address extends Model
     {
         return $query->where('status', 1);
     }
+
+
+    function getFullAddress() :string
+    {
+        return "{$this->region->city->name}, {$this->region->name}, {$this->street}, {$this->building}, Floor: {$this->floor}, Flat: {$this->flat}, Type: ({$this->type}), Notes: {$this->notes}";
+    }
 }

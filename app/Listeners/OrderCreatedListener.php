@@ -2,11 +2,13 @@
 
 namespace App\Listeners;
 
+use App\Mail\SendOrderMailForUser;
+use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendOrderMailForUserJob;
 use App\Jobs\SendOrderMailForAdminJob;
 use App\Jobs\SendOrderMailForSellersJob;
-use App\Jobs\SendOrderMailForUserJob;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class OrderCreatedListener
 {
@@ -28,8 +30,8 @@ class OrderCreatedListener
      */
     public function handle($event)
     {
-        SendOrderMailForUserJob::dispatch();
-        SendOrderMailForAdminJob::dispatch();
-        SendOrderMailForSellersJob::dispatch();
+        SendOrderMailForUserJob::dispatch($event->user);
+        SendOrderMailForAdminJob::dispatch($event->admin);
+        SendOrderMailForSellersJob::dispatch($event->seller);
     }
 }

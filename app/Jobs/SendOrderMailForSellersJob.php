@@ -2,7 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Entities\Contracts\SellerOrderMailEntityInterface;
 use App\Mail\SendOrderMailForSellers;
+use App\Models\Seller;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
@@ -20,9 +22,9 @@ class SendOrderMailForSellersJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public SellerOrderMailEntityInterface $sellerMailData)
     {
-        //
+        
     }
 
     /**
@@ -32,6 +34,8 @@ class SendOrderMailForSellersJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('galal.husseny@seller.com')->send(new SendOrderMailForSellers);
+        foreach ($this->sellerMailData->getSellers() as $seller) {
+            Mail::to($seller->getSellerEmail())->send(new SendOrderMailForSellers($this->sellerMailData));
+        }
     }
 }

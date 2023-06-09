@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Entities\Contracts\AdminOrderMailEntityInterface;
 use Illuminate\Bus\Queueable;
 use App\Mail\SendOrderMailForAdmin;
 use Illuminate\Support\Facades\Mail;
@@ -20,7 +21,7 @@ class SendOrderMailForAdminJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public AdminOrderMailEntityInterface $adminMailData)
     {
         //
     }
@@ -32,6 +33,6 @@ class SendOrderMailForAdminJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('galal.husseny@admin.com')->send(new SendOrderMailForAdmin);
+        Mail::to($this->adminMailData->getAdminEmail())->send(new SendOrderMailForAdmin($this->adminMailData));
     }
 }

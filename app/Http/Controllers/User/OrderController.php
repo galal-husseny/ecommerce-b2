@@ -20,6 +20,8 @@ use App\Events\OrderCreatedEvent;
 use App\Http\Requests\Order\ChangeOrderStatusRequest;
 use App\Http\Requests\Order\OrderRequest;
 use App\Models\Admin;
+use App\Models\WebsiteSetting;
+use App\Services\PreprareOrderMailDataService;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -156,6 +158,7 @@ class OrderController extends Controller
         $discountPercent = $this->discountPercent;
         $products = $user->load('carts.seller')->carts;
         $admin = Admin::first();
+        $websiteSetting = WebsiteSetting::first();
 
         if ($coupon) {
             $coupon_id = $coupon->id;
@@ -183,7 +186,8 @@ class OrderController extends Controller
                 'address_id' => $address->id,
                 'coupon_id' => $coupon_id
             ]);
-            OrderCreatedEvent::dispatch($user, $admin, $order, $products, $address, $coupon, $shippingValue, $discountPercent, $subTotal);
+            $prepareMailData = new PreprareOrderMailDataService($user, $admin, $order, $products, $address, $websiteSetting, $coupon, $shippingValue, $discountPercent, $subTotal);
+            OrderCreatedEvent::dispatch($prepareMailData->getUserEntity(), $prepareMailData->getAdminEntity(), $prepareMailData->getSellerEntity());
             foreach ($user->carts as $product) {
                 $product->orders()->attach($product->id, [
                     'order_id' => $order->id,
