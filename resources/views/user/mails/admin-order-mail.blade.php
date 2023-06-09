@@ -146,13 +146,13 @@
                         <tr>
                             <td>
                                 <p>
-                                    website name.
+                                    seller  shop name.
                                 </p>
                                 <p>
-                                    website address
+                                    seller phone
                                 </p>
                                 <p>
-                                    website mail
+                                    seller mail
                                 </p>
                             </td>
 
@@ -176,7 +176,7 @@
             </tr>
             <tr class="heading">
                 <td>Payment Method</td>
-                <td>Check #</td>
+                <td>COD</td>
             </tr>
         </table>
         <br /><br />
@@ -184,29 +184,23 @@
         <table class="products">
             <thead>
                 <tr class="heading">
-                    <th style="text-align: center;"> No </th>
-                    <th style="text-align: center;"> product name </th>
+                    <th style="text-align: center;"> Code </th>
+                    <th style="text-align: center;"> Product name </th>
                     <th style="text-align: center;"> Seller name </th>
-                    <th style="text-align: center;"> specs </th>
                     <th style="text-align: center;"> quantity </th>
-                    <th style="text-align: center;"> sale price </th>
+                    <th style="text-align: center;"> price </th>
                     <th style="text-align: center;"> total </th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr class="item">
-                    <td style="text-align: center;"> index </td>
+                    <td style="text-align: center;"> Code </td>
                     <td style="text-align: center;">
                         <p>product name</p>
-                        <p>product description </p>
                     </td>
                     <td style="text-align: center;">
                         Seller name
-                    </td>
-                    <td style="text-align: center;">
-                        <p> spec name : spec value </p>
-                        <p> No specs available </p>
                     </td>
                     <td style="text-align: center;">
                         <p>

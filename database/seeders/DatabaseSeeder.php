@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Admin;
+use App\Models\WebsiteSetting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +21,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@ecommerce.com',
             'password' => bcrypt('admin'),
+        ]);
+
+        WebsiteSetting::create([
+            'name' => 'Ecommerce',
+            'email' => 'noreply@ecommerce.com',
+            'phone' => '01144884499',
         ]);
     }
 }

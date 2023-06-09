@@ -175,7 +175,7 @@
             </tr>
             <tr class="heading">
                 <td>Payment Method</td>
-                <td>Check #</td>
+                <td>COD</td>
             </tr>
         </table>
 <br/><br/>
@@ -183,30 +183,20 @@
         <table class="products">
             <thead>
                 <tr class="heading">
-                    <th style="text-align: center;"> No </th>
+                    <th style="text-align: center;"> Code </th>
                     <th style="text-align: center;"> product name </th>
-                    <th style="text-align: center;"> specs </th>
                     <th style="text-align: center;"> quantity </th>
                     <th style="text-align: center;"> stock </th>
-                    <th style="text-align: center;"> code </th>
-                    <th style="text-align: center;"> purchase price </th>
                     <th style="text-align: center;"> sale price </th>
-                    <th style="text-align: center;"> profit </th>
-                    <th style="text-align: center;"> Total profit </th>
                     <th style="text-align: center;"> total </th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr class="item">
-                    <td style="text-align: center;"> index  </td>
+                    <td style="text-align: center;"> code  </td>
                     <td style="text-align: center;">
                         <p >product name</p>
-                        <p >product description </p>
-                    </td>
-                    <td style="text-align: center;">
-                        <p> spec name : spec value </p>
-                        <p > No specs available </p>
                     </td>
                     <td style="text-align: center;">
                         <p>
@@ -217,19 +207,7 @@
                         stock
                     </td>
                     <td style="text-align: center;">
-                        code
-                    </td>
-                    <td style="text-align: center;">
-                        purchase price
-                    </td>
-                    <td style="text-align: center;">
                         sale price
-                    </td>
-                    <td style="text-align: center;">
-                        profit
-                    </td>
-                    <td style="text-align: center;">
-                        Total profit
                     </td>
                     <td style="text-align: center;">
                         <p>

@@ -161,7 +161,7 @@
                                     Billed to:
                                 </p>
                                 <p>
-                                    user name
+                                    {{$userMailData->getUserName()}}
                                 </p>
                                 <p>
                                     user address
@@ -175,8 +175,8 @@
                 </td>
             </tr>
             <tr class="heading">
-                <td>Payment Method</td>
-                <td>Check #</td>
+                <td>Payment Method:</td>
+                <td>COD</td>
             </tr>
         </table>
         <br /><br />
@@ -184,25 +184,19 @@
         <table class="products">
             <thead>
                 <tr class="heading">
-                    <th style="text-align: center;"> No </th>
-                    <th style="text-align: center;"> product name </th>
-                    <th style="text-align: center;"> specs </th>
-                    <th style="text-align: center;"> quantity </th>
-                    <th style="text-align: center;"> price </th>
-                    <th style="text-align: center;"> total </th>
+                    <th style="text-align: center;"> Code </th>
+                    <th style="text-align: center;"> Product name </th>
+                    <th style="text-align: center;"> Quantity </th>
+                    <th style="text-align: center;"> Price </th>
+                    <th style="text-align: center;"> Total </th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr class="item">
-                    <td style="text-align: center;"> index </td>
+                    <td style="text-align: center;"> Code </td>
                     <td style="text-align: center;">
                         <p>product name</p>
-                        <p>product description </p>
-                    </td>
-                    <td style="text-align: center;">
-                        <p> spec name : spec value </p>
-                        <p> No specs available </p>
                     </td>
                     <td style="text-align: center;">
                         <p>

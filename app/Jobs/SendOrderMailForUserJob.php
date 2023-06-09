@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Entities\Contracts\UserOrderMailEntityInterface;
 use Illuminate\Bus\Queueable;
 use App\Mail\SendOrderMailForUser;
 use Illuminate\Support\Facades\Mail;
@@ -20,9 +21,9 @@ class SendOrderMailForUserJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public UserOrderMailEntityInterface $userMailData)
     {
-        //
+
     }
 
     /**
@@ -32,6 +33,6 @@ class SendOrderMailForUserJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('galal.husseny@user.com')->send(new SendOrderMailForUser);
+        Mail::to($this->userMailData->getUserEmail())->send(new SendOrderMailForUser($this->userMailData));
     }
 }
