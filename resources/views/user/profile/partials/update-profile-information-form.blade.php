@@ -17,8 +17,11 @@
         @csrf
         @method('patch')
 
+
+
         <!-- Name -->
         <div>
+            <img src="{{$user->avatar}}" alt="Avatar">
             <label for="name"> {{__('user.profile.update_info.name')}} </label>
             <input id="name" name="name" type="text" class="mt-1 block w-full p-2 border" value="{{old('name', $user->name)}}" required autofocus autocomplete="name"  />
                 @if ($errors->get('name'))

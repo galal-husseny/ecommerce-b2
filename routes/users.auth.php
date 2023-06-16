@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\User\Auth\ProfileController;
 use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\NewPasswordController;
@@ -37,6 +38,18 @@ Route::prefix('users')->name('users.')->group(function(){
 
         Route::post('reset-password', [NewPasswordController::class, 'store'])
                     ->name('password.store');
+
+        Route::get('/auth/github/redirect', [AuthenticatedSessionController::class , 'githubRedirect'])->name('github.redirect');
+
+        Route::get('/auth/github/callback', [AuthenticatedSessionController::class, 'githubCallback'])->name('github.callback');
+
+        Route::get('/auth/google/redirect', [AuthenticatedSessionController::class , 'googleRedirect'])->name('google.redirect');
+
+        Route::get('/auth/google/callback', [AuthenticatedSessionController::class, 'googleCallback'])->name('google.callback');
+
+        Route::get('/auth/facebook/redirect', [AuthenticatedSessionController::class , 'facebookRedirect'])->name('facebook.redirect');
+
+        Route::get('/auth/facebook/callback', [AuthenticatedSessionController::class, 'facebookCallback'])->name('facebook.callback');
     });
 
     Route::middleware('auth:web')->group(function () {

@@ -26,7 +26,7 @@ class SellerOrderMailEntity implements SellerOrderMailEntityInterface
     private string $sellerShopName;
     private string $sellerEmail;
     private string $sellerPhone;
-    private array $sellers = [];
+    public array $sellers = [];
 
 
     /**
