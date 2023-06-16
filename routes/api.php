@@ -47,3 +47,7 @@ Route::post('regions', [RegionsController::class, 'index']);
 Route::prefix('products')->controller(OrderShippingController::class)->group(function (){
     Route::post('carts/getShipping', 'shipping');
 });
+
+Route::get('test', function() {
+    echo route('users.github.callback');
+});

@@ -24,7 +24,7 @@ class SendOrderMailForSellersJob implements ShouldQueue
      */
     public function __construct(public SellerOrderMailEntityInterface $sellerMailData)
     {
-        
+
     }
 
     /**
@@ -34,8 +34,8 @@ class SendOrderMailForSellersJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->sellerMailData->getSellers() as $seller) {
-            Mail::to($seller->getSellerEmail())->send(new SendOrderMailForSellers($this->sellerMailData));
+        foreach ($this->sellerMailData->getSellers() as $sellerData) {
+            Mail::to($sellerData->getSellerEmail())->send(new SendOrderMailForSellers($sellerData));
         }
     }
 }

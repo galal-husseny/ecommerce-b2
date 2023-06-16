@@ -101,38 +101,52 @@ class PreprareOrderMailDataService
 
 
         foreach ($this->cart as $cartProduct) {
-            $this->productEntity->setName($cartProduct->name);
-            $this->productEntity->setPrice($cartProduct->sale_price);
-            $this->productEntity->setQuantity($cartProduct->carts->quantity);
-            $this->productEntity->setStock($cartProduct->quantity);
-            $this->productEntity->setCode($cartProduct->code);
+            $adminEntity = clone $this->adminEntity;
+            $productEntity = clone $this->productEntity;
+            $sellerEntity = clone $this->sellerEntity;
+
+            $productEntity->setName($cartProduct->name);
+            $productEntity->setPrice($cartProduct->sale_price);
+            $productEntity->setQuantity($cartProduct->carts->quantity);
+            $productEntity->setStock($cartProduct->quantity);
+            $productEntity->setCode($cartProduct->code);
+            $sellerEntity->setSubTotal($cartProduct->sale_price * $cartProduct->quantity);
+            $sellerEntity->setTotal($sellerEntity->getSubTotal() + $this->shipping);
 
             // private array $products;
-            $this->sellerEntity->setProducts($this->productEntity);
-            $this->adminEntity->setProducts($this->productEntity);
-            $this->userEntity->setProducts($this->productEntity);
+            $sellerEntity->setProducts($productEntity);
+            $adminEntity->setProducts($productEntity);
+            $this->userEntity->setProducts($productEntity);
 
             // admin
             // private string $sellerName;
-            $this->adminEntity->setSellerName($cartProduct->seller->name);
-            $this->sellerEntity->setSellerName($cartProduct->seller->name);
+            $adminEntity->setSellerName($cartProduct->seller->name);
+            $sellerEntity->setSellerName($cartProduct->seller->name);
             // private string $sellerShopName;
-            $this->adminEntity->setSellerShopName($cartProduct->seller->shop_name);
-            $this->sellerEntity->setSellerShopName($cartProduct->seller->shop_name);
+            $adminEntity->setSellerShopName($cartProduct->seller->shop_name);
+            $sellerEntity->setSellerShopName($cartProduct->seller->shop_name);
 
             // private string $sellerEmail;
-            $this->adminEntity->setSellerEmail($cartProduct->seller->email);
-            $this->sellerEntity->setSellerEmail($cartProduct->seller->email);
+            $adminEntity->setSellerEmail($cartProduct->seller->email);
+            $sellerEntity->setSellerEmail($cartProduct->seller->email);
 
             // private string $sellerPhone;
-            $this->adminEntity->setSellerPhone($cartProduct->seller->phone);
-            $this->sellerEntity->setSellerPhone($cartProduct->seller->phone);
+            $adminEntity->setSellerPhone($cartProduct->seller->phone);
+            $sellerEntity->setSellerPhone($cartProduct->seller->phone);
 
+            // $exist = false;
+            // foreach($this->adminEntity->getSellers() as $seller) {
+            //     if ($seller->getSellerEmail() === $cartProduct->seller->email) {
+            //         $exist = true;
+            //     }
+            // }
+            // if (! $exist) {
+                $this->adminEntity->setSellers($adminEntity);
+                $this->sellerEntity->setSellers($sellerEntity);
+            // } else {
+
+            // }
             // unique sellers
-            if (! in_array($this->adminEntity, $this->adminEntity->getSellers())) {
-                $this->adminEntity->setSellers($this->adminEntity);
-                $this->sellerEntity->setSellers($this->sellerEntity);
-            }
         }
 
         // private string $adminEmail;

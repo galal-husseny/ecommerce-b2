@@ -78,6 +78,15 @@
                                 </a>
                             @endif
                         </div>
+                        <div class="mb-3 form-check d-flex justify-content-around  mt-4">
+                            {!! NoCaptcha::renderJs() !!}
+                            {!! NoCaptcha::display() !!}
+                        </div>
+                        @if ($errors->has('g-recaptcha-response'))
+                            <span class="text-danger">
+                                <p>{{ $errors->first('g-recaptcha-response') }}</p>
+                            </span>
+                        @endif
 
                         <button class="button-general">
                             {{ __('user.auth.login.login') }}
@@ -92,13 +101,17 @@
                     </form>
                     <div class="social-auth-links text-center">
                         <p class="text-center mb-2">{{ __('user.auth.login.or') }}</p>
-                        <a href="#" class="button-facebook mb-2">
-                            {{ __('user.auth.login.login_facebook') }}
-                            <i class="fab fa-facebook text-white mx-2"></i>
+                        <a href="{{route('users.github.redirect')}}" class="button-facebook mb-2">
+                            Login With Github
+                            <i class="fab fa-github text-white mx-2"></i>
                         </a>
-                        <a href="#" class="button-gmail">
-                            {{ __('user.auth.login.login_google') }}
+                        <a href="{{route('users.google.redirect')}}" class="button-gmail">
+                            Login With Google
                             <i class="fab fa-google-plus text-white mx-2"></i>
+                        </a>
+                        <a href="{{route('users.facebook.redirect')}}" class="button-facebook">
+                            Login With Facebook
+                            <i class="fab fa-facebook text-white mx-2"></i>
                         </a>
                     </div>
                 </div>
